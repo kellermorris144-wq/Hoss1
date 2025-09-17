@@ -51,11 +51,11 @@ const Product: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-6">
-              HOSS Customer Portal
+              The All-in-One Logistics Platform
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
-              A comprehensive logistics management platform that puts you in complete control 
-              of your haulage operations. From quotes to delivery, everything in one place.
+              HOSS provides a comprehensive customer portal that puts you in complete control 
+              of your haulage operations. From quotes to delivery, everything is in one place.
             </p>
             <div className="flex justify-center">
               <Link to="/demo">

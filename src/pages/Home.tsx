@@ -1,10 +1,9 @@
 import React from 'react';
-import { ArrowRight, CheckCircle, Truck, Clock, Shield, Users } from 'lucide-react';
+import { ArrowRight, Truck, Clock, Shield, Users, BarChart3, Zap, Database } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 import Card from '../components/Card';
 import AnimatedBackground from '../components/AnimatedBackground';
-import FloatingElements from '../components/FloatingElements';
 
 const Home: React.FC = () => {
   const features = [
@@ -30,105 +29,52 @@ const Home: React.FC = () => {
     },
   ];
 
-  const benefits = [
-    'Save 40% on logistics costs',
-    'Reduce manual processes by 80%',
-    'Improve delivery times by 25%',
-    'Complete visibility across operations',
+  const performanceMetrics = [
+    { icon: Zap, metric: '< 200ms', label: 'API Response Time' },
+    { icon: BarChart3, metric: '99.99%', label: 'Uptime Guarantee' },
+    { icon: Database, metric: '10M+', label: 'Transactions Processed' },
+    { icon: Shield, metric: 'ISO 27001', label: 'Certified Security' },
   ];
 
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-gray-50 via-gray-100 to-blue-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 min-h-screen flex items-center">
+      <section className="relative overflow-hidden bg-white dark:bg-gray-900 min-h-screen flex items-center justify-center">
         <AnimatedBackground />
-        <FloatingElements />
         
-        {/* Animated gradient overlays */}
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/1 via-purple-500/1 to-emerald-500/1 animate-gradient-shift" style={{ zIndex: 3 }}></div>
-        <div className="absolute inset-0 bg-gradient-to-bl from-transparent via-gray-200/2 to-blue-200/3 animate-gradient-shift-reverse" style={{ zIndex: 3 }}></div>
-        
-        {/* Complex geometric shapes */}
-        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-gradient-to-br from-purple-200/3 to-blue-200/2 rounded-lg rotate-45 animate-morph" style={{ zIndex: 3 }}></div>
-        <div className="absolute top-1/2 left-1/6 w-40 h-40 border border-emerald-200/4 transform rotate-12 animate-float-medium" style={{ zIndex: 3 }}></div>
-        
-        {/* Floating particles */}
-        <div className="absolute top-20 right-1/3 w-2 h-2 bg-blue-400/8 rounded-full animate-twinkle" style={{ zIndex: 4 }}></div>
-        <div className="absolute top-1/3 left-1/5 w-1.5 h-1.5 bg-purple-400/6 rounded-full animate-twinkle-delayed" style={{ zIndex: 4 }}></div>
-        <div className="absolute bottom-1/3 right-1/5 w-2.5 h-2.5 bg-emerald-400/7 rounded-full animate-twinkle-slow" style={{ zIndex: 4 }}></div>
-        <div className="absolute top-2/3 left-2/3 w-1.5 h-1.5 bg-amber-400/5 rounded-full animate-twinkle" style={{ zIndex: 4 }}></div>
-        
-        {/* Wave effects */}
-        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-gray-100/8 to-transparent animate-wave" style={{ zIndex: 3 }}></div>
-        
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24" style={{ zIndex: 10 }}>
-          <div className="text-center">
-            <div className="relative">
-              {/* Subtle text shadow */}
-              <div className="absolute inset-0 text-5xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent blur-sm opacity-5">
-                HOSS
-              </div>
-              <h1 className="relative text-5xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent mb-6 animate-fade-in">
-                HOSS
-                <br />
-                <span className="text-3xl md:text-4xl lg:text-5xl text-gray-700 dark:text-gray-300">Haulage One Stop Solutions</span>
-              </h1>
-            </div>
-            
-            {/* Animated underline */}
-            <div className="w-24 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mb-8 rounded-full"></div>
-            
-            <div className="relative">
-              <div className="absolute inset-0 bg-white/60 dark:bg-gray-900/60 backdrop-blur-sm rounded-xl"></div>
-              <p className="relative text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed p-6">
-                Transform your logistics operations with our comprehensive customer portal. 
-                Streamline processes, reduce costs, and gain complete visibility over your haulage operations.
-              </p>
-            </div>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-              <div className="relative group">
-                <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg blur opacity-5 group-hover:opacity-15 transition duration-500"></div>
-                <Link to="/demo" className="relative">
-                  <Button size="lg" icon={ArrowRight} iconPosition="right" className="transform hover:scale-102 transition-all duration-200">
-                    Book Free Demo
-                  </Button>
-                </Link>
-              </div>
-              <div className="relative group">
-                <Link to="/product">
-                  <Button variant="outline" size="lg" className="backdrop-blur-sm bg-white/90 dark:bg-gray-900/90 border-2 border-gray-300 hover:border-blue-500 transform hover:scale-102 transition-all duration-200">
-                    Explore Features
-                  </Button>
-                </Link>
-              </div>
-            </div>
-            
-            <div className="relative">
-              <div className="absolute inset-0 bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm rounded-lg"></div>
-              <div className="relative flex flex-wrap justify-center gap-6 text-sm text-gray-600 dark:text-gray-400 p-4">
-                {benefits.map((benefit, index) => (
-                  <div key={benefit} className={`flex items-center animate-fade-in`} style={{ animationDelay: `${index * 0.2}s` }}>
-                    <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
-                    {benefit}
-                  </div>
-                ))}
-              </div>
-            </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center" style={{ zIndex: 10 }}>
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent mb-6 animate-fade-in">
+            The Future of Logistics
+          </h1>
+          
+          <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed">
+            HOSS is the all-in-one platform designed to streamline your haulage operations, reduce costs, and provide unparalleled visibility.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link to="/demo">
+              <Button size="lg" icon={ArrowRight} iconPosition="right">
+                Book a Demo
+              </Button>
+            </Link>
+            <Link to="/product">
+              <Button variant="outline" size="lg">
+                Explore The Platform
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-24 bg-white dark:bg-gray-900">
+      <section className="py-24 bg-gray-50 dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-              Professional Logistics Solutions
+              An End-to-End Logistics Solution
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              Comprehensive logistics management platform designed for modern haulage operations
-              with enterprise-grade reliability and industry-leading features.
+              Our platform provides everything you need to manage your operations efficiently, from initial quote to final delivery.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -140,9 +86,38 @@ const Home: React.FC = () => {
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300">
+                <p className="text-gray-600 dark:text-gray-300 text-sm">
                   {feature.description}
                 </p>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Performance Section */}
+      <section className="py-24 bg-white dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+              Built for Performance and Scale
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+              Our robust infrastructure ensures reliability and speed, no matter the size of your operation.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {performanceMetrics.map((item) => (
+              <Card key={item.label} className="p-6">
+                <div className="flex items-center">
+                  <div className="p-3 bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900 dark:to-purple-900 rounded-lg mr-4">
+                    <item.icon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">{item.metric}</div>
+                    <div className="text-gray-600 dark:text-gray-400">{item.label}</div>
+                  </div>
+                </div>
               </Card>
             ))}
           </div>
@@ -157,7 +132,7 @@ const Home: React.FC = () => {
           </h2>
           <p className="text-xl text-blue-100 mb-8">
             Join hundreds of logistics companies who have already revolutionized 
-            their operations with HOSS. Book your free face-to-face demo today.
+            their operations with HOSS. Book your free, personalized demo today.
           </p>
           <Link to="/demo">
             <Button 
