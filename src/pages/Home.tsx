@@ -62,21 +62,21 @@ const Home: React.FC = () => {
 
         {/* Visual Diagram */}
         <div className="relative w-full max-w-7xl mx-auto mt-16 md:mt-24">
-          <div className="flex flex-col md:flex-row items-center justify-between">
+          <div className="relative flex flex-col md:flex-row items-center justify-around">
             {/* Left: Features */}
-            <div className="space-y-6 w-full md:w-auto">
+            <div className="space-y-8 w-full md:w-auto">
               {features.map((feature) => (
                 <div key={feature.name} className="flex items-center space-x-4 group">
-                  <div className="flex items-center justify-center w-12 h-12 bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg shadow-sm transition-all duration-300 group-hover:scale-110 group-hover:shadow-blue-500/30 group-hover:border-blue-400 dark:group-hover:border-blue-600">
+                  <div className="flex items-center justify-center w-12 h-12 bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl shadow-sm transition-all duration-300 group-hover:scale-110 group-hover:shadow-blue-500/30 group-hover:border-blue-400 dark:group-hover:border-blue-600">
                     <feature.icon className="w-6 h-6 text-slate-500 dark:text-slate-400 transition-colors group-hover:text-blue-500" />
                   </div>
-                  <span className="font-medium text-slate-700 dark:text-slate-300 text-lg">{feature.name}</span>
+                  <span className="font-semibold text-slate-700 dark:text-slate-300 text-lg">{feature.name}</span>
                 </div>
               ))}
             </div>
 
             {/* Center: Hub */}
-            <div className="relative my-8 md:my-0 md:mx-16">
+            <div className="relative my-12 md:my-0 md:mx-24">
               <div className="absolute inset-0 bg-blue-500/20 rounded-full blur-2xl animate-pulse-slow"></div>
               <div className="relative w-28 h-28 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full flex items-center justify-center shadow-lg">
                 <Truck className="w-12 h-12 text-blue-600 dark:text-blue-500" />
@@ -85,7 +85,7 @@ const Home: React.FC = () => {
 
             {/* Right: Product UI */}
             <div className="w-full md:w-auto max-w-lg">
-              <div className="bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg shadow-2xl p-4 w-full backdrop-blur-sm animate-shadow-pulse">
+              <div className="bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl shadow-2xl p-6 w-full backdrop-blur-sm animate-shadow-pulse">
                 <div className="flex items-center justify-between mb-4">
                   <span className="font-bold text-lg text-slate-800 dark:text-slate-200">Operations Dashboard</span>
                   <div className="flex items-center space-x-1.5">
@@ -96,7 +96,7 @@ const Home: React.FC = () => {
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   {/* Live Fleet Map */}
-                  <div className="col-span-2 p-4 bg-slate-100 dark:bg-slate-900/50 rounded-lg relative">
+                  <div className="col-span-2 p-4 bg-slate-100 dark:bg-slate-900/50 rounded-xl relative">
                     <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-2">Live Fleet: Essex</h3>
                     <div className="relative h-32 bg-slate-200 dark:bg-slate-800/70 rounded-lg overflow-hidden">
                       {/* Map background elements */}
@@ -123,40 +123,40 @@ const Home: React.FC = () => {
                     </div>
                   </div>
                   {/* Key Metrics */}
-                  <div className="col-span-1 p-4 bg-slate-100 dark:bg-slate-900/50 rounded-lg">
-                    <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-2">Key Metrics</h3>
-                    <div className="space-y-3">
+                  <div className="col-span-1 p-4 bg-slate-100 dark:bg-slate-900/50 rounded-xl">
+                    <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-4">Key Metrics</h3>
+                    <div className="space-y-4">
                       <div>
                         <div className="flex items-center text-sm text-slate-500 dark:text-slate-400">
                           <div className="w-2 h-2 rounded-full bg-green-400 mr-2 shadow-[0_0_6px_1px] shadow-green-400"></div>
                           On-Time Rate
                         </div>
-                        <p className="text-2xl font-bold text-slate-800 dark:text-slate-200">98.7%</p>
+                        <p className="text-3xl font-bold text-slate-800 dark:text-slate-200">98.7%</p>
                       </div>
                       <div>
                         <div className="flex items-center text-sm text-slate-500 dark:text-slate-400">
                           <div className="w-2 h-2 rounded-full bg-blue-400 mr-2 shadow-[0_0_6px_1px] shadow-blue-400"></div>
                           Fleet Utilization
                         </div>
-                        <p className="text-2xl font-bold text-slate-800 dark:text-slate-200">82%</p>
+                        <p className="text-3xl font-bold text-slate-800 dark:text-slate-200">82%</p>
                       </div>
                     </div>
                   </div>
                   {/* Active Jobs */}
-                  <div className="col-span-1 p-4 bg-slate-100 dark:bg-slate-900/50 rounded-lg">
-                    <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-2">Active Jobs</h3>
-                    <div className="space-y-2">
-                      <div className="flex justify-between items-center text-xs p-2 rounded-md transition-colors hover:bg-slate-200 dark:hover:bg-slate-800/50">
+                  <div className="col-span-1 p-4 bg-slate-100 dark:bg-slate-900/50 rounded-xl">
+                    <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-4">Active Jobs</h3>
+                    <div className="space-y-3">
+                      <div className="flex justify-between items-center text-sm p-2 rounded-md transition-colors hover:bg-slate-200 dark:hover:bg-slate-800/50">
                         <span className="font-medium text-slate-700 dark:text-slate-300">Chelmsford &rarr; Colchester</span>
-                        <span className="flex items-center text-green-600 dark:text-green-400"><CheckCircle className="w-3 h-3 mr-1" /> On Time</span>
+                        <span className="flex items-center text-green-600 dark:text-green-400"><CheckCircle className="w-4 h-4 mr-1" /> On Time</span>
                       </div>
-                      <div className="flex justify-between items-center text-xs p-2 rounded-md transition-colors hover:bg-slate-200 dark:hover:bg-slate-800/50">
+                      <div className="flex justify-between items-center text-sm p-2 rounded-md transition-colors hover:bg-slate-200 dark:hover:bg-slate-800/50">
                         <span className="font-medium text-slate-700 dark:text-slate-300">Southend &rarr; London</span>
-                        <span className="flex items-center text-yellow-600 dark:text-yellow-400"><Truck className="w-3 h-3 mr-1" /> In Transit</span>
+                        <span className="flex items-center text-yellow-600 dark:text-yellow-400"><Truck className="w-4 h-4 mr-1" /> In Transit</span>
                       </div>
-                      <div className="flex justify-between items-center text-xs p-2 rounded-md transition-colors hover:bg-slate-200 dark:hover:bg-slate-800/50">
+                      <div className="flex justify-between items-center text-sm p-2 rounded-md transition-colors hover:bg-slate-200 dark:hover:bg-slate-800/50">
                         <span className="font-medium text-slate-700 dark:text-slate-300">Harwich &rarr; Tilbury</span>
-                        <span className="flex items-center text-red-600 dark:text-red-400"><AlertTriangle className="w-3 h-3 mr-1" /> At Risk</span>
+                        <span className="flex items-center text-red-600 dark:text-red-400"><AlertTriangle className="w-4 h-4 mr-1" /> At Risk</span>
                       </div>
                     </div>
                   </div>
@@ -166,7 +166,7 @@ const Home: React.FC = () => {
           </div>
 
           {/* SVG Lines for Desktop */}
-          <svg className="absolute top-0 left-0 w-full h-full z-[-1] hidden md:block" preserveAspectRatio="none">
+          <svg className="absolute top-0 left-0 w-full h-full z-[-1] hidden md:block" preserveAspectRatio="none" viewBox="0 0 1280 400">
             <defs>
               <linearGradient id="line-grad" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stopColor="rgba(59, 130, 246, 0.5)" />
@@ -174,41 +174,41 @@ const Home: React.FC = () => {
               </linearGradient>
             </defs>
             {/* Paths from features to hub */}
-            <path d="M 250 70 C 400 70, 400 180, 540 180" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
-            <path d="M 250 145 C 400 145, 400 180, 540 180" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
-            <path d="M 250 220 C 400 220, 400 180, 540 180" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
-            <path d="M 250 295 C 400 295, 400 180, 540 180" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
+            <path d="M 280 50 C 420 50, 450 200, 580 200" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
+            <path d="M 280 134 C 420 134, 450 200, 580 200" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
+            <path d="M 280 218 C 420 218, 450 200, 580 200" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
+            <path d="M 280 302 C 420 302, 450 200, 580 200" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
             
             {/* Path from hub to product */}
-            <path d="M 660 180 H 800" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
+            <path d="M 700 200 H 850" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
 
             {/* Feedback paths from product to hub */}
-            <path d="M 800 170 H 660" stroke="rgba(203, 213, 225, 0.5)" strokeWidth="1.5" fill="none" />
-            <path d="M 800 190 H 660" stroke="rgba(203, 213, 225, 0.5)" strokeWidth="1.5" fill="none" />
+            <path d="M 850 190 H 700" stroke="rgba(203, 213, 225, 0.5)" strokeWidth="1.5" fill="none" />
+            <path d="M 850 210 H 700" stroke="rgba(203, 213, 225, 0.5)" strokeWidth="1.5" fill="none" />
 
             {/* Animated dots */}
             <circle cx="0" cy="0" r="4" fill="#3b82f6">
-              <animateMotion dur="8s" repeatCount="indefinite" path="M 250 70 C 400 70, 400 180, 540 180" />
+              <animateMotion dur="8s" repeatCount="indefinite" path="M 280 50 C 420 50, 450 200, 580 200" />
             </circle>
             <circle cx="0" cy="0" r="4" fill="#3b82f6">
-              <animateMotion dur="7s" repeatCount="indefinite" path="M 250 145 C 400 145, 400 180, 540 180" />
+              <animateMotion dur="7s" repeatCount="indefinite" path="M 280 134 C 420 134, 450 200, 580 200" />
             </circle>
             <circle cx="0" cy="0" r="4" fill="#3b82f6">
-              <animateMotion dur="6s" repeatCount="indefinite" path="M 250 220 C 400 220, 400 180, 540 180" />
+              <animateMotion dur="6s" repeatCount="indefinite" path="M 280 218 C 420 218, 450 200, 580 200" />
             </circle>
             <circle cx="0" cy="0" r="4" fill="#3b82f6">
-              <animateMotion dur="9s" repeatCount="indefinite" path="M 250 295 C 400 295, 400 180, 540 180" />
+              <animateMotion dur="9s" repeatCount="indefinite" path="M 280 302 C 420 302, 450 200, 580 200" />
             </circle>
              <circle cx="0" cy="0" r="4" fill="#3b82f6">
-              <animateMotion dur="5s" repeatCount="indefinite" path="M 660 180 H 800" />
+              <animateMotion dur="5s" repeatCount="indefinite" path="M 700 200 H 850" />
             </circle>
 
             {/* Feedback dots */}
             <circle cx="0" cy="0" r="3" fill="#22c55e">
-              <animateMotion dur="6s" repeatCount="indefinite" path="M 800 170 H 660" />
+              <animateMotion dur="6s" repeatCount="indefinite" path="M 850 190 H 700" />
             </circle>
             <circle cx="0" cy="0" r="3" fill="#22c55e">
-              <animateMotion dur="6s" begin="0.5s" repeatCount="indefinite" path="M 800 190 H 660" />
+              <animateMotion dur="6s" begin="0.5s" repeatCount="indefinite" path="M 850 210 H 700" />
             </circle>
           </svg>
         </div>
