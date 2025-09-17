@@ -87,6 +87,10 @@
   .animate-wave {
     animation: wave 6s ease-in-out infinite;
   }
+
+  .animate-bar-grow {
+    animation: bar-grow 1s ease-out forwards;
+  }
   
   @keyframes fadeIn {
     from {
@@ -172,6 +176,17 @@
     25% { transform: translateY(-10px) scaleY(1.1); }
     50% { transform: translateY(-5px) scaleY(0.9); }
     75% { transform: translateY(-15px) scaleY(1.05); }
+  }
+
+  @keyframes bar-grow {
+    from {
+      transform: scaleY(0);
+      transform-origin: bottom;
+    }
+    to {
+      transform: scaleY(1);
+      transform-origin: bottom;
+    }
   }
 }
 
