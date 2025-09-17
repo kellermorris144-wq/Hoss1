@@ -61,8 +61,8 @@ const Home: React.FC = () => {
         </div>
 
         {/* Visual Diagram */}
-        <div className="relative w-full max-w-7xl mx-auto mt-16 md:mt-24">
-          <div className="relative flex flex-col md:flex-row items-center justify-around">
+        <div className="relative w-full max-w-7xl mx-auto mt-16 md:mt-24 h-[400px]">
+          <div className="relative flex flex-row items-center justify-between h-full">
             {/* Left: Features */}
             <div className="space-y-8 w-full md:w-auto">
               {features.map((feature) => (
@@ -76,7 +76,7 @@ const Home: React.FC = () => {
             </div>
 
             {/* Center: Hub */}
-            <div className="relative my-12 md:my-0 md:mx-24">
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
               <div className="absolute inset-0 bg-blue-500/20 rounded-full blur-2xl animate-pulse-slow"></div>
               <div className="relative w-28 h-28 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full flex items-center justify-center shadow-lg">
                 <Truck className="w-12 h-12 text-blue-600 dark:text-blue-500" />
@@ -166,50 +166,60 @@ const Home: React.FC = () => {
           </div>
 
           {/* SVG Lines for Desktop */}
-          <svg className="absolute top-0 left-0 w-full h-full z-[-1] hidden md:block" preserveAspectRatio="none" viewBox="0 0 1280 400">
+          <svg className="absolute top-0 left-0 w-full h-full z-[-1] hidden md:block" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1280 400">
             <defs>
               <linearGradient id="line-grad" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stopColor="rgba(59, 130, 246, 0.5)" />
                 <stop offset="100%" stopColor="rgba(59, 130, 246, 0.1)" />
               </linearGradient>
+              <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                <feMerge>
+                  <feMergeNode in="coloredBlur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
             </defs>
-            {/* Paths from features to hub */}
-            <path d="M 280 50 C 420 50, 450 200, 580 200" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
-            <path d="M 280 134 C 420 134, 450 200, 580 200" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
-            <path d="M 280 218 C 420 218, 450 200, 580 200" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
-            <path d="M 280 302 C 420 302, 450 200, 580 200" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
             
-            {/* Path from hub to product */}
-            <path d="M 700 200 H 850" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
+            {/* Paths from features to hub */}
+            <g filter="url(#glow)">
+              <path d="M 280 40 C 420 40, 450 200, 580 200" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
+              <path d="M 280 120 C 420 120, 450 200, 580 200" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
+              <path d="M 280 280 C 420 280, 450 200, 580 200" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
+              <path d="M 280 360 C 420 360, 450 200, 580 200" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
+              
+              {/* Path from hub to product */}
+              <path d="M 700 200 H 850" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
 
-            {/* Feedback paths from product to hub */}
-            <path d="M 850 190 H 700" stroke="rgba(203, 213, 225, 0.5)" strokeWidth="1.5" fill="none" />
-            <path d="M 850 210 H 700" stroke="rgba(203, 213, 225, 0.5)" strokeWidth="1.5" fill="none" />
+              {/* Feedback paths from product to hub */}
+              <path d="M 850 190 H 700" stroke="rgba(34, 197, 94, 0.6)" strokeWidth="1.5" fill="none" />
+              <path d="M 850 210 H 700" stroke="rgba(34, 197, 94, 0.6)" strokeWidth="1.5" fill="none" />
 
-            {/* Animated dots */}
-            <circle cx="0" cy="0" r="4" fill="#3b82f6">
-              <animateMotion dur="8s" repeatCount="indefinite" path="M 280 50 C 420 50, 450 200, 580 200" />
-            </circle>
-            <circle cx="0" cy="0" r="4" fill="#3b82f6">
-              <animateMotion dur="7s" repeatCount="indefinite" path="M 280 134 C 420 134, 450 200, 580 200" />
-            </circle>
-            <circle cx="0" cy="0" r="4" fill="#3b82f6">
-              <animateMotion dur="6s" repeatCount="indefinite" path="M 280 218 C 420 218, 450 200, 580 200" />
-            </circle>
-            <circle cx="0" cy="0" r="4" fill="#3b82f6">
-              <animateMotion dur="9s" repeatCount="indefinite" path="M 280 302 C 420 302, 450 200, 580 200" />
-            </circle>
-             <circle cx="0" cy="0" r="4" fill="#3b82f6">
-              <animateMotion dur="5s" repeatCount="indefinite" path="M 700 200 H 850" />
-            </circle>
+              {/* Animated dots */}
+              <circle cx="0" cy="0" r="5" fill="#3b82f6">
+                <animateMotion dur="8s" repeatCount="indefinite" path="M 280 40 C 420 40, 450 200, 580 200" />
+              </circle>
+              <circle cx="0" cy="0" r="5" fill="#3b82f6">
+                <animateMotion dur="7s" repeatCount="indefinite" path="M 280 120 C 420 120, 450 200, 580 200" />
+              </circle>
+              <circle cx="0" cy="0" r="5" fill="#3b82f6">
+                <animateMotion dur="6s" repeatCount="indefinite" path="M 280 280 C 420 280, 450 200, 580 200" />
+              </circle>
+              <circle cx="0" cy="0" r="5" fill="#3b82f6">
+                <animateMotion dur="9s" repeatCount="indefinite" path="M 280 360 C 420 360, 450 200, 580 200" />
+              </circle>
+              <circle cx="0" cy="0" r="5" fill="#3b82f6">
+                <animateMotion dur="5s" repeatCount="indefinite" path="M 700 200 H 850" />
+              </circle>
 
-            {/* Feedback dots */}
-            <circle cx="0" cy="0" r="3" fill="#22c55e">
-              <animateMotion dur="6s" repeatCount="indefinite" path="M 850 190 H 700" />
-            </circle>
-            <circle cx="0" cy="0" r="3" fill="#22c55e">
-              <animateMotion dur="6s" begin="0.5s" repeatCount="indefinite" path="M 850 210 H 700" />
-            </circle>
+              {/* Feedback dots */}
+              <circle cx="0" cy="0" r="4" fill="#22c55e">
+                <animateMotion dur="6s" repeatCount="indefinite" path="M 850 190 H 700" />
+              </circle>
+              <circle cx="0" cy="0" r="4" fill="#22c55e">
+                <animateMotion dur="6s" begin="0.5s" repeatCount="indefinite" path="M 850 210 H 700" />
+              </circle>
+            </g>
           </svg>
         </div>
       </div>
