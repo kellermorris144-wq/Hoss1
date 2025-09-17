@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Truck, Clock, Shield, Users, BarChart3, Zap, Database } from 'lucide-react';
+import { ArrowRight, Truck, Clock, Shield, Users, BarChart3, Zap, Database, Warehouse, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 import Card from '../components/Card';
@@ -95,6 +95,77 @@ const Home: React.FC = () => {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Logistics People Section */}
+      <section className="py-24 bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-slate-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            {/* Left Column: Text and Features */}
+            <div>
+              <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-6 leading-tight">
+                The logistics software built by{' '}
+                <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                  logistics people
+                </span>{' '}
+                for logistics people.
+              </h2>
+              <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
+                HOSS is built by people who understand your business. Working in the industry for decades, our professional team knows what it takes to run a thriving logistics company and have created HOSS to help you run yours.
+              </p>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 mb-10">
+                <ul className="space-y-4">
+                  {[
+                    'Automated Quoting',
+                    'Automated Invoicing',
+                    'Accounting and Bank Integration',
+                    'Live Tracking',
+                    'Servicing, MOT, Insurance Monitoring',
+                  ].map((feature) => (
+                    <li key={feature} className="flex items-center">
+                      <CheckCircle className="w-5 h-5 text-blue-600 mr-3 flex-shrink-0" />
+                      <span className="text-gray-700 dark:text-gray-300">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                <ul className="space-y-4">
+                  {[
+                    'Multi Pickup/Delivery Bookings',
+                    'Works from any Device',
+                    'Customer Management (CRM System)',
+                    'Automated Intelligent Address Lookup',
+                    'Signature/Document/Photo/POD Capture',
+                  ].map((feature) => (
+                    <li key={feature} className="flex items-center">
+                      <CheckCircle className="w-5 h-5 text-blue-600 mr-3 flex-shrink-0" />
+                      <span className="text-gray-700 dark:text-gray-300">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <p className="text-gray-700 dark:text-gray-200 font-medium mb-4">
+                Let us show you how HOSS can change your business from day one! Sign up for a free face-to-face demo with one of our team today!
+              </p>
+              <Link to="/demo">
+                <Button size="lg">
+                  Sign up for a free demo!
+                </Button>
+              </Link>
+            </div>
+
+            {/* Right Column: Image */}
+            <div className="hidden lg:flex items-center justify-center">
+              <div className="relative w-96 h-96">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full blur-2xl opacity-30"></div>
+                <div className="relative w-full h-full flex items-center justify-center bg-white/50 dark:bg-gray-800/50 rounded-full backdrop-blur-sm border border-white/20">
+                  <Warehouse className="w-48 h-48 text-blue-600 dark:text-blue-400" />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
