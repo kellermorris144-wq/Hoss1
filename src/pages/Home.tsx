@@ -1,158 +1,125 @@
 import React from 'react';
-import { ArrowRight, Truck, Clock, Shield, Users, BarChart3, Zap, Database, Warehouse, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
-import Card from '../components/Card';
-import AnimatedBackground from '../components/AnimatedBackground';
-import { useTheme } from '../contexts/ThemeContext';
-import FeatureShowcase from '../components/FeatureShowcase';
-import TestimonialCard from '../components/TestimonialCard';
+import { Truck, Briefcase, Users, Database, CreditCard, MapPin, BarChart2, PieChart, ArrowRight } from 'lucide-react';
+
+const integrations = [
+  { name: 'Accounting', icons: [CreditCard, Briefcase] },
+  { name: 'Freight Networks', icons: [Users] },
+  { name: 'File Storage', icons: [Database] },
+  { name: 'Maps & Tracking', icons: [MapPin] },
+];
 
 const Home: React.FC = () => {
-  const { theme } = useTheme();
-
   return (
-    <div className="pt-16">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-white dark:bg-gray-900 min-h-screen flex items-center justify-center">
-        <AnimatedBackground theme={theme} />
-        
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center" style={{ zIndex: 10 }}>
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent mb-6 animate-fade-in">
-            Orchestrate Your Logistics, Effortlessly.
+    <div className="relative min-h-screen w-full overflow-hidden bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
+      {/* Background decorative shapes */}
+      <div className="absolute top-0 left-0 w-full h-full z-0">
+        <div className="absolute -top-1/4 -left-1/4 w-1/2 h-1/2 bg-purple-100/30 dark:bg-purple-900/20 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-blue-100/30 dark:bg-blue-900/20 rounded-full blur-3xl"></div>
+      </div>
+
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 pt-24 pb-12">
+        {/* Top Content */}
+        <div className="text-center max-w-3xl mx-auto">
+          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+            One Platform, hundreds of logistics integrations
           </h1>
-          
-          <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed">
-            HOSS is the all-in-one platform built by logistics experts to streamline operations, slash costs, and deliver unparalleled visibility.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/demo">
-              <Button size="lg" icon={ArrowRight} iconPosition="right">
-                Book a Free Demo
-              </Button>
-            </Link>
-            <Link to="/product">
-              <Button variant="outline" size="lg">
-                Explore The Platform
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Trusted By Section */}
-      <section className="py-16 bg-gray-50 dark:bg-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h3 className="text-center text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-8">
-            Trusted by Industry Leaders
-          </h3>
-          <div className="flex flex-wrap justify-around items-center gap-8 opacity-60">
-            {/* Replace with actual client logos */}
-            <p className="font-bold text-2xl">YourLogo</p>
-            <p className="font-bold text-2xl">Logistics Inc.</p>
-            <p className="font-bold text-2xl">Transport Co.</p>
-            <p className="font-bold text-2xl">Freightify</p>
-            <p className="font-bold text-2xl">ShipWell</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Feature Showcase Section */}
-      <section className="py-24 bg-white dark:bg-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
-          <FeatureShowcase
-            icon={Truck}
-            title="Real-Time Tracking & Visibility"
-            description="Go beyond dots on a map. Get live ETAs, shareable tracking links, and automated alerts for every shipment, giving you and your customers complete peace of mind."
-            imageUrl="https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-          />
-          <FeatureShowcase
-            icon={Clock}
-            title="Instant, Accurate Quoting"
-            description="Stop wasting time with spreadsheets. Our intelligent engine generates precise quotes in seconds, factoring in real-time market rates, fuel costs, and vehicle availability."
-            imageUrl="https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-            reverse
-          />
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section className="py-24 bg-gray-50 dark:bg-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-              Don't Just Take Our Word For It
-            </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              See how HOSS is transforming operations for businesses like yours.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <TestimonialCard
-              quote="HOSS cut our administrative overhead by 40% in the first three months. The visibility it provides is a game-changer for our customer service."
-              author="John Smith"
-              title="Operations Director, Logistics Inc."
-              companyLogoUrl="https://tailwindui.com/img/logos/reform-logo-gray-900.svg"
-            />
-            <TestimonialCard
-              quote="The implementation was seamless. We were up and running in a week, and the team's support has been phenomenal. It feels like they're part of our company."
-              author="Sarah Jones"
-              title="CEO, Transport Co."
-              companyLogoUrl="https://tailwindui.com/img/logos/tuple-logo-gray-900.svg"
-            />
-            <TestimonialCard
-              quote="Finally, a software that understands the complexities of haulage. From driver management to invoicing, everything is connected and just works."
-              author="David Chen"
-              title="Founder, Freightify"
-              companyLogoUrl="https://tailwindui.com/img/logos/savvycal-logo-gray-900.svg"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Why HOSS Section */}
-      <section className="py-24 bg-white dark:bg-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-6 leading-tight">
-              Built by Experts, For Experts.
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-4xl mx-auto mb-8">
-              HOSS isn't just software; it's decades of logistics expertise encoded into a platform that anticipates your needs. Our team, seasoned by years on the road and in the office, has built the tool they always wished they had—and now it's yours. We understand the challenges because we've lived them.
-            </p>
-            <Link to="/demo">
-              <Button size="lg">
-                Meet the Team & See the Difference
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-r from-blue-600 to-purple-600">
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-white mb-6">
-            Ready to Transform Your Operations?
-          </h2>
-          <p className="text-xl text-blue-100 mb-8">
-            Join hundreds of logistics companies who have already revolutionized 
-            their operations with HOSS. Book your free, personalized demo today.
+          <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
+            HOSS is the leading platform for customer-facing logistics integrations, trusted by Fortune 500 organizations and thousands of other B2B SaaS companies.
           </p>
           <Link to="/demo">
-            <Button 
-              variant="secondary" 
-              size="lg" 
-              icon={ArrowRight} 
-              iconPosition="right"
-              className="bg-white text-blue-600 hover:bg-gray-100 shadow-xl"
-            >
-              Schedule Your Free Demo
+            <Button variant="dark" size="lg">
+              Book a Demo
             </Button>
           </Link>
         </div>
-      </section>
+
+        {/* Visual Diagram */}
+        <div className="relative w-full max-w-6xl mx-auto mt-16 md:mt-24">
+          <div className="flex flex-col md:flex-row items-center justify-between">
+            {/* Left: Integrations */}
+            <div className="space-y-4 w-full md:w-auto">
+              {integrations.map((integration, index) => (
+                <div key={integration.name} className="flex items-center space-x-4">
+                  <div className="flex items-center justify-center space-x-4 bg-white dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-2 shadow-sm">
+                    {integration.icons.map((Icon, i) => (
+                      <Icon key={i} className="w-6 h-6 text-gray-400" />
+                    ))}
+                  </div>
+                  <span className="font-medium text-gray-700 dark:text-gray-300">{integration.name}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Center: Hub */}
+            <div className="relative my-8 md:my-0 md:mx-16">
+              <div className="w-24 h-24 bg-white dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-full flex items-center justify-center shadow-lg">
+                <Truck className="w-10 h-10 text-blue-600 dark:text-blue-500" />
+              </div>
+            </div>
+
+            {/* Right: Product UI */}
+            <div className="w-full md:w-auto max-w-md">
+              <div className="bg-white dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg p-4">
+                <div className="flex items-center space-x-1.5 mb-4">
+                  <div className="w-3 h-3 bg-red-400 rounded-full"></div>
+                  <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                  <div className="w-3 h-3 bg-green-400 rounded-full"></div>
+                </div>
+                <div className="space-y-4">
+                  <div className="flex items-end space-x-2 h-24 p-2 bg-gray-100 dark:bg-gray-900/50 rounded">
+                    <div className="w-1/6 h-1/3 bg-gray-300 dark:bg-gray-600 rounded-sm"></div>
+                    <div className="w-1/6 h-2/3 bg-gray-300 dark:bg-gray-600 rounded-sm"></div>
+                    <div className="w-1/6 h-full bg-blue-400 dark:bg-blue-600 rounded-sm"></div>
+                    <div className="w-1/6 h-1/2 bg-gray-300 dark:bg-gray-600 rounded-sm"></div>
+                    <div className="w-1/6 h-3/4 bg-gray-300 dark:bg-gray-600 rounded-sm"></div>
+                    <div className="w-1/6 h-1/2 bg-gray-300 dark:bg-gray-600 rounded-sm"></div>
+                  </div>
+                  <div className="flex space-x-4">
+                    <div className="w-1/2 p-2 bg-gray-100 dark:bg-gray-900/50 rounded">
+                      <div className="h-3 w-3/4 bg-gray-300 dark:bg-gray-600 rounded"></div>
+                      <div className="h-2 w-1/2 bg-gray-200 dark:bg-gray-700 rounded mt-2"></div>
+                    </div>
+                    <div className="w-1/2 p-2 bg-gray-100 dark:bg-gray-900/50 rounded">
+                      <div className="h-3 w-3/4 bg-gray-300 dark:bg-gray-600 rounded"></div>
+                      <div className="h-2 w-1/2 bg-gray-200 dark:bg-gray-700 rounded mt-2"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* SVG Lines for Desktop */}
+          <svg className="absolute top-0 left-0 w-full h-full z-[-1] hidden md:block" preserveAspectRatio="none">
+            <defs>
+              <marker id="dot" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5">
+                <circle cx="5" cy="5" r="5" fill="rgba(59, 130, 246, 0.5)" />
+              </marker>
+            </defs>
+            {/* Paths from integrations to hub */}
+            <path d="M 220 50 C 350 50, 350 150, 480 150" stroke="#9ca3af" strokeWidth="2" fill="none" strokeDasharray="4 4" />
+            <path d="M 220 115 C 350 115, 350 150, 480 150" stroke="#9ca3af" strokeWidth="2" fill="none" strokeDasharray="4 4" />
+            <path d="M 220 180 C 350 180, 350 150, 480 150" stroke="#9ca3af" strokeWidth="2" fill="none" strokeDasharray="4 4" />
+            <path d="M 220 245 C 350 245, 350 150, 480 150" stroke="#9ca3af" strokeWidth="2" fill="none" strokeDasharray="4 4" />
+            
+            {/* Path from hub to product */}
+            <path d="M 580 150 H 700" stroke="#9ca3af" strokeWidth="2" fill="none" />
+
+            {/* Animated dots */}
+            <circle cx="0" cy="0" r="3" fill="#3b82f6" className="opacity-75">
+              <animateMotion dur="6s" repeatCount="indefinite" path="M 220 50 C 350 50, 350 150, 480 150" />
+            </circle>
+            <circle cx="0" cy="0" r="3" fill="#3b82f6" className="opacity-75">
+              <animateMotion dur="5s" repeatCount="indefinite" path="M 220 180 C 350 180, 350 150, 480 150" />
+            </circle>
+             <circle cx="0" cy="0" r="3" fill="#3b82f6" className="opacity-75">
+              <animateMotion dur="7s" repeatCount="indefinite" path="M 580 150 H 700" />
+            </circle>
+          </svg>
+        </div>
+      </div>
     </div>
   );
 };
