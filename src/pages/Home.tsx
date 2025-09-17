@@ -85,7 +85,7 @@ const Home: React.FC = () => {
 
             {/* Right: Product UI */}
             <div className="w-full md:w-auto max-w-lg">
-              <div className="bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg shadow-2xl p-4 w-full backdrop-blur-sm">
+              <div className="bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg shadow-2xl p-4 w-full backdrop-blur-sm animate-shadow-pulse">
                 <div className="flex items-center justify-between mb-4">
                   <span className="font-bold text-lg text-slate-800 dark:text-slate-200">Operations Dashboard</span>
                   <div className="flex items-center space-x-1.5">
@@ -172,6 +172,10 @@ const Home: React.FC = () => {
                 <stop offset="0%" stopColor="rgba(59, 130, 246, 0.5)" />
                 <stop offset="100%" stopColor="rgba(59, 130, 246, 0.1)" />
               </linearGradient>
+              <linearGradient id="line-grad-reverse" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="rgba(34, 197, 94, 0.1)" />
+                <stop offset="100%" stopColor="rgba(34, 197, 94, 0.5)" />
+              </linearGradient>
             </defs>
             {/* Paths from features to hub */}
             <path d="M 250 70 C 400 70, 400 180, 540 180" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
@@ -181,6 +185,10 @@ const Home: React.FC = () => {
             
             {/* Path from hub to product */}
             <path d="M 660 180 H 800" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
+
+            {/* Feedback paths from product to hub */}
+            <path d="M 800 170 C 750 170, 750 180, 660 180" stroke="url(#line-grad-reverse)" strokeWidth="1.5" fill="none" />
+            <path d="M 800 190 C 750 190, 750 180, 660 180" stroke="url(#line-grad-reverse)" strokeWidth="1.5" fill="none" />
 
             {/* Animated dots */}
             <circle cx="0" cy="0" r="4" fill="#3b82f6">
@@ -197,6 +205,14 @@ const Home: React.FC = () => {
             </circle>
              <circle cx="0" cy="0" r="4" fill="#3b82f6">
               <animateMotion dur="5s" repeatCount="indefinite" path="M 660 180 H 800" />
+            </circle>
+
+            {/* Feedback dots */}
+            <circle cx="0" cy="0" r="3" fill="#22c55e">
+              <animateMotion dur="6s" repeatCount="indefinite" path="M 800 170 C 750 170, 750 180, 660 180" />
+            </circle>
+            <circle cx="0" cy="0" r="3" fill="#22c55e">
+              <animateMotion dur="6s" begin="0.5s" repeatCount="indefinite" path="M 800 190 C 750 190, 750 180, 660 180" />
             </circle>
           </svg>
         </div>
