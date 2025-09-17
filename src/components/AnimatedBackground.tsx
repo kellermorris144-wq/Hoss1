@@ -29,39 +29,21 @@ const AnimatedBackground: React.FC = () => {
 
     const createParticles = () => {
       const particles: Particle[] = [];
-      const particleCount = Math.floor((canvas.width * canvas.height) / 15000);
-      const colors = ['rgba(59, 130, 246, 0.6)', 'rgba(147, 51, 234, 0.5)'];
+      // Use a fixed number of larger particles for a cleaner look
+      const particleCount = 30; 
+      const colors = ['rgba(59, 130, 246, 0.4)', 'rgba(147, 51, 234, 0.3)'];
       
       for (let i = 0; i < particleCount; i++) {
         particles.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 0.3,
-          vy: (Math.random() - 0.5) * 0.3,
-          size: Math.random() * 1.5 + 1,
+          vx: (Math.random() - 0.5) * 0.2, // Slower movement
+          vy: (Math.random() - 0.5) * 0.2,
+          size: Math.random() * 50 + 20, // Larger orbs
           color: colors[Math.floor(Math.random() * colors.length)]
         });
       }
       return particles;
-    };
-
-    const drawConnections = (ctx: CanvasRenderingContext2D, particles: Particle[]) => {
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-          
-          if (distance < 120) {
-            ctx.strokeStyle = `rgba(107, 114, 128, ${0.2 * (1 - distance / 120)})`;
-            ctx.lineWidth = 0.5;
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.stroke();
-          }
-        }
-      }
     };
 
     const animate = () => {
@@ -81,25 +63,29 @@ const AnimatedBackground: React.FC = () => {
           const forceDirectionX = dx / distance;
           const forceDirectionY = dy / distance;
           const force = (mouseRef.current.radius - distance) / mouseRef.current.radius;
-          const directionX = forceDirectionX * force * -1;
-          const directionY = forceDirectionY * force * -1;
+          const directionX = forceDirectionX * force * -1.5; // Stronger push
+          const directionY = forceDirectionY * force * -1.5;
           
           particle.x += directionX;
           particle.y += directionY;
         }
 
-        // Boundary check
-        if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
-        if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
+        // Boundary check - make them wrap around for a seamless effect
+        if (particle.x < -particle.size) particle.x = canvas.width + particle.size;
+        if (particle.x > canvas.width + particle.size) particle.x = -particle.size;
+        if (particle.y < -particle.size) particle.y = canvas.height + particle.size;
+        if (particle.y > canvas.height + particle.size) particle.y = -particle.size;
 
-        // Draw particle
+        // Draw particle with a glow
+        ctx.save();
         ctx.fillStyle = particle.color;
+        ctx.shadowColor = particle.color;
+        ctx.shadowBlur = 30;
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
         ctx.fill();
+        ctx.restore();
       });
-
-      drawConnections(ctx, particlesRef.current);
 
       animationRef.current = requestAnimationFrame(animate);
     };
