@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
-import { Truck, MapPin, FileText, CreditCard, BarChart3, CheckCircle, ArrowRight } from 'lucide-react';
+import { Truck, MapPin, FileText, CreditCard, BarChart3, CheckCircle, ArrowRight, AlertTriangle } from 'lucide-react';
 
 const features = [
   { name: 'Live ETA Tracking', icon: MapPin },
@@ -63,7 +63,7 @@ const Home: React.FC = () => {
             <div className="w-full md:w-auto max-w-lg">
               <div className="bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg shadow-2xl p-4 w-full backdrop-blur-sm">
                 <div className="flex items-center justify-between mb-4">
-                  <span className="font-semibold text-sm text-slate-700 dark:text-slate-300">Operations Dashboard</span>
+                  <span className="font-bold text-lg text-slate-800 dark:text-slate-200">Operations Dashboard</span>
                   <div className="flex items-center space-x-1.5">
                     <div className="w-3 h-3 bg-red-400 rounded-full"></div>
                     <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
@@ -72,20 +72,23 @@ const Home: React.FC = () => {
                 </div>
                 <div className="space-y-4">
                   <div className="p-4 bg-slate-100 dark:bg-slate-900/50 rounded-lg">
-                    <div className="h-24 bg-cover bg-center rounded" style={{backgroundImage: "url('https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-s+000(-74.0060,40.7128)/-74.0060,40.7128,12,0/400x200?access_token=pk.eyJ1IjoiZHVtbXl1c2VyIiwiYSI6ImNsbW1mMjRzNzBqN2Mza3FqZ3M3M2Q5c3AifQ.1234567890abcdefghijklmnopqrstuvwxyz')"}}></div>
+                    <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-2">Live Fleet</h3>
+                    <div className="h-24 bg-cover bg-center rounded" style={{backgroundImage: "url('https://api.mapbox.com/styles/v1/mapbox/dark-v10/static/pin-s+00f(-2.24,53.48),pin-s+f00(-0.12,51.50)/-1.18,52.49,5/400x200?access_token=pk.eyJ1IjoiZHVtbXl1c2VyIiwiYSI6ImNsbW1mMjRzNzBqN2Mza3FqZ3M3M2Q5c3AifQ.1234567890abcdefghijklmnopqrstuvwxyz')"}}></div>
                   </div>
                   <div className="p-4 bg-slate-100 dark:bg-slate-900/50 rounded-lg">
-                    <h4 className="font-medium text-xs text-slate-500 dark:text-slate-400 mb-2">Active Shipments</h4>
-                    <div className="space-y-2">
+                    <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-3">Active Jobs</h3>
+                    <div className="space-y-3">
                       <div className="flex justify-between items-center text-sm">
-                        <span className="text-slate-700 dark:text-slate-300">#JB-1024</span>
-                        <span className="text-slate-500 dark:text-slate-400">London &rarr; Manchester</span>
-                        <span className="flex items-center text-green-600 dark:text-green-400"><CheckCircle className="w-4 h-4 mr-1" /> On Time</span>
+                        <span className="font-medium text-slate-700 dark:text-slate-300">#JB-1024 <span className="text-slate-500 dark:text-slate-400 font-normal">LND &rarr; MAN</span></span>
+                        <span className="flex items-center text-xs font-semibold px-2 py-1 bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-300 rounded-full"><CheckCircle className="w-3 h-3 mr-1" /> On Time</span>
                       </div>
                       <div className="flex justify-between items-center text-sm">
-                        <span className="text-slate-700 dark:text-slate-300">#JB-1025</span>
-                        <span className="text-slate-500 dark:text-slate-400">Birmingham &rarr; Glasgow</span>
-                        <span className="flex items-center text-yellow-600 dark:text-yellow-400"><Truck className="w-4 h-4 mr-1" /> In Transit</span>
+                        <span className="font-medium text-slate-700 dark:text-slate-300">#JB-1025 <span className="text-slate-500 dark:text-slate-400 font-normal">BHX &rarr; GLA</span></span>
+                        <span className="flex items-center text-xs font-semibold px-2 py-1 bg-yellow-100 text-yellow-800 dark:bg-yellow-900/50 dark:text-yellow-300 rounded-full"><Truck className="w-3 h-3 mr-1" /> In Transit</span>
+                      </div>
+                      <div className="flex justify-between items-center text-sm">
+                        <span className="font-medium text-slate-700 dark:text-slate-300">#JB-1026 <span className="text-slate-500 dark:text-slate-400 font-normal">SOU &rarr; LPL</span></span>
+                        <span className="flex items-center text-xs font-semibold px-2 py-1 bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-300 rounded-full"><AlertTriangle className="w-3 h-3 mr-1" /> At Risk</span>
                       </div>
                     </div>
                   </div>
