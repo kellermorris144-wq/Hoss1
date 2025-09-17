@@ -240,9 +240,10 @@ const Home: React.FC = () => {
       </div>
 
       {/* Built by Experts Section */}
-      <section className="py-24 bg-white dark:bg-slate-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-16">
+      <section className="relative py-24 bg-slate-50 dark:bg-slate-900 overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-[60%] bg-blue-500/10 dark:bg-blue-500/5 rounded-full blur-3xl -z-0"></div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
             <div>
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6 leading-tight">
                 The logistics platform built by <span className="text-blue-600 dark:text-blue-500">logistics experts</span>, for logistics professionals.
@@ -261,24 +262,35 @@ const Home: React.FC = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 mb-16">
-            {expertFeatures.map((feature) => (
-              <div key={feature} className="flex items-center py-3 border-b border-gray-200 dark:border-slate-700">
-                <CheckSquare className="w-6 h-6 text-blue-600 mr-4 flex-shrink-0" />
-                <span className="text-gray-700 dark:text-gray-300">{feature}</span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+            {expertFeatures.slice(0, 9).map((feature) => (
+              <div key={feature} className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-lg border border-slate-200 dark:border-slate-700 rounded-xl p-6 transition-all duration-300 hover:border-blue-500/50 hover:shadow-xl hover:-translate-y-1">
+                <div className="flex items-center">
+                  <CheckSquare className="w-6 h-6 text-blue-600 mr-4 flex-shrink-0" />
+                  <span className="font-medium text-gray-700 dark:text-gray-300">{feature}</span>
+                </div>
               </div>
             ))}
           </div>
 
-          <div className="text-center">
-            <p className="text-xl text-gray-700 dark:text-gray-300 mb-6 max-w-3xl mx-auto">
-              Let us show you how HOSS can transform your business from day one! Sign up for a free, personalized demo with our team today!
-            </p>
-            <Link to="/demo">
-              <Button size="lg" variant="dark">
-                SIGN UP FOR A FREE DEMO
-              </Button>
-            </Link>
+          <div className="mt-20">
+            <div className="relative p-10 text-center bg-gradient-to-br from-blue-600 to-purple-600 text-white shadow-2xl rounded-2xl overflow-hidden">
+              <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full"></div>
+              <div className="absolute -bottom-16 -left-10 w-48 h-48 bg-white/10 rounded-full"></div>
+              <div className="relative">
+                <h3 className="text-3xl font-bold mb-4">
+                  Ready to Transform Your Business?
+                </h3>
+                <p className="text-lg text-blue-100 mb-8 max-w-3xl mx-auto">
+                  Let us show you how HOSS can streamline your operations from day one! Sign up for a free, personalized demo with our team today.
+                </p>
+                <Link to="/demo">
+                  <Button size="lg" className="bg-white text-blue-700 hover:bg-slate-100 font-bold shadow-lg transform hover:scale-105">
+                    SIGN UP FOR A FREE DEMO
+                  </Button>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
