@@ -24,6 +24,9 @@ const Navigation: React.FC = () => {
             <div className="p-2 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg group-hover:from-blue-700 group-hover:to-purple-700 transition-all duration-200">
               <Truck className="w-6 h-6 text-white" />
             </div>
+            <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              HOSS
+            </span>
           </NavLink>
 
           {/* Navigation Links */}
