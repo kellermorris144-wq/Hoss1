@@ -111,56 +111,17 @@ const Home: React.FC = () => {
             </p>
           </div>
           
-          <Card className="p-8" gradient>
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
-              {/* Graph Visualization */}
-              <div className="lg:col-span-3">
-                <div className="w-full h-80 bg-gray-50 dark:bg-gray-800/50 rounded-lg p-6 flex items-end justify-around relative overflow-hidden">
-                  {/* Background grid lines */}
-                  <div className="absolute inset-0 grid grid-rows-5 p-6 pointer-events-none">
-                    {[...Array(4)].map((_, i) => (
-                      <div key={i} className="border-b border-gray-200 dark:border-gray-700/50"></div>
-                    ))}
-                  </div>
-                  
-                  {/* Bars */}
-                  <div className="relative w-1/5 h-full flex flex-col justify-end items-center">
-                    <div className="w-full bg-gradient-to-t from-blue-600 to-blue-400 rounded-t-md animate-bar-grow" style={{ height: '65%', animationDelay: '0s' }}></div>
-                    <span className="text-xs mt-2 text-gray-500 dark:text-gray-400">Q1</span>
-                  </div>
-                  <div className="relative w-1/5 h-full flex flex-col justify-end items-center">
-                    <div className="w-full bg-gradient-to-t from-purple-600 to-purple-400 rounded-t-md animate-bar-grow" style={{ height: '75%', animationDelay: '0.2s' }}></div>
-                    <span className="text-xs mt-2 text-gray-500 dark:text-gray-400">Q2</span>
-                  </div>
-                  <div className="relative w-1/5 h-full flex flex-col justify-end items-center">
-                    <div className="w-full bg-gradient-to-t from-blue-500 to-cyan-400 rounded-t-md animate-bar-grow" style={{ height: '85%', animationDelay: '0.4s' }}></div>
-                    <span className="text-xs mt-2 text-gray-500 dark:text-gray-400">Q3</span>
-                  </div>
-                  <div className="relative w-1/5 h-full flex flex-col justify-end items-center">
-                    <div className="w-full bg-gradient-to-t from-purple-500 to-pink-400 rounded-t-md animate-bar-grow" style={{ height: '95%', animationDelay: '0.6s' }}></div>
-                    <span className="text-xs mt-2 text-gray-500 dark:text-gray-400">Q4</span>
-                  </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {performanceMetrics.map((item) => (
+              <Card key={item.label} hover className="p-6 text-center">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900 dark:to-purple-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <item.icon className="w-8 h-8 text-blue-600 dark:text-blue-400" />
                 </div>
-              </div>
-
-              {/* Metrics */}
-              <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {performanceMetrics.map((item) => (
-                  <Card key={item.label} className="p-4 bg-white/50 dark:bg-gray-900/50">
-                    <div className="flex items-center">
-                      <div className="p-3 bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900 dark:to-purple-900 rounded-lg mr-4">
-                        <item.icon className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-                      </div>
-                      <div>
-                        <div className="text-xl font-bold text-gray-900 dark:text-gray-100">{item.metric}</div>
-                        <div className="text-sm text-gray-600 dark:text-gray-400">{item.label}</div>
-                      </div>
-                    </div>
-                  </Card>
-                ))}
-              </div>
-            </div>
-          </Card>
+                <div className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-2">{item.metric}</div>
+                <div className="text-gray-600 dark:text-gray-400">{item.label}</div>
+              </Card>
+            ))}
+          </div>
         </div>
       </section>
 
