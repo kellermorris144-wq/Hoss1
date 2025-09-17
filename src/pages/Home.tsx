@@ -1,13 +1,37 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
-import { Truck, MapPin, FileText, CreditCard, BarChart3, CheckCircle, ArrowRight, AlertTriangle, TrendingUp } from 'lucide-react';
+import { Truck, MapPin, FileText, CreditCard, BarChart3, CheckCircle, ArrowRight, AlertTriangle } from 'lucide-react';
 
 const features = [
   { name: 'Live ETA Tracking', icon: MapPin },
   { name: 'Instant Quoting', icon: FileText },
   { name: 'Digital Invoicing', icon: CreditCard },
   { name: 'Analytics & Reporting', icon: BarChart3 },
+];
+
+const trucks = [
+  {
+    id: 'HOSS-04',
+    driver: 'Sarah J.',
+    position: { top: '35%', left: '45%' },
+    color: 'bg-blue-500',
+    pingColor: 'bg-blue-400',
+  },
+  {
+    id: 'HOSS-11',
+    driver: 'Mike P.',
+    position: { top: '65%', left: '60%' },
+    color: 'bg-red-500',
+    pingColor: 'bg-red-400',
+  },
+  {
+    id: 'HOSS-07',
+    driver: 'David L.',
+    position: { top: '50%', left: '20%' },
+    color: 'bg-green-500',
+    pingColor: 'bg-green-400',
+  },
 ];
 
 const Home: React.FC = () => {
@@ -74,15 +98,28 @@ const Home: React.FC = () => {
                   {/* Live Fleet Map */}
                   <div className="col-span-2 p-4 bg-slate-100 dark:bg-slate-900/50 rounded-lg relative">
                     <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-2">Live Fleet: Essex</h3>
-                    <div className="h-24 bg-cover bg-center rounded" style={{backgroundImage: "url('https://api.mapbox.com/styles/v1/mapbox/dark-v10/static/pin-s+00f(0.4685,51.7356),pin-s+f00(0.8956,51.8937)/0.6,51.75,9/400x200?access_token=pk.eyJ1IjoiZHVtbXl1c2VyIiwiYSI6ImNsbW1mMjRzNzBqN2Mza3FqZ3M3M2Q5c3AifQ.1234567890abcdefghijklmnopqrstuvwxyz')"}}></div>
-                    {/* Pulsing dots for trucks */}
-                    <div className="absolute top-1/2 left-1/3 w-3 h-3">
-                      <div className="absolute inset-0 bg-blue-400 rounded-full animate-ping"></div>
-                      <div className="relative block w-3 h-3 bg-blue-500 rounded-full border-2 border-white"></div>
-                    </div>
-                    <div className="absolute top-1/3 left-2/3 w-3 h-3">
-                      <div className="absolute inset-0 bg-red-400 rounded-full animate-ping delay-1000"></div>
-                      <div className="relative block w-3 h-3 bg-red-500 rounded-full border-2 border-white"></div>
+                    <div className="relative h-32 bg-slate-200 dark:bg-slate-800/70 rounded-lg overflow-hidden">
+                      {/* Map background elements */}
+                      <div className="absolute top-1/2 left-0 w-full h-0.5 bg-slate-300 dark:bg-slate-700/50 -translate-y-1/2"></div>
+                      <div className="absolute top-1/4 left-1/2 w-3/4 h-0.5 bg-slate-300 dark:bg-slate-700/50 -translate-x-1/2 rotate-12"></div>
+                      <div className="absolute top-0 bottom-0 left-1/3 w-0.5 bg-slate-300 dark:bg-slate-700/50 -translate-x-1/2"></div>
+                      <span className="absolute top-[28%] left-[40%] text-xs text-slate-500 dark:text-slate-400 font-semibold">Chelmsford</span>
+                      <span className="absolute top-[60%] left-[55%] text-xs text-slate-500 dark:text-slate-400 font-semibold">Southend</span>
+                      <span className="absolute top-[45%] left-[15%] text-xs text-slate-500 dark:text-slate-400 font-semibold">Harlow</span>
+
+                      {/* Truck dots */}
+                      {trucks.map(truck => (
+                        <div key={truck.id} className="absolute group" style={truck.position}>
+                          <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-max px-2 py-1 bg-slate-900 text-white text-xs font-bold rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10">
+                            <p>{truck.driver}</p>
+                            <p className="text-slate-400 font-medium">{truck.id}</p>
+                          </div>
+                          <div className="relative w-3 h-3">
+                            <div className={`absolute inset-0 ${truck.pingColor} rounded-full animate-ping`}></div>
+                            <div className={`relative block w-3 h-3 ${truck.color} rounded-full border-2 border-white dark:border-slate-900`}></div>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
                   {/* Key Metrics */}
