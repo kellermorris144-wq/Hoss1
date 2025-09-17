@@ -1,0 +1,205 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  .bg-grid-pattern {
+    background-image: 
+      linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .animate-float-slow {
+    animation: floatSlow 8s ease-in-out infinite;
+  }
+  
+  .animate-float-medium {
+    animation: floatMedium 6s ease-in-out infinite;
+  }
+  
+  .animate-float-fast {
+    animation: floatFast 4s ease-in-out infinite;
+  }
+  
+  .animate-float-slow-reverse {
+    animation: floatSlowReverse 10s ease-in-out infinite;
+  }
+  
+  .animate-spin-slow {
+    animation: spinSlow 20s linear infinite;
+  }
+  
+  .animate-pulse-slow {
+    animation: pulseSlow 4s ease-in-out infinite;
+  }
+  
+  .animate-float-vertical {
+    animation: floatVertical 5s ease-in-out infinite;
+  }
+  
+  .animate-float-horizontal {
+    animation: floatHorizontal 7s ease-in-out infinite;
+  }
+  
+  .animate-twinkle {
+    animation: twinkle 3s ease-in-out infinite;
+  }
+  
+  .animate-twinkle-delayed {
+    animation: twinkle 3s ease-in-out infinite 1s;
+  }
+  
+  .animate-twinkle-slow {
+    animation: twinkle 5s ease-in-out infinite 2s;
+  }
+  
+  .animate-gradient-shift {
+    animation: gradientShift 15s ease-in-out infinite;
+  }
+  
+  .animate-gradient-shift-reverse {
+    animation: gradientShiftReverse 12s ease-in-out infinite;
+  }
+  
+  .animate-morph {
+    animation: morph 8s ease-in-out infinite;
+  }
+  
+  .animate-wave {
+    animation: wave 6s ease-in-out infinite;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes floatSlow {
+    0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+    25% { transform: translateY(-20px) translateX(10px) rotate(5deg); }
+    50% { transform: translateY(-10px) translateX(-15px) rotate(-3deg); }
+    75% { transform: translateY(-25px) translateX(5px) rotate(7deg); }
+  }
+  
+  @keyframes floatMedium {
+    0%, 100% { transform: translateY(0px) translateX(0px) scale(1); }
+    33% { transform: translateY(-15px) translateX(-10px) scale(1.05); }
+    66% { transform: translateY(-5px) translateX(12px) scale(0.95); }
+  }
+  
+  @keyframes floatFast {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-30px) rotate(180deg); }
+  }
+  
+  @keyframes floatSlowReverse {
+    0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg) scale(1); }
+    25% { transform: translateY(15px) translateX(-8px) rotate(-5deg) scale(1.1); }
+    50% { transform: translateY(5px) translateX(20px) rotate(3deg) scale(0.9); }
+    75% { transform: translateY(20px) translateX(-5px) rotate(-7deg) scale(1.05); }
+  }
+  
+  @keyframes spinSlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+  @keyframes pulseSlow {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.1); }
+  }
+  
+  @keyframes floatVertical {
+    0%, 100% { transform: translateY(0px); opacity: 0.3; }
+    50% { transform: translateY(-40px); opacity: 0.8; }
+  }
+  
+  @keyframes floatHorizontal {
+    0%, 100% { transform: translateX(0px); opacity: 0.3; }
+    50% { transform: translateX(30px); opacity: 0.7; }
+  }
+  
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.5); }
+  }
+  
+  @keyframes gradientShift {
+    0%, 100% { opacity: 0.3; transform: rotate(0deg) scale(1); }
+    33% { opacity: 0.6; transform: rotate(120deg) scale(1.1); }
+    66% { opacity: 0.4; transform: rotate(240deg) scale(0.9); }
+  }
+  
+  @keyframes gradientShiftReverse {
+    0%, 100% { opacity: 0.2; transform: rotate(0deg) scale(1); }
+    50% { opacity: 0.5; transform: rotate(-180deg) scale(1.2); }
+  }
+  
+  @keyframes morph {
+    0%, 100% { border-radius: 50%; transform: rotate(0deg) scale(1); }
+    25% { border-radius: 25%; transform: rotate(90deg) scale(1.1); }
+    50% { border-radius: 10%; transform: rotate(180deg) scale(0.9); }
+    75% { border-radius: 35%; transform: rotate(270deg) scale(1.05); }
+  }
+  
+  @keyframes wave {
+    0%, 100% { transform: translateY(0px) scaleY(1); }
+    25% { transform: translateY(-10px) scaleY(1.1); }
+    50% { transform: translateY(-5px) scaleY(0.9); }
+    75% { transform: translateY(-15px) scaleY(1.05); }
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100 dark:bg-gray-900;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 dark:bg-gray-700 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400 dark:bg-gray-600;
+}
+
+/* Focus styles for better accessibility */
+.focus-visible {
+  @apply outline-none ring-2 ring-blue-500 ring-offset-2 dark:ring-offset-gray-900;
+}
+
+/* Smooth transitions for theme switching */
+* {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
