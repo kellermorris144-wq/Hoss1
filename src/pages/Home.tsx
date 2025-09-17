@@ -64,7 +64,7 @@ const Home: React.FC = () => {
         <div className="relative w-full max-w-7xl mx-auto mt-16 md:mt-24 h-[400px]">
           <div className="relative flex flex-row items-center justify-between h-full">
             {/* Left: Features */}
-            <div className="space-y-8 w-full md:w-auto">
+            <div className="flex flex-col justify-between h-full py-2">
               {features.map((feature) => (
                 <div key={feature.name} className="flex items-center space-x-4 group">
                   <div className="flex items-center justify-center w-12 h-12 bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl shadow-sm transition-all duration-300 group-hover:scale-110 group-hover:shadow-blue-500/30 group-hover:border-blue-400 dark:group-hover:border-blue-600">
@@ -181,12 +181,12 @@ const Home: React.FC = () => {
               </filter>
             </defs>
             
-            {/* Paths from features to hub */}
             <g filter="url(#glow)">
-              <path d="M 280 40 C 420 40, 450 200, 580 200" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
-              <path d="M 280 120 C 420 120, 450 200, 580 200" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
-              <path d="M 280 280 C 420 280, 450 200, 580 200" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
-              <path d="M 280 360 C 420 360, 450 200, 580 200" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
+              {/* Paths from features to hub */}
+              <path d="M 280 50 C 420 50, 450 200, 580 200" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
+              <path d="M 280 125 C 420 125, 450 200, 580 200" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
+              <path d="M 280 275 C 420 275, 450 200, 580 200" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
+              <path d="M 280 350 C 420 350, 450 200, 580 200" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
               
               {/* Path from hub to product */}
               <path d="M 700 200 H 850" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
@@ -197,16 +197,16 @@ const Home: React.FC = () => {
 
               {/* Animated dots */}
               <circle cx="0" cy="0" r="5" fill="#3b82f6">
-                <animateMotion dur="8s" repeatCount="indefinite" path="M 280 40 C 420 40, 450 200, 580 200" />
+                <animateMotion dur="8s" repeatCount="indefinite" path="M 280 50 C 420 50, 450 200, 580 200" />
               </circle>
               <circle cx="0" cy="0" r="5" fill="#3b82f6">
-                <animateMotion dur="7s" repeatCount="indefinite" path="M 280 120 C 420 120, 450 200, 580 200" />
+                <animateMotion dur="7s" repeatCount="indefinite" path="M 280 125 C 420 125, 450 200, 580 200" />
               </circle>
               <circle cx="0" cy="0" r="5" fill="#3b82f6">
-                <animateMotion dur="6s" repeatCount="indefinite" path="M 280 280 C 420 280, 450 200, 580 200" />
+                <animateMotion dur="6s" repeatCount="indefinite" path="M 280 275 C 420 275, 450 200, 580 200" />
               </circle>
               <circle cx="0" cy="0" r="5" fill="#3b82f6">
-                <animateMotion dur="9s" repeatCount="indefinite" path="M 280 360 C 420 360, 450 200, 580 200" />
+                <animateMotion dur="9s" repeatCount="indefinite" path="M 280 350 C 420 350, 450 200, 580 200" />
               </circle>
               <circle cx="0" cy="0" r="5" fill="#3b82f6">
                 <animateMotion dur="5s" repeatCount="indefinite" path="M 700 200 H 850" />
@@ -214,10 +214,10 @@ const Home: React.FC = () => {
 
               {/* Feedback dots */}
               <circle cx="0" cy="0" r="4" fill="#22c55e">
-                <animateMotion dur="6s" repeatCount="indefinite" path="M 850 190 H 700" />
+                <animateMotion dur="4s" repeatCount="indefinite" path="M 850 190 H 700" />
               </circle>
               <circle cx="0" cy="0" r="4" fill="#22c55e">
-                <animateMotion dur="6s" begin="0.5s" repeatCount="indefinite" path="M 850 210 H 700" />
+                <animateMotion dur="4s" begin="0.5s" repeatCount="indefinite" path="M 850 210 H 700" />
               </circle>
             </g>
           </svg>
