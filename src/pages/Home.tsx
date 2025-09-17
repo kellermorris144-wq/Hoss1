@@ -4,8 +4,11 @@ import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 import Card from '../components/Card';
 import AnimatedBackground from '../components/AnimatedBackground';
+import { useTheme } from '../contexts/ThemeContext';
 
 const Home: React.FC = () => {
+  const { theme } = useTheme();
+
   const features = [
     {
       icon: Truck,
@@ -40,7 +43,7 @@ const Home: React.FC = () => {
     <div className="pt-16">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-white dark:bg-gray-900 min-h-screen flex items-center justify-center">
-        <AnimatedBackground />
+        <AnimatedBackground theme={theme} />
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center" style={{ zIndex: 10 }}>
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent mb-6 animate-fade-in">
