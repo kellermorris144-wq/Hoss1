@@ -42,7 +42,7 @@ const Home: React.FC = () => {
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 pt-24 pb-12">
         {/* Top Content */}
         <div className="text-center max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent mb-6">
+          <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent mb-6 leading-snug">
             The All-in-One Solution for Modern Logistics.
           </h1>
           <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8">
