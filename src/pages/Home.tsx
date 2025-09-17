@@ -1,32 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
-import { Truck, Briefcase, Users, Database, CreditCard, MapPin, BarChart2, PieChart, ArrowRight } from 'lucide-react';
+import { Truck, Briefcase, Users, Database, CreditCard, BarChart2, PieChart } from 'lucide-react';
 
 const integrations = [
-  { name: 'Accounting', icons: [CreditCard, Briefcase] },
-  { name: 'Freight Networks', icons: [Users] },
-  { name: 'File Storage', icons: [Database] },
-  { name: 'Maps & Tracking', icons: [MapPin] },
+  { name: 'Job Management', icon: Briefcase },
+  { name: 'Accounting', icon: CreditCard },
+  { name: 'CRM', icon: Users },
+  { name: 'File Storage', icon: Database },
 ];
 
 const Home: React.FC = () => {
   return (
-    <div className="relative min-h-screen w-full overflow-hidden bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
-      {/* Background decorative shapes */}
-      <div className="absolute top-0 left-0 w-full h-full z-0">
-        <div className="absolute -top-1/4 -left-1/4 w-1/2 h-1/2 bg-purple-100/30 dark:bg-purple-900/20 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-blue-100/30 dark:bg-blue-900/20 rounded-full blur-3xl"></div>
-      </div>
-
+    <div className="relative min-h-screen w-full overflow-hidden bg-grid-pattern text-gray-800 dark:text-gray-200">
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 pt-24 pb-12">
         {/* Top Content */}
-        <div className="text-center max-w-3xl mx-auto">
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
-            One Platform, hundreds of logistics integrations
+        <div className="text-center max-w-4xl mx-auto">
+          <h1 className="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-6">
+            Your Entire Haulage Operation, Unified.
           </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-            HOSS is the leading platform for customer-facing logistics integrations, trusted by Fortune 500 organizations and thousands of other B2B SaaS companies.
+          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8">
+            HOSS provides a single platform to integrate your accounting, CRM, job management, and tracking, giving you complete control and visibility.
           </p>
           <Link to="/demo">
             <Button variant="dark" size="lg">
@@ -36,54 +30,53 @@ const Home: React.FC = () => {
         </div>
 
         {/* Visual Diagram */}
-        <div className="relative w-full max-w-6xl mx-auto mt-16 md:mt-24">
+        <div className="relative w-full max-w-7xl mx-auto mt-16 md:mt-24">
           <div className="flex flex-col md:flex-row items-center justify-between">
             {/* Left: Integrations */}
-            <div className="space-y-4 w-full md:w-auto">
-              {integrations.map((integration, index) => (
-                <div key={integration.name} className="flex items-center space-x-4">
-                  <div className="flex items-center justify-center space-x-4 bg-white dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-2 shadow-sm">
-                    {integration.icons.map((Icon, i) => (
-                      <Icon key={i} className="w-6 h-6 text-gray-400" />
-                    ))}
+            <div className="space-y-6 w-full md:w-auto">
+              {integrations.map((integration) => (
+                <div key={integration.name} className="flex items-center space-x-4 group">
+                  <div className="flex items-center justify-center w-12 h-12 bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg shadow-sm transition-all duration-300 group-hover:scale-110 group-hover:shadow-blue-500/30 group-hover:border-blue-400 dark:group-hover:border-blue-600">
+                    <integration.icon className="w-6 h-6 text-slate-500 dark:text-slate-400 transition-colors group-hover:text-blue-500" />
                   </div>
-                  <span className="font-medium text-gray-700 dark:text-gray-300">{integration.name}</span>
+                  <span className="font-medium text-slate-700 dark:text-slate-300 text-lg">{integration.name}</span>
                 </div>
               ))}
             </div>
 
             {/* Center: Hub */}
             <div className="relative my-8 md:my-0 md:mx-16">
-              <div className="w-24 h-24 bg-white dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-full flex items-center justify-center shadow-lg">
-                <Truck className="w-10 h-10 text-blue-600 dark:text-blue-500" />
+              <div className="absolute inset-0 bg-blue-500/20 rounded-full blur-2xl animate-pulse-slow"></div>
+              <div className="relative w-28 h-28 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full flex items-center justify-center shadow-lg">
+                <Truck className="w-12 h-12 text-blue-600 dark:text-blue-500" />
               </div>
             </div>
 
             {/* Right: Product UI */}
-            <div className="w-full md:w-auto max-w-md">
-              <div className="bg-white dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg p-4">
+            <div className="w-full md:w-auto max-w-lg">
+              <div className="bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg shadow-2xl p-4 w-full backdrop-blur-sm">
                 <div className="flex items-center space-x-1.5 mb-4">
                   <div className="w-3 h-3 bg-red-400 rounded-full"></div>
                   <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
                   <div className="w-3 h-3 bg-green-400 rounded-full"></div>
                 </div>
                 <div className="space-y-4">
-                  <div className="flex items-end space-x-2 h-24 p-2 bg-gray-100 dark:bg-gray-900/50 rounded">
-                    <div className="w-1/6 h-1/3 bg-gray-300 dark:bg-gray-600 rounded-sm"></div>
-                    <div className="w-1/6 h-2/3 bg-gray-300 dark:bg-gray-600 rounded-sm"></div>
-                    <div className="w-1/6 h-full bg-blue-400 dark:bg-blue-600 rounded-sm"></div>
-                    <div className="w-1/6 h-1/2 bg-gray-300 dark:bg-gray-600 rounded-sm"></div>
-                    <div className="w-1/6 h-3/4 bg-gray-300 dark:bg-gray-600 rounded-sm"></div>
-                    <div className="w-1/6 h-1/2 bg-gray-300 dark:bg-gray-600 rounded-sm"></div>
+                  <div className="flex justify-between items-center">
+                    <div className="h-5 w-1/3 bg-slate-200 dark:bg-slate-700 rounded"></div>
+                    <div className="h-5 w-1/4 bg-slate-200 dark:bg-slate-700 rounded"></div>
+                  </div>
+                  <div className="p-4 bg-slate-100 dark:bg-slate-900/50 rounded-lg">
+                    <BarChart2 className="w-full h-24 text-slate-300 dark:text-slate-600" />
                   </div>
                   <div className="flex space-x-4">
-                    <div className="w-1/2 p-2 bg-gray-100 dark:bg-gray-900/50 rounded">
-                      <div className="h-3 w-3/4 bg-gray-300 dark:bg-gray-600 rounded"></div>
-                      <div className="h-2 w-1/2 bg-gray-200 dark:bg-gray-700 rounded mt-2"></div>
+                    <div className="w-1/3 p-2 bg-slate-100 dark:bg-slate-900/50 rounded-lg flex items-center justify-center">
+                      <PieChart className="w-16 h-16 text-slate-300 dark:text-slate-600" />
                     </div>
-                    <div className="w-1/2 p-2 bg-gray-100 dark:bg-gray-900/50 rounded">
-                      <div className="h-3 w-3/4 bg-gray-300 dark:bg-gray-600 rounded"></div>
-                      <div className="h-2 w-1/2 bg-gray-200 dark:bg-gray-700 rounded mt-2"></div>
+                    <div className="w-2/3 p-2 bg-slate-100 dark:bg-slate-900/50 rounded-lg space-y-2 flex flex-col justify-center">
+                      <div className="h-3 w-full bg-slate-200 dark:bg-slate-700 rounded"></div>
+                      <div className="h-3 w-5/6 bg-slate-200 dark:bg-slate-700 rounded"></div>
+                      <div className="h-3 w-full bg-slate-200 dark:bg-slate-700 rounded"></div>
+                      <div className="h-3 w-3/4 bg-slate-200 dark:bg-slate-700 rounded"></div>
                     </div>
                   </div>
                 </div>
@@ -99,23 +92,29 @@ const Home: React.FC = () => {
               </marker>
             </defs>
             {/* Paths from integrations to hub */}
-            <path d="M 220 50 C 350 50, 350 150, 480 150" stroke="#9ca3af" strokeWidth="2" fill="none" strokeDasharray="4 4" />
-            <path d="M 220 115 C 350 115, 350 150, 480 150" stroke="#9ca3af" strokeWidth="2" fill="none" strokeDasharray="4 4" />
-            <path d="M 220 180 C 350 180, 350 150, 480 150" stroke="#9ca3af" strokeWidth="2" fill="none" strokeDasharray="4 4" />
-            <path d="M 220 245 C 350 245, 350 150, 480 150" stroke="#9ca3af" strokeWidth="2" fill="none" strokeDasharray="4 4" />
+            <path d="M 250 70 C 400 70, 400 180, 540 180" stroke="url(#grad1)" strokeWidth="2" fill="none" />
+            <path d="M 250 145 C 400 145, 400 180, 540 180" stroke="url(#grad1)" strokeWidth="2" fill="none" />
+            <path d="M 250 220 C 400 220, 400 180, 540 180" stroke="url(#grad1)" strokeWidth="2" fill="none" />
+            <path d="M 250 295 C 400 295, 400 180, 540 180" stroke="url(#grad1)" strokeWidth="2" fill="none" />
             
             {/* Path from hub to product */}
-            <path d="M 580 150 H 700" stroke="#9ca3af" strokeWidth="2" fill="none" />
+            <path d="M 660 180 H 800" stroke="url(#grad1)" strokeWidth="2" fill="none" />
+
+            {/* Gradient for lines */}
+            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style={{ stopColor: 'rgba(156, 163, 175, 0.1)', stopOpacity: 1 }} />
+              <stop offset="100%" style={{ stopColor: 'rgba(156, 163, 175, 0.5)', stopOpacity: 1 }} />
+            </linearGradient>
 
             {/* Animated dots */}
             <circle cx="0" cy="0" r="3" fill="#3b82f6" className="opacity-75">
-              <animateMotion dur="6s" repeatCount="indefinite" path="M 220 50 C 350 50, 350 150, 480 150" />
+              <animateMotion dur="8s" repeatCount="indefinite" path="M 250 70 C 400 70, 400 180, 540 180" />
             </circle>
             <circle cx="0" cy="0" r="3" fill="#3b82f6" className="opacity-75">
-              <animateMotion dur="5s" repeatCount="indefinite" path="M 220 180 C 350 180, 350 150, 480 150" />
+              <animateMotion dur="6s" repeatCount="indefinite" path="M 250 220 C 400 220, 400 180, 540 180" />
             </circle>
              <circle cx="0" cy="0" r="3" fill="#3b82f6" className="opacity-75">
-              <animateMotion dur="7s" repeatCount="indefinite" path="M 580 150 H 700" />
+              <animateMotion dur="7s" repeatCount="indefinite" path="M 660 180 H 800" />
             </circle>
           </svg>
         </div>
