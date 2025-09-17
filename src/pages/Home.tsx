@@ -73,14 +73,14 @@ const Home: React.FC = () => {
                 <div className="grid grid-cols-2 gap-4">
                   {/* Live Fleet Map */}
                   <div className="col-span-2 p-4 bg-slate-100 dark:bg-slate-900/50 rounded-lg relative">
-                    <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-2">Live Fleet</h3>
-                    <div className="h-24 bg-cover bg-center rounded" style={{backgroundImage: "url('https://api.mapbox.com/styles/v1/mapbox/dark-v10/static/pin-s+00f(-2.24,53.48),pin-s+f00(-0.12,51.50)/-1.18,52.49,5/400x200?access_token=pk.eyJ1IjoiZHVtbXl1c2VyIiwiYSI6ImNsbW1mMjRzNzBqN2Mza3FqZ3M3M2Q5c3AifQ.1234567890abcdefghijklmnopqrstuvwxyz')"}}></div>
+                    <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-2">Live Fleet: Essex</h3>
+                    <div className="h-24 bg-cover bg-center rounded" style={{backgroundImage: "url('https://api.mapbox.com/styles/v1/mapbox/dark-v10/static/pin-s+00f(0.4685,51.7356),pin-s+f00(0.8956,51.8937)/0.6,51.75,9/400x200?access_token=pk.eyJ1IjoiZHVtbXl1c2VyIiwiYSI6ImNsbW1mMjRzNzBqN2Mza3FqZ3M3M2Q5c3AifQ.1234567890abcdefghijklmnopqrstuvwxyz')"}}></div>
                     {/* Pulsing dots for trucks */}
                     <div className="absolute top-1/2 left-1/3 w-3 h-3">
                       <div className="absolute inset-0 bg-blue-400 rounded-full animate-ping"></div>
                       <div className="relative block w-3 h-3 bg-blue-500 rounded-full border-2 border-white"></div>
                     </div>
-                    <div className="absolute top-2/3 left-2/3 w-3 h-3">
+                    <div className="absolute top-1/3 left-2/3 w-3 h-3">
                       <div className="absolute inset-0 bg-red-400 rounded-full animate-ping delay-1000"></div>
                       <div className="relative block w-3 h-3 bg-red-500 rounded-full border-2 border-white"></div>
                     </div>
@@ -110,15 +110,15 @@ const Home: React.FC = () => {
                     <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-2">Active Jobs</h3>
                     <div className="space-y-2">
                       <div className="flex justify-between items-center text-xs p-2 rounded-md transition-colors hover:bg-slate-200 dark:hover:bg-slate-800/50">
-                        <span className="font-medium text-slate-700 dark:text-slate-300">#JB-1024</span>
+                        <span className="font-medium text-slate-700 dark:text-slate-300">Chelmsford &rarr; Colchester</span>
                         <span className="flex items-center text-green-600 dark:text-green-400"><CheckCircle className="w-3 h-3 mr-1" /> On Time</span>
                       </div>
                       <div className="flex justify-between items-center text-xs p-2 rounded-md transition-colors hover:bg-slate-200 dark:hover:bg-slate-800/50">
-                        <span className="font-medium text-slate-700 dark:text-slate-300">#JB-1025</span>
+                        <span className="font-medium text-slate-700 dark:text-slate-300">Southend &rarr; London</span>
                         <span className="flex items-center text-yellow-600 dark:text-yellow-400"><Truck className="w-3 h-3 mr-1" /> In Transit</span>
                       </div>
                       <div className="flex justify-between items-center text-xs p-2 rounded-md transition-colors hover:bg-slate-200 dark:hover:bg-slate-800/50">
-                        <span className="font-medium text-slate-700 dark:text-slate-300">#JB-1026</span>
+                        <span className="font-medium text-slate-700 dark:text-slate-300">Harwich &rarr; Tilbury</span>
                         <span className="flex items-center text-red-600 dark:text-red-400"><AlertTriangle className="w-3 h-3 mr-1" /> At Risk</span>
                       </div>
                     </div>
