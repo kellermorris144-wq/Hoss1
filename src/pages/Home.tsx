@@ -106,14 +106,13 @@ const Home: React.FC = () => {
             {/* Left Column: Text and Features */}
             <div>
               <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-6 leading-tight">
-                The logistics software built by{' '}
+                From Industry Insiders to Your{' '}
                 <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                  logistics people
-                </span>{' '}
-                for logistics people.
+                  Integrated Solution
+                </span>
               </h2>
               <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-                HOSS is built by people who understand your business. Working in the industry for decades, our professional team knows what it takes to run a thriving logistics company and have created HOSS to help you run yours.
+                HOSS isn't just software; it's decades of logistics expertise encoded into a platform that anticipates your needs. Our team, seasoned by years in the industry, has built the tool they always wished they had—and now it's yours.
               </p>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 mb-10">
@@ -160,9 +159,9 @@ const Home: React.FC = () => {
             {/* Right Column: Image */}
             <div className="hidden lg:flex items-center justify-center">
               <div className="relative w-96 h-96">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full blur-2xl opacity-30"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full blur-2xl opacity-30 animate-pulse-slow"></div>
                 <div className="relative w-full h-full flex items-center justify-center bg-white/50 dark:bg-gray-800/50 rounded-full backdrop-blur-sm border border-white/20">
-                  <Warehouse className="w-48 h-48 text-blue-600 dark:text-blue-400" />
+                  <Warehouse className="w-48 h-48 text-blue-600 dark:text-blue-400 drop-shadow-[0_0_1rem_rgba(59,130,246,0.6)] dark:drop-shadow-[0_0_1.5rem_rgba(99,102,241,0.5)]" />
                 </div>
               </div>
             </div>
