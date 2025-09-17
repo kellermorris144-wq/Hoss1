@@ -5,39 +5,11 @@ import Button from '../components/Button';
 import Card from '../components/Card';
 import AnimatedBackground from '../components/AnimatedBackground';
 import { useTheme } from '../contexts/ThemeContext';
+import FeatureShowcase from '../components/FeatureShowcase';
+import TestimonialCard from '../components/TestimonialCard';
 
 const Home: React.FC = () => {
   const { theme } = useTheme();
-
-  const features = [
-    {
-      icon: Truck,
-      title: 'Real-Time Tracking',
-      description: 'Live ETA updates and full visibility of your shipments from pickup to delivery.',
-    },
-    {
-      icon: Clock,
-      title: 'Instant Quotes',
-      description: 'Get accurate pricing in seconds with our intelligent quoting system.',
-    },
-    {
-      icon: Shield,
-      title: 'Secure & Reliable',
-      description: 'Enterprise-grade security with 99.9% uptime guarantee.',
-    },
-    {
-      icon: Users,
-      title: '24/7 Support',
-      description: 'Dedicated customer success team available around the clock.',
-    },
-  ];
-
-  const performanceMetrics = [
-    { icon: Zap, metric: '< 200ms', label: 'API Response Time' },
-    { icon: BarChart3, metric: '99.99%', label: 'Uptime Guarantee' },
-    { icon: Database, metric: '10M+', label: 'Transactions Processed' },
-    { icon: Shield, metric: 'ISO 27001', label: 'Certified Security' },
-  ];
 
   return (
     <div className="pt-16">
@@ -47,17 +19,17 @@ const Home: React.FC = () => {
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center" style={{ zIndex: 10 }}>
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent mb-6 animate-fade-in">
-            The Future of Logistics
+            Orchestrate Your Logistics, Effortlessly.
           </h1>
           
           <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed">
-            HOSS is the all-in-one platform designed to streamline your haulage operations, reduce costs, and provide unparalleled visibility.
+            HOSS is the all-in-one platform built by logistics experts to streamline operations, slash costs, and deliver unparalleled visibility.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/demo">
               <Button size="lg" icon={ArrowRight} iconPosition="right">
-                Book a Demo
+                Book a Free Demo
               </Button>
             </Link>
             <Link to="/product">
@@ -69,131 +41,91 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* Trusted By Section */}
+      <section className="py-16 bg-gray-50 dark:bg-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h3 className="text-center text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-8">
+            Trusted by Industry Leaders
+          </h3>
+          <div className="flex flex-wrap justify-around items-center gap-8 opacity-60">
+            {/* Replace with actual client logos */}
+            <p className="font-bold text-2xl">YourLogo</p>
+            <p className="font-bold text-2xl">Logistics Inc.</p>
+            <p className="font-bold text-2xl">Transport Co.</p>
+            <p className="font-bold text-2xl">Freightify</p>
+            <p className="font-bold text-2xl">ShipWell</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Feature Showcase Section */}
+      <section className="py-24 bg-white dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
+          <FeatureShowcase
+            icon={Truck}
+            title="Real-Time Tracking & Visibility"
+            description="Go beyond dots on a map. Get live ETAs, shareable tracking links, and automated alerts for every shipment, giving you and your customers complete peace of mind."
+            imageUrl="https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+          />
+          <FeatureShowcase
+            icon={Clock}
+            title="Instant, Accurate Quoting"
+            description="Stop wasting time with spreadsheets. Our intelligent engine generates precise quotes in seconds, factoring in real-time market rates, fuel costs, and vehicle availability."
+            imageUrl="https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            reverse
+          />
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
       <section className="py-24 bg-gray-50 dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-              An End-to-End Logistics Solution
+              Don't Just Take Our Word For It
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              Our platform provides everything you need to manage your operations efficiently, from initial quote to final delivery.
+              See how HOSS is transforming operations for businesses like yours.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {features.map((feature) => (
-              <div key={feature.title} className="relative group bg-white dark:bg-gray-900 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-200 dark:border-gray-800">
-                <div className="absolute -inset-px bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ zIndex: 0 }}></div>
-                <div className="absolute inset-0.5 bg-white dark:bg-gray-900 rounded-lg" style={{ zIndex: 1 }}></div>
-                <div className="relative text-center" style={{ zIndex: 2 }}>
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center mx-auto mb-4 transform group-hover:scale-110 transition-transform duration-300">
-                    <feature.icon className="w-6 h-6 text-white" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
-                    {feature.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm">
-                    {feature.description}
-                  </p>
-                </div>
-              </div>
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <TestimonialCard
+              quote="HOSS cut our administrative overhead by 40% in the first three months. The visibility it provides is a game-changer for our customer service."
+              author="John Smith"
+              title="Operations Director, Logistics Inc."
+              companyLogoUrl="https://tailwindui.com/img/logos/reform-logo-gray-900.svg"
+            />
+            <TestimonialCard
+              quote="The implementation was seamless. We were up and running in a week, and the team's support has been phenomenal. It feels like they're part of our company."
+              author="Sarah Jones"
+              title="CEO, Transport Co."
+              companyLogoUrl="https://tailwindui.com/img/logos/tuple-logo-gray-900.svg"
+            />
+            <TestimonialCard
+              quote="Finally, a software that understands the complexities of haulage. From driver management to invoicing, everything is connected and just works."
+              author="David Chen"
+              title="Founder, Freightify"
+              companyLogoUrl="https://tailwindui.com/img/logos/savvycal-logo-gray-900.svg"
+            />
           </div>
         </div>
       </section>
 
-      {/* Logistics People Section */}
-      <section className="py-24 bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-slate-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Left Column: Text and Features */}
-            <div>
-              <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-6 leading-tight">
-                From Industry Insiders to Your{' '}
-                <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                  Integrated Solution
-                </span>
-              </h2>
-              <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-                HOSS isn't just software; it's decades of logistics expertise encoded into a platform that anticipates your needs. Our team, seasoned by years in the industry, has built the tool they always wished they had—and now it's yours.
-              </p>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 mb-10">
-                <ul className="space-y-4">
-                  {[
-                    'Automated Quoting',
-                    'Automated Invoicing',
-                    'Accounting and Bank Integration',
-                    'Live Tracking',
-                    'Servicing, MOT, Insurance Monitoring',
-                  ].map((feature) => (
-                    <li key={feature} className="flex items-center">
-                      <CheckCircle className="w-5 h-5 text-blue-600 mr-3 flex-shrink-0" />
-                      <span className="text-gray-700 dark:text-gray-300">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-                <ul className="space-y-4">
-                  {[
-                    'Multi Pickup/Delivery Bookings',
-                    'Works from any Device',
-                    'Customer Management (CRM System)',
-                    'Automated Intelligent Address Lookup',
-                    'Signature/Document/Photo/POD Capture',
-                  ].map((feature) => (
-                    <li key={feature} className="flex items-center">
-                      <CheckCircle className="w-5 h-5 text-blue-600 mr-3 flex-shrink-0" />
-                      <span className="text-gray-700 dark:text-gray-300">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <p className="text-gray-700 dark:text-gray-200 font-medium mb-4">
-                Let us show you how HOSS can change your business from day one! Sign up for a free face-to-face demo with one of our team today!
-              </p>
-              <Link to="/demo">
-                <Button size="lg">
-                  Sign up for a free demo!
-                </Button>
-              </Link>
-            </div>
-
-            {/* Right Column: Image */}
-            <div className="hidden lg:flex items-center justify-center">
-              <div className="relative w-96 h-96">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full blur-2xl opacity-30 animate-pulse-slow"></div>
-                <div className="relative w-full h-full flex items-center justify-center bg-white/50 dark:bg-gray-800/50 rounded-full backdrop-blur-sm border border-white/20">
-                  <Warehouse className="w-48 h-48 text-blue-600 dark:text-blue-400 drop-shadow-[0_0_1rem_rgba(59,130,246,0.6)] dark:drop-shadow-[0_0_1.5rem_rgba(99,102,241,0.5)]" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Performance Section */}
+      {/* Why HOSS Section */}
       <section className="py-24 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-              Built for Performance and Scale
+          <div className="text-center">
+            <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-6 leading-tight">
+              Built by Experts, For Experts.
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              Our robust infrastructure ensures reliability and speed, no matter the size of your operation.
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-4xl mx-auto mb-8">
+              HOSS isn't just software; it's decades of logistics expertise encoded into a platform that anticipates your needs. Our team, seasoned by years on the road and in the office, has built the tool they always wished they had—and now it's yours. We understand the challenges because we've lived them.
             </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {performanceMetrics.map((item) => (
-              <Card key={item.label} hover className="p-6 text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900 dark:to-purple-900 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <item.icon className="w-8 h-8 text-blue-600 dark:text-blue-400" />
-                </div>
-                <div className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-2">{item.metric}</div>
-                <div className="text-gray-600 dark:text-gray-400">{item.label}</div>
-              </Card>
-            ))}
+            <Link to="/demo">
+              <Button size="lg">
+                Meet the Team & See the Difference
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -216,7 +148,7 @@ const Home: React.FC = () => {
               iconPosition="right"
               className="bg-white text-blue-600 hover:bg-gray-100 shadow-xl"
             >
-              Schedule Your Demo
+              Schedule Your Free Demo
             </Button>
           </Link>
         </div>
