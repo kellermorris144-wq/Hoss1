@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
-import { Truck, MapPin, FileText, CreditCard, BarChart3, CheckCircle, ArrowRight, AlertTriangle, Warehouse, CheckSquare } from 'lucide-react';
+import { Truck, MapPin, FileText, CreditCard, BarChart3, CheckCircle, ArrowRight, AlertTriangle, Warehouse, CheckSquare, User, Users, Building, Zap, DollarSign, Eye, Network, ShieldCheck, TrendingUp } from 'lucide-react';
 
 const features = [
   { name: 'Live ETA Tracking', icon: MapPin },
@@ -45,6 +45,57 @@ const expertFeatures = [
   'Automated Intelligent Address Lookup',
   'Servicing, MOT, Insurance Monitoring',
   'Signature/Document/Photo/POD Capture',
+];
+
+const whoWeHelp = [
+  {
+    icon: User,
+    title: 'Owner Drivers',
+    description: 'Manage your single vehicle with enterprise-level tools. Find loads, plan routes, and handle invoicing effortlessly.',
+  },
+  {
+    icon: Users,
+    title: 'Fleet Managers',
+    description: 'Oversee your entire fleet with a real-time dashboard. Optimize dispatch, track performance, and reduce operational costs.',
+  },
+  {
+    icon: Building,
+    title: 'Enterprise Logistics',
+    description: 'Integrate HOSS into your large-scale operations for complete visibility and control over your supply chain.',
+  },
+];
+
+const hossAdvantage = [
+  {
+    icon: Zap,
+    title: 'Maximize Efficiency',
+    description: 'Automate repetitive tasks like quoting, invoicing, and dispatching to save time and reduce manual errors.',
+  },
+  {
+    icon: DollarSign,
+    title: 'Increase Profitability',
+    description: 'Reduce empty miles, optimize routes for fuel efficiency, and gain insights into your most profitable jobs.',
+  },
+  {
+    icon: Eye,
+    title: 'Enhance Visibility',
+    description: 'Provide clients with live tracking portals and get a real-time overview of your entire fleet\'s status.',
+  },
+  {
+    icon: Network,
+    title: 'Build a Trusted Network',
+    description: 'Connect with vetted carriers and subcontractors to expand your capacity and never turn down a job.',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'Ensure Compliance',
+    description: 'Keep track of vehicle maintenance, driver certifications, and insurance renewals with automated alerts.',
+  },
+  {
+    icon: TrendingUp,
+    title: 'Drive Growth',
+    description: 'Use powerful analytics to identify growth opportunities, improve performance, and make data-driven decisions.',
+  },
 ];
 
 const Home: React.FC = () => {
@@ -262,7 +313,7 @@ const Home: React.FC = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {expertFeatures.slice(0, 9).map((feature) => (
               <div key={feature} className="relative group">
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl blur opacity-0 group-hover:opacity-60 transition duration-300"></div>
@@ -273,24 +324,78 @@ const Home: React.FC = () => {
               </div>
             ))}
           </div>
+        </div>
+      </section>
 
-          <div className="mt-20">
-            <div className="relative p-10 text-center bg-gradient-to-br from-blue-600 to-purple-600 text-white shadow-2xl rounded-2xl overflow-hidden">
-              <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full"></div>
-              <div className="absolute -bottom-16 -left-10 w-48 h-48 bg-white/10 rounded-full"></div>
-              <div className="relative">
-                <h3 className="text-3xl font-bold mb-4">
-                  Ready to Transform Your Business?
-                </h3>
-                <p className="text-lg text-blue-100 mb-8 max-w-3xl mx-auto">
-                  Let us show you how HOSS can streamline your operations from day one! Sign up for a free, personalized demo with our team today.
-                </p>
-                <Link to="/demo">
-                  <Button size="lg" className="bg-white text-blue-700 hover:bg-slate-100 font-bold shadow-lg transform hover:scale-105">
-                    SIGN UP FOR A FREE DEMO
-                  </Button>
-                </Link>
+      {/* Who We Help Section */}
+      <section className="py-24 bg-white dark:bg-slate-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6">A Solution for Every Scale of Operation</h2>
+            <p className="text-lg text-gray-600 dark:text-gray-300">
+              Whether you're a solo operator or a national enterprise, HOSS provides the tools you need to succeed and scale.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {whoWeHelp.map((who) => (
+              <div key={who.title} className="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-2xl p-8 text-center transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                  <who.icon className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">{who.title}</h3>
+                <p className="text-gray-600 dark:text-gray-300">{who.description}</p>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* The HOSS Advantage Section */}
+      <section className="py-24 bg-slate-50 dark:bg-slate-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6">The HOSS Advantage</h2>
+            <p className="text-lg text-gray-600 dark:text-gray-300">
+              Discover the core benefits that make HOSS the preferred platform for modern logistics companies.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {hossAdvantage.map((advantage) => (
+              <div key={advantage.title} className="relative group">
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl blur opacity-0 group-hover:opacity-60 transition duration-300"></div>
+                <div className="relative bg-white/80 dark:bg-slate-800/80 backdrop-blur-lg border border-slate-200 dark:border-slate-700 rounded-xl p-8 h-full">
+                  <div className="flex items-center mb-4">
+                    <div className="w-12 h-12 bg-slate-100 dark:bg-slate-900/50 rounded-lg flex items-center justify-center mr-4">
+                      <advantage.icon className="w-6 h-6 text-blue-600" />
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">{advantage.title}</h3>
+                  </div>
+                  <p className="text-gray-600 dark:text-gray-300">{advantage.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="bg-white dark:bg-slate-900 py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative p-10 text-center bg-gradient-to-br from-blue-600 to-purple-600 text-white shadow-2xl rounded-2xl overflow-hidden">
+            <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full"></div>
+            <div className="absolute -bottom-16 -left-10 w-48 h-48 bg-white/10 rounded-full"></div>
+            <div className="relative">
+              <h3 className="text-3xl font-bold mb-4">
+                Ready to Transform Your Business?
+              </h3>
+              <p className="text-lg text-blue-100 mb-8 max-w-3xl mx-auto">
+                Let us show you how HOSS can streamline your operations from day one! Sign up for a free, personalized demo with our team today.
+              </p>
+              <Link to="/demo">
+                <Button size="lg" className="bg-white text-blue-700 hover:bg-slate-100 font-bold shadow-lg transform hover:scale-105">
+                  SIGN UP FOR A FREE DEMO
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
