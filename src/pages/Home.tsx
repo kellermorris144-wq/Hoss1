@@ -328,7 +328,7 @@ const Home: React.FC = () => {
       </section>
 
       {/* Who We Help Section */}
-      <section className="py-24 bg-white dark:bg-slate-900">
+      <section className="py-24 bg-gradient-to-b from-white to-slate-50 dark:from-slate-900 dark:to-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6">A Solution for Every Scale of Operation</h2>
@@ -338,12 +338,15 @@ const Home: React.FC = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {whoWeHelp.map((who) => (
-              <div key={who.title} className="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-2xl p-8 text-center transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                  <who.icon className="w-8 h-8 text-white" />
+              <div key={who.title} className="relative group">
+                <div className="absolute -inset-px bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl blur-lg opacity-0 group-hover:opacity-70 transition-opacity duration-500"></div>
+                <div className="relative bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-8 h-full">
+                  <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mb-6">
+                    <who.icon className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">{who.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-300">{who.description}</p>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">{who.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300">{who.description}</p>
               </div>
             ))}
           </div>
