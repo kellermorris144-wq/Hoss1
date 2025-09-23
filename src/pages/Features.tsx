@@ -1,16 +1,16 @@
 import React from 'react';
 import {
   CreditCard,
-  Spline,
   BarChart3,
   MapPin,
   FileSignature,
-  Search,
-  Wrench,
-  Palette,
   Smartphone,
   ArrowRight,
   Truck,
+  Route,
+  Navigation,
+  ShieldCheck,
+  LayoutTemplate,
 } from 'lucide-react';
 import Button from '../components/Button';
 import { Link } from 'react-router-dom';
@@ -111,7 +111,7 @@ const highlightedFeatures = [
 // Other features for the grid
 const otherFeatures = [
   {
-    icon: Spline,
+    icon: Route,
     title: 'Multi-Stop Bookings',
     description: 'Easily manage complex jobs with multi-stop collection and delivery capabilities, whether booked via our app or CX.',
   },
@@ -121,17 +121,17 @@ const otherFeatures = [
     description: 'Go paperless. Manage PODs and other crucial documents in a secure, easy-to-use digital format.',
   },
   {
-    icon: Search,
+    icon: Navigation,
     title: 'Intelligent Address Lookup',
     description: 'Save time and reduce errors with our integrated address search engine that quickly finds and verifies locations.',
   },
   {
-    icon: Wrench,
+    icon: ShieldCheck,
     title: 'Vehicle Maintenance Alerts',
     description: 'Stay ahead of maintenance with automated reminders for your entire fleet, ensuring compliance and safety.',
   },
   {
-    icon: Palette,
+    icon: LayoutTemplate,
     title: 'Branded Customer Portals',
     description: 'Deliver a professional, white-labelled experience with customer portals fully branded to your company.',
   },
@@ -192,10 +192,10 @@ const Features: React.FC = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {otherFeatures.map((feature) => (
-              <div key={feature.title} className="relative group p-8 bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:border-blue-500/50 hover:-translate-y-2">
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-500/[0.03] to-purple-500/[0.03] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div key={feature.title} className="relative group p-8 bg-white dark:bg-gray-900/50 border border-gray-200 dark:border-gray-800 rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:border-blue-500/50 hover:-translate-y-1">
+                <div className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] bg-gradient-radial from-blue-600/10 via-purple-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-spin-slow"></div>
                 <div className="relative z-10">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900/50 dark:to-purple-900/50 rounded-xl mb-6 transition-transform duration-300 group-hover:scale-110">
+                  <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900/50 dark:to-purple-900/50 rounded-xl mb-6 transition-transform duration-300 group-hover:scale-110">
                     <feature.icon className="w-6 h-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent" />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-3">
