@@ -112,6 +112,15 @@
   .animate-shadow-pulse {
     animation: shadow-pulse 5s infinite;
   }
+
+  .animate-scale-in-stamp {
+    animation: scale-in-stamp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  .animate-grow-bar {
+    transform-origin: bottom;
+    animation: grow-bar 0.8s ease-out forwards;
+  }
   
   @keyframes fadeIn {
     from {
@@ -202,6 +211,29 @@
   @keyframes shadow-pulse {
     50% {
       box-shadow: 0 0 0 10px rgba(59, 130, 246, 0), 0 0 0 0 rgba(59, 130, 246, 0.7);
+    }
+  }
+
+  @keyframes scale-in-stamp {
+    0% {
+      opacity: 0;
+      transform: scale(2) rotate(-30deg);
+    }
+    60% {
+      opacity: 1;
+      transform: scale(0.9) rotate(5deg);
+    }
+    100% {
+      transform: scale(1) rotate(0deg);
+    }
+  }
+
+  @keyframes grow-bar {
+    from {
+      transform: scaleY(0);
+    }
+    to {
+      transform: scaleY(1);
     }
   }
 }

@@ -66,15 +66,15 @@ const whoWeHelp = [
 ];
 
 const MapVisual = () => (
-  <div className="w-full h-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg p-4 flex items-center justify-center">
-    <div className="w-full h-full rounded-lg bg-slate-100 dark:bg-slate-900/50 relative overflow-hidden">
-      <MapPin className="absolute top-[30%] left-[40%] text-blue-500 animate-pulse" />
-      <MapPin className="absolute top-[60%] left-[65%] text-blue-500 animate-pulse [animation-delay:0.2s]" />
-      <MapPin className="absolute top-[50%] left-[20%] text-blue-500 animate-pulse [animation-delay:0.4s]" />
-      <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
-        <path d="M 80 120 C 120 40, 200 40, 240 150" stroke="rgba(59, 130, 246, 0.5)" strokeWidth="3" fill="none" strokeDasharray="8 8" className="animate-dash" />
-      </svg>
-      <style>{`.animate-dash { animation: dash 5s linear infinite; } @keyframes dash { to { stroke-dashoffset: -32; } }`}</style>
+  <div className="w-full h-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg p-4 flex items-center justify-center overflow-hidden">
+    <div className="w-full h-full rounded-lg bg-slate-100 dark:bg-slate-900/50 relative">
+      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-blue-500/5 to-transparent"></div>
+      <div className="absolute top-1/4 left-1/4 w-1/2 h-1/2 rounded-full bg-blue-500/10 animate-pulse"></div>
+      <MapPin className="absolute top-[30%] left-[40%] text-blue-500" />
+      <MapPin className="absolute top-[60%] left-[65%] text-blue-500" />
+      <MapPin className="absolute top-[50%] left-[20%] text-blue-500" />
+      <div className="absolute top-[20%] left-[15%] p-2 bg-white/80 dark:bg-slate-900/80 rounded-lg shadow-md text-xs font-semibold">New Load Available!</div>
+      <div className="absolute bottom-[15%] right-[10%] p-2 bg-white/80 dark:bg-slate-900/80 rounded-lg shadow-md text-xs font-semibold">Route Optimized</div>
     </div>
   </div>
 );
@@ -106,7 +106,7 @@ const BackloadVisual = () => (
         <div className="w-24 h-0.5 bg-slate-300 dark:bg-slate-600 mx-2"></div>
         <span className="font-bold">B</span>
       </div>
-      <div className="flex items-center mt-1">
+      <div className="flex items-center mt-1 animate-fade-in">
         <div className="w-24 h-0.5 bg-green-400 mx-2 relative left-7"></div>
         <Truck className="text-green-500 transform -scale-x-100" />
         <div className="w-24 h-0.5 bg-transparent mx-2"></div>
@@ -117,28 +117,25 @@ const BackloadVisual = () => (
 );
 
 const FleetVisual = () => (
-  <div className="w-full h-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg p-4 flex space-x-2">
-    <div className="w-1/3 bg-slate-100 dark:bg-slate-900/50 rounded-lg p-2 space-y-2">
-      <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded w-3/4"></div>
-      <div className="h-4 bg-blue-500 rounded w-full"></div>
-      <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded w-1/2"></div>
+  <div className="w-full h-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg p-4 flex flex-col space-y-2">
+    <h3 className="font-bold text-slate-800 dark:text-slate-200">Fleet Performance</h3>
+    <div className="flex-grow flex items-end justify-between space-x-2 px-2">
+      <div className="w-1/4 h-[60%] bg-blue-500 rounded-t-md animate-grow-bar" style={{ animationDelay: '0.1s' }}></div>
+      <div className="w-1/4 h-[80%] bg-blue-500 rounded-t-md animate-grow-bar" style={{ animationDelay: '0.2s' }}></div>
+      <div className="w-1/4 h-[50%] bg-blue-500 rounded-t-md animate-grow-bar" style={{ animationDelay: '0.3s' }}></div>
+      <div className="w-1/4 h-[70%] bg-blue-500 rounded-t-md animate-grow-bar" style={{ animationDelay: '0.4s' }}></div>
     </div>
-    <div className="w-2/3 bg-slate-100 dark:bg-slate-900/50 rounded-lg p-2 space-y-2">
-      <div className="flex justify-between items-center">
-        <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded w-1/3"></div>
-        <div className="w-6 h-6 rounded-full bg-slate-200 dark:bg-slate-700"></div>
-      </div>
-      <div className="h-16 bg-slate-200 dark:bg-slate-700 rounded-lg animate-pulse"></div>
-      <div className="h-8 bg-slate-200 dark:bg-slate-700 rounded-lg"></div>
+    <div className="flex justify-between text-xs text-slate-500 dark:text-slate-400 px-2">
+      <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span>
     </div>
   </div>
 );
 
 const PaymentsVisual = () => (
-  <div className="w-full h-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg p-4">
+  <div className="w-full h-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg p-4 relative overflow-hidden">
     <div className="flex justify-between items-center mb-4">
       <h3 className="font-bold text-slate-800 dark:text-slate-200">Invoice #INV-0451</h3>
-      <span className="px-2 py-1 text-xs font-semibold text-green-800 bg-green-100 dark:text-green-100 dark:bg-green-900/50 rounded-full">Paid</span>
+      <span className="px-2 py-1 text-xs font-semibold text-yellow-800 bg-yellow-100 dark:text-yellow-100 dark:bg-yellow-900/50 rounded-full">Pending</span>
     </div>
     <div className="space-y-2">
       <div className="flex justify-between text-sm"><span className="text-slate-500 dark:text-slate-400">Item 1</span><span className="font-medium">£450.00</span></div>
@@ -146,8 +143,10 @@ const PaymentsVisual = () => (
       <div className="w-full h-px bg-slate-200 dark:bg-slate-700 my-2"></div>
       <div className="flex justify-between font-bold"><span className="text-slate-800 dark:text-slate-200">Total</span><span>£770.00</span></div>
     </div>
-    <div className="mt-4 w-full h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-semibold">
-      Payment Simplified
+    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+      <div className="border-4 border-green-500 text-green-500 rounded-full w-32 h-32 flex items-center justify-center font-bold text-3xl uppercase transform -rotate-12 animate-scale-in-stamp" style={{ animationDelay: '0.3s' }}>
+        Paid
+      </div>
     </div>
   </div>
 );
@@ -158,26 +157,26 @@ const Home: React.FC = () => {
   const interactiveFeatures = [
     {
       icon: MapPin,
-      title: 'Find the Right Loads',
-      description: 'Access thousands of daily freight opportunities across the UK on HOSS. Instantly connect with trusted verified professionals, filter jobs by route, vehicle type, and schedule, and use insights like Price-Per-Mile to make smarter decisions for maximum profitability.',
+      title: 'Find Profitable Loads',
+      description: 'Stop searching, start hauling. HOSS gives you exclusive access to thousands of daily loads from a network of vetted shippers. Our smart matching system filters opportunities by your route, vehicle type, and availability, while Price-Per-Mile insights ensure you\'re always maximizing your earnings.',
       visual: <MapVisual />,
     },
     {
       icon: ArrowRightLeft,
-      title: 'Minimise Empty Miles',
-      description: 'HOSS\'s smart load matching algorithm helps you find backloads along your route, turning costly empty runs into profitable journeys. Reduce fuel waste, increase vehicle utilisation, and boost your bottom line.',
+      title: 'Slash Empty Mileage',
+      description: 'Turn deadhead runs into revenue. HOSS\'s intelligent backload finder automatically identifies profitable return loads along your route. Drastically reduce fuel waste, increase your vehicle utilisation, and boost your bottom line with every trip.',
       visual: <BackloadVisual />,
     },
     {
       icon: LayoutDashboard,
-      title: 'Streamline Fleet Operations',
-      description: 'Manage your entire fleet from a single dashboard. HOSS provides real-time tracking, automated dispatching, driver communication, and performance analytics to optimize your daily operations and improve efficiency.',
+      title: 'Unify Your Fleet Management',
+      description: 'Ditch the spreadsheets and chaotic group chats. Manage your entire fleet from a single, intuitive dashboard. HOSS provides live GPS tracking, automated dispatching, instant driver communication, and real-time performance analytics to keep your operations running smoothly and efficiently.',
       visual: <FleetVisual />,
     },
     {
       icon: CreditCard,
-      title: 'Simplify Payments',
-      description: 'Get paid faster with HOSS\'s integrated payment system. Generate and send digital invoices automatically, track payment statuses in real-time, and offer clients multiple secure payment options.',
+      title: 'Get Paid in Days, Not Weeks',
+      description: 'Accelerate your cash flow with automated invoicing and integrated payments. HOSS generates and sends professional invoices the moment a job is complete. Track payment statuses in real-time and offer clients secure, convenient payment options to eliminate delays and chasing payments.',
       visual: <PaymentsVisual />,
     },
   ];
@@ -454,7 +453,7 @@ const Home: React.FC = () => {
                     onClick={() => setActiveFeature(index)}
                     className={`p-4 rounded-lg text-left transition-all duration-300 w-full ${
                       activeFeature === index
-                        ? 'bg-blue-600 text-white shadow-lg'
+                        ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg'
                         : 'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700'
                     }`}
                   >
