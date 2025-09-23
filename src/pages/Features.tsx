@@ -18,7 +18,7 @@ import { Link } from 'react-router-dom';
 const AnimatedMap = () => {
   const trucks = [
     { id: 'HOSS-07', driver: 'Sarah J.', status: 'On Time', path: 'M 50 200 Q 150 150 250 200 T 450 200', duration: '10s', color: 'text-blue-600' },
-    { id: 'HOSS-11', driver: 'Mike P.', status: 'In Transit', path: 'M 80 50 Q 180 100 280 50 T 480 50', duration: '12s', color: 'text-green-600' },
+    { id: 'HOSS-11', driver: 'Mike P.', status: 'In Transit', path: 'M 80 70 Q 180 120 280 70 T 480 70', duration: '12s', color: 'text-green-600' },
   ];
 
   return (
@@ -28,7 +28,7 @@ const AnimatedMap = () => {
         <svg className="absolute inset-0 w-full h-full" viewBox="0 0 500 250" preserveAspectRatio="none">
           {/* Paths for trucks */}
           <path id="route1" d="M 50 200 Q 150 150 250 200 T 450 200" stroke="currentColor" className="text-blue-500/50 dark:text-blue-500/30" strokeWidth="2" fill="none" strokeDasharray="5 5" />
-          <path id="route2" d="M 80 50 Q 180 100 280 50 T 480 50" stroke="currentColor" className="text-green-500/50 dark:text-green-500/30" strokeWidth="2" fill="none" strokeDasharray="5 5" />
+          <path id="route2" d="M 80 70 Q 180 120 280 70 T 480 70" stroke="currentColor" className="text-green-500/50 dark:text-green-500/30" strokeWidth="2" fill="none" strokeDasharray="5 5" />
           
           {/* Location Pins */}
           <foreignObject x="240" y="115" width="24" height="24">
@@ -65,66 +65,122 @@ const AnimatedMap = () => {
 };
 
 const AnimatedInvoice = () => {
-  const [haulageFee, setHaulageFee] = useState(0);
-  const [surcharge, setSurcharge] = useState(0);
+  const [subtotal, setSubtotal] = useState(0);
+  const [vat, setVat] = useState(0);
   const [total, setTotal] = useState(0);
-  const [status, setStatus] = useState('Calculating...');
+  const [isPaid, setIsPaid] = useState(false);
 
   useEffect(() => {
-    const animateValue = (setter: React.Dispatch<React.SetStateAction<number>>, end: number, duration: number) => {
-      let start = 0;
-      const range = end - start;
-      let current = start;
-      const step = range / (duration / 16); 
-      
-      const timer = setInterval(() => {
-        current += step;
-        if (current >= end) {
-          current = end;
-          clearInterval(timer);
-        }
-        setter(current);
-      }, 16);
-      return () => clearInterval(timer);
+    const animateValue = (setter: React.Dispatch<React.SetStateAction<number>>, end: number, duration: number, delay: number = 0) => {
+      const timeoutId = setTimeout(() => {
+        let start = 0;
+        const range = end - start;
+        let current = start;
+        const increment = end / (duration / 16);
+        
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= end) {
+            current = end;
+            clearInterval(timer);
+          }
+          setter(current);
+        }, 16);
+        return () => clearInterval(timer);
+      }, delay);
+      return () => clearTimeout(timeoutId);
     };
 
-    const feeTimer = setTimeout(() => animateValue(setHaulageFee, 850, 1000), 200);
-    const surchargeTimer = setTimeout(() => animateValue(setSurcharge, 75, 800), 500);
-    
+    const finalSubtotal = 925.00;
+    const finalVat = finalSubtotal * 0.20;
+    const finalTotal = finalSubtotal + finalVat;
+
+    const cleanupSubtotal = animateValue(setSubtotal, finalSubtotal, 800, 200);
+    const cleanupVat = animateValue(setVat, finalVat, 800, 500);
+    const cleanupTotal = animateValue(setTotal, finalTotal, 1000, 700);
+
+    const paidTimer = setTimeout(() => {
+      setIsPaid(true);
+    }, 2000);
+
     return () => {
-      clearTimeout(feeTimer);
-      clearTimeout(surchargeTimer);
+      cleanupSubtotal();
+      cleanupVat();
+      cleanupTotal();
+      clearTimeout(paidTimer);
     };
   }, []);
 
-  useEffect(() => {
-    setTotal(haulageFee + surcharge);
-    if (haulageFee === 850 && surcharge === 75) {
-      const statusTimer = setTimeout(() => setStatus('Pending'), 500);
-      return () => clearTimeout(statusTimer);
-    }
-  }, [haulageFee, surcharge]);
-
   return (
-    <div className="relative w-full h-full p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700 flex items-center justify-center group">
-      <div className="w-full max-w-sm relative">
-        <div className="absolute -inset-4 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-full blur-xl transition-opacity duration-300 opacity-0 group-hover:opacity-100"></div>
-        <div className="relative bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-4 shadow-lg z-10 transition-transform duration-300 group-hover:scale-105">
-          <div className="flex justify-between items-center mb-3">
-            <h4 className="font-bold text-slate-800 dark:text-slate-200">Invoice #INV-0452</h4>
-            <span className={`px-2 py-1 text-xs font-semibold rounded-full transition-colors duration-300 ${
-              status === 'Pending' 
-              ? 'text-yellow-800 bg-yellow-100 dark:text-yellow-100 dark:bg-yellow-900/50' 
-              : 'text-blue-800 bg-blue-100 dark:text-blue-100 dark:bg-blue-900/50'
-            }`}>{status}</span>
+    <div className="relative w-full h-full p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700 flex items-center justify-center group overflow-hidden">
+      <div className="w-full max-w-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-2xl transition-transform duration-300 group-hover:scale-105 relative">
+        {/* Header */}
+        <div className="flex justify-between items-center p-4 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 rounded-t-lg">
+          <div className="flex items-center space-x-2">
+            <Truck className="w-6 h-6 text-blue-600" />
+            <span className="font-bold text-lg text-slate-800 dark:text-slate-200">HOSS</span>
           </div>
-          <div className="space-y-1 text-sm font-mono">
-            <div className="flex justify-between"><span className="text-slate-500 dark:text-slate-400">Haulage Fee</span><span className="font-medium text-slate-800 dark:text-slate-200">£{haulageFee.toFixed(2)}</span></div>
-            <div className="flex justify-between"><span className="text-slate-500 dark:text-slate-400">Fuel Surcharge</span><span className="font-medium text-slate-800 dark:text-slate-200">£{surcharge.toFixed(2)}</span></div>
-            <div className="w-full h-px bg-slate-200 dark:bg-slate-700 my-2"></div>
-            <div className="flex justify-between font-bold text-base"><span className="text-slate-800 dark:text-slate-200">Total</span><span className="text-slate-800 dark:text-slate-200">£{total.toFixed(2)}</span></div>
+          <h3 className="text-xl font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">Invoice</h3>
+        </div>
+
+        {/* Body */}
+        <div className="p-4">
+          {/* Details */}
+          <div className="grid grid-cols-2 gap-4 text-xs text-slate-600 dark:text-slate-400 mb-6">
+            <div>
+              <p className="font-bold text-slate-700 dark:text-slate-300 mb-1">Billed To:</p>
+              <p>Global Logistics Inc.</p>
+              <p>123 Supply Chain Ave.</p>
+              <p>London, E1 6AN</p>
+            </div>
+            <div className="text-right">
+              <p><span className="font-bold text-slate-700 dark:text-slate-300">Invoice #:</span> INV-0452</p>
+              <p><span className="font-bold text-slate-700 dark:text-slate-300">Date:</span> 23/09/2025</p>
+              <p><span className="font-bold text-slate-700 dark:text-slate-300">Due:</span> 23/10/2025</p>
+            </div>
+          </div>
+
+          {/* Line Items Table */}
+          <div className="space-y-2 text-sm mb-4">
+            <div className="flex justify-between font-bold text-slate-700 dark:text-slate-300 border-b border-slate-200 dark:border-slate-700 pb-1 text-xs uppercase">
+              <span>Description</span>
+              <span>Amount</span>
+            </div>
+            <div className="flex justify-between text-slate-600 dark:text-slate-300">
+              <span>Haulage Fee</span>
+              <span>£850.00</span>
+            </div>
+            <div className="flex justify-between text-slate-600 dark:text-slate-300">
+              <span>Fuel Surcharge</span>
+              <span>£75.00</span>
+            </div>
+          </div>
+
+          {/* Totals */}
+          <div className="space-y-1 text-sm font-mono text-right border-t border-slate-200 dark:border-slate-700 pt-2">
+            <div className="flex justify-end items-baseline">
+              <span className="text-slate-500 dark:text-slate-400 mr-4">Subtotal</span>
+              <span className="font-medium text-slate-800 dark:text-slate-200 w-24">£{subtotal.toFixed(2)}</span>
+            </div>
+            <div className="flex justify-end items-baseline">
+              <span className="text-slate-500 dark:text-slate-400 mr-4">VAT (20%)</span>
+              <span className="font-medium text-slate-800 dark:text-slate-200 w-24">£{vat.toFixed(2)}</span>
+            </div>
+            <div className="flex justify-end items-baseline font-bold text-base mt-2">
+              <span className="text-slate-800 dark:text-slate-200 mr-4">Total</span>
+              <span className="text-slate-800 dark:text-slate-200 w-24">£{total.toFixed(2)}</span>
+            </div>
           </div>
         </div>
+
+        {/* Status Stamp */}
+        {isPaid && (
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            <div className="border-4 border-green-500 text-green-500 rounded-full w-32 h-32 flex items-center justify-center font-bold text-3xl uppercase transform -rotate-12 animate-scale-in-stamp">
+              Paid
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
