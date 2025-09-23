@@ -85,9 +85,9 @@ const Integrations: React.FC = () => {
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800 py-24">
+      <section className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-gray-900 dark:to-gray-800 py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-6">
+          <h1 className="text-5xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-6">
             Seamless Integrations
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
@@ -163,14 +163,14 @@ const Integrations: React.FC = () => {
                 <ul className="space-y-2 mb-4">
                   {integration.features.map((feature) => (
                     <li key={feature} className="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                      <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mr-3"></div>
+                      <div className="w-1.5 h-1.5 bg-amber-600 rounded-full mr-3"></div>
                       {feature}
                     </li>
                   ))}
                 </ul>
 
                 {integration.status === 'Available' && (
-                  <button className="w-full flex items-center justify-center px-4 py-2 text-sm font-medium text-blue-600 hover:text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-900 transition-colors rounded-lg border border-blue-200 dark:border-blue-800">
+                  <button className="w-full flex items-center justify-center px-4 py-2 text-sm font-medium text-amber-600 hover:text-amber-700 hover:bg-amber-50 dark:hover:bg-amber-900/50 transition-colors rounded-lg border border-amber-200 dark:border-amber-800">
                     Learn More
                     <ExternalLink className="w-4 h-4 ml-2" />
                   </button>

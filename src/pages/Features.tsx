@@ -17,7 +17,7 @@ import { Link } from 'react-router-dom';
 
 const AnimatedMap = () => {
   const trucks = [
-    { id: 'HOSS-07', driver: 'Sarah J.', status: 'On Time', path: 'M 50 200 Q 150 150 250 200 T 450 200', duration: '10s', color: 'text-blue-600' },
+    { id: 'HOSS-07', driver: 'Sarah J.', status: 'On Time', path: 'M 50 200 Q 150 150 250 200 T 450 200', duration: '10s', color: 'text-amber-600' },
     { id: 'HOSS-11', driver: 'Mike P.', status: 'In Transit', path: 'M 80 70 Q 180 120 280 70 T 480 70', duration: '12s', color: 'text-green-600' },
   ];
 
@@ -27,7 +27,7 @@ const AnimatedMap = () => {
       <div className="relative w-full h-full bg-slate-200/30 dark:bg-slate-900/30 rounded-lg overflow-hidden">
         <svg className="absolute inset-0 w-full h-full" viewBox="0 0 500 250" preserveAspectRatio="none">
           {/* Paths for trucks */}
-          <path id="route1" d="M 50 200 Q 150 150 250 200 T 450 200" stroke="currentColor" className="text-blue-500/30 dark:text-blue-500/20" strokeWidth="2" fill="none" strokeDasharray="4 4" />
+          <path id="route1" d="M 50 200 Q 150 150 250 200 T 450 200" stroke="currentColor" className="text-amber-500/30 dark:text-amber-500/20" strokeWidth="2" fill="none" strokeDasharray="4 4" />
           <path id="route2" d="M 80 70 Q 180 120 280 70 T 480 70" stroke="currentColor" className="text-green-500/30 dark:text-green-500/20" strokeWidth="2" fill="none" strokeDasharray="4 4" />
           
           {/* Location Pins / "Cities" */}
@@ -63,7 +63,7 @@ const AnimatedMap = () => {
                 <div className="p-1.5 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm rounded-md shadow-lg text-center">
                     <p className="font-bold text-[10px] text-slate-800 dark:text-slate-200">{truck.id}</p>
                     <p className="text-[9px] text-slate-500 dark:text-slate-400">{truck.driver}</p>
-                    <p className={`text-[9px] font-semibold ${truck.status === 'On Time' ? 'text-green-500' : 'text-blue-500'}`}>{truck.status}</p>
+                    <p className={`text-[9px] font-semibold ${truck.status === 'On Time' ? 'text-green-500' : 'text-amber-500'}`}>{truck.status}</p>
                 </div>
               </foreignObject>
             </g>
@@ -127,7 +127,7 @@ const AnimatedInvoice = () => {
         {/* Header */}
         <div className="flex justify-between items-center p-4 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 rounded-t-lg">
           <div className="flex items-center space-x-2">
-            <Truck className="w-6 h-6 text-blue-600" />
+            <Truck className="w-6 h-6 text-amber-600" />
             <span className="font-bold text-lg text-slate-800 dark:text-slate-200">HOSS</span>
           </div>
           <h3 className="text-xl font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">Invoice</h3>
@@ -219,10 +219,10 @@ const highlightedFeatures = [
         <div className="w-full h-full bg-white dark:bg-slate-800 rounded-lg p-4 shadow-inner flex flex-col space-y-4">
           <h3 className="font-bold text-slate-800 dark:text-slate-200">Performance Dashboard</h3>
           <div className="flex-grow flex items-end justify-between space-x-2 px-2">
-            <div className="w-1/4 h-[40%] bg-blue-400 rounded-t-md transition-all duration-300 group-hover:bg-blue-500 animate-grow-bar" style={{ animationDelay: '0.1s' }}></div>
-            <div className="w-1/4 h-[60%] bg-blue-400 rounded-t-md transition-all duration-300 group-hover:bg-blue-500 animate-grow-bar" style={{ animationDelay: '0.2s' }}></div>
-            <div className="w-1/4 h-[50%] bg-blue-400 rounded-t-md transition-all duration-300 group-hover:bg-blue-500 animate-grow-bar" style={{ animationDelay: '0.3s' }}></div>
-            <div className="w-1/4 h-[80%] bg-blue-400 rounded-t-md transition-all duration-300 group-hover:bg-blue-500 animate-grow-bar" style={{ animationDelay: '0.4s' }}></div>
+            <div className="w-1/4 h-[40%] bg-amber-400 rounded-t-md transition-all duration-300 group-hover:bg-amber-500 animate-grow-bar" style={{ animationDelay: '0.1s' }}></div>
+            <div className="w-1/4 h-[60%] bg-amber-400 rounded-t-md transition-all duration-300 group-hover:bg-amber-500 animate-grow-bar" style={{ animationDelay: '0.2s' }}></div>
+            <div className="w-1/4 h-[50%] bg-amber-400 rounded-t-md transition-all duration-300 group-hover:bg-amber-500 animate-grow-bar" style={{ animationDelay: '0.3s' }}></div>
+            <div className="w-1/4 h-[80%] bg-amber-400 rounded-t-md transition-all duration-300 group-hover:bg-amber-500 animate-grow-bar" style={{ animationDelay: '0.4s' }}></div>
           </div>
           <div className="grid grid-cols-2 gap-2 text-center">
             <div className="p-2 bg-slate-100 dark:bg-slate-900/50 rounded-md">
@@ -231,7 +231,7 @@ const highlightedFeatures = [
             </div>
             <div className="p-2 bg-slate-100 dark:bg-slate-900/50 rounded-md">
               <p className="text-xs text-slate-500 dark:text-slate-400">Fleet Utilization</p>
-              <p className="font-bold text-lg text-blue-500">82%</p>
+              <p className="font-bold text-lg text-amber-500">82%</p>
             </div>
           </div>
         </div>
@@ -278,9 +278,9 @@ const Features: React.FC = () => {
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800 py-24">
+      <section className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-gray-900 dark:to-gray-800 py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-6">
+          <h1 className="text-5xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-6">
             An End-to-End Logistics Platform
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
@@ -296,8 +296,8 @@ const Features: React.FC = () => {
             {highlightedFeatures.map((feature, index) => (
               <div key={feature.title} className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div className={`lg:order-${index % 2 === 1 ? '2' : '1'}`}>
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900/50 dark:to-purple-900/50 rounded-xl mb-4">
-                    <feature.icon className="w-7 h-7 text-blue-600 dark:text-blue-400" />
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-amber-100 to-orange-100 dark:from-amber-900/50 dark:to-orange-900/50 rounded-xl mb-4">
+                    <feature.icon className="w-7 h-7 text-amber-600 dark:text-amber-400" />
                   </div>
                   <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">{feature.title}</h2>
                   <p className="text-gray-600 dark:text-gray-300 text-lg">{feature.description}</p>
@@ -325,10 +325,10 @@ const Features: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {otherFeatures.map((feature) => (
               <div key={feature.title} className="relative group">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl blur opacity-0 group-hover:opacity-75 transition duration-300"></div>
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-600 to-orange-600 rounded-2xl blur opacity-0 group-hover:opacity-75 transition duration-300"></div>
                 <div className="relative p-8 bg-white dark:bg-gray-900 h-full rounded-2xl border border-gray-200 dark:border-gray-800 transition-all duration-300 group-hover:shadow-xl group-hover:-translate-y-1">
-                  <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900/50 dark:to-purple-900/50 rounded-xl mb-6 transition-transform duration-300 group-hover:scale-110">
-                    <feature.icon className="w-7 h-7 text-blue-600 dark:text-blue-400" />
+                  <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-amber-100 to-orange-100 dark:from-amber-900/50 dark:to-orange-900/50 rounded-xl mb-6 transition-transform duration-300 group-hover:scale-110">
+                    <feature.icon className="w-7 h-7 text-amber-600 dark:text-amber-400" />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-3">
                     {feature.title}

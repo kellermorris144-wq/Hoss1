@@ -101,9 +101,9 @@ const Contact: React.FC = () => {
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800 py-24">
+      <section className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-gray-900 dark:to-gray-800 py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-6">
+          <h1 className="text-5xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-6">
             Contact Us
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
@@ -148,7 +148,7 @@ const Contact: React.FC = () => {
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-gray-100"
+                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 dark:bg-gray-800 dark:text-gray-100"
                       />
                     </div>
                     <div>
@@ -161,7 +161,7 @@ const Contact: React.FC = () => {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-gray-100"
+                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 dark:bg-gray-800 dark:text-gray-100"
                       />
                     </div>
                   </div>
@@ -176,7 +176,7 @@ const Contact: React.FC = () => {
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
-                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-gray-100"
+                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 dark:bg-gray-800 dark:text-gray-100"
                       />
                     </div>
                     <div>
@@ -188,7 +188,7 @@ const Contact: React.FC = () => {
                         name="company"
                         value={formData.company}
                         onChange={handleChange}
-                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-gray-100"
+                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 dark:bg-gray-800 dark:text-gray-100"
                       />
                     </div>
                   </div>
@@ -202,7 +202,7 @@ const Contact: React.FC = () => {
                       value={formData.subject}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-gray-100"
+                      className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 dark:bg-gray-800 dark:text-gray-100"
                     >
                       <option value="">Select a subject</option>
                       <option value="sales">Sales Inquiry</option>
@@ -225,7 +225,7 @@ const Contact: React.FC = () => {
                       required
                       rows={5}
                       placeholder="Tell us how we can help you..."
-                      className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-gray-100"
+                      className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 dark:bg-gray-800 dark:text-gray-100"
                     />
                   </div>
 
@@ -248,7 +248,7 @@ const Contact: React.FC = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {contactInfo.map((info) => (
                   <Card key={info.title} className="p-6">
-                    <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center mb-4">
+                    <div className="w-12 h-12 bg-gradient-to-br from-amber-500 to-orange-600 rounded-lg flex items-center justify-center mb-4">
                       <info.icon className="w-6 h-6 text-white" />
                     </div>
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">
@@ -265,13 +265,13 @@ const Contact: React.FC = () => {
                 ))}
               </div>
 
-              <Card className="p-8 bg-gradient-to-br from-blue-600 to-purple-600 text-white">
+              <Card className="p-8 bg-gradient-to-br from-amber-500 to-orange-600 text-white">
                 <h3 className="text-xl font-bold mb-4">24/7 Emergency Support</h3>
-                <p className="text-blue-100 mb-4">
+                <p className="text-amber-100 mb-4">
                   Need urgent assistance? Our emergency support team is available 
                   around the clock for critical issues.
                 </p>
-                <div className="flex items-center text-blue-100">
+                <div className="flex items-center text-amber-100">
                   <Phone className="w-5 h-5 mr-2" />
                   <span className="font-semibold">+44 800 EMERGENCY</span>
                 </div>
@@ -296,13 +296,13 @@ const Contact: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {officeLocations.map((location) => (
               <Card key={location.city} hover className="p-6 text-center">
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-amber-500 to-orange-600 rounded-lg flex items-center justify-center mx-auto mb-4">
                   <MapPin className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
                   {location.city}
                 </h3>
-                <div className="text-xs text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900 px-2 py-1 rounded mb-3">
+                <div className="text-xs text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/50 px-2 py-1 rounded mb-3">
                   {location.type}
                 </div>
                 <p className="text-gray-600 dark:text-gray-300 text-sm mb-2">

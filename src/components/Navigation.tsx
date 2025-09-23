@@ -20,10 +20,10 @@ const Navigation: React.FC = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <NavLink to="/" className="flex items-center space-x-2 group">
-            <div className="p-2 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg group-hover:from-blue-700 group-hover:to-purple-700 transition-all duration-200">
+            <div className="p-2 bg-gradient-to-br from-amber-500 to-orange-600 rounded-lg group-hover:from-amber-600 group-hover:to-orange-700 transition-all duration-200">
               <Truck className="w-6 h-6 text-white" />
             </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <span className="text-xl font-bold bg-gradient-to-r from-amber-500 to-orange-600 bg-clip-text text-transparent">
               HOSS
             </span>
           </NavLink>
@@ -38,7 +38,7 @@ const Navigation: React.FC = () => {
                   className={({ isActive }) =>
                     `px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                       isActive
-                        ? 'bg-blue-600 text-white shadow-lg'
+                        ? 'bg-amber-600 text-white shadow-lg'
                         : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
                     }`
                   }
@@ -74,7 +74,7 @@ const Navigation: React.FC = () => {
               className={({ isActive }) =>
                 `block px-3 py-2 rounded-md text-base font-medium transition-all duration-200 ${
                   isActive
-                    ? 'bg-blue-600 text-white'
+                    ? 'bg-amber-600 text-white'
                     : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
                 }`
               }

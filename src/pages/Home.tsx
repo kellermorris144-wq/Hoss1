@@ -15,8 +15,8 @@ const trucks = [
     id: 'HOSS-04',
     driver: 'Sarah J.',
     position: { top: '35%', left: '45%' },
-    color: 'bg-blue-500',
-    pingColor: 'bg-blue-400',
+    color: 'bg-amber-500',
+    pingColor: 'bg-amber-400',
   },
   {
     id: 'HOSS-11',
@@ -68,11 +68,11 @@ const whoWeHelp = [
 const MapVisual = () => (
   <div className="w-full h-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg p-4 flex items-center justify-center overflow-hidden">
     <div className="w-full h-full rounded-lg bg-slate-100 dark:bg-slate-900/50 relative">
-      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-blue-500/5 to-transparent"></div>
-      <div className="absolute top-1/4 left-1/4 w-1/2 h-1/2 rounded-full bg-blue-500/10 animate-pulse-slow"></div>
-      <MapPin className="absolute top-[30%] left-[40%] text-blue-500 animate-pulse" style={{ animationDelay: '0.1s' }} />
-      <MapPin className="absolute top-[60%] left-[65%] text-blue-500 animate-pulse" style={{ animationDelay: '0.3s' }} />
-      <MapPin className="absolute top-[50%] left-[20%] text-blue-500 animate-pulse" style={{ animationDelay: '0.5s' }} />
+      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-amber-500/5 to-transparent"></div>
+      <div className="absolute top-1/4 left-1/4 w-1/2 h-1/2 rounded-full bg-amber-500/10 animate-pulse-slow"></div>
+      <MapPin className="absolute top-[30%] left-[40%] text-amber-500 animate-pulse" style={{ animationDelay: '0.1s' }} />
+      <MapPin className="absolute top-[60%] left-[65%] text-amber-500 animate-pulse" style={{ animationDelay: '0.3s' }} />
+      <MapPin className="absolute top-[50%] left-[20%] text-amber-500 animate-pulse" style={{ animationDelay: '0.5s' }} />
       <div className="absolute top-[20%] left-[15%] p-2 bg-white/80 dark:bg-slate-900/80 rounded-lg shadow-md text-xs font-semibold animate-float-slow" style={{ animationDuration: '6s' }}>New Load Available!</div>
       <div className="absolute bottom-[15%] right-[10%] p-2 bg-white/80 dark:bg-slate-900/80 rounded-lg shadow-md text-xs font-semibold animate-float-slow-reverse" style={{ animationDuration: '7s' }}>Route Optimized</div>
     </div>
@@ -86,7 +86,7 @@ const BackloadVisual = () => (
       <div className="flex items-center mt-2">
         <span className="font-bold">A</span>
         <div className="w-24 h-0.5 bg-slate-300 dark:bg-slate-600 mx-2"></div>
-        <Truck className="text-blue-500 animate-slide-in-right" style={{ animationDelay: '0.2s' }} />
+        <Truck className="text-amber-500 animate-slide-in-right" style={{ animationDelay: '0.2s' }} />
         <div className="w-24 h-0.5 bg-slate-300 dark:bg-slate-600 mx-2"></div>
         <span className="font-bold">B</span>
       </div>
@@ -102,7 +102,7 @@ const BackloadVisual = () => (
       <div className="flex items-center mt-2">
         <span className="font-bold">A</span>
         <div className="w-24 h-0.5 bg-slate-300 dark:bg-slate-600 mx-2"></div>
-        <Truck className="text-blue-500" />
+        <Truck className="text-amber-500" />
         <div className="w-24 h-0.5 bg-slate-300 dark:bg-slate-600 mx-2"></div>
         <span className="font-bold">B</span>
       </div>
@@ -126,10 +126,10 @@ const FleetVisual = () => (
       </div>
     </div>
     <div className="flex-grow flex items-end justify-between space-x-2 px-2">
-      <div className="w-1/4 h-[60%] bg-blue-500 rounded-t-md animate-grow-bar" style={{ animationDelay: '0.1s' }}></div>
-      <div className="w-1/4 h-[80%] bg-blue-500 rounded-t-md animate-grow-bar" style={{ animationDelay: '0.2s' }}></div>
-      <div className="w-1/4 h-[50%] bg-blue-500 rounded-t-md animate-grow-bar" style={{ animationDelay: '0.3s' }}></div>
-      <div className="w-1/4 h-[70%] bg-blue-500 rounded-t-md animate-grow-bar" style={{ animationDelay: '0.4s' }}></div>
+      <div className="w-1/4 h-[60%] bg-amber-500 rounded-t-md animate-grow-bar" style={{ animationDelay: '0.1s' }}></div>
+      <div className="w-1/4 h-[80%] bg-amber-500 rounded-t-md animate-grow-bar" style={{ animationDelay: '0.2s' }}></div>
+      <div className="w-1/4 h-[50%] bg-amber-500 rounded-t-md animate-grow-bar" style={{ animationDelay: '0.3s' }}></div>
+      <div className="w-1/4 h-[70%] bg-amber-500 rounded-t-md animate-grow-bar" style={{ animationDelay: '0.4s' }}></div>
     </div>
     <div className="flex justify-between text-xs text-slate-500 dark:text-slate-400 px-2">
       <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span>
@@ -217,7 +217,7 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <div className="relative min-h-screen w-full overflow-hidden bg-grid-pattern text-gray-800 dark:text-gray-200">
+      <div className="relative min-h-screen w-full overflow-hidden bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200">
         <div className="absolute inset-0 bg-gradient-to-b from-white/50 to-transparent dark:from-gray-900/50 dark:to-transparent z-0"></div>
         
         <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 pt-24 pb-12">
@@ -248,8 +248,8 @@ const Home: React.FC = () => {
               <div className="flex flex-col justify-between h-full py-2">
                 {features.map((feature) => (
                   <div key={feature.name} className="flex items-center space-x-4 group">
-                    <div className="flex items-center justify-center w-12 h-12 bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl shadow-sm transition-all duration-300 group-hover:scale-110 group-hover:shadow-blue-500/30 group-hover:border-blue-400 dark:group-hover:border-blue-600">
-                      <feature.icon className="w-6 h-6 text-slate-500 dark:text-slate-400 transition-colors group-hover:text-blue-500" />
+                    <div className="flex items-center justify-center w-12 h-12 bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl shadow-sm transition-all duration-300 group-hover:scale-110 group-hover:shadow-amber-500/30 group-hover:border-amber-400 dark:group-hover:border-amber-600">
+                      <feature.icon className="w-6 h-6 text-slate-500 dark:text-slate-400 transition-colors group-hover:text-amber-500" />
                     </div>
                     <span className="font-semibold text-slate-700 dark:text-slate-300 text-lg">{feature.name}</span>
                   </div>
@@ -258,9 +258,9 @@ const Home: React.FC = () => {
 
               {/* Center: Hub */}
               <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-                <div className="absolute inset-0 bg-blue-500/20 rounded-full blur-2xl animate-pulse-slow"></div>
+                <div className="absolute inset-0 bg-amber-500/20 rounded-full blur-2xl animate-pulse-slow"></div>
                 <div className="relative w-28 h-28 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full flex items-center justify-center shadow-lg">
-                  <Truck className="w-12 h-12 text-blue-600 dark:text-blue-500" />
+                  <Truck className="w-12 h-12 text-amber-600 dark:text-amber-500" />
                 </div>
               </div>
 
@@ -316,7 +316,7 @@ const Home: React.FC = () => {
                         </div>
                         <div>
                           <div className="flex items-center text-sm text-slate-500 dark:text-slate-400">
-                            <div className="w-2 h-2 rounded-full bg-blue-400 mr-2 shadow-[0_0_6px_1px] shadow-blue-400"></div>
+                            <div className="w-2 h-2 rounded-full bg-amber-400 mr-2 shadow-[0_0_6px_1px] shadow-amber-400"></div>
                             Fleet Utilization
                           </div>
                           <p className="text-3xl font-bold text-slate-800 dark:text-slate-200">82%</p>
@@ -350,8 +350,8 @@ const Home: React.FC = () => {
             <svg className="absolute top-0 left-0 w-full h-full z-[-1] hidden md:block" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1280 400">
               <defs>
                 <linearGradient id="line-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="rgba(59, 130, 246, 0.5)" />
-                  <stop offset="100%" stopColor="rgba(59, 130, 246, 0.1)" />
+                  <stop offset="0%" stopColor="rgba(245, 158, 11, 0.5)" />
+                  <stop offset="100%" stopColor="rgba(245, 158, 11, 0.1)" />
                 </linearGradient>
                 <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
                   <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
@@ -377,19 +377,19 @@ const Home: React.FC = () => {
                 <path d="M 850 210 H 700" stroke="rgba(34, 197, 94, 0.6)" strokeWidth="1.5" fill="none" />
 
                 {/* Animated dots */}
-                <circle cx="0" cy="0" r="5" fill="#3b82f6">
+                <circle cx="0" cy="0" r="5" fill="#f59e0b">
                   <animateMotion dur="8s" repeatCount="indefinite" path="M 280 50 C 420 50, 450 200, 580 200" />
                 </circle>
-                <circle cx="0" cy="0" r="5" fill="#3b82f6">
+                <circle cx="0" cy="0" r="5" fill="#f59e0b">
                   <animateMotion dur="7s" repeatCount="indefinite" path="M 280 125 C 420 125, 450 200, 580 200" />
                 </circle>
-                <circle cx="0" cy="0" r="5" fill="#3b82f6">
+                <circle cx="0" cy="0" r="5" fill="#f59e0b">
                   <animateMotion dur="6s" repeatCount="indefinite" path="M 280 275 C 420 275, 450 200, 580 200" />
                 </circle>
-                <circle cx="0" cy="0" r="5" fill="#3b82f6">
+                <circle cx="0" cy="0" r="5" fill="#f59e0b">
                   <animateMotion dur="9s" repeatCount="indefinite" path="M 280 350 C 420 350, 450 200, 580 200" />
                 </circle>
-                <circle cx="0" cy="0" r="5" fill="#3b82f6">
+                <circle cx="0" cy="0" r="5" fill="#f59e0b">
                   <animateMotion dur="5s" repeatCount="indefinite" path="M 700 200 H 850" />
                 </circle>
 
@@ -424,12 +424,12 @@ const Home: React.FC = () => {
                     onClick={() => setActiveFeature(index)}
                     className={`p-4 rounded-lg text-left transition-all duration-300 w-full ${
                       activeFeature === index
-                        ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg'
+                        ? 'bg-gradient-to-r from-amber-500 to-orange-600 text-white shadow-lg'
                         : 'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700'
                     }`}
                   >
                     <div className="flex items-center">
-                      <feature.icon className={`w-6 h-6 mr-3 ${activeFeature === index ? 'text-white' : 'text-blue-600 dark:text-blue-400'}`} />
+                      <feature.icon className={`w-6 h-6 mr-3 ${activeFeature === index ? 'text-white' : 'text-amber-600 dark:text-amber-400'}`} />
                       <span className="font-semibold">{feature.title}</span>
                     </div>
                   </button>
@@ -447,7 +447,7 @@ const Home: React.FC = () => {
                   >
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center h-full">
                       <div className="relative w-full h-full flex items-center justify-center">
-                        <div className="absolute inset-0 bg-purple-100 dark:bg-purple-900/20 rounded-2xl bg-purple-grid-pattern-faded"></div>
+                        <div className="absolute inset-0 bg-orange-100 dark:bg-orange-900/20 rounded-2xl bg-purple-grid-pattern-faded"></div>
                         <div className="relative w-[90%] h-[90%] transform transition-transform duration-500 group-hover:scale-105">
                           {feature.visual}
                         </div>
@@ -467,12 +467,12 @@ const Home: React.FC = () => {
 
       {/* Built by Experts Section */}
       <section className="relative py-24 bg-slate-50 dark:bg-slate-900 overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-[60%] bg-blue-500/10 dark:bg-blue-500/5 rounded-full blur-3xl -z-0 animate-pulse-slow"></div>
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-[60%] bg-amber-500/10 dark:bg-amber-500/5 rounded-full blur-3xl -z-0 animate-pulse-slow"></div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
             <div>
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6 leading-tight">
-                The logistics platform built by <span className="text-blue-600 dark:text-blue-500">logistics experts</span>, for logistics professionals.
+                The logistics platform built by <span className="text-amber-600 dark:text-amber-500">logistics experts</span>, for logistics professionals.
               </h2>
               <p className="text-lg text-gray-600 dark:text-gray-300">
                 HOSS is engineered by professionals who live and breathe logistics. With decades of industry experience, our team knows what it takes to run a thriving logistics company, and we've built HOSS to help you run yours.
@@ -480,9 +480,9 @@ const Home: React.FC = () => {
             </div>
             <div className="flex justify-center items-center">
               <div className="relative">
-                <div className="absolute -inset-8 bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 rounded-full blur-2xl animate-pulse-slow"></div>
+                <div className="absolute -inset-8 bg-gradient-to-br from-amber-100 to-orange-100 dark:from-amber-900/30 dark:to-orange-900/30 rounded-full blur-2xl animate-pulse-slow"></div>
                 <div className="relative w-64 h-64 bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-full flex items-center justify-center shadow-lg">
-                  <Warehouse className="w-32 h-32 text-blue-600 dark:text-blue-500" />
+                  <Warehouse className="w-32 h-32 text-amber-600 dark:text-amber-500" />
                 </div>
               </div>
             </div>
@@ -491,9 +491,9 @@ const Home: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {expertFeatures.slice(0, 9).map((feature) => (
               <div key={feature} className="relative group">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl blur opacity-0 group-hover:opacity-60 transition duration-300"></div>
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-500 to-orange-500 rounded-xl blur opacity-0 group-hover:opacity-60 transition duration-300"></div>
                 <div className="relative bg-white/80 dark:bg-slate-800/80 backdrop-blur-lg border border-slate-200 dark:border-slate-700 rounded-xl p-6 h-full flex items-center">
-                  <CheckSquare className="w-6 h-6 text-blue-600 mr-4 flex-shrink-0" />
+                  <CheckSquare className="w-6 h-6 text-amber-600 mr-4 flex-shrink-0" />
                   <span className="font-medium text-gray-700 dark:text-gray-300">{feature}</span>
                 </div>
               </div>
@@ -514,9 +514,9 @@ const Home: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {whoWeHelp.map((who) => (
               <div key={who.title} className="relative group">
-                <div className="absolute -inset-px bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl blur-lg opacity-0 group-hover:opacity-70 transition-opacity duration-500"></div>
+                <div className="absolute -inset-px bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl blur-lg opacity-0 group-hover:opacity-70 transition-opacity duration-500"></div>
                 <div className="relative bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-8 h-full">
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl flex items-center justify-center mb-6">
                     <who.icon className="w-8 h-8 text-white" />
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">{who.title}</h3>
@@ -531,18 +531,18 @@ const Home: React.FC = () => {
       {/* Final CTA */}
       <section className="bg-white dark:bg-slate-900 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative p-10 text-center bg-gradient-to-br from-blue-600 to-purple-600 text-white shadow-2xl rounded-2xl overflow-hidden">
+          <div className="relative p-10 text-center bg-gradient-to-br from-amber-500 to-orange-600 text-white shadow-2xl rounded-2xl overflow-hidden">
             <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full"></div>
             <div className="absolute -bottom-16 -left-10 w-48 h-48 bg-white/10 rounded-full"></div>
             <div className="relative">
               <h3 className="text-3xl font-bold mb-4">
                 Ready to Transform Your Business?
               </h3>
-              <p className="text-lg text-blue-100 mb-8 max-w-3xl mx-auto">
+              <p className="text-lg text-amber-100 mb-8 max-w-3xl mx-auto">
                 Let us show you how HOSS can streamline your operations from day one! Sign up for a free, personalized demo with our team today.
               </p>
               <Link to="/demo">
-                <Button size="lg" className="bg-white text-blue-700 hover:bg-slate-100 font-bold shadow-lg transform hover:scale-105">
+                <Button size="lg" className="bg-white text-amber-700 hover:bg-slate-100 font-bold shadow-lg transform hover:scale-105">
                   SIGN UP FOR A FREE DEMO
                 </Button>
               </Link>

@@ -126,10 +126,10 @@ const Demo: React.FC = () => {
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800 py-24">
+      <section className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-gray-900 dark:to-gray-800 py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-6">
+            <h1 className="text-5xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-6">
               Schedule a Demo
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
@@ -141,7 +141,7 @@ const Demo: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             {demoFeatures.map((feature) => (
               <Card key={feature.title} className="p-6 text-center">
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-amber-500 to-orange-600 rounded-lg flex items-center justify-center mx-auto mb-4">
                   <feature.icon className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
@@ -176,7 +176,7 @@ const Demo: React.FC = () => {
                       name="firstName"
                       value={formData.firstName}
                       onChange={handleChange}
-                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 ${
+                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 ${
                         errors.firstName ? 'border-red-500' : 'border-gray-300 dark:border-gray-700'
                       }`}
                     />
@@ -193,7 +193,7 @@ const Demo: React.FC = () => {
                       name="lastName"
                       value={formData.lastName}
                       onChange={handleChange}
-                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 ${
+                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 ${
                         errors.lastName ? 'border-red-500' : 'border-gray-300 dark:border-gray-700'
                       }`}
                     />
@@ -213,7 +213,7 @@ const Demo: React.FC = () => {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 ${
+                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 ${
                         errors.email ? 'border-red-500' : 'border-gray-300 dark:border-gray-700'
                       }`}
                     />
@@ -230,7 +230,7 @@ const Demo: React.FC = () => {
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
-                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 ${
+                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 ${
                         errors.phone ? 'border-red-500' : 'border-gray-300 dark:border-gray-700'
                       }`}
                     />
@@ -249,13 +249,13 @@ const Demo: React.FC = () => {
                     name="company"
                     value={formData.company}
                     onChange={handleChange}
-                    className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 ${
+                    className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 ${
                       errors.company ? 'border-red-500' : 'border-gray-300 dark:border-gray-700'
                     }`}
                   />
                   {errors.company && (
                     <p className="mt-1 text-sm text-red-600">{errors.company}</p>
-                  )}
+                    )}
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -267,7 +267,7 @@ const Demo: React.FC = () => {
                       name="industry"
                       value={formData.industry}
                       onChange={handleChange}
-                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 ${
+                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 ${
                         errors.industry ? 'border-red-500' : 'border-gray-300 dark:border-gray-700'
                       }`}
                     >
@@ -291,7 +291,7 @@ const Demo: React.FC = () => {
                       name="fleetSize"
                       value={formData.fleetSize}
                       onChange={handleChange}
-                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 ${
+                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 ${
                         errors.fleetSize ? 'border-red-500' : 'border-gray-300 dark:border-gray-700'
                       }`}
                     >
@@ -317,7 +317,7 @@ const Demo: React.FC = () => {
                       name="preferredDate"
                       value={formData.preferredDate}
                       onChange={handleChange}
-                      className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-gray-100"
+                      className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 dark:bg-gray-800 dark:text-gray-100"
                     />
                   </div>
                   <div>
@@ -328,7 +328,7 @@ const Demo: React.FC = () => {
                       name="preferredTime"
                       value={formData.preferredTime}
                       onChange={handleChange}
-                      className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-gray-100"
+                      className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 dark:bg-gray-800 dark:text-gray-100"
                     >
                       <option value="">Select Time</option>
                       <option value="morning">Morning (9:00-12:00)</option>
@@ -348,7 +348,7 @@ const Demo: React.FC = () => {
                     onChange={handleChange}
                     rows={3}
                     placeholder="Tell us about your current logistics challenges..."
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-gray-100"
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 dark:bg-gray-800 dark:text-gray-100"
                   />
                 </div>
 
@@ -381,14 +381,14 @@ const Demo: React.FC = () => {
                 </ul>
               </Card>
 
-              <Card className="p-8 bg-gradient-to-br from-blue-600 to-purple-600 text-white">
+              <Card className="p-8 bg-gradient-to-br from-amber-500 to-orange-600 text-white">
                 <h3 className="text-xl font-bold mb-4">Demo Guarantee</h3>
-                <p className="text-blue-100 mb-4">
+                <p className="text-amber-100 mb-4">
                   We're so confident in our platform that if you don't see immediate value 
                   in the first 15 minutes of your demo, we'll end the session early - 
                   no questions asked.
                 </p>
-                <p className="text-sm text-blue-200">
+                <p className="text-sm text-amber-200">
                   Average demo satisfaction score: 9.8/10
                 </p>
               </Card>
