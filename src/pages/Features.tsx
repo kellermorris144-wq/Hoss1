@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   CreditCard,
   BarChart3,
@@ -15,68 +15,134 @@ import {
 import Button from '../components/Button';
 import { Link } from 'react-router-dom';
 
+const AnimatedMap = () => {
+  const trucks = [
+    { id: 'HOSS-07', driver: 'Sarah J.', status: 'On Time', path: 'M 50 200 Q 150 150 250 200 T 450 200', duration: '10s', color: 'text-blue-600' },
+    { id: 'HOSS-11', driver: 'Mike P.', status: 'In Transit', path: 'M 80 50 Q 180 100 280 50 T 480 50', duration: '12s', color: 'text-green-600' },
+  ];
+
+  return (
+    <div className="relative w-full h-full p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+      <div className="absolute inset-0 bg-grid-pattern opacity-50 dark:opacity-100"></div>
+      <div className="relative w-full h-full bg-slate-200/50 dark:bg-slate-900/50 rounded-lg">
+        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 500 250" preserveAspectRatio="none">
+          {/* Paths for trucks */}
+          <path id="route1" d="M 50 200 Q 150 150 250 200 T 450 200" stroke="currentColor" className="text-blue-500/50 dark:text-blue-500/30" strokeWidth="2" fill="none" strokeDasharray="5 5" />
+          <path id="route2" d="M 80 50 Q 180 100 280 50 T 480 50" stroke="currentColor" className="text-green-500/50 dark:text-green-500/30" strokeWidth="2" fill="none" strokeDasharray="5 5" />
+          
+          {/* Location Pins */}
+          <foreignObject x="240" y="115" width="24" height="24">
+            <MapPin className="w-6 h-6 text-red-500 animate-pulse" />
+          </foreignObject>
+
+          {/* Moving Trucks with Tooltips */}
+          {trucks.map((truck, index) => (
+            <g key={truck.id} className="group">
+              <foreignObject x="-14" y="-14" width="28" height="28">
+                <Truck className={`w-7 h-7 ${truck.color} transition-transform duration-300 group-hover:scale-125`} />
+                <animateMotion dur={truck.duration} repeatCount="indefinite" rotate="auto">
+                  <mpath xlinkHref={`#route${index + 1}`} />
+                </animateMotion>
+              </foreignObject>
+              
+              {/* Tooltip */}
+              <foreignObject x="-60" y="-75" width="120" height="60" className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                 <div className="p-2 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm rounded-lg shadow-lg text-center">
+                    <p className="font-bold text-xs text-slate-800 dark:text-slate-200">{truck.id}</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">{truck.driver}</p>
+                    <p className={`text-xs font-semibold ${truck.status === 'On Time' ? 'text-green-500' : 'text-blue-500'}`}>{truck.status}</p>
+                 </div>
+                 <animateMotion dur={truck.duration} repeatCount="indefinite" rotate="auto">
+                  <mpath xlinkHref={`#route${index + 1}`} />
+                </animateMotion>
+              </foreignObject>
+            </g>
+          ))}
+        </svg>
+      </div>
+    </div>
+  );
+};
+
+const AnimatedInvoice = () => {
+  const [haulageFee, setHaulageFee] = useState(0);
+  const [surcharge, setSurcharge] = useState(0);
+  const [total, setTotal] = useState(0);
+  const [status, setStatus] = useState('Calculating...');
+
+  useEffect(() => {
+    const animateValue = (setter: React.Dispatch<React.SetStateAction<number>>, end: number, duration: number) => {
+      let start = 0;
+      const range = end - start;
+      let current = start;
+      const step = range / (duration / 16); 
+      
+      const timer = setInterval(() => {
+        current += step;
+        if (current >= end) {
+          current = end;
+          clearInterval(timer);
+        }
+        setter(current);
+      }, 16);
+      return () => clearInterval(timer);
+    };
+
+    const feeTimer = setTimeout(() => animateValue(setHaulageFee, 850, 1000), 200);
+    const surchargeTimer = setTimeout(() => animateValue(setSurcharge, 75, 800), 500);
+    
+    return () => {
+      clearTimeout(feeTimer);
+      clearTimeout(surchargeTimer);
+    };
+  }, []);
+
+  useEffect(() => {
+    setTotal(haulageFee + surcharge);
+    if (haulageFee === 850 && surcharge === 75) {
+      const statusTimer = setTimeout(() => setStatus('Pending'), 500);
+      return () => clearTimeout(statusTimer);
+    }
+  }, [haulageFee, surcharge]);
+
+  return (
+    <div className="relative w-full h-full p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700 flex items-center justify-center group">
+      <div className="w-full max-w-sm relative">
+        <div className="absolute -inset-4 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-full blur-xl transition-opacity duration-300 opacity-0 group-hover:opacity-100"></div>
+        <div className="relative bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-4 shadow-lg z-10 transition-transform duration-300 group-hover:scale-105">
+          <div className="flex justify-between items-center mb-3">
+            <h4 className="font-bold text-slate-800 dark:text-slate-200">Invoice #INV-0452</h4>
+            <span className={`px-2 py-1 text-xs font-semibold rounded-full transition-colors duration-300 ${
+              status === 'Pending' 
+              ? 'text-yellow-800 bg-yellow-100 dark:text-yellow-100 dark:bg-yellow-900/50' 
+              : 'text-blue-800 bg-blue-100 dark:text-blue-100 dark:bg-blue-900/50'
+            }`}>{status}</span>
+          </div>
+          <div className="space-y-1 text-sm font-mono">
+            <div className="flex justify-between"><span className="text-slate-500 dark:text-slate-400">Haulage Fee</span><span className="font-medium text-slate-800 dark:text-slate-200">£{haulageFee.toFixed(2)}</span></div>
+            <div className="flex justify-between"><span className="text-slate-500 dark:text-slate-400">Fuel Surcharge</span><span className="font-medium text-slate-800 dark:text-slate-200">£{surcharge.toFixed(2)}</span></div>
+            <div className="w-full h-px bg-slate-200 dark:bg-slate-700 my-2"></div>
+            <div className="flex justify-between font-bold text-base"><span className="text-slate-800 dark:text-slate-200">Total</span><span className="text-slate-800 dark:text-slate-200">£{total.toFixed(2)}</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // Main highlighted features with detailed descriptions and visuals
 const highlightedFeatures = [
   {
     icon: MapPin,
     title: 'Live GPS Tracking & Mapping',
     description: 'Gain complete operational oversight with our real-time GPS tracking. HOSS integrates a state-of-the-art mapping system to help you plan routes, monitor vehicle progress, and provide customers with accurate ETAs. Reduce idle time, improve fuel efficiency, and enhance driver safety with a live, interactive fleet map.',
-    visual: () => (
-      <div className="relative w-full h-full p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden group">
-        <div className="absolute inset-0 bg-grid-pattern opacity-50 dark:opacity-100"></div>
-        <div className="relative w-full h-full bg-slate-200/50 dark:bg-slate-900/50 rounded-lg">
-          {/* Animated routes */}
-          <svg className="absolute inset-0 w-full h-full" width="100%" height="100%">
-            <path d="M 50 200 Q 150 150 250 200 T 450 200" stroke="currentColor" className="text-blue-500/50 dark:text-blue-500/30" strokeWidth="2" fill="none" strokeDasharray="5 5" />
-            <path d="M 80 50 Q 180 100 280 50 T 480 50" stroke="currentColor" className="text-green-500/50 dark:text-green-500/30" strokeWidth="2" fill="none" strokeDasharray="5 5" />
-          </svg>
-          {/* Trucks */}
-          <div className="absolute top-[18%] left-[15%] transition-transform duration-300 group-hover:scale-110">
-            <Truck className="w-7 h-7 text-blue-600 transform -rotate-12" />
-          </div>
-          <div className="absolute top-[65%] left-[75%] transition-transform duration-300 group-hover:scale-110">
-            <Truck className="w-7 h-7 text-green-600 transform rotate-6" />
-          </div>
-          {/* Location Pins */}
-          <MapPin className="w-6 h-6 text-red-500 absolute top-[40%] left-[50%] animate-pulse" />
-          {/* UI Card */}
-          <div className="absolute bottom-4 left-4 p-3 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-lg shadow-lg transition-all duration-300 group-hover:shadow-xl group-hover:-translate-y-1">
-            <p className="font-bold text-sm text-slate-800 dark:text-slate-200">HOSS-07</p>
-            <p className="text-xs text-slate-500 dark:text-slate-400">Status: <span className="text-green-500 font-semibold">On Time</span></p>
-          </div>
-        </div>
-      </div>
-    ),
+    visual: AnimatedMap,
   },
   {
     icon: CreditCard,
     title: 'Automated Billing & Payments',
     description: 'Accelerate your cash flow and eliminate administrative headaches. Once a job is marked complete, HOSS automatically generates professional customer invoices and driver self-bills. Track payment statuses in real-time and integrate with popular accounting software to streamline your entire financial workflow.',
-    visual: () => (
-      <div className="relative w-full h-full p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700 flex items-center justify-center group">
-        <div className="w-full max-w-sm relative">
-          <div className="absolute -inset-4 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-full blur-xl transition-opacity duration-300 opacity-0 group-hover:opacity-100"></div>
-          <div className="relative bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-4 shadow-lg z-10 transition-transform duration-300 group-hover:scale-105">
-            <div className="flex justify-between items-center mb-3">
-              <h4 className="font-bold text-slate-800 dark:text-slate-200">Invoice #INV-0452</h4>
-              <span className="px-2 py-1 text-xs font-semibold rounded-full text-green-800 bg-green-100 dark:text-green-100 dark:bg-green-900/50">Paid</span>
-            </div>
-            <div className="space-y-1 text-sm">
-              <div className="flex justify-between"><span className="text-slate-500 dark:text-slate-400">Haulage Fee</span><span className="font-medium">£850.00</span></div>
-              <div className="flex justify-between"><span className="text-slate-500 dark:text-slate-400">Fuel Surcharge</span><span className="font-medium">£75.00</span></div>
-              <div className="w-full h-px bg-slate-200 dark:bg-slate-700 my-2"></div>
-              <div className="flex justify-between font-bold text-base"><span className="text-slate-800 dark:text-slate-200">Total</span><span>£925.00</span></div>
-            </div>
-          </div>
-          <div className="absolute top-0 left-0 w-full h-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-4 shadow-lg transition-transform duration-500 group-hover:rotate-6 group-hover:scale-95">
-            <div className="flex justify-between items-center mb-3">
-              <h4 className="font-bold text-slate-800 dark:text-slate-200">Invoice #INV-0451</h4>
-              <span className="px-2 py-1 text-xs font-semibold rounded-full text-yellow-800 bg-yellow-100 dark:text-yellow-100 dark:bg-yellow-900/50">Pending</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    ),
+    visual: AnimatedInvoice,
   },
   {
     icon: BarChart3,
