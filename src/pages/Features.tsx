@@ -23,39 +23,51 @@ const AnimatedMap = () => {
 
   return (
     <div className="relative w-full h-full p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden">
-      <div className="absolute inset-0 bg-grid-pattern opacity-50 dark:opacity-100"></div>
-      <div className="relative w-full h-full bg-slate-200/50 dark:bg-slate-900/50 rounded-lg overflow-hidden">
+      <div className="absolute inset-0 bg-grid-pattern opacity-30 dark:opacity-50"></div>
+      <div className="relative w-full h-full bg-slate-200/30 dark:bg-slate-900/30 rounded-lg overflow-hidden">
         <svg className="absolute inset-0 w-full h-full" viewBox="0 0 500 250" preserveAspectRatio="none">
           {/* Paths for trucks */}
-          <path id="route1" d="M 50 200 Q 150 150 250 200 T 450 200" stroke="currentColor" className="text-blue-500/50 dark:text-blue-500/30" strokeWidth="2" fill="none" strokeDasharray="5 5" />
-          <path id="route2" d="M 80 70 Q 180 120 280 70 T 480 70" stroke="currentColor" className="text-green-500/50 dark:text-green-500/30" strokeWidth="2" fill="none" strokeDasharray="5 5" />
+          <path id="route1" d="M 50 200 Q 150 150 250 200 T 450 200" stroke="currentColor" className="text-blue-500/30 dark:text-blue-500/20" strokeWidth="2" fill="none" strokeDasharray="4 4" />
+          <path id="route2" d="M 80 70 Q 180 120 280 70 T 480 70" stroke="currentColor" className="text-green-500/30 dark:text-green-500/20" strokeWidth="2" fill="none" strokeDasharray="4 4" />
           
-          {/* Location Pins */}
-          <foreignObject x="240" y="115" width="24" height="24">
-            <MapPin className="w-6 h-6 text-red-500 animate-pulse" />
-          </foreignObject>
+          {/* Location Pins / "Cities" */}
+          <g className="opacity-70">
+            <circle cx="50" cy="200" r="4" fill="currentColor" className="text-slate-400" />
+            <text x="45" y="220" className="text-[10px] font-sans font-semibold fill-current text-slate-500" textAnchor="middle">London</text>
+            <circle cx="450" cy="200" r="4" fill="currentColor" className="text-slate-400" />
+            <text x="450" y="220" className="text-[10px] font-sans font-semibold fill-current text-slate-500" textAnchor="middle">Dover</text>
+            <circle cx="80" cy="70" r="4" fill="currentColor" className="text-slate-400" />
+            <text x="80" y="60" className="text-[10px] font-sans font-semibold fill-current text-slate-500" textAnchor="middle">Manchester</text>
+            <circle cx="480" cy="70" r="4" fill="currentColor" className="text-slate-400" />
+            <text x="480" y="60" className="text-[10px] font-sans font-semibold fill-current text-slate-500" textAnchor="middle">Glasgow</text>
+            <foreignObject x="240" y="115" width="24" height="24">
+              <MapPin className="w-6 h-6 text-red-500 animate-pulse" />
+            </foreignObject>
+            <text x="252" y="150" className="text-[10px] font-sans font-semibold fill-current text-red-500" textAnchor="middle">Warehouse</text>
+          </g>
 
           {/* Moving Trucks with Tooltips */}
           {trucks.map((truck, index) => (
-            <g key={truck.id} className="group">
-              <foreignObject x="-14" y="-14" width="28" height="28">
-                <Truck className={`w-7 h-7 ${truck.color} transition-transform duration-300 group-hover:scale-125`} />
-                <animateMotion dur={truck.duration} repeatCount="indefinite" rotate="auto">
-                  <mpath xlinkHref={`#route${index + 1}`} />
-                </animateMotion>
-              </foreignObject>
+            <g key={truck.id}>
+              <animateMotion dur={truck.duration} repeatCount="indefinite" rotate="auto">
+                <mpath xlinkHref={`#route${index + 1}`} />
+              </animateMotion>
               
-              {/* Tooltip */}
-              <foreignObject x="-60" y="-75" width="120" height="60" className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                 <div className="p-2 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm rounded-lg shadow-lg text-center">
-                    <p className="font-bold text-xs text-slate-800 dark:text-slate-200">{truck.id}</p>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">{truck.driver}</p>
-                    <p className={`text-xs font-semibold ${truck.status === 'On Time' ? 'text-green-500' : 'text-blue-500'}`}>{truck.status}</p>
-                 </div>
-                 <animateMotion dur={truck.duration} repeatCount="indefinite" rotate="auto">
-                  <mpath xlinkHref={`#route${index + 1}`} />
-                </animateMotion>
-              </foreignObject>
+              <g className="group">
+                {/* Truck Icon */}
+                <foreignObject x="-12" y="-12" width="24" height="24" className="overflow-visible">
+                  <Truck className={`w-6 h-6 ${truck.color} transition-transform duration-300 group-hover:scale-125`} />
+                </foreignObject>
+
+                {/* Tooltip - attached to the same animated group */}
+                <foreignObject x="-50" y="-65" width="100" height="50" className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                  <div className="p-1.5 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm rounded-md shadow-lg text-center">
+                      <p className="font-bold text-[10px] text-slate-800 dark:text-slate-200">{truck.id}</p>
+                      <p className="text-[9px] text-slate-500 dark:text-slate-400">{truck.driver}</p>
+                      <p className={`text-[9px] font-semibold ${truck.status === 'On Time' ? 'text-green-500' : 'text-blue-500'}`}>{truck.status}</p>
+                  </div>
+                </foreignObject>
+              </g>
             </g>
           ))}
         </svg>
@@ -74,17 +86,15 @@ const AnimatedInvoice = () => {
     const animateValue = (setter: React.Dispatch<React.SetStateAction<number>>, end: number, duration: number, delay: number = 0) => {
       const timeoutId = setTimeout(() => {
         let start = 0;
-        const range = end - start;
-        let current = start;
         const increment = end / (duration / 16);
         
         const timer = setInterval(() => {
-          current += increment;
-          if (current >= end) {
-            current = end;
+          start += increment;
+          if (start >= end) {
+            start = end;
             clearInterval(timer);
           }
-          setter(current);
+          setter(start);
         }, 16);
         return () => clearInterval(timer);
       }, delay);
