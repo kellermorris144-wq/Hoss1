@@ -406,6 +406,65 @@ const Home: React.FC = () => {
         </div>
       </div>
 
+      {/* The HOSS Advantage Section */}
+      <section className="py-24 bg-white dark:bg-slate-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6">The HOSS Advantage</h2>
+            <p className="text-lg text-gray-600 dark:text-gray-300">
+              Discover the core benefits that make HOSS the preferred platform for modern logistics companies.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
+            <div className="lg:col-span-1">
+              <div className="flex flex-col space-y-2">
+                {interactiveFeatures.map((feature, index) => (
+                  <button
+                    key={feature.title}
+                    onClick={() => setActiveFeature(index)}
+                    className={`p-4 rounded-lg text-left transition-all duration-300 w-full ${
+                      activeFeature === index
+                        ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg'
+                        : 'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700'
+                    }`}
+                  >
+                    <div className="flex items-center">
+                      <feature.icon className={`w-6 h-6 mr-3 ${activeFeature === index ? 'text-white' : 'text-blue-600 dark:text-blue-400'}`} />
+                      <span className="font-semibold">{feature.title}</span>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="lg:col-span-3">
+              <div className="relative w-full h-[450px]">
+                {interactiveFeatures.map((feature, index) => (
+                  <div
+                    key={feature.title}
+                    className={`absolute inset-0 transition-all duration-500 ease-in-out ${
+                      activeFeature === index ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
+                    }`}
+                  >
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center h-full">
+                      <div className="relative w-full h-full flex items-center justify-center">
+                        <div className="absolute inset-0 bg-purple-100 dark:bg-purple-900/20 rounded-2xl bg-purple-grid-pattern-faded"></div>
+                        <div className="relative w-[90%] h-[90%] transform transition-transform duration-500 group-hover:scale-105">
+                          {feature.visual}
+                        </div>
+                      </div>
+                      <div className="pr-4">
+                        <h3 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">{feature.title}</h3>
+                        <p className="text-gray-600 dark:text-gray-300">{feature.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Built by Experts Section */}
       <section className="relative py-24 bg-slate-50 dark:bg-slate-900 overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-[60%] bg-blue-500/10 dark:bg-blue-500/5 rounded-full blur-3xl -z-0 animate-pulse-slow"></div>
@@ -465,65 +524,6 @@ const Home: React.FC = () => {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* The HOSS Advantage Section */}
-      <section className="py-24 bg-white dark:bg-slate-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6">The HOSS Advantage</h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300">
-              Discover the core benefits that make HOSS the preferred platform for modern logistics companies.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
-            <div className="lg:col-span-1">
-              <div className="flex flex-col space-y-2">
-                {interactiveFeatures.map((feature, index) => (
-                  <button
-                    key={feature.title}
-                    onClick={() => setActiveFeature(index)}
-                    className={`p-4 rounded-lg text-left transition-all duration-300 w-full ${
-                      activeFeature === index
-                        ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg'
-                        : 'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700'
-                    }`}
-                  >
-                    <div className="flex items-center">
-                      <feature.icon className={`w-6 h-6 mr-3 ${activeFeature === index ? 'text-white' : 'text-blue-600 dark:text-blue-400'}`} />
-                      <span className="font-semibold">{feature.title}</span>
-                    </div>
-                  </button>
-                ))}
-              </div>
-            </div>
-            <div className="lg:col-span-3">
-              <div className="relative w-full h-[450px]">
-                {interactiveFeatures.map((feature, index) => (
-                  <div
-                    key={feature.title}
-                    className={`absolute inset-0 transition-all duration-500 ease-in-out ${
-                      activeFeature === index ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
-                    }`}
-                  >
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center h-full">
-                      <div className="relative w-full h-full flex items-center justify-center">
-                        <div className="absolute inset-0 bg-purple-100 dark:bg-purple-900/20 rounded-2xl bg-purple-grid-pattern-faded"></div>
-                        <div className="relative w-[90%] h-[90%] transform transition-transform duration-500 group-hover:scale-105">
-                          {feature.visual}
-                        </div>
-                      </div>
-                      <div className="pr-4">
-                        <h3 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">{feature.title}</h3>
-                        <p className="text-gray-600 dark:text-gray-300">{feature.description}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
         </div>
       </section>
