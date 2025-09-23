@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './contexts/ThemeContext';
 import Navigation from './components/Navigation';
 import Home from './pages/Home';
-import Product from './pages/Product';
 import Features from './pages/Features';
 import Integrations from './pages/Integrations';
 import Demo from './pages/Demo';
@@ -18,7 +17,6 @@ function App() {
           <main>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/product" element={<Product />} />
               <Route path="/features" element={<Features />} />
               <Route path="/integrations" element={<Integrations />} />
               <Route path="/demo" element={<Demo />} />
@@ -39,7 +37,6 @@ function App() {
                 <div>
                   <h4 className="font-medium mb-3">Product</h4>
                   <ul className="space-y-2 text-sm text-gray-400">
-                    <li><a href="/product" className="hover:text-white transition-colors">Customer Portal</a></li>
                     <li><a href="/features" className="hover:text-white transition-colors">Features</a></li>
                     <li><a href="/integrations" className="hover:text-white transition-colors">Integrations</a></li>
                   </ul>
