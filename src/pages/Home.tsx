@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 import { Truck, MapPin, FileText, CreditCard, BarChart3, CheckCircle, ArrowRight, AlertTriangle, Warehouse, CheckSquare, User, Users, Building, LayoutDashboard, ArrowRightLeft } from 'lucide-react';
@@ -69,31 +69,31 @@ const MapVisual = () => (
   <div className="w-full h-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg p-4 flex items-center justify-center overflow-hidden">
     <div className="w-full h-full rounded-lg bg-slate-100 dark:bg-slate-900/50 relative">
       <div className="absolute inset-0 bg-gradient-to-br from-transparent via-blue-500/5 to-transparent"></div>
-      <div className="absolute top-1/4 left-1/4 w-1/2 h-1/2 rounded-full bg-blue-500/10 animate-pulse"></div>
-      <MapPin className="absolute top-[30%] left-[40%] text-blue-500" />
-      <MapPin className="absolute top-[60%] left-[65%] text-blue-500" />
-      <MapPin className="absolute top-[50%] left-[20%] text-blue-500" />
-      <div className="absolute top-[20%] left-[15%] p-2 bg-white/80 dark:bg-slate-900/80 rounded-lg shadow-md text-xs font-semibold">New Load Available!</div>
-      <div className="absolute bottom-[15%] right-[10%] p-2 bg-white/80 dark:bg-slate-900/80 rounded-lg shadow-md text-xs font-semibold">Route Optimized</div>
+      <div className="absolute top-1/4 left-1/4 w-1/2 h-1/2 rounded-full bg-blue-500/10 animate-pulse-slow"></div>
+      <MapPin className="absolute top-[30%] left-[40%] text-blue-500 animate-pulse" style={{ animationDelay: '0.1s' }} />
+      <MapPin className="absolute top-[60%] left-[65%] text-blue-500 animate-pulse" style={{ animationDelay: '0.3s' }} />
+      <MapPin className="absolute top-[50%] left-[20%] text-blue-500 animate-pulse" style={{ animationDelay: '0.5s' }} />
+      <div className="absolute top-[20%] left-[15%] p-2 bg-white/80 dark:bg-slate-900/80 rounded-lg shadow-md text-xs font-semibold animate-float-slow" style={{ animationDuration: '6s' }}>New Load Available!</div>
+      <div className="absolute bottom-[15%] right-[10%] p-2 bg-white/80 dark:bg-slate-900/80 rounded-lg shadow-md text-xs font-semibold animate-float-slow-reverse" style={{ animationDuration: '7s' }}>Route Optimized</div>
     </div>
   </div>
 );
 
 const BackloadVisual = () => (
-  <div className="w-full h-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg p-4 flex flex-col justify-center items-center space-y-4">
+  <div className="w-full h-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg p-4 flex flex-col justify-center items-center space-y-4 overflow-hidden">
     <div className="text-center">
       <p className="font-semibold text-slate-700 dark:text-slate-300">Without HOSS</p>
       <div className="flex items-center mt-2">
         <span className="font-bold">A</span>
         <div className="w-24 h-0.5 bg-slate-300 dark:bg-slate-600 mx-2"></div>
-        <Truck className="text-blue-500" />
+        <Truck className="text-blue-500 animate-slide-in-right" style={{ animationDelay: '0.2s' }} />
         <div className="w-24 h-0.5 bg-slate-300 dark:bg-slate-600 mx-2"></div>
         <span className="font-bold">B</span>
       </div>
       <div className="flex items-center mt-1">
         <div className="w-24 h-0.5 bg-transparent mx-2"></div>
-        <div className="w-24 h-0.5 bg-red-400 border-t-2 border-dashed border-red-500 mx-2 relative -left-7"></div>
-        <span className="text-red-500 font-semibold text-sm">Empty Return</span>
+        <div className="w-24 h-0.5 bg-red-400 border-t-2 border-dashed border-red-500 mx-2 relative -left-7 animate-fade-in" style={{ animationDelay: '0.5s' }}></div>
+        <span className="text-red-500 font-semibold text-sm animate-fade-in" style={{ animationDelay: '0.5s' }}>Empty Return</span>
       </div>
     </div>
     <div className="w-3/4 h-px bg-slate-200 dark:bg-slate-700"></div>
@@ -106,11 +106,11 @@ const BackloadVisual = () => (
         <div className="w-24 h-0.5 bg-slate-300 dark:bg-slate-600 mx-2"></div>
         <span className="font-bold">B</span>
       </div>
-      <div className="flex items-center mt-1 animate-fade-in">
-        <div className="w-24 h-0.5 bg-green-400 mx-2 relative left-7"></div>
-        <Truck className="text-green-500 transform -scale-x-100" />
+      <div className="flex items-center mt-1">
+        <div className="w-24 h-0.5 bg-green-400 mx-2 relative left-7 animate-fade-in" style={{ animationDelay: '0.8s' }}></div>
+        <Truck className="text-green-500 transform -scale-x-100 animate-slide-in-left" style={{ animationDelay: '0.8s' }} />
         <div className="w-24 h-0.5 bg-transparent mx-2"></div>
-        <span className="text-green-500 font-semibold text-sm">Backload Found!</span>
+        <span className="text-green-500 font-semibold text-sm animate-fade-in" style={{ animationDelay: '1s' }}>Backload Found!</span>
       </div>
     </div>
   </div>
@@ -118,7 +118,13 @@ const BackloadVisual = () => (
 
 const FleetVisual = () => (
   <div className="w-full h-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg p-4 flex flex-col space-y-2">
-    <h3 className="font-bold text-slate-800 dark:text-slate-200">Fleet Performance</h3>
+    <div className="flex justify-between items-center">
+      <h3 className="font-bold text-slate-800 dark:text-slate-200">Fleet Performance</h3>
+      <div className="flex items-center space-x-1">
+        <span className="text-xs text-green-500">Live</span>
+        <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+      </div>
+    </div>
     <div className="flex-grow flex items-end justify-between space-x-2 px-2">
       <div className="w-1/4 h-[60%] bg-blue-500 rounded-t-md animate-grow-bar" style={{ animationDelay: '0.1s' }}></div>
       <div className="w-1/4 h-[80%] bg-blue-500 rounded-t-md animate-grow-bar" style={{ animationDelay: '0.2s' }}></div>
@@ -128,28 +134,56 @@ const FleetVisual = () => (
     <div className="flex justify-between text-xs text-slate-500 dark:text-slate-400 px-2">
       <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span>
     </div>
-  </div>
-);
-
-const PaymentsVisual = () => (
-  <div className="w-full h-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg p-4 relative overflow-hidden">
-    <div className="flex justify-between items-center mb-4">
-      <h3 className="font-bold text-slate-800 dark:text-slate-200">Invoice #INV-0451</h3>
-      <span className="px-2 py-1 text-xs font-semibold text-yellow-800 bg-yellow-100 dark:text-yellow-100 dark:bg-yellow-900/50 rounded-full">Pending</span>
-    </div>
-    <div className="space-y-2">
-      <div className="flex justify-between text-sm"><span className="text-slate-500 dark:text-slate-400">Item 1</span><span className="font-medium">£450.00</span></div>
-      <div className="flex justify-between text-sm"><span className="text-slate-500 dark:text-slate-400">Item 2</span><span className="font-medium">£320.00</span></div>
-      <div className="w-full h-px bg-slate-200 dark:bg-slate-700 my-2"></div>
-      <div className="flex justify-between font-bold"><span className="text-slate-800 dark:text-slate-200">Total</span><span>£770.00</span></div>
-    </div>
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-      <div className="border-4 border-green-500 text-green-500 rounded-full w-32 h-32 flex items-center justify-center font-bold text-3xl uppercase transform -rotate-12 animate-scale-in-stamp" style={{ animationDelay: '0.3s' }}>
-        Paid
+    <div className="mt-2 p-2 bg-slate-100 dark:bg-slate-900/50 rounded-lg space-y-1">
+      <div className="flex justify-between items-center text-xs">
+        <span className="font-medium text-slate-600 dark:text-slate-300">Efficiency</span>
+        <span className="font-bold text-green-500">89%</span>
+      </div>
+      <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1.5">
+        <div className="bg-green-500 h-1.5 rounded-full w-[89%] animate-grow-bar-x" style={{ animationDelay: '0.5s' }}></div>
       </div>
     </div>
   </div>
 );
+
+const PaymentsVisual = () => {
+  const [status, setStatus] = useState('Pending');
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setStatus('Paid');
+    }, 300);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <div className="w-full h-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg p-4 relative overflow-hidden">
+      <div className="flex justify-between items-center mb-4">
+        <h3 className="font-bold text-slate-800 dark:text-slate-200">Invoice #INV-0451</h3>
+        <span className={`px-2 py-1 text-xs font-semibold rounded-full transition-colors duration-300 ${
+          status === 'Pending' 
+          ? 'text-yellow-800 bg-yellow-100 dark:text-yellow-100 dark:bg-yellow-900/50' 
+          : 'text-green-800 bg-green-100 dark:text-green-100 dark:bg-green-900/50'
+        }`}>
+          {status}
+        </span>
+      </div>
+      <div className="space-y-2">
+        <div className="flex justify-between text-sm animate-fade-in" style={{ animationDelay: '0.1s' }}><span className="text-slate-500 dark:text-slate-400">Item 1</span><span className="font-medium">£450.00</span></div>
+        <div className="flex justify-between text-sm animate-fade-in" style={{ animationDelay: '0.2s' }}><span className="text-slate-500 dark:text-slate-400">Item 2</span><span className="font-medium">£320.00</span></div>
+        <div className="w-full h-px bg-slate-200 dark:bg-slate-700 my-2"></div>
+        <div className="flex justify-between font-bold"><span className="text-slate-800 dark:text-slate-200">Total</span><span>£770.00</span></div>
+      </div>
+      {status === 'Paid' && (
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+          <div className="border-4 border-green-500 text-green-500 rounded-full w-32 h-32 flex items-center justify-center font-bold text-3xl uppercase transform -rotate-12 animate-scale-in-stamp">
+            Paid
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
 
 const Home: React.FC = () => {
   const [activeFeature, setActiveFeature] = useState(0);

@@ -121,6 +121,19 @@
     transform-origin: bottom;
     animation: grow-bar 0.8s ease-out forwards;
   }
+
+  .animate-slide-in-right {
+    animation: slide-in-right 0.8s ease-out forwards;
+  }
+
+  .animate-slide-in-left {
+    animation: slide-in-left 0.8s ease-out forwards;
+  }
+
+  .animate-grow-bar-x {
+    transform-origin: left;
+    animation: grow-bar-x 1s ease-out forwards;
+  }
   
   @keyframes fadeIn {
     from {
@@ -234,6 +247,37 @@
     }
     to {
       transform: scaleY(1);
+    }
+  }
+
+  @keyframes slide-in-right {
+    from {
+      transform: translateX(-20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-in-left {
+    from {
+      transform: translateX(20px) scaleX(-1);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0) scaleX(-1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes grow-bar-x {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
     }
   }
 }
