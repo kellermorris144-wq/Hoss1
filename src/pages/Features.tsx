@@ -48,26 +48,24 @@ const AnimatedMap = () => {
 
           {/* Moving Trucks with Tooltips */}
           {trucks.map((truck, index) => (
-            <g key={truck.id}>
+            <g key={truck.id} className="group">
               <animateMotion dur={truck.duration} repeatCount="indefinite" rotate="auto">
                 <mpath xlinkHref={`#route${index + 1}`} />
               </animateMotion>
               
-              <g className="group">
-                {/* Truck Icon */}
-                <foreignObject x="-12" y="-12" width="24" height="24" className="overflow-visible">
-                  <Truck className={`w-6 h-6 ${truck.color} transition-transform duration-300 group-hover:scale-125`} />
-                </foreignObject>
+              {/* Truck Icon */}
+              <foreignObject x="-12" y="-12" width="24" height="24" className="overflow-visible">
+                <Truck className={`w-6 h-6 ${truck.color} transition-transform duration-300 group-hover:scale-125`} />
+              </foreignObject>
 
-                {/* Tooltip - attached to the same animated group */}
-                <foreignObject x="-50" y="-65" width="100" height="50" className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                  <div className="p-1.5 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm rounded-md shadow-lg text-center">
-                      <p className="font-bold text-[10px] text-slate-800 dark:text-slate-200">{truck.id}</p>
-                      <p className="text-[9px] text-slate-500 dark:text-slate-400">{truck.driver}</p>
-                      <p className={`text-[9px] font-semibold ${truck.status === 'On Time' ? 'text-green-500' : 'text-blue-500'}`}>{truck.status}</p>
-                  </div>
-                </foreignObject>
-              </g>
+              {/* Tooltip */}
+              <foreignObject x="-50" y="-65" width="100" height="50" className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                <div className="p-1.5 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm rounded-md shadow-lg text-center">
+                    <p className="font-bold text-[10px] text-slate-800 dark:text-slate-200">{truck.id}</p>
+                    <p className="text-[9px] text-slate-500 dark:text-slate-400">{truck.driver}</p>
+                    <p className={`text-[9px] font-semibold ${truck.status === 'On Time' ? 'text-green-500' : 'text-blue-500'}`}>{truck.status}</p>
+                </div>
+              </foreignObject>
             </g>
           ))}
         </svg>
@@ -83,41 +81,43 @@ const AnimatedInvoice = () => {
   const [isPaid, setIsPaid] = useState(false);
 
   useEffect(() => {
-    const animateValue = (setter: React.Dispatch<React.SetStateAction<number>>, end: number, duration: number, delay: number = 0) => {
-      const timeoutId = setTimeout(() => {
-        let start = 0;
-        const increment = end / (duration / 16);
-        
-        const timer = setInterval(() => {
-          start += increment;
-          if (start >= end) {
-            start = end;
-            clearInterval(timer);
-          }
-          setter(start);
-        }, 16);
-        return () => clearInterval(timer);
-      }, delay);
-      return () => clearTimeout(timeoutId);
+    let animationFrameId: number;
+    const animateValue = (setter: React.Dispatch<React.SetStateAction<number>>, end: number, duration: number) => {
+      let startTimestamp: number | null = null;
+      const step = (timestamp: number) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        setter(progress * end);
+        if (progress < 1) {
+          animationFrameId = requestAnimationFrame(step);
+        }
+      };
+      animationFrameId = requestAnimationFrame(step);
     };
 
-    const finalSubtotal = 925.00;
-    const finalVat = finalSubtotal * 0.20;
-    const finalTotal = finalSubtotal + finalVat;
+    const runAnimationCycle = () => {
+      setIsPaid(false);
+      setSubtotal(0);
+      setVat(0);
+      setTotal(0);
 
-    const cleanupSubtotal = animateValue(setSubtotal, finalSubtotal, 800, 200);
-    const cleanupVat = animateValue(setVat, finalVat, 800, 500);
-    const cleanupTotal = animateValue(setTotal, finalTotal, 1000, 700);
+      setTimeout(() => {
+        animateValue(setSubtotal, 925.00, 800);
+        animateValue(setVat, 185.00, 800);
+        animateValue(setTotal, 1110.00, 1000);
+      }, 200);
 
-    const paidTimer = setTimeout(() => {
-      setIsPaid(true);
-    }, 2000);
+      setTimeout(() => {
+        setIsPaid(true);
+      }, 1500);
+    };
+
+    runAnimationCycle();
+    const intervalId = setInterval(runAnimationCycle, 4000);
 
     return () => {
-      cleanupSubtotal();
-      cleanupVat();
-      cleanupTotal();
-      clearTimeout(paidTimer);
+      clearInterval(intervalId);
+      cancelAnimationFrame(animationFrameId);
     };
   }, []);
 
