@@ -24,7 +24,7 @@ const AnimatedMap = () => {
   return (
     <div className="relative w-full h-full p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden">
       <div className="absolute inset-0 bg-grid-pattern opacity-50 dark:opacity-100"></div>
-      <div className="relative w-full h-full bg-slate-200/50 dark:bg-slate-900/50 rounded-lg">
+      <div className="relative w-full h-full bg-slate-200/50 dark:bg-slate-900/50 rounded-lg overflow-hidden">
         <svg className="absolute inset-0 w-full h-full" viewBox="0 0 500 250" preserveAspectRatio="none">
           {/* Paths for trucks */}
           <path id="route1" d="M 50 200 Q 150 150 250 200 T 450 200" stroke="currentColor" className="text-blue-500/50 dark:text-blue-500/30" strokeWidth="2" fill="none" strokeDasharray="5 5" />
