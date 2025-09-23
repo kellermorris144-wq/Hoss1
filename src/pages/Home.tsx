@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
-import { Truck, MapPin, FileText, CreditCard, BarChart3, CheckCircle, ArrowRight, AlertTriangle, Warehouse, CheckSquare, User, Users, Building, Zap, DollarSign, Eye, Network, ShieldCheck, TrendingUp } from 'lucide-react';
+import { Truck, MapPin, FileText, CreditCard, BarChart3, CheckCircle, ArrowRight, AlertTriangle, Warehouse, CheckSquare, User, Users, Building, LayoutDashboard, ArrowRightLeft } from 'lucide-react';
 
 const features = [
   { name: 'Live ETA Tracking', icon: MapPin },
@@ -65,40 +65,123 @@ const whoWeHelp = [
   },
 ];
 
-const hossAdvantage = [
-  {
-    icon: Zap,
-    title: 'Maximize Efficiency',
-    description: 'Automate repetitive tasks like quoting, invoicing, and dispatching to save time and reduce manual errors.',
-  },
-  {
-    icon: DollarSign,
-    title: 'Increase Profitability',
-    description: 'Reduce empty miles, optimize routes for fuel efficiency, and gain insights into your most profitable jobs.',
-  },
-  {
-    icon: Eye,
-    title: 'Enhance Visibility',
-    description: 'Provide clients with live tracking portals and get a real-time overview of your entire fleet\'s status.',
-  },
-  {
-    icon: Network,
-    title: 'Build a Trusted Network',
-    description: 'Connect with vetted carriers and subcontractors to expand your capacity and never turn down a job.',
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Ensure Compliance',
-    description: 'Keep track of vehicle maintenance, driver certifications, and insurance renewals with automated alerts.',
-  },
-  {
-    icon: TrendingUp,
-    title: 'Drive Growth',
-    description: 'Use powerful analytics to identify growth opportunities, improve performance, and make data-driven decisions.',
-  },
-];
+const MapVisual = () => (
+  <div className="w-full h-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg p-4 flex items-center justify-center">
+    <div className="w-full h-full rounded-lg bg-slate-100 dark:bg-slate-900/50 relative overflow-hidden">
+      <MapPin className="absolute top-[30%] left-[40%] text-blue-500 animate-pulse" />
+      <MapPin className="absolute top-[60%] left-[65%] text-blue-500 animate-pulse [animation-delay:0.2s]" />
+      <MapPin className="absolute top-[50%] left-[20%] text-blue-500 animate-pulse [animation-delay:0.4s]" />
+      <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
+        <path d="M 80 120 C 120 40, 200 40, 240 150" stroke="rgba(59, 130, 246, 0.5)" strokeWidth="3" fill="none" strokeDasharray="8 8" className="animate-dash" />
+      </svg>
+      <style>{`.animate-dash { animation: dash 5s linear infinite; } @keyframes dash { to { stroke-dashoffset: -32; } }`}</style>
+    </div>
+  </div>
+);
+
+const BackloadVisual = () => (
+  <div className="w-full h-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg p-4 flex flex-col justify-center items-center space-y-4">
+    <div className="text-center">
+      <p className="font-semibold text-slate-700 dark:text-slate-300">Without HOSS</p>
+      <div className="flex items-center mt-2">
+        <span className="font-bold">A</span>
+        <div className="w-24 h-0.5 bg-slate-300 dark:bg-slate-600 mx-2"></div>
+        <Truck className="text-blue-500" />
+        <div className="w-24 h-0.5 bg-slate-300 dark:bg-slate-600 mx-2"></div>
+        <span className="font-bold">B</span>
+      </div>
+      <div className="flex items-center mt-1">
+        <div className="w-24 h-0.5 bg-transparent mx-2"></div>
+        <div className="w-24 h-0.5 bg-red-400 border-t-2 border-dashed border-red-500 mx-2 relative -left-7"></div>
+        <span className="text-red-500 font-semibold text-sm">Empty Return</span>
+      </div>
+    </div>
+    <div className="w-3/4 h-px bg-slate-200 dark:bg-slate-700"></div>
+    <div className="text-center">
+      <p className="font-semibold text-slate-700 dark:text-slate-300">With HOSS</p>
+      <div className="flex items-center mt-2">
+        <span className="font-bold">A</span>
+        <div className="w-24 h-0.5 bg-slate-300 dark:bg-slate-600 mx-2"></div>
+        <Truck className="text-blue-500" />
+        <div className="w-24 h-0.5 bg-slate-300 dark:bg-slate-600 mx-2"></div>
+        <span className="font-bold">B</span>
+      </div>
+      <div className="flex items-center mt-1">
+        <div className="w-24 h-0.5 bg-green-400 mx-2 relative left-7"></div>
+        <Truck className="text-green-500 transform -scale-x-100" />
+        <div className="w-24 h-0.5 bg-transparent mx-2"></div>
+        <span className="text-green-500 font-semibold text-sm">Backload Found!</span>
+      </div>
+    </div>
+  </div>
+);
+
+const FleetVisual = () => (
+  <div className="w-full h-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg p-4 flex space-x-2">
+    <div className="w-1/3 bg-slate-100 dark:bg-slate-900/50 rounded-lg p-2 space-y-2">
+      <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded w-3/4"></div>
+      <div className="h-4 bg-blue-500 rounded w-full"></div>
+      <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded w-1/2"></div>
+    </div>
+    <div className="w-2/3 bg-slate-100 dark:bg-slate-900/50 rounded-lg p-2 space-y-2">
+      <div className="flex justify-between items-center">
+        <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded w-1/3"></div>
+        <div className="w-6 h-6 rounded-full bg-slate-200 dark:bg-slate-700"></div>
+      </div>
+      <div className="h-16 bg-slate-200 dark:bg-slate-700 rounded-lg animate-pulse"></div>
+      <div className="h-8 bg-slate-200 dark:bg-slate-700 rounded-lg"></div>
+    </div>
+  </div>
+);
+
+const PaymentsVisual = () => (
+  <div className="w-full h-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg p-4">
+    <div className="flex justify-between items-center mb-4">
+      <h3 className="font-bold text-slate-800 dark:text-slate-200">Invoice #INV-0451</h3>
+      <span className="px-2 py-1 text-xs font-semibold text-green-800 bg-green-100 dark:text-green-100 dark:bg-green-900/50 rounded-full">Paid</span>
+    </div>
+    <div className="space-y-2">
+      <div className="flex justify-between text-sm"><span className="text-slate-500 dark:text-slate-400">Item 1</span><span className="font-medium">£450.00</span></div>
+      <div className="flex justify-between text-sm"><span className="text-slate-500 dark:text-slate-400">Item 2</span><span className="font-medium">£320.00</span></div>
+      <div className="w-full h-px bg-slate-200 dark:bg-slate-700 my-2"></div>
+      <div className="flex justify-between font-bold"><span className="text-slate-800 dark:text-slate-200">Total</span><span>£770.00</span></div>
+    </div>
+    <div className="mt-4 w-full h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-semibold">
+      Payment Simplified
+    </div>
+  </div>
+);
 
 const Home: React.FC = () => {
+  const [activeFeature, setActiveFeature] = useState(0);
+
+  const interactiveFeatures = [
+    {
+      icon: MapPin,
+      title: 'Find the Right Loads',
+      description: 'Access thousands of daily freight opportunities across the UK on HOSS. Instantly connect with trusted verified professionals, filter jobs by route, vehicle type, and schedule, and use insights like Price-Per-Mile to make smarter decisions for maximum profitability.',
+      visual: <MapVisual />,
+    },
+    {
+      icon: ArrowRightLeft,
+      title: 'Minimise Empty Miles',
+      description: 'HOSS\'s smart load matching algorithm helps you find backloads along your route, turning costly empty runs into profitable journeys. Reduce fuel waste, increase vehicle utilisation, and boost your bottom line.',
+      visual: <BackloadVisual />,
+    },
+    {
+      icon: LayoutDashboard,
+      title: 'Streamline Fleet Operations',
+      description: 'Manage your entire fleet from a single dashboard. HOSS provides real-time tracking, automated dispatching, driver communication, and performance analytics to optimize your daily operations and improve efficiency.',
+      visual: <FleetVisual />,
+    },
+    {
+      icon: CreditCard,
+      title: 'Simplify Payments',
+      description: 'Get paid faster with HOSS\'s integrated payment system. Generate and send digital invoices automatically, track payment statuses in real-time, and offer clients multiple secure payment options.',
+      visual: <PaymentsVisual />,
+    },
+  ];
+
   return (
     <>
       <div className="relative min-h-screen w-full overflow-hidden bg-grid-pattern text-gray-800 dark:text-gray-200">
@@ -354,7 +437,7 @@ const Home: React.FC = () => {
       </section>
 
       {/* The HOSS Advantage Section */}
-      <section className="py-24 bg-slate-50 dark:bg-slate-900">
+      <section className="py-24 bg-white dark:bg-slate-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6">The HOSS Advantage</h2>
@@ -362,21 +445,52 @@ const Home: React.FC = () => {
               Discover the core benefits that make HOSS the preferred platform for modern logistics companies.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {hossAdvantage.map((advantage) => (
-              <div key={advantage.title} className="relative group">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl blur opacity-0 group-hover:opacity-60 transition duration-300"></div>
-                <div className="relative bg-white/80 dark:bg-slate-800/80 backdrop-blur-lg border border-slate-200 dark:border-slate-700 rounded-xl p-8 h-full">
-                  <div className="flex items-center mb-4">
-                    <div className="w-12 h-12 bg-slate-100 dark:bg-slate-900/50 rounded-lg flex items-center justify-center mr-4">
-                      <advantage.icon className="w-6 h-6 text-blue-600" />
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
+            <div className="lg:col-span-1">
+              <div className="flex flex-col space-y-2">
+                {interactiveFeatures.map((feature, index) => (
+                  <button
+                    key={feature.title}
+                    onClick={() => setActiveFeature(index)}
+                    className={`p-4 rounded-lg text-left transition-all duration-300 w-full ${
+                      activeFeature === index
+                        ? 'bg-blue-600 text-white shadow-lg'
+                        : 'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700'
+                    }`}
+                  >
+                    <div className="flex items-center">
+                      <feature.icon className={`w-6 h-6 mr-3 ${activeFeature === index ? 'text-white' : 'text-blue-600 dark:text-blue-400'}`} />
+                      <span className="font-semibold">{feature.title}</span>
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">{advantage.title}</h3>
-                  </div>
-                  <p className="text-gray-600 dark:text-gray-300">{advantage.description}</p>
-                </div>
+                  </button>
+                ))}
               </div>
-            ))}
+            </div>
+            <div className="lg:col-span-3">
+              <div className="relative w-full h-[450px]">
+                {interactiveFeatures.map((feature, index) => (
+                  <div
+                    key={feature.title}
+                    className={`absolute inset-0 transition-all duration-500 ease-in-out ${
+                      activeFeature === index ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
+                    }`}
+                  >
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center h-full">
+                      <div className="relative w-full h-full flex items-center justify-center">
+                        <div className="absolute inset-0 bg-purple-100 dark:bg-purple-900/20 rounded-2xl bg-purple-grid-pattern-faded"></div>
+                        <div className="relative w-[90%] h-[90%] transform transition-transform duration-500 group-hover:scale-105">
+                          {feature.visual}
+                        </div>
+                      </div>
+                      <div className="pr-4">
+                        <h3 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">{feature.title}</h3>
+                        <p className="text-gray-600 dark:text-gray-300">{feature.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
