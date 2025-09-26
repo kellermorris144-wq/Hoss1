@@ -1,10 +1,12 @@
-import React from 'react';
-import { CheckCircle, ArrowRight, Star, XCircle } from 'lucide-react';
+import React, { useState } from 'react';
+import { CheckCircle, ArrowRight, Star, XCircle, Truck, Smartphone, MapPin, FileSignature, Users, BarChart3, PlusCircle, MinusCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 import Card from '../components/Card';
 
 const Pricing: React.FC = () => {
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
+
   const pricingTiers = [
     {
       name: 'Starter',
@@ -56,6 +58,15 @@ const Pricing: React.FC = () => {
     },
   ];
 
+  const allPlansFeatures = [
+    { icon: Truck, text: 'Unlimited Jobs & Orders' },
+    { icon: Smartphone, text: 'Mobile App for Drivers' },
+    { icon: MapPin, text: 'Real-time GPS Tracking' },
+    { icon: FileSignature, text: 'Proof of Delivery (Photo & Sign)' },
+    { icon: Users, text: 'Unlimited Admin Users' },
+    { icon: BarChart3, text: 'Analytics Dashboard' },
+  ];
+
   const featureComparison = [
     {
       category: 'Core Features',
@@ -94,6 +105,29 @@ const Pricing: React.FC = () => {
         { name: 'SLA Guarantees', starter: false, professional: false, enterprise: true },
       ],
     },
+  ];
+
+  const faqData = [
+    {
+      question: 'Can I change my plan later?',
+      answer: 'Yes, you can upgrade or downgrade your plan at any time from your account settings. Changes will be prorated for the current billing cycle.'
+    },
+    {
+      question: 'Is there a free trial available?',
+      answer: 'We offer a personalized demo to showcase how HOSS can fit your needs. While we don\'t have a self-serve free trial, the demo allows us to tailor the experience to your specific operational challenges.'
+    },
+    {
+      question: 'What does "/ vehicle / month" mean?',
+      answer: 'Our pricing is based on the number of active vehicles you are tracking in the system per month. You can add or remove vehicles as your fleet size changes.'
+    },
+    {
+      question: 'Are there any setup fees?',
+      answer: 'No, there are no hidden setup fees. The monthly price is all-inclusive for the features listed in your plan. For Enterprise plans, custom implementation services may have associated costs, which will be clearly outlined in your proposal.'
+    },
+    {
+      question: 'What kind of support is included?',
+      answer: 'All plans come with 24/7 standard support via email and our help center. The Professional plan includes priority support, and the Enterprise plan includes a dedicated account manager and SLA guarantees for the highest level of service.'
+    }
   ];
 
   return (
@@ -179,12 +213,41 @@ const Pricing: React.FC = () => {
         </div>
       </section>
 
-      {/* Feature Comparison Section */}
+      {/* Included in all plans Section */}
       <section className="py-24 bg-gray-50 dark:bg-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+              Included in All Plans
+            </h2>
+            <p className="text-lg text-gray-600 dark:text-gray-300">
+              Every HOSS subscription comes packed with powerful core features to run your business efficiently.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {allPlansFeatures.map((feature, index) => (
+              <div key={index} className="relative group">
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-600 to-orange-600 rounded-2xl blur opacity-0 group-hover:opacity-75 transition duration-300"></div>
+                <div className="relative p-8 bg-white dark:bg-gray-900 h-full rounded-2xl border border-gray-200 dark:border-gray-800 transition-all duration-300 group-hover:shadow-xl group-hover:-translate-y-1">
+                  <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-amber-100 to-orange-100 dark:from-amber-900/50 dark:to-orange-900/50 rounded-xl mb-6 transition-transform duration-300 group-hover:scale-110">
+                    <feature.icon className="w-7 h-7 text-amber-600 dark:text-amber-400" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 text-center">
+                    {feature.text}
+                  </h3>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Feature Comparison Section */}
+      <section className="py-24 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-              Compare Plans
+              Compare Plans & Features
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-300">
               Find the perfect set of features for your business needs.
@@ -228,6 +291,43 @@ const Pricing: React.FC = () => {
                 ))}
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-24 bg-gray-50 dark:bg-gray-800">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+              Frequently Asked Questions
+            </h2>
+          </div>
+          <div className="space-y-4">
+            {faqData.map((faq, index) => (
+              <Card key={index} className="overflow-hidden">
+                <button
+                  onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                  className="w-full flex justify-between items-center p-6 text-left font-semibold text-gray-900 dark:text-gray-100"
+                >
+                  <span>{faq.question}</span>
+                  {openFaq === index ? (
+                    <MinusCircle className="w-6 h-6 text-amber-600" />
+                  ) : (
+                    <PlusCircle className="w-6 h-6 text-gray-500" />
+                  )}
+                </button>
+                <div
+                  className={`transition-all duration-300 ease-in-out ${
+                    openFaq === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                  }`}
+                >
+                  <div className="p-6 pt-0 text-gray-600 dark:text-gray-300">
+                    {faq.answer}
+                  </div>
+                </div>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
