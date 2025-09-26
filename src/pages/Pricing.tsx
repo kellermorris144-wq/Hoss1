@@ -5,6 +5,7 @@ import Button from '../components/Button';
 import Card from '../components/Card';
 
 const Pricing: React.FC = () => {
+  const [vehicleCount, setVehicleCount] = useState(5);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   const pricingTiers = [
@@ -147,68 +148,97 @@ const Pricing: React.FC = () => {
       {/* Pricing Tiers */}
       <section className="py-24 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-            {pricingTiers.map((tier, index) => (
-              <div
-                key={tier.name}
-                className={`relative transition-all duration-500 group animate-fade-in ${
-                  tier.popular ? 'transform lg:-translate-y-6' : 'lg:hover:-translate-y-2'
-                }`}
-                style={{ animationDelay: `${index * 150}ms` }}
-              >
-                {tier.popular && (
-                  <>
-                    <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-300"></div>
-                    <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                      <div className="flex items-center justify-center px-4 py-1 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-sm font-semibold rounded-full shadow-lg">
-                        <Star className="w-4 h-4 mr-2" />
-                        Most Popular
-                      </div>
-                    </div>
-                  </>
-                )}
-                <Card
-                  className={`relative w-full h-full p-8 flex flex-col transition-all duration-300 ${
-                    tier.popular ? 'border-amber-500/50 border-2' : ''
-                  }`}
-                >
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">{tier.name}</h3>
-                  <p className="text-gray-600 dark:text-gray-300 mb-6 flex-grow">{tier.description}</p>
-                  
-                  <div className="mb-6">
-                    {tier.price === 'Custom' ? (
-                      <span className="text-4xl font-bold text-gray-900 dark:text-gray-100">Custom</span>
-                    ) : (
-                      <>
-                        <span className="text-4xl font-bold text-gray-900 dark:text-gray-100">£{tier.price}</span>
-                        <span className="text-gray-500 dark:text-gray-400">/ vehicle / month</span>
-                      </>
-                    )}
-                  </div>
-
-                  <ul className="space-y-4 mb-8">
-                    {tier.features.slice(0, 6).map((feature, index) => (
-                      <li key={index} className="flex items-start">
-                        <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                        <span className="text-gray-600 dark:text-gray-300">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="mt-auto">
-                    <Link to={tier.name === 'Enterprise' ? '/contact' : '/demo'} className="block">
-                      <Button
-                        size="lg"
-                        variant={tier.variant as 'primary' | 'outline'}
-                        className="w-full"
-                      >
-                        {tier.buttonText}
-                      </Button>
-                    </Link>
-                  </div>
-                </Card>
+          {/* Vehicle Count Selector */}
+          <div className="max-w-2xl mx-auto mb-20 text-center">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">Calculate Your Price</h2>
+            <p className="text-gray-600 dark:text-gray-300 mb-8">
+              Adjust the number of vehicles to see your estimated monthly cost.
+            </p>
+            <div className="bg-white dark:bg-gray-800/50 p-4 rounded-xl inline-flex items-center justify-center space-x-6 border border-gray-200 dark:border-gray-700 shadow-sm">
+              <Button variant="secondary" size="sm" onClick={() => setVehicleCount(v => Math.max(1, v - 1))} className="rounded-full w-10 h-10 p-0">
+                <MinusCircle className="w-5 h-5" />
+              </Button>
+              <div className="text-center">
+                <span className="text-5xl font-bold text-amber-600 dark:text-amber-400 tracking-tight">{vehicleCount}</span>
+                <p className="text-sm text-gray-500 dark:text-gray-400 uppercase font-medium tracking-wider">Vehicles</p>
               </div>
-            ))}
+              <Button variant="secondary" size="sm" onClick={() => setVehicleCount(v => v + 1)} className="rounded-full w-10 h-10 p-0">
+                <PlusCircle className="w-5 h-5" />
+              </Button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+            {pricingTiers.map((tier, index) => {
+              const isNumericPrice = !isNaN(parseInt(tier.price));
+              const monthlyCost = isNumericPrice ? parseInt(tier.price) * vehicleCount : null;
+
+              return (
+                <div
+                  key={tier.name}
+                  className={`relative transition-all duration-500 group animate-fade-in ${
+                    tier.popular ? 'transform lg:-translate-y-6' : 'lg:hover:-translate-y-2'
+                  }`}
+                  style={{ animationDelay: `${index * 150}ms` }}
+                >
+                  {tier.popular && (
+                    <>
+                      <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-300"></div>
+                      <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                        <div className="flex items-center justify-center px-4 py-1 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-sm font-semibold rounded-full shadow-lg">
+                          <Star className="w-4 h-4 mr-2" />
+                          Most Popular
+                        </div>
+                      </div>
+                    </>
+                  )}
+                  <Card
+                    className={`relative w-full h-full p-8 flex flex-col transition-all duration-300 ${
+                      tier.popular ? 'border-amber-500/50 border-2' : ''
+                    }`}
+                  >
+                    <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">{tier.name}</h3>
+                    <p className="text-gray-600 dark:text-gray-300 mb-6 flex-grow">{tier.description}</p>
+                    
+                    <div className="mb-6 text-center">
+                      {tier.price === 'Custom' ? (
+                        <span className="text-5xl font-bold text-gray-900 dark:text-gray-100">Custom</span>
+                      ) : (
+                        <>
+                          <div className="flex items-baseline justify-center">
+                            <span className="text-2xl font-bold text-gray-500 dark:text-gray-400 mr-1">£</span>
+                            <span className="text-5xl font-extrabold text-gray-900 dark:text-gray-100 tracking-tight">{monthlyCost}</span>
+                          </div>
+                          <p className="text-gray-500 dark:text-gray-400">per month</p>
+                          <p className="text-sm text-gray-400 dark:text-gray-500 mt-2">(£{tier.price} / vehicle)</p>
+                        </>
+                      )}
+                    </div>
+
+                    <ul className="space-y-4 mb-8">
+                      {tier.features.slice(0, 6).map((feature, index) => (
+                        <li key={index} className="flex items-start">
+                          <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
+                          <span className="text-gray-600 dark:text-gray-300">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <div className="mt-auto">
+                      <Link to={tier.name === 'Enterprise' ? '/contact' : '/demo'} className="block">
+                        <Button
+                          size="lg"
+                          variant={tier.variant as 'primary' | 'outline'}
+                          className="w-full"
+                        >
+                          {tier.buttonText}
+                        </Button>
+                      </Link>
+                    </div>
+                  </Card>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
