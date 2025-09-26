@@ -1,5 +1,5 @@
 import React from 'react';
-import { CheckCircle, ArrowRight, Star } from 'lucide-react';
+import { CheckCircle, ArrowRight, Star, XCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 import Card from '../components/Card';
@@ -19,7 +19,7 @@ const Pricing: React.FC = () => {
         '24/7 Standard Support',
       ],
       buttonText: 'Get Started',
-      variant: 'secondary',
+      variant: 'outline',
     },
     {
       name: 'Professional',
@@ -52,7 +52,47 @@ const Pricing: React.FC = () => {
         'SLA Guarantees',
       ],
       buttonText: 'Contact Sales',
-      variant: 'secondary',
+      variant: 'outline',
+    },
+  ];
+
+  const featureComparison = [
+    {
+      category: 'Core Features',
+      features: [
+        { name: 'Live GPS Tracking', starter: true, professional: true, enterprise: true },
+        { name: 'Standard Quoting', starter: true, professional: true, enterprise: true },
+        { name: 'Digital Invoicing', starter: true, professional: true, enterprise: true },
+        { name: 'Mobile App Access', starter: true, professional: true, enterprise: true },
+        { name: 'Basic Reporting', starter: true, professional: true, enterprise: true },
+      ],
+    },
+    {
+      category: 'Automation & Efficiency',
+      features: [
+        { name: 'Automated Quoting & Invoicing', starter: false, professional: true, enterprise: true },
+        { name: 'Multi-Stop Bookings', starter: false, professional: true, enterprise: true },
+        { name: 'Document Capture (PODs)', starter: false, professional: true, enterprise: true },
+        { name: 'Vehicle Maintenance Alerts', starter: false, professional: true, enterprise: true },
+      ],
+    },
+    {
+      category: 'Advanced & Enterprise',
+      features: [
+        { name: 'Accounting Integrations', starter: false, professional: true, enterprise: true },
+        { name: 'Branded Customer Portals', starter: false, professional: false, enterprise: true },
+        { name: 'Advanced BI & Analytics', starter: false, professional: false, enterprise: true },
+        { name: 'Full API Access', starter: false, professional: false, enterprise: true },
+      ],
+    },
+    {
+      category: 'Support',
+      features: [
+        { name: '24/7 Standard Support', starter: true, professional: true, enterprise: true },
+        { name: 'Priority Support', starter: false, professional: true, enterprise: true },
+        { name: 'Dedicated Account Manager', starter: false, professional: false, enterprise: true },
+        { name: 'SLA Guarantees', starter: false, professional: false, enterprise: true },
+      ],
     },
   ];
 
@@ -74,24 +114,28 @@ const Pricing: React.FC = () => {
       <section className="py-24 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-            {pricingTiers.map((tier) => (
+            {pricingTiers.map((tier, index) => (
               <div
                 key={tier.name}
-                className={`relative rounded-2xl transition-all duration-300 group ${
-                  tier.popular ? 'transform lg:-translate-y-4' : ''
+                className={`relative rounded-2xl transition-all duration-500 group animate-fade-in ${
+                  tier.popular ? 'transform lg:-translate-y-6' : 'lg:hover:-translate-y-2'
                 }`}
+                style={{ animationDelay: `${index * 150}ms` }}
               >
                 {tier.popular && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                    <div className="flex items-center justify-center px-4 py-1 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-sm font-semibold rounded-full shadow-lg">
-                      <Star className="w-4 h-4 mr-2" />
-                      Most Popular
+                  <>
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-300"></div>
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                      <div className="flex items-center justify-center px-4 py-1 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-sm font-semibold rounded-full shadow-lg">
+                        <Star className="w-4 h-4 mr-2" />
+                        Most Popular
+                      </div>
                     </div>
-                  </div>
+                  </>
                 )}
                 <Card
-                  className={`w-full h-full p-8 flex flex-col transition-all duration-300 group-hover:shadow-2xl ${
-                    tier.popular ? 'border-amber-500 border-2' : ''
+                  className={`relative w-full h-full p-8 flex flex-col transition-all duration-300 ${
+                    tier.popular ? 'border-amber-500/50 border-2' : ''
                   }`}
                 >
                   <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">{tier.name}</h3>
@@ -109,7 +153,7 @@ const Pricing: React.FC = () => {
                   </div>
 
                   <ul className="space-y-4 mb-8">
-                    {tier.features.map((feature, index) => (
+                    {tier.features.slice(0, 6).map((feature, index) => (
                       <li key={index} className="flex items-start">
                         <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
                         <span className="text-gray-600 dark:text-gray-300">{feature}</span>
@@ -121,7 +165,7 @@ const Pricing: React.FC = () => {
                     <Link to={tier.name === 'Enterprise' ? '/contact' : '/demo'} className="block">
                       <Button
                         size="lg"
-                        variant={tier.variant as 'primary' | 'secondary'}
+                        variant={tier.variant as 'primary' | 'outline'}
                         className="w-full"
                       >
                         {tier.buttonText}
@@ -135,35 +179,56 @@ const Pricing: React.FC = () => {
         </div>
       </section>
 
-      {/* FAQ Section */}
+      {/* Feature Comparison Section */}
       <section className="py-24 bg-gray-50 dark:bg-gray-800">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-              Frequently Asked Questions
+              Compare Plans
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-300">
-              Have questions? We've got answers.
+              Find the perfect set of features for your business needs.
             </p>
           </div>
-          <div className="space-y-8">
-            <div>
-              <h3 className="font-semibold text-lg text-gray-900 dark:text-gray-100 mb-2">Is there a free trial?</h3>
-              <p className="text-gray-600 dark:text-gray-300">
-                We don't offer a traditional free trial. Instead, we provide a free, personalized demo to show you exactly how HOSS can meet your specific needs. This ensures you get the most value from your evaluation.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-semibold text-lg text-gray-900 dark:text-gray-100 mb-2">Can I change my plan later?</h3>
-              <p className="text-gray-600 dark:text-gray-300">
-                Absolutely! You can upgrade or downgrade your plan at any time. Our plans are designed to be flexible and scale with your business.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-semibold text-lg text-gray-900 dark:text-gray-100 mb-2">What kind of support is included?</h3>
-              <p className="text-gray-600 dark:text-gray-300">
-                All our plans include 24/7 support via email and phone for critical issues. The Professional plan includes priority support, and the Enterprise plan comes with a dedicated account manager for personalized assistance.
-              </p>
+
+          <div className="overflow-x-auto">
+            <div className="min-w-full align-middle">
+              <div className="grid grid-cols-4 gap-px bg-gray-200 dark:bg-gray-700 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700">
+                {/* Header */}
+                <div className="bg-white dark:bg-gray-900 p-6">
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Features</h3>
+                </div>
+                {pricingTiers.map(tier => (
+                  <div key={tier.name} className="bg-white dark:bg-gray-900 p-6 text-center">
+                    <h3 className={`text-lg font-semibold ${tier.popular ? 'text-amber-600 dark:text-amber-400' : 'text-gray-900 dark:text-gray-100'}`}>{tier.name}</h3>
+                  </div>
+                ))}
+
+                {/* Feature Rows */}
+                {featureComparison.map(category => (
+                  <React.Fragment key={category.category}>
+                    <div className="col-span-4 bg-gray-100 dark:bg-gray-800 p-4">
+                      <h4 className="font-semibold text-gray-800 dark:text-gray-200">{category.category}</h4>
+                    </div>
+                    {category.features.map(feature => (
+                      <React.Fragment key={feature.name}>
+                        <div className="bg-white dark:bg-gray-900 p-4 flex items-center">
+                          <span className="text-sm text-gray-600 dark:text-gray-300">{feature.name}</span>
+                        </div>
+                        <div className="bg-white dark:bg-gray-900 p-4 flex justify-center items-center">
+                          {feature.starter ? <CheckCircle className="w-6 h-6 text-green-500" /> : <XCircle className="w-6 h-6 text-gray-300 dark:text-gray-600" />}
+                        </div>
+                        <div className="bg-white dark:bg-gray-900 p-4 flex justify-center items-center">
+                          {feature.professional ? <CheckCircle className="w-6 h-6 text-green-500" /> : <XCircle className="w-6 h-6 text-gray-300 dark:text-gray-600" />}
+                        </div>
+                        <div className="bg-white dark:bg-gray-900 p-4 flex justify-center items-center">
+                          {feature.enterprise ? <CheckCircle className="w-6 h-6 text-green-500" /> : <XCircle className="w-6 h-6 text-gray-300 dark:text-gray-600" />}
+                        </div>
+                      </React.Fragment>
+                    ))}
+                  </React.Fragment>
+                ))}
+              </div>
             </div>
           </div>
         </div>
