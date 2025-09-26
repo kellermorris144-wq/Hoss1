@@ -1,4 +1,4 @@
-import React, 'useState' from 'react';
+import React, { useState } from 'react';
 import { CheckCircle, ArrowRight, Star, XCircle, Truck, Smartphone, MapPin, FileSignature, Users, BarChart3, PlusCircle, MinusCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
