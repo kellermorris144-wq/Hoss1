@@ -21,7 +21,7 @@ const OurSolution: React.FC = () => {
               <div className="w-2 h-2 rounded-full bg-green-400"></div>
             </div>
           </div>
-          <div className="p-2 bg-white dark:bg-slate-800 rounded animate-fade-in" style={{ animationDelay: '0.2s' }}>
+          <div className="p-2 bg-white dark:bg-slate-800 rounded opacity-0 animate-slide-in-bottom" style={{ animationDelay: '0.2s' }}>
             <div className="flex justify-between items-center">
               <span className="text-xs font-medium">London &rarr; Manchester</span>
               <span className="text-xs text-green-500 font-semibold animate-pulse">On Time</span>
@@ -30,7 +30,7 @@ const OurSolution: React.FC = () => {
               <div className="bg-green-500 h-1 rounded-full w-[75%] animate-grow-bar-x" style={{ animationDelay: '0.3s' }}></div>
             </div>
           </div>
-          <div className="p-2 bg-white dark:bg-slate-800 rounded animate-fade-in" style={{ animationDelay: '0.4s' }}>
+          <div className="p-2 bg-white dark:bg-slate-800 rounded opacity-0 animate-slide-in-bottom" style={{ animationDelay: '0.4s' }}>
             <div className="flex justify-between items-center">
               <span className="text-xs font-medium">Dover &rarr; Glasgow</span>
               <span className="text-xs text-yellow-500 font-semibold animate-pulse">In Transit</span>
@@ -49,7 +49,7 @@ const OurSolution: React.FC = () => {
       visual: (
         <div className="w-full h-full flex justify-center items-center">
           <div className="w-32 h-56 bg-slate-800 dark:bg-slate-900 rounded-2xl p-2 shadow-2xl transform group-hover:scale-105 transition-transform duration-300 animate-float-gentle">
-            <div className="w-full h-full bg-white dark:bg-slate-800 rounded-lg p-1.5 space-y-1.5">
+            <div className="w-full h-full bg-white dark:bg-slate-800 rounded-lg p-1.5 space-y-1.5 animate-background-shimmer">
               <p className="text-xs font-bold text-center text-slate-700 dark:text-slate-300">Today's Jobs</p>
               <div className="bg-amber-500 text-white p-1.5 rounded-md text-[10px] animate-pop-in" style={{ animationDelay: '0.2s' }}>
                 <p className="font-bold">LDN &rarr; MCR</p>
@@ -70,14 +70,14 @@ const OurSolution: React.FC = () => {
       description: 'Give your clients a professional, self-service experience. They can request quotes, book jobs, track their shipments in real-time, and access invoices 24/7.',
       visual: (
         <div className="w-full h-full bg-slate-100 dark:bg-slate-900/50 rounded-lg p-3 space-y-2 overflow-hidden">
-          <div className="flex items-center space-x-2 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            <div className="w-8 h-8 bg-blue-500 rounded-full flex-shrink-0"></div>
+          <div className="flex items-center space-x-2 opacity-0 animate-slide-in-bottom" style={{ animationDelay: '0.2s' }}>
+            <div className="w-8 h-8 bg-blue-500 rounded-full flex-shrink-0 animate-pulse"></div>
             <div>
               <p className="text-xs font-bold text-slate-700 dark:text-slate-300">Global Logistics Inc.</p>
               <p className="text-[10px] text-slate-500 dark:text-slate-400">Customer Portal</p>
             </div>
           </div>
-          <div className="p-2 bg-white dark:bg-slate-800 rounded text-xs animate-fade-in" style={{ animationDelay: '0.4s' }}>
+          <div className="p-2 bg-white dark:bg-slate-800 rounded text-xs opacity-0 animate-slide-in-bottom" style={{ animationDelay: '0.4s' }}>
             <p className="font-bold mb-1">Tracking ID: #GL-12345</p>
             <div className="flex items-center">
               <div className="w-2 h-2 rounded-full bg-green-500 mr-1.5 animate-pulse"></div>
@@ -93,19 +93,19 @@ const OurSolution: React.FC = () => {
       description: 'Automate your back-office with tools for instant quoting, automated invoicing, driver self-billing, and deep analytics to track profitability and performance.',
       visual: (
         <div className="w-full h-full bg-slate-100 dark:bg-slate-900/50 rounded-lg p-3 grid grid-cols-2 gap-2">
-          <div className="bg-white dark:bg-slate-800 rounded p-2 animate-pop-in transition-transform duration-200 hover:scale-110" style={{ animationDelay: '0.2s' }}>
+          <div className="bg-white dark:bg-slate-800 rounded p-2 animate-pop-in transition-transform duration-200 hover:scale-110 animate-background-shimmer" style={{ animationDelay: '0.2s' }}>
             <p className="text-[10px] text-slate-500 dark:text-slate-400">Revenue</p>
             <p className="text-sm font-bold text-green-500">£12,450</p>
           </div>
-          <div className="bg-white dark:bg-slate-800 rounded p-2 animate-pop-in transition-transform duration-200 hover:scale-110" style={{ animationDelay: '0.3s' }}>
+          <div className="bg-white dark:bg-slate-800 rounded p-2 animate-pop-in transition-transform duration-200 hover:scale-110 animate-background-shimmer" style={{ animationDelay: '0.3s' }}>
             <p className="text-[10px] text-slate-500 dark:text-slate-400">Jobs</p>
             <p className="text-sm font-bold text-slate-700 dark:text-slate-200">42</p>
           </div>
-          <div className="bg-white dark:bg-slate-800 rounded p-2 animate-pop-in transition-transform duration-200 hover:scale-110" style={{ animationDelay: '0.4s' }}>
+          <div className="bg-white dark:bg-slate-800 rounded p-2 animate-pop-in transition-transform duration-200 hover:scale-110 animate-background-shimmer" style={{ animationDelay: '0.4s' }}>
             <p className="text-[10px] text-slate-500 dark:text-slate-400">On-Time</p>
             <p className="text-sm font-bold text-slate-700 dark:text-slate-200">98.7%</p>
           </div>
-          <div className="bg-white dark:bg-slate-800 rounded p-2 animate-pop-in transition-transform duration-200 hover:scale-110" style={{ animationDelay: '0.5s' }}>
+          <div className="bg-white dark:bg-slate-800 rounded p-2 animate-pop-in transition-transform duration-200 hover:scale-110 animate-background-shimmer" style={{ animationDelay: '0.5s' }}>
             <p className="text-[10px] text-slate-500 dark:text-slate-400">Profit</p>
             <p className="text-sm font-bold text-green-500">£4,120</p>
           </div>

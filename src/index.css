@@ -159,6 +159,39 @@
   .dark .particle {
     background: theme('colors.slate.600 / 0.6');
   }
+
+  .animate-slide-in-bottom {
+    animation: slide-in-bottom 0.5s ease-out forwards;
+  }
+
+  .animate-background-shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  .animate-background-shimmer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    transform: skewX(-25deg);
+    background-image: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.15),
+      transparent
+    );
+    animation: shimmer 4s infinite linear;
+  }
+  .dark .animate-background-shimmer::after {
+    background-image: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.08),
+      transparent
+    );
+  }
   
   @keyframes fadeIn {
     from {
@@ -323,10 +356,10 @@
 
   @keyframes float-gentle {
     0%, 100% {
-      transform: translateY(0);
+      transform: translateY(0) rotate(-1deg);
     }
     50% {
-      transform: translateY(-10px);
+      transform: translateY(-12px) rotate(1deg);
     }
   }
 
@@ -353,6 +386,26 @@
     100% {
       transform: translateY(-300px) translateX(var(--translateX)) scale(0.5);
       opacity: 0;
+    }
+  }
+
+  @keyframes slide-in-bottom {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      left: -100%;
+    }
+    100% {
+      left: 100%;
     }
   }
 
