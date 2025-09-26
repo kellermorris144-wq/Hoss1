@@ -4,7 +4,7 @@ import { ThemeProvider } from './contexts/ThemeContext';
 import Navigation from './components/Navigation';
 import Home from './pages/Home';
 import Features from './pages/Features';
-import Integrations from './pages/Integrations';
+import Pricing from './pages/Pricing';
 import Demo from './pages/Demo';
 import Contact from './pages/Contact';
 
@@ -18,7 +18,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/features" element={<Features />} />
-              <Route path="/integrations" element={<Integrations />} />
+              <Route path="/pricing" element={<Pricing />} />
               <Route path="/demo" element={<Demo />} />
               <Route path="/contact" element={<Contact />} />
             </Routes>
@@ -38,7 +38,7 @@ function App() {
                   <h4 className="font-medium mb-3">Product</h4>
                   <ul className="space-y-2 text-sm text-gray-400">
                     <li><a href="/features" className="hover:text-white transition-colors">Features</a></li>
-                    <li><a href="/integrations" className="hover:text-white transition-colors">Integrations</a></li>
+                    <li><a href="/pricing" className="hover:text-white transition-colors">Pricing</a></li>
                   </ul>
                 </div>
                 <div>

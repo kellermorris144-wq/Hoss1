@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useTheme } from '../contexts/ThemeContext';
-import { Moon, Sun, Truck } from 'lucide-react';
+import { Moon, Sun } from 'lucide-react';
 
 const Navigation: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
@@ -9,7 +9,7 @@ const Navigation: React.FC = () => {
   const navLinks = [
     { to: '/', label: 'Home' },
     { to: '/features', label: 'Features' },
-    { to: '/integrations', label: 'Integrations' },
+    { to: '/pricing', label: 'Pricing' },
     { to: '/demo', label: 'Demo' },
     { to: '/contact', label: 'Contact' },
   ];
@@ -20,10 +20,7 @@ const Navigation: React.FC = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <NavLink to="/" className="flex items-center space-x-2 group">
-            <div className="p-2 bg-gradient-to-br from-amber-500 to-orange-600 rounded-lg group-hover:from-amber-600 group-hover:to-orange-700 transition-all duration-200">
-              <Truck className="w-6 h-6 text-white" />
-            </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-amber-500 to-orange-600 bg-clip-text text-transparent">
+            <span className="text-2xl font-bold bg-gradient-to-r from-amber-500 to-orange-600 bg-clip-text text-transparent">
               HOSS
             </span>
           </NavLink>
