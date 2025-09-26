@@ -24,7 +24,7 @@ const OurSolution: React.FC = () => {
           <div className="p-2 bg-white dark:bg-slate-800 rounded animate-fade-in" style={{ animationDelay: '0.2s' }}>
             <div className="flex justify-between items-center">
               <span className="text-xs font-medium">London &rarr; Manchester</span>
-              <span className="text-xs text-green-500 font-semibold">On Time</span>
+              <span className="text-xs text-green-500 font-semibold animate-pulse">On Time</span>
             </div>
             <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1 mt-1">
               <div className="bg-green-500 h-1 rounded-full w-[75%] animate-grow-bar-x" style={{ animationDelay: '0.3s' }}></div>
@@ -33,7 +33,7 @@ const OurSolution: React.FC = () => {
           <div className="p-2 bg-white dark:bg-slate-800 rounded animate-fade-in" style={{ animationDelay: '0.4s' }}>
             <div className="flex justify-between items-center">
               <span className="text-xs font-medium">Dover &rarr; Glasgow</span>
-              <span className="text-xs text-yellow-500 font-semibold">In Transit</span>
+              <span className="text-xs text-yellow-500 font-semibold animate-pulse">In Transit</span>
             </div>
             <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1 mt-1">
               <div className="bg-yellow-500 h-1 rounded-full w-[40%] animate-grow-bar-x" style={{ animationDelay: '0.5s' }}></div>
@@ -48,7 +48,7 @@ const OurSolution: React.FC = () => {
       description: 'Empower your drivers with a simple mobile app. They can view job details, get optimized routes, capture PODs with photos and signatures, and communicate instantly.',
       visual: (
         <div className="w-full h-full flex justify-center items-center">
-          <div className="w-32 h-56 bg-slate-800 dark:bg-slate-900 rounded-2xl p-2 shadow-2xl transform group-hover:scale-105 transition-transform duration-300">
+          <div className="w-32 h-56 bg-slate-800 dark:bg-slate-900 rounded-2xl p-2 shadow-2xl transform group-hover:scale-105 transition-transform duration-300 animate-float-gentle">
             <div className="w-full h-full bg-white dark:bg-slate-800 rounded-lg p-1.5 space-y-1.5">
               <p className="text-xs font-bold text-center text-slate-700 dark:text-slate-300">Today's Jobs</p>
               <div className="bg-amber-500 text-white p-1.5 rounded-md text-[10px] animate-pop-in" style={{ animationDelay: '0.2s' }}>
@@ -81,7 +81,7 @@ const OurSolution: React.FC = () => {
             <p className="font-bold mb-1">Tracking ID: #GL-12345</p>
             <div className="flex items-center">
               <div className="w-2 h-2 rounded-full bg-green-500 mr-1.5 animate-pulse"></div>
-              <p className="text-green-600 dark:text-green-400 font-semibold">In Transit</p>
+              <p className="text-green-600 dark:text-green-400 font-semibold animate-pulse">In Transit</p>
             </div>
           </div>
         </div>
@@ -93,19 +93,19 @@ const OurSolution: React.FC = () => {
       description: 'Automate your back-office with tools for instant quoting, automated invoicing, driver self-billing, and deep analytics to track profitability and performance.',
       visual: (
         <div className="w-full h-full bg-slate-100 dark:bg-slate-900/50 rounded-lg p-3 grid grid-cols-2 gap-2">
-          <div className="bg-white dark:bg-slate-800 rounded p-2 animate-pop-in" style={{ animationDelay: '0.2s' }}>
+          <div className="bg-white dark:bg-slate-800 rounded p-2 animate-pop-in transition-transform duration-200 hover:scale-110" style={{ animationDelay: '0.2s' }}>
             <p className="text-[10px] text-slate-500 dark:text-slate-400">Revenue</p>
             <p className="text-sm font-bold text-green-500">£12,450</p>
           </div>
-          <div className="bg-white dark:bg-slate-800 rounded p-2 animate-pop-in" style={{ animationDelay: '0.3s' }}>
+          <div className="bg-white dark:bg-slate-800 rounded p-2 animate-pop-in transition-transform duration-200 hover:scale-110" style={{ animationDelay: '0.3s' }}>
             <p className="text-[10px] text-slate-500 dark:text-slate-400">Jobs</p>
             <p className="text-sm font-bold text-slate-700 dark:text-slate-200">42</p>
           </div>
-          <div className="bg-white dark:bg-slate-800 rounded p-2 animate-pop-in" style={{ animationDelay: '0.4s' }}>
+          <div className="bg-white dark:bg-slate-800 rounded p-2 animate-pop-in transition-transform duration-200 hover:scale-110" style={{ animationDelay: '0.4s' }}>
             <p className="text-[10px] text-slate-500 dark:text-slate-400">On-Time</p>
             <p className="text-sm font-bold text-slate-700 dark:text-slate-200">98.7%</p>
           </div>
-          <div className="bg-white dark:bg-slate-800 rounded p-2 animate-pop-in" style={{ animationDelay: '0.5s' }}>
+          <div className="bg-white dark:bg-slate-800 rounded p-2 animate-pop-in transition-transform duration-200 hover:scale-110" style={{ animationDelay: '0.5s' }}>
             <p className="text-[10px] text-slate-500 dark:text-slate-400">Profit</p>
             <p className="text-sm font-bold text-green-500">£4,120</p>
           </div>
