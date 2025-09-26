@@ -173,7 +173,7 @@ const Pricing: React.FC = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start pt-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start pt-16">
             {pricingTiers.map((tier, index) => {
               const isNumericPrice = !isNaN(parseInt(tier.price));
               const monthlyCost = isNumericPrice ? parseInt(tier.price) * vehicleCount : null;
@@ -182,7 +182,7 @@ const Pricing: React.FC = () => {
                 <div
                   key={tier.name}
                   className={`relative transition-transform duration-500 animate-float-gentle ${
-                    tier.popular ? 'transform lg:-translate-y-6' : ''
+                    tier.popular ? 'lg:-translate-y-8' : ''
                   }`}
                   style={{ animationDelay: `${index * 200}ms` }}
                 >
@@ -203,8 +203,8 @@ const Pricing: React.FC = () => {
 
                   {tier.popular && (
                     <>
-                      <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-300"></div>
-                      <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                      <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
+                      <div className="absolute -top-5 left-1/2 -translate-x-1/2 z-10">
                         <div className="flex items-center justify-center px-4 py-1 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-sm font-semibold rounded-full shadow-lg">
                           <Star className="w-4 h-4 mr-2" />
                           Most Popular
@@ -213,36 +213,38 @@ const Pricing: React.FC = () => {
                     </>
                   )}
                   <Card
-                    className={`relative w-full h-full p-8 flex flex-col transition-all duration-300 group hover:shadow-2xl ${
-                      tier.popular ? 'border-amber-500/50 border-2' : ''
+                    className={`relative w-full h-full p-8 flex flex-col transition-all duration-300 group hover:shadow-2xl overflow-hidden ${
+                      tier.popular ? 'bg-slate-50 dark:bg-slate-800/50' : ''
                     }`}
                   >
-                    <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">{tier.name}</h3>
-                    <p className="text-gray-600 dark:text-gray-300 mb-6 flex-grow">{tier.description}</p>
-                    
-                    <div className="mb-6 text-center">
-                      {tier.price === 'Custom' ? (
-                        <span className="text-5xl font-bold text-gray-900 dark:text-gray-100">Custom</span>
-                      ) : (
-                        <>
-                          <div className="flex items-baseline justify-center">
-                            <span className="text-2xl font-bold text-gray-500 dark:text-gray-400 mr-1">£</span>
-                            <span className="text-5xl font-extrabold text-gray-900 dark:text-gray-100 tracking-tight">{monthlyCost}</span>
-                          </div>
-                          <p className="text-gray-500 dark:text-gray-400">per month</p>
-                          <p className="text-sm text-gray-400 dark:text-gray-500 mt-2">(£{tier.price} / vehicle)</p>
-                        </>
-                      )}
-                    </div>
+                    <div className="flex-grow flex flex-col">
+                      <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">{tier.name}</h3>
+                      <p className="text-gray-600 dark:text-gray-300 mb-6">{tier.description}</p>
+                      
+                      <div className="mb-8 text-center bg-slate-100 dark:bg-slate-800/50 p-6 rounded-xl border border-slate-200 dark:border-slate-700">
+                        {tier.price === 'Custom' ? (
+                          <span className="text-4xl font-bold text-gray-900 dark:text-gray-100">Custom</span>
+                        ) : (
+                          <>
+                            <div className="flex items-baseline justify-center">
+                              <span className="text-2xl font-bold text-gray-500 dark:text-gray-400 mr-1">£</span>
+                              <span className="text-5xl font-extrabold text-gray-900 dark:text-gray-100 tracking-tight">{monthlyCost}</span>
+                            </div>
+                            <p className="text-gray-500 dark:text-gray-400">per month</p>
+                            <p className="text-sm text-gray-400 dark:text-gray-500 mt-2">(£{tier.price} / vehicle)</p>
+                          </>
+                        )}
+                      </div>
 
-                    <ul className="space-y-4 mb-8">
-                      {tier.features.slice(0, 6).map((feature, index) => (
-                        <li key={index} className="flex items-start">
-                          <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                          <span className="text-gray-600 dark:text-gray-300">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
+                      <ul className="space-y-4 mb-8 flex-grow">
+                        {tier.features.slice(0, 6).map((feature, index) => (
+                          <li key={index} className="flex items-start">
+                            <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
+                            <span className="text-gray-600 dark:text-gray-300">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
 
                     <div className="mt-auto">
                       <Link to={tier.name === 'Enterprise' ? '/contact' : '/demo'} className="block">
