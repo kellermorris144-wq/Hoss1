@@ -12,7 +12,7 @@ const OurSolution: React.FC = () => {
       title: 'Live Job Tracking',
       description: 'A centralized dashboard to create, assign, and monitor every job in real-time. From multi-drop routes to backloads, gain complete visibility over your entire operation.',
       visual: (
-        <div className="w-full h-full bg-slate-100 dark:bg-slate-900/50 rounded-lg p-3 space-y-2">
+        <div className="w-full h-full bg-slate-100 dark:bg-slate-900/50 rounded-lg p-3 space-y-2 overflow-hidden">
           <div className="flex justify-between items-center">
             <span className="text-xs font-bold text-slate-600 dark:text-slate-300">Active Jobs</span>
             <div className="flex space-x-1">
@@ -27,7 +27,7 @@ const OurSolution: React.FC = () => {
               <span className="text-xs text-green-500 font-semibold">On Time</span>
             </div>
             <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1 mt-1">
-              <div className="bg-green-500 h-1 rounded-full w-[75%]"></div>
+              <div className="bg-green-500 h-1 rounded-full w-[75%] animate-grow-bar-x" style={{ animationDelay: '0.3s' }}></div>
             </div>
           </div>
           <div className="p-2 bg-white dark:bg-slate-800 rounded animate-fade-in" style={{ animationDelay: '0.4s' }}>
@@ -36,7 +36,7 @@ const OurSolution: React.FC = () => {
               <span className="text-xs text-yellow-500 font-semibold">In Transit</span>
             </div>
             <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1 mt-1">
-              <div className="bg-yellow-500 h-1 rounded-full w-[40%]"></div>
+              <div className="bg-yellow-500 h-1 rounded-full w-[40%] animate-grow-bar-x" style={{ animationDelay: '0.5s' }}></div>
             </div>
           </div>
         </div>
@@ -48,7 +48,7 @@ const OurSolution: React.FC = () => {
       description: 'Empower your drivers with a simple mobile app. They can view job details, get optimized routes, capture PODs with photos and signatures, and communicate instantly.',
       visual: (
         <div className="w-full h-full flex justify-center items-center">
-          <div className="w-32 h-56 bg-slate-800 dark:bg-slate-900 rounded-2xl p-2 shadow-2xl">
+          <div className="w-32 h-56 bg-slate-800 dark:bg-slate-900 rounded-2xl p-2 shadow-2xl transform group-hover:scale-105 transition-transform duration-300">
             <div className="w-full h-full bg-white dark:bg-slate-800 rounded-lg p-1.5 space-y-1.5">
               <p className="text-xs font-bold text-center text-slate-700 dark:text-slate-300">Today's Jobs</p>
               <div className="bg-amber-500 text-white p-1.5 rounded-md text-[10px] animate-pop-in" style={{ animationDelay: '0.2s' }}>
@@ -69,18 +69,18 @@ const OurSolution: React.FC = () => {
       title: 'Branded Customer Portal',
       description: 'Give your clients a professional, self-service experience. They can request quotes, book jobs, track their shipments in real-time, and access invoices 24/7.',
       visual: (
-        <div className="w-full h-full bg-slate-100 dark:bg-slate-900/50 rounded-lg p-3 space-y-2">
-          <div className="flex items-center space-x-2">
+        <div className="w-full h-full bg-slate-100 dark:bg-slate-900/50 rounded-lg p-3 space-y-2 overflow-hidden">
+          <div className="flex items-center space-x-2 animate-fade-in" style={{ animationDelay: '0.2s' }}>
             <div className="w-8 h-8 bg-blue-500 rounded-full flex-shrink-0"></div>
             <div>
               <p className="text-xs font-bold text-slate-700 dark:text-slate-300">Global Logistics Inc.</p>
               <p className="text-[10px] text-slate-500 dark:text-slate-400">Customer Portal</p>
             </div>
           </div>
-          <div className="p-2 bg-white dark:bg-slate-800 rounded text-xs animate-fade-in" style={{ animationDelay: '0.2s' }}>
+          <div className="p-2 bg-white dark:bg-slate-800 rounded text-xs animate-fade-in" style={{ animationDelay: '0.4s' }}>
             <p className="font-bold mb-1">Tracking ID: #GL-12345</p>
             <div className="flex items-center">
-              <div className="w-2 h-2 rounded-full bg-green-500 mr-1.5"></div>
+              <div className="w-2 h-2 rounded-full bg-green-500 mr-1.5 animate-pulse"></div>
               <p className="text-green-600 dark:text-green-400 font-semibold">In Transit</p>
             </div>
           </div>
@@ -172,7 +172,7 @@ const OurSolution: React.FC = () => {
             {features.map((feature, index) => (
               <div key={feature.title} className="relative group">
                 <div className="absolute -inset-px bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl blur-lg opacity-0 group-hover:opacity-60 transition-opacity duration-500"></div>
-                <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-6 bg-white dark:bg-slate-900 p-8 rounded-2xl h-full border border-slate-200 dark:border-slate-700">
+                <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-6 bg-white dark:bg-slate-900 p-8 rounded-2xl h-full border border-slate-200 dark:border-slate-700 transition-all duration-300 group-hover:shadow-2xl group-hover:-translate-y-1">
                   <div className="flex flex-col justify-center">
                     <div className="w-12 h-12 bg-gradient-to-br from-amber-100 to-orange-100 dark:from-amber-900/50 dark:to-orange-900/50 rounded-xl flex items-center justify-center mb-4">
                       <feature.icon className="w-7 h-7 text-amber-600 dark:text-amber-400" />
