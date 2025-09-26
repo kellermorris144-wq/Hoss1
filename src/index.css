@@ -134,6 +134,10 @@
     transform-origin: left;
     animation: grow-bar-x 1s ease-out forwards;
   }
+
+  .animate-pop-in {
+    animation: pop-in 0.4s ease-out forwards;
+  }
   
   @keyframes fadeIn {
     from {
@@ -278,6 +282,21 @@
     }
     to {
       transform: scaleX(1);
+    }
+  }
+
+  @keyframes pop-in {
+    0% {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    80% {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
     }
   }
 }

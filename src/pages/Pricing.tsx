@@ -191,42 +191,40 @@ const Pricing: React.FC = () => {
             </p>
           </div>
 
-          <div className="overflow-x-auto">
-            <div className="min-w-full align-middle">
-              <div className="grid grid-cols-4 gap-px bg-gray-200 dark:bg-gray-700 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700">
-                {/* Header */}
-                <div className="bg-white dark:bg-gray-900 p-6">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Features</h3>
-                </div>
+          <div className="w-full overflow-x-auto">
+            <div className="min-w-[1024px]">
+              {/* Header */}
+              <div className="grid grid-cols-4 gap-4 p-4 sticky top-16 bg-gray-100 dark:bg-gray-900 z-10 rounded-t-xl">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Features</h3>
                 {pricingTiers.map(tier => (
-                  <div key={tier.name} className="bg-white dark:bg-gray-900 p-6 text-center">
+                  <div key={tier.name} className="text-center">
                     <h3 className={`text-lg font-semibold ${tier.popular ? 'text-amber-600 dark:text-amber-400' : 'text-gray-900 dark:text-gray-100'}`}>{tier.name}</h3>
                   </div>
                 ))}
+              </div>
 
-                {/* Feature Rows */}
+              {/* Body */}
+              <div className="bg-white dark:bg-gray-900/50 rounded-b-xl shadow-md">
                 {featureComparison.map(category => (
-                  <React.Fragment key={category.category}>
-                    <div className="col-span-4 bg-gray-100 dark:bg-gray-800 p-4">
+                  <div key={category.category} className="border-t border-gray-200 dark:border-gray-700">
+                    <div className="py-3 px-4 bg-gray-50 dark:bg-gray-800/50">
                       <h4 className="font-semibold text-gray-800 dark:text-gray-200">{category.category}</h4>
                     </div>
-                    {category.features.map(feature => (
-                      <React.Fragment key={feature.name}>
-                        <div className="bg-white dark:bg-gray-900 p-4 flex items-center">
-                          <span className="text-sm text-gray-600 dark:text-gray-300">{feature.name}</span>
-                        </div>
-                        <div className="bg-white dark:bg-gray-900 p-4 flex justify-center items-center">
-                          {feature.starter ? <CheckCircle className="w-6 h-6 text-green-500" /> : <XCircle className="w-6 h-6 text-gray-300 dark:text-gray-600" />}
-                        </div>
-                        <div className="bg-white dark:bg-gray-900 p-4 flex justify-center items-center">
-                          {feature.professional ? <CheckCircle className="w-6 h-6 text-green-500" /> : <XCircle className="w-6 h-6 text-gray-300 dark:text-gray-600" />}
-                        </div>
-                        <div className="bg-white dark:bg-gray-900 p-4 flex justify-center items-center">
-                          {feature.enterprise ? <CheckCircle className="w-6 h-6 text-green-500" /> : <XCircle className="w-6 h-6 text-gray-300 dark:text-gray-600" />}
-                        </div>
-                      </React.Fragment>
+                    {category.features.map((feature, idx) => (
+                      <div key={feature.name} className="grid grid-cols-4 gap-4 p-4 items-center transition-colors duration-200 hover:bg-gray-50 dark:hover:bg-gray-800/50 border-b border-gray-100 dark:border-gray-800 last:border-b-0">
+                        <span className="text-sm text-gray-600 dark:text-gray-300">{feature.name}</span>
+                        {[feature.starter, feature.professional, feature.enterprise].map((hasFeature, planIndex) => (
+                          <div key={planIndex} className="flex justify-center items-center">
+                            {hasFeature ? (
+                              <CheckCircle className="w-6 h-6 text-green-500 animate-pop-in" style={{ animationDelay: `${idx * 30}ms` }} />
+                            ) : (
+                              <XCircle className="w-6 h-6 text-gray-300 dark:text-gray-600" />
+                            )}
+                          </div>
+                        ))}
+                      </div>
                     ))}
-                  </React.Fragment>
+                  </div>
                 ))}
               </div>
             </div>
