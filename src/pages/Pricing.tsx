@@ -61,25 +61,48 @@ const Pricing: React.FC = () => {
     },
   ];
 
-  const Slider = ({ label, value, setValue, max, icon: Icon }: { label: string, value: number, setValue: (v: number) => void, max: number, icon: React.ElementType }) => (
-    <div className="space-y-3">
-      <div className="flex justify-between items-center">
-        <label className="font-medium text-gray-700 dark:text-gray-300 flex items-center">
-          <Icon className="w-5 h-5 mr-2 text-amber-600 dark:text-amber-400" />
-          {label}
-        </label>
-        <span className="font-bold text-lg text-gray-900 dark:text-gray-100 w-12 text-right">{value}</span>
+  const Slider = ({ label, value, setValue, max, icon: Icon }: { label: string, value: number, setValue: (v: number) => void, max: number, icon: React.ElementType }) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      let numValue = parseInt(e.target.value);
+      if (isNaN(numValue)) {
+        numValue = 0;
+      }
+      if (numValue > max) {
+        numValue = max;
+      }
+      if (numValue < 0) {
+        numValue = 0;
+      }
+      setValue(numValue);
+    };
+
+    return (
+      <div className="space-y-3">
+        <div className="flex justify-between items-center">
+          <label className="font-medium text-gray-700 dark:text-gray-300 flex items-center">
+            <Icon className="w-5 h-5 mr-2 text-amber-600 dark:text-amber-400" />
+            {label}
+          </label>
+          <input
+            type="number"
+            value={value}
+            onChange={handleInputChange}
+            min="0"
+            max={max}
+            className="w-20 text-right bg-gray-100 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-lg px-2 py-1 font-bold text-lg text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-amber-500 focus:outline-none transition-colors"
+          />
+        </div>
+        <input
+          type="range"
+          min="0"
+          max={max}
+          value={value}
+          onChange={(e) => setValue(parseInt(e.target.value))}
+          className="w-full"
+        />
       </div>
-      <input
-        type="range"
-        min="0"
-        max={max}
-        value={value}
-        onChange={(e) => setValue(parseInt(e.target.value))}
-        className="w-full"
-      />
-    </div>
-  );
+    );
+  };
 
   return (
     <div className="pt-16">

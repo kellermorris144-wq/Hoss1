@@ -371,14 +371,16 @@
 
   /* Chrome, Safari, Opera, and Edge Chromium */
   input[type=range]::-webkit-slider-runnable-track {
-    @apply h-1 bg-gray-200 dark:bg-gray-700 rounded-full;
+    @apply h-2 bg-gray-200 dark:bg-gray-700 rounded-full;
   }
 
   input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    margin-top: -10px; /* Adjust to center thumb on track */
-    @apply w-6 h-6 bg-amber-500 rounded-full cursor-pointer transition-all duration-200 hover:scale-110 shadow-lg;
+    margin-top: -7px; /* (track-height - thumb-height) / 2 */
+    @apply w-6 h-6 bg-amber-500 rounded-full cursor-pointer transition-all duration-200 ease-in-out shadow-md;
+    @apply hover:scale-110 hover:shadow-lg;
+    @apply active:scale-125 active:shadow-xl;
   }
 
   input[type=range]:focus::-webkit-slider-thumb {
@@ -387,11 +389,13 @@
 
   /* Firefox */
   input[type=range]::-moz-range-track {
-    @apply h-1 bg-gray-200 dark:bg-gray-700 rounded-full;
+    @apply h-2 bg-gray-200 dark:bg-gray-700 rounded-full;
   }
 
   input[type=range]::-moz-range-thumb {
-    @apply w-6 h-6 bg-amber-500 rounded-full cursor-pointer transition-all duration-200 hover:scale-110 shadow-lg border-0;
+    @apply w-6 h-6 bg-amber-500 rounded-full cursor-pointer transition-all duration-200 ease-in-out shadow-md border-0;
+    @apply hover:scale-110 hover:shadow-lg;
+    @apply active:scale-125 active:shadow-xl;
   }
 
   input[type=range]:focus::-moz-range-thumb {
