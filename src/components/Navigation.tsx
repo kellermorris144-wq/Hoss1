@@ -9,6 +9,7 @@ const Navigation: React.FC = () => {
   const navLinks = [
     { to: '/', label: 'Home' },
     { to: '/features', label: 'Features' },
+    { to: '/our-solution', label: 'Our Solution' },
     { to: '/pricing', label: 'Pricing' },
     { to: '/demo', label: 'Demo' },
     { to: '/contact', label: 'Contact' },

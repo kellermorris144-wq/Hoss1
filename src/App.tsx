@@ -7,6 +7,7 @@ import Features from './pages/Features';
 import Pricing from './pages/Pricing';
 import Demo from './pages/Demo';
 import Contact from './pages/Contact';
+import OurSolution from './pages/OurSolution';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/features" element={<Features />} />
+              <Route path="/our-solution" element={<OurSolution />} />
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/demo" element={<Demo />} />
               <Route path="/contact" element={<Contact />} />
@@ -38,6 +40,7 @@ function App() {
                   <h4 className="font-medium mb-3">Product</h4>
                   <ul className="space-y-2 text-sm text-gray-400">
                     <li><a href="/features" className="hover:text-white transition-colors">Features</a></li>
+                    <li><a href="/our-solution" className="hover:text-white transition-colors">Our Solution</a></li>
                     <li><a href="/pricing" className="hover:text-white transition-colors">Pricing</a></li>
                   </ul>
                 </div>
