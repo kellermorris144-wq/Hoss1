@@ -6,8 +6,8 @@ import Card from '../components/Card';
 import { useAnimatedCounter } from '../hooks/useAnimatedCounter';
 
 const Pricing: React.FC = () => {
-  const [officeUsers, setOfficeUsers] = useState(0);
-  const [drivers, setDrivers] = useState(0);
+  const [officeUsers, setOfficeUsers] = useState(1);
+  const [drivers, setDrivers] = useState(1);
   const [customers, setCustomers] = useState(0);
   const [totalCost, setTotalCost] = useState(0);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
@@ -61,17 +61,17 @@ const Pricing: React.FC = () => {
     },
   ];
 
-  const Slider = ({ label, value, setValue, max, icon: Icon }: { label: string, value: number, setValue: (v: number) => void, max: number, icon: React.ElementType }) => {
+  const Slider = ({ label, value, setValue, min = 0, max, icon: Icon }: { label: string, value: number, setValue: (v: number) => void, min?: number, max: number, icon: React.ElementType }) => {
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       let numValue = parseInt(e.target.value);
       if (isNaN(numValue)) {
-        numValue = 0;
+        numValue = min;
       }
       if (numValue > max) {
         numValue = max;
       }
-      if (numValue < 0) {
-        numValue = 0;
+      if (numValue < min) {
+        numValue = min;
       }
       setValue(numValue);
     };
@@ -87,14 +87,14 @@ const Pricing: React.FC = () => {
             type="number"
             value={value}
             onChange={handleInputChange}
-            min="0"
+            min={min}
             max={max}
             className="w-20 text-right bg-gray-100 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-lg px-2 py-1 font-bold text-lg text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-amber-500 focus:outline-none transition-colors"
           />
         </div>
         <input
           type="range"
-          min="0"
+          min={min}
           max={max}
           value={value}
           onChange={(e) => setValue(parseInt(e.target.value))}
@@ -130,9 +130,9 @@ const Pricing: React.FC = () => {
                 <Card className="relative p-8 sticky top-24" gradient>
                   <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8">Estimate Your Monthly Cost</h2>
                   <div className="space-y-8 mb-8">
-                    <Slider label="Office Users" value={officeUsers} setValue={setOfficeUsers} max={100} icon={Briefcase} />
-                    <Slider label="Drivers" value={drivers} setValue={setDrivers} max={200} icon={Truck} />
-                    <Slider label="Customers" value={customers} setValue={setCustomers} max={500} icon={Users} />
+                    <Slider label="Office Users" value={officeUsers} setValue={setOfficeUsers} min={1} max={50} icon={Briefcase} />
+                    <Slider label="Drivers" value={drivers} setValue={setDrivers} min={1} max={50} icon={Truck} />
+                    <Slider label="Customers" value={customers} setValue={setCustomers} min={0} max={100} icon={Users} />
                   </div>
 
                   <div className="bg-gray-100 dark:bg-gray-800/50 p-6 rounded-xl space-y-3 text-sm border border-gray-200 dark:border-gray-700">
