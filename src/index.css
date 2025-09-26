@@ -138,6 +138,15 @@
   .animate-pop-in {
     animation: pop-in 0.4s ease-out forwards;
   }
+
+  .animate-float-gentle {
+    animation: float-gentle 7s ease-in-out infinite;
+  }
+
+  .animate-background-pan {
+    background-size: 200% 200%;
+    animation: background-pan 15s ease infinite;
+  }
   
   @keyframes fadeIn {
     from {
@@ -297,6 +306,27 @@
     100% {
       opacity: 1;
       transform: scale(1);
+    }
+  }
+
+  @keyframes float-gentle {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes background-pan {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
     }
   }
 }

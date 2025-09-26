@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, 'useState' from 'react';
 import { CheckCircle, ArrowRight, Star, XCircle, Truck, Smartphone, MapPin, FileSignature, Users, BarChart3, PlusCircle, MinusCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
@@ -134,7 +134,7 @@ const Pricing: React.FC = () => {
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-gray-900 dark:to-gray-800 py-24">
+      <section className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-gray-900 dark:to-gray-800 py-24 animate-background-pan">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-5xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-6">
             Simple, Transparent Pricing
@@ -149,23 +149,27 @@ const Pricing: React.FC = () => {
       <section className="py-24 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Vehicle Count Selector */}
-          <div className="max-w-2xl mx-auto mb-20 text-center">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">Calculate Your Price</h2>
-            <p className="text-gray-600 dark:text-gray-300 mb-8">
-              Adjust the number of vehicles to see your estimated monthly cost.
-            </p>
-            <div className="bg-white dark:bg-gray-800/50 p-4 rounded-xl inline-flex items-center justify-center space-x-6 border border-gray-200 dark:border-gray-700 shadow-sm">
-              <Button variant="secondary" size="sm" onClick={() => setVehicleCount(v => Math.max(1, v - 1))} className="rounded-full w-10 h-10 p-0">
-                <MinusCircle className="w-5 h-5" />
-              </Button>
+          <div className="mb-24">
+            <Card className="max-w-3xl mx-auto p-8" gradient hover>
               <div className="text-center">
-                <span className="text-5xl font-bold text-amber-600 dark:text-amber-400 tracking-tight">{vehicleCount}</span>
-                <p className="text-sm text-gray-500 dark:text-gray-400 uppercase font-medium tracking-wider">Vehicles</p>
+                <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">Calculate Your Price</h2>
+                <p className="text-gray-600 dark:text-gray-300 mb-8">
+                  Adjust the number of vehicles to see your estimated monthly cost.
+                </p>
+                <div className="bg-white dark:bg-gray-800/50 p-4 rounded-xl inline-flex items-center justify-center space-x-6 border border-gray-200 dark:border-gray-700 shadow-inner">
+                  <Button variant="secondary" size="md" onClick={() => setVehicleCount(v => Math.max(1, v - 1))} className="rounded-full w-12 h-12 p-0">
+                    <MinusCircle className="w-6 h-6" />
+                  </Button>
+                  <div className="text-center w-40">
+                    <span className="text-6xl font-bold text-amber-600 dark:text-amber-400 tracking-tight">{vehicleCount}</span>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 uppercase font-medium tracking-wider mt-1">Vehicles</p>
+                  </div>
+                  <Button variant="secondary" size="md" onClick={() => setVehicleCount(v => v + 1)} className="rounded-full w-12 h-12 p-0">
+                    <PlusCircle className="w-6 h-6" />
+                  </Button>
+                </div>
               </div>
-              <Button variant="secondary" size="sm" onClick={() => setVehicleCount(v => v + 1)} className="rounded-full w-10 h-10 p-0">
-                <PlusCircle className="w-5 h-5" />
-              </Button>
-            </div>
+            </Card>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
@@ -176,10 +180,10 @@ const Pricing: React.FC = () => {
               return (
                 <div
                   key={tier.name}
-                  className={`relative transition-all duration-500 group animate-fade-in ${
-                    tier.popular ? 'transform lg:-translate-y-6' : 'lg:hover:-translate-y-2'
+                  className={`relative transition-transform duration-500 animate-float-gentle ${
+                    tier.popular ? 'transform lg:-translate-y-6' : ''
                   }`}
-                  style={{ animationDelay: `${index * 150}ms` }}
+                  style={{ animationDelay: `${index * 200}ms` }}
                 >
                   {tier.popular && (
                     <>
@@ -193,7 +197,7 @@ const Pricing: React.FC = () => {
                     </>
                   )}
                   <Card
-                    className={`relative w-full h-full p-8 flex flex-col transition-all duration-300 ${
+                    className={`relative w-full h-full p-8 flex flex-col transition-all duration-300 group hover:shadow-2xl ${
                       tier.popular ? 'border-amber-500/50 border-2' : ''
                     }`}
                   >
