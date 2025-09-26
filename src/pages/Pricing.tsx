@@ -3,13 +3,13 @@ import { CheckCircle, ArrowRight, Users, Briefcase, Truck, Building, PlusCircle,
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 import Card from '../components/Card';
+import { useAnimatedCounter } from '../hooks/useAnimatedCounter';
 
 const Pricing: React.FC = () => {
-  const [officeUsers, setOfficeUsers] = useState(5);
-  const [drivers, setDrivers] = useState(10);
-  const [customers, setCustomers] = useState(20);
+  const [officeUsers, setOfficeUsers] = useState(0);
+  const [drivers, setDrivers] = useState(0);
+  const [customers, setCustomers] = useState(0);
   const [totalCost, setTotalCost] = useState(0);
-  const [totalUsers, setTotalUsers] = useState(0);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   const costs = {
@@ -25,8 +25,9 @@ const Pricing: React.FC = () => {
     const customerCost = customers * costs.customer;
     
     setTotalCost(officeCost + driverCost + customerCost + costs.base);
-    setTotalUsers(officeUsers + drivers + customers);
   }, [officeUsers, drivers, customers]);
+
+  const animatedTotalCost = useAnimatedCounter(totalCost, 500);
 
   const includedFeatures = [
     'Live GPS Tracking & Mapping',
@@ -67,7 +68,7 @@ const Pricing: React.FC = () => {
           <Icon className="w-5 h-5 mr-2 text-amber-600 dark:text-amber-400" />
           {label}
         </label>
-        <span className="font-bold text-lg text-gray-900 dark:text-gray-100">{value}</span>
+        <span className="font-bold text-lg text-gray-900 dark:text-gray-100 w-12 text-right">{value}</span>
       </div>
       <input
         type="range"
@@ -75,7 +76,7 @@ const Pricing: React.FC = () => {
         max={max}
         value={value}
         onChange={(e) => setValue(parseInt(e.target.value))}
-        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 slider-thumb"
+        className="w-full"
       />
     </div>
   );
@@ -101,44 +102,47 @@ const Pricing: React.FC = () => {
             
             {/* Calculator */}
             <div className="lg:col-span-3">
-              <Card className="p-8 sticky top-24" gradient>
-                <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6">Estimate Your Monthly Cost</h2>
-                <div className="space-y-6 mb-8">
-                  <Slider label="Office Users" value={officeUsers} setValue={setOfficeUsers} max={100} icon={Briefcase} />
-                  <Slider label="Drivers" value={drivers} setValue={setDrivers} max={200} icon={Truck} />
-                  <Slider label="Customers" value={customers} setValue={setCustomers} max={500} icon={Users} />
-                </div>
+              <div className="relative">
+                <div className="absolute -inset-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl blur-xl opacity-20 animate-pulse-slow"></div>
+                <Card className="relative p-8 sticky top-24" gradient>
+                  <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8">Estimate Your Monthly Cost</h2>
+                  <div className="space-y-8 mb-8">
+                    <Slider label="Office Users" value={officeUsers} setValue={setOfficeUsers} max={100} icon={Briefcase} />
+                    <Slider label="Drivers" value={drivers} setValue={setDrivers} max={200} icon={Truck} />
+                    <Slider label="Customers" value={customers} setValue={setCustomers} max={500} icon={Users} />
+                  </div>
 
-                <div className="bg-gray-100 dark:bg-gray-800/50 p-6 rounded-xl space-y-3 text-sm border border-gray-200 dark:border-gray-700">
-                  <div className="flex justify-between items-center text-gray-600 dark:text-gray-300">
-                    <span>Base Fee</span>
-                    <span className="font-medium text-gray-800 dark:text-gray-200">£{costs.base.toFixed(2)}</span>
+                  <div className="bg-gray-100 dark:bg-gray-800/50 p-6 rounded-xl space-y-3 text-sm border border-gray-200 dark:border-gray-700">
+                    <div className="flex justify-between items-center text-gray-600 dark:text-gray-300 transition-colors">
+                      <span>Base Fee</span>
+                      <span className="font-medium text-gray-800 dark:text-gray-200">£{costs.base.toFixed(2)}</span>
+                    </div>
+                    <div className="flex justify-between items-center text-gray-600 dark:text-gray-300 transition-colors">
+                      <span>Office Users ({officeUsers} x £{costs.office})</span>
+                      <span className="font-medium text-gray-800 dark:text-gray-200">£{(officeUsers * costs.office).toFixed(2)}</span>
+                    </div>
+                    <div className="flex justify-between items-center text-gray-600 dark:text-gray-300 transition-colors">
+                      <span>Drivers ({drivers} x £{costs.driver})</span>
+                      <span className="font-medium text-gray-800 dark:text-gray-200">£{(drivers * costs.driver).toFixed(2)}</span>
+                    </div>
+                    <div className="flex justify-between items-center text-gray-600 dark:text-gray-300 transition-colors">
+                      <span>Customers ({customers} x £{costs.customer})</span>
+                      <span className="font-medium text-gray-800 dark:text-gray-200">£{(customers * costs.customer).toFixed(2)}</span>
+                    </div>
+                    <div className="border-t border-gray-300 dark:border-gray-700 my-3"></div>
+                    <div className="flex justify-between items-center text-xl font-bold text-gray-900 dark:text-gray-100">
+                      <span>Estimated Monthly Total</span>
+                      <span>£{animatedTotalCost.toFixed(2)}</span>
+                    </div>
                   </div>
-                  <div className="flex justify-between items-center text-gray-600 dark:text-gray-300">
-                    <span>Office Users ({officeUsers} x £{costs.office})</span>
-                    <span className="font-medium text-gray-800 dark:text-gray-200">£{(officeUsers * costs.office).toFixed(2)}</span>
-                  </div>
-                  <div className="flex justify-between items-center text-gray-600 dark:text-gray-300">
-                    <span>Drivers ({drivers} x £{costs.driver})</span>
-                    <span className="font-medium text-gray-800 dark:text-gray-200">£{(drivers * costs.driver).toFixed(2)}</span>
-                  </div>
-                  <div className="flex justify-between items-center text-gray-600 dark:text-gray-300">
-                    <span>Customers ({customers} x £{costs.customer})</span>
-                    <span className="font-medium text-gray-800 dark:text-gray-200">£{(customers * costs.customer).toFixed(2)}</span>
-                  </div>
-                  <div className="border-t border-gray-200 dark:border-gray-700 my-3"></div>
-                  <div className="flex justify-between items-center text-xl font-bold text-gray-900 dark:text-gray-100">
-                    <span>Estimated Monthly Total</span>
-                    <span>£{totalCost.toFixed(2)}</span>
-                  </div>
-                </div>
-                
-                <Link to="/demo" className="block mt-8">
-                  <Button size="lg" className="w-full" icon={ArrowRight} iconPosition="right">
-                    Book a Demo
-                  </Button>
-                </Link>
-              </Card>
+                  
+                  <Link to="/demo" className="block mt-8">
+                    <Button size="lg" className="w-full" icon={ArrowRight} iconPosition="right">
+                      Book a Demo
+                    </Button>
+                  </Link>
+                </Card>
+              </div>
             </div>
 
             {/* Features */}

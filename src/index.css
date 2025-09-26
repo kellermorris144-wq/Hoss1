@@ -357,24 +357,45 @@
   }
 
   /* Custom Slider Styles */
-  .slider-thumb {
+  input[type=range] {
     -webkit-appearance: none;
     appearance: none;
-    @apply w-5 h-5 bg-amber-500 rounded-full cursor-pointer transition-transform duration-200 hover:scale-110;
-  }
-
-  input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    margin-top: -6px; /* Adjust to center thumb on track */
+    background: transparent;
+    cursor: pointer;
+    width: 100%;
   }
 
   input[type=range]:focus {
     outline: none;
   }
 
+  /* Chrome, Safari, Opera, and Edge Chromium */
+  input[type=range]::-webkit-slider-runnable-track {
+    @apply h-1 bg-gray-200 dark:bg-gray-700 rounded-full;
+  }
+
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    margin-top: -10px; /* Adjust to center thumb on track */
+    @apply w-6 h-6 bg-amber-500 rounded-full cursor-pointer transition-all duration-200 hover:scale-110 shadow-lg;
+  }
+
   input[type=range]:focus::-webkit-slider-thumb {
-    @apply ring-2 ring-offset-2 ring-amber-500 dark:ring-offset-gray-800;
+    @apply ring-2 ring-offset-2 ring-amber-500 dark:ring-offset-gray-900;
+  }
+
+  /* Firefox */
+  input[type=range]::-moz-range-track {
+    @apply h-1 bg-gray-200 dark:bg-gray-700 rounded-full;
+  }
+
+  input[type=range]::-moz-range-thumb {
+    @apply w-6 h-6 bg-amber-500 rounded-full cursor-pointer transition-all duration-200 hover:scale-110 shadow-lg border-0;
+  }
+
+  input[type=range]:focus::-moz-range-thumb {
+    @apply ring-2 ring-offset-2 ring-amber-500 dark:ring-offset-gray-900;
   }
 }
 
