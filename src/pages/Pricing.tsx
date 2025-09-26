@@ -173,7 +173,7 @@ const Pricing: React.FC = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start pt-8">
             {pricingTiers.map((tier, index) => {
               const isNumericPrice = !isNaN(parseInt(tier.price));
               const monthlyCost = isNumericPrice ? parseInt(tier.price) * vehicleCount : null;

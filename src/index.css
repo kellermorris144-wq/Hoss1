@@ -151,13 +151,13 @@
   .particle {
     position: absolute;
     bottom: -20px;
-    background: theme('colors.amber.400 / 0.2');
+    background: theme('colors.slate.300 / 0.3');
     border-radius: 50%;
     animation: bubble-up 10s infinite ease-in;
     opacity: 0;
   }
   .dark .particle {
-    background: theme('colors.amber.400 / 0.3');
+    background: theme('colors.slate.600 / 0.4');
   }
   
   @keyframes fadeIn {
@@ -326,7 +326,7 @@
       transform: translateY(0);
     }
     50% {
-      transform: translateY(-20px);
+      transform: translateY(-25px);
     }
   }
 
