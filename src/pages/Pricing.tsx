@@ -117,7 +117,7 @@ const Pricing: React.FC = () => {
             {pricingTiers.map((tier, index) => (
               <div
                 key={tier.name}
-                className={`relative rounded-2xl transition-all duration-500 group animate-fade-in ${
+                className={`relative transition-all duration-500 group animate-fade-in ${
                   tier.popular ? 'transform lg:-translate-y-6' : 'lg:hover:-translate-y-2'
                 }`}
                 style={{ animationDelay: `${index * 150}ms` }}
