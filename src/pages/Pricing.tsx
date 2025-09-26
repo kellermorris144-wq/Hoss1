@@ -150,8 +150,9 @@ const Pricing: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Vehicle Count Selector */}
           <div className="mb-24">
-            <Card className="max-w-3xl mx-auto p-8" gradient hover>
-              <div className="text-center">
+            <div className="relative max-w-3xl mx-auto p-8 bg-gradient-to-br from-slate-100 to-white dark:from-slate-800 dark:to-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700">
+              <div className="absolute -inset-px bg-gradient-to-r from-amber-500/20 to-orange-500/20 rounded-2xl blur-lg opacity-50"></div>
+              <div className="relative text-center">
                 <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">Calculate Your Price</h2>
                 <p className="text-gray-600 dark:text-gray-300 mb-8">
                   Adjust the number of vehicles to see your estimated monthly cost.
@@ -169,7 +170,7 @@ const Pricing: React.FC = () => {
                   </Button>
                 </div>
               </div>
-            </Card>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
@@ -185,6 +186,21 @@ const Pricing: React.FC = () => {
                   }`}
                   style={{ animationDelay: `${index * 200}ms` }}
                 >
+                  <div className="absolute inset-0 overflow-hidden rounded-2xl pointer-events-none">
+                    {Array.from({ length: 10 }).map((_, i) => {
+                      const size = Math.random() * 10 + 5;
+                      const style = {
+                        width: `${size}px`,
+                        height: `${size}px`,
+                        left: `${Math.random() * 100}%`,
+                        animationDuration: `${Math.random() * 5 + 8}s`,
+                        animationDelay: `${Math.random() * 7}s`,
+                        '--translateX': `${(Math.random() - 0.5) * 40}px`
+                      };
+                      return <span key={i} className="particle" style={style as React.CSSProperties} />;
+                    })}
+                  </div>
+
                   {tier.popular && (
                     <>
                       <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-300"></div>
