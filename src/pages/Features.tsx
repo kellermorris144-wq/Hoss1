@@ -278,23 +278,23 @@ const Features: React.FC = () => {
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-gray-900 dark:to-gray-800 py-24">
+      <section className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-gray-900 dark:to-gray-800 py-20 sm:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-6">
+          <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-6">
             An End-to-End Logistics Platform
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             HOSS is more than just software; it's a complete solution designed to streamline every aspect of your logistics operations, from first mile to final invoice.
           </p>
         </div>
       </section>
 
       {/* Highlighted Features */}
-      <section className="py-24 bg-white dark:bg-gray-900">
+      <section className="py-20 sm:py-24 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-20">
+          <div className="space-y-16 sm:space-y-20">
             {highlightedFeatures.map((feature, index) => (
-              <div key={feature.title} className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div key={feature.title} className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
                 <div className={`lg:order-${index % 2 === 1 ? '2' : '1'}`}>
                   <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-amber-100 to-orange-100 dark:from-amber-900/50 dark:to-orange-900/50 rounded-xl mb-4">
                     <feature.icon className="w-7 h-7 text-amber-600 dark:text-amber-400" />
@@ -302,7 +302,7 @@ const Features: React.FC = () => {
                   <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">{feature.title}</h2>
                   <p className="text-gray-600 dark:text-gray-300 text-lg">{feature.description}</p>
                 </div>
-                <div className={`lg:order-${index % 2 === 1 ? '1' : '2'} h-80`}>
+                <div className={`lg:order-${index % 2 === 1 ? '1' : '2'} h-64 sm:h-80`}>
                   <feature.visual />
                 </div>
               </div>
@@ -312,10 +312,10 @@ const Features: React.FC = () => {
       </section>
 
       {/* Other Features Grid */}
-      <section className="py-24 bg-gray-50 dark:bg-gray-800">
+      <section className="py-20 sm:py-24 bg-gray-50 dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+          <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
               Comprehensive Feature Set
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-300">
@@ -344,12 +344,12 @@ const Features: React.FC = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-white dark:bg-gray-900">
+      <section className="py-20 sm:py-24 bg-white dark:bg-gray-900">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-6">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-6">
             Ready to See It in Action?
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
+          <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 mb-8">
             Book a free, no-obligation demo with one of our logistics experts to see how these features can transform your business.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

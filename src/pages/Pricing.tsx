@@ -107,19 +107,19 @@ const Pricing: React.FC = () => {
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-gray-900 dark:to-gray-800 py-24">
+      <section className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-gray-900 dark:to-gray-800 py-20 sm:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-6">
+          <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-6">
             Simple, Flexible Pricing
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             One powerful plan that scales with your business. No tiers, no hidden fees. Just everything you need to succeed.
           </p>
         </div>
       </section>
 
       {/* Calculator and Features Section */}
-      <section className="py-24 bg-white dark:bg-gray-900">
+      <section className="py-20 sm:py-24 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
             
@@ -127,8 +127,8 @@ const Pricing: React.FC = () => {
             <div className="lg:col-span-3">
               <div className="relative">
                 <div className="absolute -inset-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl blur-xl opacity-20 animate-pulse-slow"></div>
-                <Card className="relative p-8 sticky top-24" gradient>
-                  <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8">Estimate Your Monthly Cost</h2>
+                <Card className="relative p-6 sm:p-8 sticky top-24" gradient>
+                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8">Estimate Your Monthly Cost</h2>
                   <div className="space-y-8 mb-8">
                     <Slider label="Office Users" value={officeUsers} setValue={setOfficeUsers} min={1} max={50} icon={Briefcase} />
                     <Slider label="Drivers" value={drivers} setValue={setDrivers} min={1} max={50} icon={Truck} />
@@ -153,9 +153,9 @@ const Pricing: React.FC = () => {
                       <span className="font-medium text-gray-800 dark:text-gray-200">£{(customers * costs.customer).toFixed(2)}</span>
                     </div>
                     <div className="border-t border-gray-300 dark:border-gray-700 my-3"></div>
-                    <div className="flex justify-between items-center text-xl font-bold text-gray-900 dark:text-gray-100">
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center text-xl font-bold text-gray-900 dark:text-gray-100">
                       <span>Estimated Monthly Total</span>
-                      <span>£{animatedTotalCost.toFixed(2)}</span>
+                      <span className="text-2xl sm:text-xl">£{animatedTotalCost.toFixed(2)}</span>
                     </div>
                   </div>
                   
@@ -170,7 +170,7 @@ const Pricing: React.FC = () => {
 
             {/* Features */}
             <div className="lg:col-span-2">
-              <Card className="p-8">
+              <Card className="p-6 sm:p-8">
                 <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">Everything You Need, All Included</h3>
                 <ul className="space-y-4">
                   {includedFeatures.map((feature) => (
@@ -185,11 +185,11 @@ const Pricing: React.FC = () => {
           </div>
 
           {/* Enterprise Note */}
-          <div className="mt-24">
+          <div className="mt-20 sm:mt-24">
             <Card className="p-8 bg-gradient-to-r from-amber-500 to-orange-600 text-white shadow-2xl">
               <div className="flex flex-col md:flex-row items-center text-center md:text-left gap-6">
                 <div className="flex-shrink-0">
-                  <Building className="w-16 h-16 text-amber-200" />
+                  <Building className="w-12 h-12 md:w-16 md:h-16 text-amber-200" />
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold mb-2">Need a solution for 50+ users?</h3>
@@ -212,10 +212,10 @@ const Pricing: React.FC = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-24 bg-gray-50 dark:bg-gray-800">
+      <section className="py-20 sm:py-24 bg-gray-50 dark:bg-gray-800">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
               Frequently Asked Questions
             </h2>
           </div>
