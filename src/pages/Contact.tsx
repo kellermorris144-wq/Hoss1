@@ -39,21 +39,22 @@ const Contact: React.FC = () => {
       console.error('Error sending contact message:', error);
       setIsSubmitting(false);
       
-      let errorMessage = 'An unknown error occurred.';
+      let userMessage = 'An unexpected error occurred. Please try again later.';
+
       if (error instanceof FunctionsHttpError) {
+        // Server returned a non-2xx status code (e.g., 400, 500)
         try {
           const errorJson = await error.context.json();
-          errorMessage = errorJson.message || 'An unexpected error occurred.';
-          if (errorJson.details) {
-            errorMessage += `\n\nDetails: ${errorJson.details}`;
-          }
+          userMessage = errorJson.message || 'There was a problem with the server response.';
         } catch {
-          errorMessage = 'Could not parse error response.';
+          userMessage = 'Could not understand the server\'s response.';
         }
-      } else {
-        errorMessage = error.message;
+      } else if (error.name === 'FunctionsFetchError') {
+        // Network error or CORS issue
+        userMessage = 'Could not connect to the server. This is often due to a network issue or a CORS configuration problem. Please check your internet connection and ensure the ALLOWED_ORIGIN secret is correctly set in your Supabase project.';
       }
-      alert(`Failed to send message:\n\n${errorMessage}`);
+      
+      alert(`Failed to send message:\n\n${userMessage}`);
       return;
     }
     
