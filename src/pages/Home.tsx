@@ -69,13 +69,14 @@ const whoWeHelp = [
 const MapVisual = () => (
   <div className="w-full h-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg p-4 flex items-center justify-center overflow-hidden">
     <div 
-      className="w-full h-full rounded-lg relative bg-contain bg-no-repeat bg-center"
-      style={{ backgroundImage: "url('/pasted-image-2025-10-05T10-17-18-551Z.png')" }}
+      className="w-full h-full rounded-lg relative bg-cover bg-center"
+      style={{ backgroundImage: "url('https://images.unsplash.com/photo-1599511029751-813a5c837585?q=80&w=800&auto=format&fit=crop')" }}
     >
+      <div className="absolute inset-0 bg-black/20 dark:bg-black/50 rounded-lg"></div>
       <div className="relative w-full h-full">
-        <MapPin className="absolute top-[40%] left-[48%] text-amber-500 animate-pulse" style={{ animationDelay: '0.1s' }} />
-        <MapPin className="absolute top-[70%] left-[65%] text-amber-500 animate-pulse" style={{ animationDelay: '0.3s' }} />
-        <MapPin className="absolute top-[50%] left-[20%] text-amber-500 animate-pulse" style={{ animationDelay: '0.5s' }} />
+        <MapPin className="absolute top-[40%] left-[48%] text-amber-400 animate-pulse" style={{ animationDelay: '0.1s' }} />
+        <MapPin className="absolute top-[70%] left-[65%] text-amber-400 animate-pulse" style={{ animationDelay: '0.3s' }} />
+        <MapPin className="absolute top-[50%] left-[20%] text-amber-400 animate-pulse" style={{ animationDelay: '0.5s' }} />
         <div className="absolute top-[30%] left-[10%] p-2 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm rounded-lg shadow-md text-xs font-semibold text-slate-800 dark:text-slate-200 animate-float-slow" style={{ animationDuration: '6s' }}>New Load Available!</div>
         <div className="absolute bottom-[15%] right-[10%] p-2 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm rounded-lg shadow-md text-xs font-semibold text-slate-800 dark:text-slate-200 animate-float-slow-reverse" style={{ animationDuration: '7s' }}>Route Optimized</div>
       </div>
@@ -276,9 +277,10 @@ const Home: React.FC = () => {
                     <div className="p-3 bg-slate-100 dark:bg-slate-900/50 rounded-xl relative">
                       <h3 className="font-semibold text-slate-700 dark:text-slate-300 text-sm mb-2">Live Fleet: Essex</h3>
                       <div 
-                        className="relative h-32 rounded-lg overflow-hidden bg-contain bg-no-repeat bg-center"
-                        style={{ backgroundImage: "url('/pasted-image-2025-10-05T10-17-18-551Z.png')" }}
+                        className="relative h-32 rounded-lg overflow-hidden bg-cover bg-center"
+                        style={{ backgroundImage: "url('https://images.unsplash.com/photo-1599511029751-813a5c837585?q=80&w=800&auto=format&fit=crop')" }}
                       >
+                        <div className="absolute inset-0 bg-black/20 dark:bg-black/50"></div>
                         <div className="relative w-full h-full">
                           <span className="absolute top-[40%] left-[48%] text-[10px] text-white font-bold bg-black/60 px-1.5 py-0.5 rounded -translate-x-1/2">Chelmsford</span>
                           <span className="absolute top-[70%] left-[65%] text-[10px] text-white font-bold bg-black/60 px-1.5 py-0.5 rounded -translate-x-1/2">Southend</span>
@@ -332,9 +334,10 @@ const Home: React.FC = () => {
                       <div className="col-span-2 p-4 bg-slate-100 dark:bg-slate-900/50 rounded-xl relative">
                         <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-2">Live Fleet: Essex</h3>
                         <div 
-                          className="relative h-32 rounded-lg overflow-hidden bg-contain bg-no-repeat bg-center"
-                          style={{ backgroundImage: "url('/pasted-image-2025-10-05T10-17-18-551Z.png')" }}
+                          className="relative h-32 rounded-lg overflow-hidden bg-cover bg-center"
+                          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1599511029751-813a5c837585?q=80&w=800&auto=format&fit=crop')" }}
                         >
+                          <div className="absolute inset-0 bg-black/20 dark:bg-black/50"></div>
                           <div className="relative w-full h-full">
                             <span className="absolute top-[40%] left-[48%] text-xs text-white font-bold bg-black/60 px-1.5 py-0.5 rounded -translate-x-1/2">Chelmsford</span>
                             <span className="absolute top-[70%] left-[65%] text-xs text-white font-bold bg-black/60 px-1.5 py-0.5 rounded -translate-x-1/2">Southend</span>
