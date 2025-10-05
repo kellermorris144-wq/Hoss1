@@ -69,9 +69,9 @@ const MapVisual = () => (
   <div className="w-full h-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg p-4 flex items-center justify-center overflow-hidden">
     <div 
       className="w-full h-full rounded-lg relative bg-cover bg-center"
-      style={{ backgroundImage: "url('https://images.unsplash.com/photo-1614483936938-69a78592f105?q=80&w=800&auto=format&fit=crop')" }}
+      style={{ backgroundImage: "url('https://images.unsplash.com/photo-1599511029751-813a5c837585?q=80&w=800&auto=format&fit=crop')" }}
     >
-      <div className="absolute inset-0 bg-black/40 dark:bg-black/60 rounded-lg"></div>
+      <div className="absolute inset-0 bg-black/20 dark:bg-black/50 rounded-lg"></div>
       <MapPin className="absolute top-[30%] left-[40%] text-amber-400 animate-pulse" style={{ animationDelay: '0.1s' }} />
       <MapPin className="absolute top-[60%] left-[65%] text-amber-400 animate-pulse" style={{ animationDelay: '0.3s' }} />
       <MapPin className="absolute top-[50%] left-[20%] text-amber-400 animate-pulse" style={{ animationDelay: '0.5s' }} />
@@ -276,9 +276,9 @@ const Home: React.FC = () => {
                       <h3 className="font-semibold text-slate-700 dark:text-slate-300 text-sm mb-2">Live Fleet: Essex</h3>
                       <div
                         className="relative h-32 rounded-lg overflow-hidden bg-cover bg-center"
-                        style={{ backgroundImage: "url('https://images.unsplash.com/photo-1614483936938-69a78592f105?q=80&w=800&auto=format&fit=crop')" }}
+                        style={{ backgroundImage: "url('https://images.unsplash.com/photo-1599511029751-813a5c837585?q=80&w=800&auto=format&fit=crop')" }}
                       >
-                        <div className="absolute inset-0 bg-black/50"></div>
+                        <div className="absolute inset-0 bg-black/20 dark:bg-black/50"></div>
                         <span className="absolute top-[28%] left-[40%] text-[10px] text-white font-semibold drop-shadow-md">Chelmsford</span>
                         <span className="absolute top-[60%] left-[55%] text-[10px] text-white font-semibold drop-shadow-md">Southend</span>
                         <span className="absolute top-[45%] left-[15%] text-[10px] text-white font-semibold drop-shadow-md">Harlow</span>
@@ -331,9 +331,9 @@ const Home: React.FC = () => {
                         <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-2">Live Fleet: Essex</h3>
                         <div
                           className="relative h-32 rounded-lg overflow-hidden bg-cover bg-center"
-                          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1614483936938-69a78592f105?q=80&w=800&auto=format&fit=crop')" }}
+                          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1599511029751-813a5c837585?q=80&w=800&auto=format&fit=crop')" }}
                         >
-                          <div className="absolute inset-0 bg-black/50"></div>
+                          <div className="absolute inset-0 bg-black/20 dark:bg-black/50"></div>
                           <span className="absolute top-[28%] left-[40%] text-xs text-white font-semibold drop-shadow-md">Chelmsford</span>
                           <span className="absolute top-[60%] left-[55%] text-xs text-white font-semibold drop-shadow-md">Southend</span>
                           <span className="absolute top-[45%] left-[15%] text-xs text-white font-semibold drop-shadow-md">Harlow</span>
