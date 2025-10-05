@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useTheme } from '../contexts/ThemeContext';
-import { Moon, Sun } from 'lucide-react';
+import { Moon, Sun, User, Lock, Building } from 'lucide-react';
+import Button from './Button';
 
 const Navigation: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const loginRef = useRef<HTMLDivElement>(null);
 
   const navLinks = [
     { to: '/', label: 'Home' },
@@ -14,6 +17,19 @@ const Navigation: React.FC = () => {
     { to: '/demo', label: 'Demo' },
     { to: '/contact', label: 'Contact' },
   ];
+
+  // Close login popover on outside click
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (loginRef.current && !loginRef.current.contains(event.target as Node)) {
+        setIsLoginOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
@@ -58,6 +74,74 @@ const Navigation: React.FC = () => {
                 <Sun className="w-5 h-5 text-gray-700 dark:text-gray-300" />
               )}
             </button>
+
+            {/* Login Section */}
+            <div className="relative" ref={loginRef}>
+              <Button
+                variant="outline"
+                size="md"
+                onClick={() => setIsLoginOpen(!isLoginOpen)}
+              >
+                Login
+              </Button>
+
+              {isLoginOpen && (
+                <div className="absolute top-full right-0 mt-2 w-80">
+                  <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl shadow-2xl p-6 animate-fade-in">
+                    <h3 className="font-bold text-lg text-gray-900 dark:text-gray-100 mb-4">Client Portal Login</h3>
+                    <form className="space-y-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                          Username
+                        </label>
+                        <div className="relative">
+                          <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                          <input
+                            type="text"
+                            className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 dark:bg-gray-800 dark:text-gray-100"
+                            placeholder="your.username"
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                          Password
+                        </label>
+                        <div className="relative">
+                          <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                          <input
+                            type="password"
+                            className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 dark:bg-gray-800 dark:text-gray-100"
+                            placeholder="••••••••"
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                          Organisation ID
+                        </label>
+                        <div className="relative">
+                          <Building className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                          <input
+                            type="text"
+                            className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 dark:bg-gray-800 dark:text-gray-100"
+                            placeholder="e.g., HOSS-123"
+                          />
+                        </div>
+                      </div>
+                      <Button type="submit" className="w-full">
+                        Sign In
+                      </Button>
+                      <div className="text-center">
+                        <a href="#" className="text-sm text-amber-600 hover:text-amber-500 dark:text-amber-400 dark:hover:text-amber-300 transition-colors">
+                          Forgot Password?
+                        </a>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
