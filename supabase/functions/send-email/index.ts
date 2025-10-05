@@ -13,14 +13,22 @@ serve(async (req) => {
   }
 
   try {
+    // Check for required secrets first
+    const requiredSecrets = ["SMTP_HOST", "SMTP_PORT", "SMTP_USER", "SMTP_PASSWORD"];
+    for (const secret of requiredSecrets) {
+      if (!Deno.env.get(secret)) {
+        throw new Error(`Missing required secret in Supabase dashboard: ${secret}`);
+      }
+    }
+
     const { formType, ...formData } = await req.json()
 
     const client = new SmtpClient();
     await client.connectTLS({
-      hostname: Deno.env.get("SMTP_HOST"),
+      hostname: Deno.env.get("SMTP_HOST")!,
       port: parseInt(Deno.env.get("SMTP_PORT")!),
-      username: Deno.env.get("SMTP_USER"),
-      password: Deno.env.get("SMTP_PASSWORD"),
+      username: Deno.env.get("SMTP_USER")!,
+      password: Deno.env.get("SMTP_PASSWORD")!,
     });
 
     let subject = '';
@@ -66,7 +74,7 @@ serve(async (req) => {
     });
 
   } catch (error) {
-    console.error('Error sending email:', error);
+    console.error('Error in send-email function:', error);
     return new Response(JSON.stringify({ error: error.message }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 500,
