@@ -60,34 +60,42 @@ serve(async (req: Request) => {
     // 5. Get SMTP password from Supabase secrets
     const smtpPassword = Deno.env.get("SMTP_PASSWORD");
     if (!smtpPassword) {
-        console.error("Server configuration error: Missing required secret 'SMTP_PASSWORD'");
-        return jsonResponse(500, { error: "Server configuration error" }, corsHeaders);
+        const configError = new Error("Server configuration error: Missing required secret 'SMTP_PASSWORD'");
+        console.error(configError);
+        return jsonResponse(500, { success: false, error: configError.message, stack: configError.stack }, corsHeaders);
     }
 
     // 6. Configure and send the email
     const client = new SmtpClient();
-    await client.connectTLS({
-      hostname: "mail.nkwebsolutions.com",
-      port: 465,
-      username: "noreply@thehoss.co.uk",
-      password: smtpPassword,
-    });
+    
+    try {
+      await client.connectTLS({
+        hostname: "mail.nkwebsolutions.com",
+        port: 465,
+        username: "noreply@thehoss.co.uk",
+        password: smtpPassword,
+      });
 
-    await client.send({
-      from: `"HOSS Contact" <noreply@thehoss.co.uk>`,
-      to: "info@thehoss.co.uk",
-      subject: `New contact form from ${name}`,
-      content: `From: ${name} <${email}>\n\n${message}`,
-    });
+      await client.send({
+        from: `"HOSS Contact" <noreply@thehoss.co.uk>`,
+        to: "info@thehoss.co.uk",
+        subject: `New contact form from ${name}`,
+        content: `From: ${name} <${email}>\n\n${message}`,
+      });
 
-    await client.close();
+      await client.close();
+    } catch (emailError) {
+      // Catch errors specifically from the email sending process
+      console.error("SMTP Error:", emailError);
+      throw emailError; // Re-throw to be caught by the outer catch block
+    }
 
     // 7. Return success response
     return jsonResponse(200, { success: true }, corsHeaders);
 
   } catch (error) {
-    console.error("Error in send-email function:", error);
-    // Return the actual error message for better debugging
-    return jsonResponse(500, { success: false, error: error.message }, corsHeaders);
+    // This outer catch handles any error, including the re-thrown emailError
+    console.error("Full error in send-email function:", error);
+    return jsonResponse(500, { success: false, error: error.message, stack: error.stack }, corsHeaders);
   }
 });
