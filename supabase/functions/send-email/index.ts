@@ -34,6 +34,15 @@ function jsonResponse(status: number, body: object, corsHeaders: HeadersInit) {
   });
 }
 
+// Helper to format form data into a readable string for the email body
+function formatObjectForEmail(data: Record<string, any>): string {
+  // Remove formType from the email body and format the rest
+  const { formType, ...rest } = data;
+  return Object.entries(rest)
+    .map(([key, value]) => `${key.charAt(0).toUpperCase() + key.slice(1)}: ${value || 'N/A'}`)
+    .join('\n');
+}
+
 serve(async (req: Request) => {
   const requestOrigin = req.headers.get("Origin");
   const corsHeaders = getCorsHeaders(requestOrigin);
@@ -56,37 +65,47 @@ serve(async (req: Request) => {
   try {
     // 4. Get SMTP secrets from environment
     const smtpHost = Deno.env.get("SMTP_HOST");
-    const smtpPort = Deno.env.get("SMTP_PORT");
+    const smtpPortStr = Deno.env.get("SMTP_PORT");
     const smtpUser = Deno.env.get("SMTP_USER");
     const smtpPassword = Deno.env.get("SMTP_PASSWORD");
 
-    if (!smtpHost || !smtpPort || !smtpUser || !smtpPassword) {
-      const configError = new Error("Server configuration error: Missing one or more required SMTP secrets (SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASSWORD)");
-      console.error(configError);
-      return jsonResponse(500, { success: false, error: configError.message }, corsHeaders);
+    if (!smtpHost || !smtpPortStr || !smtpUser || !smtpPassword) {
+      throw new Error("Server configuration error: Missing one or more required SMTP secrets.");
+    }
+    const smtpPort = parseInt(smtpPortStr);
+
+    // 5. Parse request body and prepare email content
+    const formData = await req.json();
+    const { formType } = formData;
+
+    let subject = '';
+    let content = '';
+
+    if (formType === 'contact') {
+      subject = `New Contact Form Submission: ${formData.subject || 'General Inquiry'}`;
+      content = `You have a new message from your website's contact form.\n\n---\n\n${formatObjectForEmail(formData)}`;
+    } else if (formType === 'demo') {
+      subject = `New Demo Request from ${formData.company}`;
+      content = `You have a new demo request.\n\n---\n\n${formatObjectForEmail(formData)}`;
+    } else {
+      return jsonResponse(400, { error: "Invalid or missing formType in request body" }, corsHeaders);
     }
 
-    // 5. Parse request body and validate required fields
-    const { name, email, message } = await req.json();
-    if (!name || !email || !message) {
-      return jsonResponse(400, { error: "Missing required fields: name, email, message" }, corsHeaders);
-    }
-
-    // 6. Configure and send the email using Deno's SmtpClient
+    // 6. Configure and send the email
     const client = new SmtpClient();
     
     await client.connectTLS({
       hostname: smtpHost,
-      port: parseInt(smtpPort),
+      port: smtpPort,
       username: smtpUser,
       password: smtpPassword,
     });
 
     await client.send({
-      from: `"HOSS Contact" <${smtpUser}>`,
+      from: `"HOSS Website" <${smtpUser}>`,
       to: "info@thehoss.co.uk",
-      subject: `New contact form from ${name}`,
-      content: `From: ${name} <${email}>\n\n${message}`,
+      subject,
+      content,
     });
 
     await client.close();
@@ -95,8 +114,12 @@ serve(async (req: Request) => {
     return jsonResponse(200, { success: true }, corsHeaders);
 
   } catch (err) {
-    // Catch any error, log it, and return a structured error response
-    console.error(err);
-    return jsonResponse(500, { success: false, error: err.message }, corsHeaders);
+    // Catch any error, log it, and return a detailed error response for debugging
+    console.error("Error in send-email function:", err);
+    return jsonResponse(500, { 
+      success: false, 
+      error: err.message,
+      details: String(err) // Provides more context than JSON.stringify for Error objects
+    }, corsHeaders);
   }
 });
