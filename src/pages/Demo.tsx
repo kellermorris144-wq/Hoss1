@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Calendar, CheckCircle, Clock, Users, MapPin } from 'lucide-react';
+import { FunctionsHttpError } from '@supabase/supabase-js';
 import Card from '../components/Card';
 import Button from '../components/Button';
 import Modal from '../components/Modal';
@@ -72,8 +73,22 @@ const Demo: React.FC = () => {
     if (error) {
       console.error('Error sending demo request:', error);
       setIsSubmitting(false);
-      // Let's display the full error to debug what the function is returning
-      alert(`An error occurred. Please see the details below:\n\n${JSON.stringify(error, null, 2)}`);
+      
+      let errorMessage = 'An unknown error occurred.';
+      if (error instanceof FunctionsHttpError) {
+        try {
+          const errorJson = await error.context.json();
+          errorMessage = errorJson.message || 'An unexpected error occurred.';
+          if (errorJson.details) {
+            errorMessage += `\n\nDetails: ${errorJson.details}`;
+          }
+        } catch {
+          errorMessage = 'Could not parse error response.';
+        }
+      } else {
+        errorMessage = error.message;
+      }
+      alert(`Failed to schedule demo:\n\n${errorMessage}`);
       return;
     }
     
