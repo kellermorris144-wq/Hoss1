@@ -72,7 +72,8 @@ const Demo: React.FC = () => {
     if (error) {
       console.error('Error sending demo request:', error);
       setIsSubmitting(false);
-      alert('There was an error submitting your request. Please try again.');
+      // Let's display the full error to debug what the function is returning
+      alert(`An error occurred. Please see the details below:\n\n${JSON.stringify(error, null, 2)}`);
       return;
     }
     

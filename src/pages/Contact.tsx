@@ -37,7 +37,8 @@ const Contact: React.FC = () => {
     if (error) {
       console.error('Error sending contact message:', error);
       setIsSubmitting(false);
-      alert('There was an error sending your message. Please try again.');
+      // Let's display the full error to debug what the function is returning
+      alert(`An error occurred. Please see the details below:\n\n${JSON.stringify(error, null, 2)}`);
       return;
     }
     
