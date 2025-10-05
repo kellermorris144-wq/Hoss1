@@ -1,3 +1,7 @@
+// NOTE: This is a Deno function. Dependencies are imported via URL, so 'npm install' is not needed.
+// Before deploying, ensure secrets are set in your Supabase project dashboard.
+// Deploy command: supabase functions deploy send-email --no-verify-jwt
+
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { SmtpClient } from "https://deno.land/x/smtp@v0.7.0/mod.ts";
 
@@ -51,18 +55,22 @@ serve(async (req: Request) => {
   }
 
   try {
-    // 4. Parse request body and validate required fields
+    // 4. Get SMTP secrets from environment
+    const smtpHost = Deno.env.get("SMTP_HOST");
+    const smtpPort = Deno.env.get("SMTP_PORT");
+    const smtpUser = Deno.env.get("SMTP_USER");
+    const smtpPassword = Deno.env.get("SMTP_PASSWORD");
+
+    if (!smtpHost || !smtpPort || !smtpUser || !smtpPassword) {
+      const configError = new Error("Server configuration error: Missing one or more required SMTP secrets (SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASSWORD)");
+      console.error(configError);
+      return jsonResponse(500, { success: false, error: configError.message, stack: configError.stack }, corsHeaders);
+    }
+
+    // 5. Parse request body and validate required fields
     const { name, email, message } = await req.json();
     if (!name || !email || !message) {
       return jsonResponse(400, { error: "Missing required fields: name, email, message" }, corsHeaders);
-    }
-
-    // 5. Get SMTP password from Supabase secrets
-    const smtpPassword = Deno.env.get("SMTP_PASSWORD");
-    if (!smtpPassword) {
-        const configError = new Error("Server configuration error: Missing required secret 'SMTP_PASSWORD'");
-        console.error(configError);
-        return jsonResponse(500, { success: false, error: configError.message, stack: configError.stack }, corsHeaders);
     }
 
     // 6. Configure and send the email
@@ -70,14 +78,14 @@ serve(async (req: Request) => {
     
     try {
       await client.connectTLS({
-        hostname: "mail.nkwebsolutions.com",
-        port: 465,
-        username: "noreply@thehoss.co.uk",
+        hostname: smtpHost,
+        port: parseInt(smtpPort),
+        username: smtpUser,
         password: smtpPassword,
       });
 
       await client.send({
-        from: `"HOSS Contact" <noreply@thehoss.co.uk>`,
+        from: `"HOSS Contact" <${smtpUser}>`,
         to: "info@thehoss.co.uk",
         subject: `New contact form from ${name}`,
         content: `From: ${name} <${email}>\n\n${message}`,
