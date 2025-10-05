@@ -272,15 +272,19 @@ const Home: React.FC = () => {
                   <div className="grid grid-cols-1 gap-4">
                     <div className="p-3 bg-slate-100 dark:bg-slate-900/50 rounded-xl relative">
                       <h3 className="font-semibold text-slate-700 dark:text-slate-300 text-sm mb-2">Live Fleet: Essex</h3>
-                      <div className="relative h-32 bg-slate-200 dark:bg-slate-800/70 rounded-lg overflow-hidden">
-                        <span className="absolute top-[28%] left-[40%] text-[10px] text-slate-500 dark:text-slate-400 font-semibold">Chelmsford</span>
-                        <span className="absolute top-[60%] left-[55%] text-[10px] text-slate-500 dark:text-slate-400 font-semibold">Southend</span>
-                        <span className="absolute top-[45%] left-[15%] text-[10px] text-slate-500 dark:text-slate-400 font-semibold">Harlow</span>
+                      <div
+                        className="relative h-32 rounded-lg overflow-hidden bg-cover bg-center"
+                        style={{ backgroundImage: "url('https://images.unsplash.com/photo-1569327212182-a37d05372763?q=80&w=800&auto=format&fit=crop')" }}
+                      >
+                        <div className="absolute inset-0 bg-black/50"></div>
+                        <span className="absolute top-[28%] left-[40%] text-[10px] text-white font-semibold drop-shadow-md">Chelmsford</span>
+                        <span className="absolute top-[60%] left-[55%] text-[10px] text-white font-semibold drop-shadow-md">Southend</span>
+                        <span className="absolute top-[45%] left-[15%] text-[10px] text-white font-semibold drop-shadow-md">Harlow</span>
                         {trucks.map(truck => (
                           <div key={truck.id} className="absolute" style={truck.position}>
                             <div className="relative w-2.5 h-2.5">
                               <div className={`absolute inset-0 ${truck.pingColor} rounded-full animate-ping`}></div>
-                              <div className={`relative block w-2.5 h-2.5 ${truck.color} rounded-full border border-white dark:border-slate-900`}></div>
+                              <div className={`relative block w-2.5 h-2.5 ${truck.color} rounded-full border border-white`}></div>
                             </div>
                           </div>
                         ))}
@@ -323,10 +327,14 @@ const Home: React.FC = () => {
                     <div className="grid grid-cols-2 gap-4">
                       <div className="col-span-2 p-4 bg-slate-100 dark:bg-slate-900/50 rounded-xl relative">
                         <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-2">Live Fleet: Essex</h3>
-                        <div className="relative h-32 bg-slate-200 dark:bg-slate-800/70 rounded-lg overflow-hidden">
-                          <span className="absolute top-[28%] left-[40%] text-xs text-slate-500 dark:text-slate-400 font-semibold">Chelmsford</span>
-                          <span className="absolute top-[60%] left-[55%] text-xs text-slate-500 dark:text-slate-400 font-semibold">Southend</span>
-                          <span className="absolute top-[45%] left-[15%] text-xs text-slate-500 dark:text-slate-400 font-semibold">Harlow</span>
+                        <div
+                          className="relative h-32 rounded-lg overflow-hidden bg-cover bg-center"
+                          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1569327212182-a37d05372763?q=80&w=800&auto=format&fit=crop')" }}
+                        >
+                          <div className="absolute inset-0 bg-black/50"></div>
+                          <span className="absolute top-[28%] left-[40%] text-xs text-white font-semibold drop-shadow-md">Chelmsford</span>
+                          <span className="absolute top-[60%] left-[55%] text-xs text-white font-semibold drop-shadow-md">Southend</span>
+                          <span className="absolute top-[45%] left-[15%] text-xs text-white font-semibold drop-shadow-md">Harlow</span>
                           {trucks.map(truck => (
                             <div key={truck.id} className="absolute group" style={truck.position}>
                               <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-max px-2 py-1 bg-slate-900 text-white text-xs font-bold rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10">
@@ -335,7 +343,7 @@ const Home: React.FC = () => {
                               </div>
                               <div className="relative w-3 h-3">
                                 <div className={`absolute inset-0 ${truck.pingColor} rounded-full animate-ping`}></div>
-                                <div className={`relative block w-3 h-3 ${truck.color} rounded-full border-2 border-white dark:border-slate-900`}></div>
+                                <div className={`relative block w-3 h-3 ${truck.color} rounded-full border-2 border-white`}></div>
                               </div>
                             </div>
                           ))}
@@ -436,7 +444,7 @@ const Home: React.FC = () => {
                     className={`p-4 rounded-lg text-left transition-all duration-300 w-48 lg:w-full flex-shrink-0 ${
                       activeFeature === index
                         ? 'bg-gradient-to-r from-amber-500 to-orange-600 text-white shadow-lg'
-                        : 'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700'
+                        : 'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-gray-900 dark:text-gray-100'
                     }`}
                   >
                     <div className="flex items-center">
