@@ -51,59 +51,33 @@ serve(async (req: Request) => {
   }
 
   try {
-    // 4. Check for required environment variables (set as Supabase secrets)
-    const requiredSecrets = ["SMTP_HOST", "SMTP_PORT", "SMTP_USER", "SMTP_PASSWORD"];
-    for (const secret of requiredSecrets) {
-      if (!Deno.env.get(secret)) {
-        console.error(`Server configuration error: Missing required secret '${secret}'`);
-        return jsonResponse(500, { error: "Server configuration error" }, corsHeaders);
-      }
+    // 4. Parse request body and validate required fields
+    const { name, email, message } = await req.json();
+    if (!name || !email || !message) {
+      return jsonResponse(400, { error: "Missing required fields: name, email, message" }, corsHeaders);
     }
 
-    // 5. Parse request body and determine form type
-    const { formType, ...formData } = await req.json();
-    let subject = '';
-    let emailBody = '';
-
-    if (formType === 'demo') {
-      subject = 'New Demo Request from HOSS Website';
-      emailBody = `A new demo has been requested:\n\n` +
-             `Name: ${formData.firstName} ${formData.lastName}\n` +
-             `Email: ${formData.email}\n` +
-             `Phone: ${formData.phone}\n` +
-             `Company: ${formData.company}\n` +
-             `Industry: ${formData.industry}\n` +
-             `Fleet Size: ${formData.fleetSize}\n` +
-             `Preferred Date: ${formData.preferredDate || 'N/A'}\n` +
-             `Preferred Time: ${formData.preferredTime || 'N/A'}\n` +
-             `Challenges: ${formData.challenges || 'N/A'}\n`;
-    } else if (formType === 'contact') {
-      subject = `New Contact Form Submission: ${formData.subject}`;
-      emailBody = `New message from contact form:\n\n` +
-             `Name: ${formData.name}\n` +
-             `Email: ${formData.email}\n` +
-             `Phone: ${formData.phone || 'N/A'}\n` +
-             `Company: ${formData.company || 'N/A'}\n` +
-             `Subject: ${formData.subject}\n\n` +
-             `Message:\n${formData.message}`;
-    } else {
-      return jsonResponse(400, { error: "Invalid or missing 'formType' in request body" }, corsHeaders);
+    // 5. Get SMTP password from Supabase secrets
+    const smtpPassword = Deno.env.get("SMTP_PASSWORD");
+    if (!smtpPassword) {
+        console.error("Server configuration error: Missing required secret 'SMTP_PASSWORD'");
+        return jsonResponse(500, { error: "Server configuration error" }, corsHeaders);
     }
 
     // 6. Configure and send the email
     const client = new SmtpClient();
     await client.connectTLS({
-      hostname: Deno.env.get("SMTP_HOST")!,
-      port: parseInt(Deno.env.get("SMTP_PORT")!),
-      username: Deno.env.get("SMTP_USER")!,
-      password: Deno.env.get("SMTP_PASSWORD")!,
+      hostname: "mail.nkwebsolutions.com",
+      port: 465,
+      username: "noreply@thehoss.co.uk",
+      password: smtpPassword,
     });
 
     await client.send({
-      from: `"HOSS Contact" <${Deno.env.get("SMTP_USER")!}>`,
+      from: `"HOSS Contact" <noreply@thehoss.co.uk>`,
       to: "info@thehoss.co.uk",
-      subject: subject,
-      content: emailBody,
+      subject: `New contact form from ${name}`,
+      content: `From: ${name} <${email}>\n\n${message}`,
     });
 
     await client.close();
@@ -113,6 +87,7 @@ serve(async (req: Request) => {
 
   } catch (error) {
     console.error("Error in send-email function:", error);
-    return jsonResponse(500, { success: false, error: "Failed to send email" }, corsHeaders);
+    // Return the actual error message for better debugging
+    return jsonResponse(500, { success: false, error: error.message }, corsHeaders);
   }
 });
