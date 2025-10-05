@@ -3,6 +3,7 @@ import { Calendar, CheckCircle, Clock, Users, MapPin } from 'lucide-react';
 import Card from '../components/Card';
 import Button from '../components/Button';
 import Modal from '../components/Modal';
+import { supabase } from '../integrations/supabase/client';
 
 interface FormData {
   firstName: string;
@@ -64,8 +65,16 @@ const Demo: React.FC = () => {
 
     setIsSubmitting(true);
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    const { error } = await supabase.functions.invoke('send-email', {
+      body: { formType: 'demo', ...formData },
+    });
+
+    if (error) {
+      console.error('Error sending demo request:', error);
+      setIsSubmitting(false);
+      alert('There was an error submitting your request. Please try again.');
+      return;
+    }
     
     setIsSubmitting(false);
     setShowSuccessModal(true);

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Clock, Send } from 'lucide-react';
 import Card from '../components/Card';
 import Button from '../components/Button';
+import { supabase } from '../integrations/supabase/client';
 
 interface ContactFormData {
   name: string;
@@ -29,8 +30,16 @@ const Contact: React.FC = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    const { error } = await supabase.functions.invoke('send-email', {
+      body: { formType: 'contact', ...formData },
+    });
+
+    if (error) {
+      console.error('Error sending contact message:', error);
+      setIsSubmitting(false);
+      alert('There was an error sending your message. Please try again.');
+      return;
+    }
     
     setIsSubmitting(false);
     setSubmitted(true);
