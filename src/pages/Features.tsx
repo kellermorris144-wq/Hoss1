@@ -33,13 +33,13 @@ const AnimatedMap = () => {
           {/* Location Pins / "Cities" */}
           <g className="opacity-70">
             <circle cx="50" cy="200" r="4" fill="currentColor" className="text-slate-400" />
-            <text x="45" y="220" className="text-[10px] font-sans font-semibold fill-current text-slate-500" textAnchor="middle">London</text>
+            <text x="45" y="220" className="text-[10px] font-sans font-semibold fill-current text-slate-500 dark:text-slate-400" textAnchor="middle">London</text>
             <circle cx="450" cy="200" r="4" fill="currentColor" className="text-slate-400" />
-            <text x="450" y="220" className="text-[10px] font-sans font-semibold fill-current text-slate-500" textAnchor="middle">Dover</text>
+            <text x="450" y="220" className="text-[10px] font-sans font-semibold fill-current text-slate-500 dark:text-slate-400" textAnchor="middle">Dover</text>
             <circle cx="80" cy="70" r="4" fill="currentColor" className="text-slate-400" />
-            <text x="80" y="60" className="text-[10px] font-sans font-semibold fill-current text-slate-500" textAnchor="middle">Manchester</text>
+            <text x="80" y="60" className="text-[10px] font-sans font-semibold fill-current text-slate-500 dark:text-slate-400" textAnchor="middle">Manchester</text>
             <circle cx="480" cy="70" r="4" fill="currentColor" className="text-slate-400" />
-            <text x="480" y="60" className="text-[10px] font-sans font-semibold fill-current text-slate-500" textAnchor="middle">Glasgow</text>
+            <text x="480" y="60" className="text-[10px] font-sans font-semibold fill-current text-slate-500 dark:text-slate-400" textAnchor="middle">Glasgow</text>
             <foreignObject x="240" y="115" width="24" height="24">
               <MapPin className="w-6 h-6 text-red-500 animate-pulse" />
             </foreignObject>
