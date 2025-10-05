@@ -73,8 +73,8 @@ const MapVisual = () => (
       <MapPin className="absolute top-[30%] left-[40%] text-amber-500 animate-pulse" style={{ animationDelay: '0.1s' }} />
       <MapPin className="absolute top-[60%] left-[65%] text-amber-500 animate-pulse" style={{ animationDelay: '0.3s' }} />
       <MapPin className="absolute top-[50%] left-[20%] text-amber-500 animate-pulse" style={{ animationDelay: '0.5s' }} />
-      <div className="absolute top-[20%] left-[15%] p-2 bg-white/80 dark:bg-slate-900/80 rounded-lg shadow-md text-xs font-semibold animate-float-slow" style={{ animationDuration: '6s' }}>New Load Available!</div>
-      <div className="absolute bottom-[15%] right-[10%] p-2 bg-white/80 dark:bg-slate-900/80 rounded-lg shadow-md text-xs font-semibold animate-float-slow-reverse" style={{ animationDuration: '7s' }}>Route Optimized</div>
+      <div className="absolute top-[20%] left-[15%] p-2 bg-white/80 dark:bg-slate-900/80 rounded-lg shadow-md text-xs font-semibold text-slate-800 dark:text-slate-200 animate-float-slow" style={{ animationDuration: '6s' }}>New Load Available!</div>
+      <div className="absolute bottom-[15%] right-[10%] p-2 bg-white/80 dark:bg-slate-900/80 rounded-lg shadow-md text-xs font-semibold text-slate-800 dark:text-slate-200 animate-float-slow-reverse" style={{ animationDuration: '7s' }}>Route Optimized</div>
     </div>
   </div>
 );
@@ -84,11 +84,11 @@ const BackloadVisual = () => (
     <div className="text-center">
       <p className="font-semibold text-slate-700 dark:text-slate-300">Without HOSS</p>
       <div className="flex items-center mt-2">
-        <span className="font-bold">A</span>
+        <span className="font-bold text-slate-800 dark:text-slate-200">A</span>
         <div className="w-24 h-0.5 bg-slate-300 dark:bg-slate-600 mx-2"></div>
         <Truck className="text-amber-500 animate-slide-in-right" style={{ animationDelay: '0.2s' }} />
         <div className="w-24 h-0.5 bg-slate-300 dark:bg-slate-600 mx-2"></div>
-        <span className="font-bold">B</span>
+        <span className="font-bold text-slate-800 dark:text-slate-200">B</span>
       </div>
       <div className="flex items-center mt-1">
         <div className="w-24 h-0.5 bg-transparent mx-2"></div>
@@ -100,11 +100,11 @@ const BackloadVisual = () => (
     <div className="text-center">
       <p className="font-semibold text-slate-700 dark:text-slate-300">With HOSS</p>
       <div className="flex items-center mt-2">
-        <span className="font-bold">A</span>
+        <span className="font-bold text-slate-800 dark:text-slate-200">A</span>
         <div className="w-24 h-0.5 bg-slate-300 dark:bg-slate-600 mx-2"></div>
         <Truck className="text-amber-500" />
         <div className="w-24 h-0.5 bg-slate-300 dark:bg-slate-600 mx-2"></div>
-        <span className="font-bold">B</span>
+        <span className="font-bold text-slate-800 dark:text-slate-200">B</span>
       </div>
       <div className="flex items-center mt-1">
         <div className="w-24 h-0.5 bg-green-400 mx-2 relative left-7 animate-fade-in" style={{ animationDelay: '0.8s' }}></div>
@@ -169,10 +169,10 @@ const PaymentsVisual = () => {
         </span>
       </div>
       <div className="space-y-2">
-        <div className="flex justify-between text-sm animate-fade-in" style={{ animationDelay: '0.1s' }}><span className="text-slate-500 dark:text-slate-400">Item 1</span><span className="font-medium">£450.00</span></div>
-        <div className="flex justify-between text-sm animate-fade-in" style={{ animationDelay: '0.2s' }}><span className="text-slate-500 dark:text-slate-400">Item 2</span><span className="font-medium">£320.00</span></div>
+        <div className="flex justify-between text-sm animate-fade-in" style={{ animationDelay: '0.1s' }}><span className="text-slate-500 dark:text-slate-400">Item 1</span><span className="font-medium text-slate-800 dark:text-slate-200">£450.00</span></div>
+        <div className="flex justify-between text-sm animate-fade-in" style={{ animationDelay: '0.2s' }}><span className="text-slate-500 dark:text-slate-400">Item 2</span><span className="font-medium text-slate-800 dark:text-slate-200">£320.00</span></div>
         <div className="w-full h-px bg-slate-200 dark:bg-slate-700 my-2"></div>
-        <div className="flex justify-between font-bold"><span className="text-slate-800 dark:text-slate-200">Total</span><span>£770.00</span></div>
+        <div className="flex justify-between font-bold"><span className="text-slate-800 dark:text-slate-200">Total</span><span className="text-slate-800 dark:text-slate-200">£770.00</span></div>
       </div>
       {status === 'Paid' && (
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
