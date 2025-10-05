@@ -67,12 +67,14 @@ const whoWeHelp = [
 
 const MapVisual = () => (
   <div className="w-full h-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg p-4 flex items-center justify-center overflow-hidden">
-    <div className="w-full h-full rounded-lg bg-slate-100 dark:bg-slate-900/50 relative">
-      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-amber-500/5 to-transparent"></div>
-      <div className="absolute top-1/4 left-1/4 w-1/2 h-1/2 rounded-full bg-amber-500/10 animate-pulse-slow"></div>
-      <MapPin className="absolute top-[30%] left-[40%] text-amber-500 animate-pulse" style={{ animationDelay: '0.1s' }} />
-      <MapPin className="absolute top-[60%] left-[65%] text-amber-500 animate-pulse" style={{ animationDelay: '0.3s' }} />
-      <MapPin className="absolute top-[50%] left-[20%] text-amber-500 animate-pulse" style={{ animationDelay: '0.5s' }} />
+    <div 
+      className="w-full h-full rounded-lg relative bg-cover bg-center"
+      style={{ backgroundImage: "url('https://images.unsplash.com/photo-1534353436294-0dbd4bdac845?q=80&w=800&auto=format&fit=crop')" }}
+    >
+      <div className="absolute inset-0 bg-black/40 dark:bg-black/60 rounded-lg"></div>
+      <MapPin className="absolute top-[30%] left-[40%] text-amber-400 animate-pulse" style={{ animationDelay: '0.1s' }} />
+      <MapPin className="absolute top-[60%] left-[65%] text-amber-400 animate-pulse" style={{ animationDelay: '0.3s' }} />
+      <MapPin className="absolute top-[50%] left-[20%] text-amber-400 animate-pulse" style={{ animationDelay: '0.5s' }} />
       <div className="absolute top-[20%] left-[15%] p-2 bg-white/80 dark:bg-slate-900/80 rounded-lg shadow-md text-xs font-semibold text-slate-800 dark:text-slate-200 animate-float-slow" style={{ animationDuration: '6s' }}>New Load Available!</div>
       <div className="absolute bottom-[15%] right-[10%] p-2 bg-white/80 dark:bg-slate-900/80 rounded-lg shadow-md text-xs font-semibold text-slate-800 dark:text-slate-200 animate-float-slow-reverse" style={{ animationDuration: '7s' }}>Route Optimized</div>
     </div>
@@ -274,7 +276,7 @@ const Home: React.FC = () => {
                       <h3 className="font-semibold text-slate-700 dark:text-slate-300 text-sm mb-2">Live Fleet: Essex</h3>
                       <div
                         className="relative h-32 rounded-lg overflow-hidden bg-cover bg-center"
-                        style={{ backgroundImage: "url('https://images.unsplash.com/photo-1569327212182-a37d05372763?q=80&w=800&auto=format&fit=crop')" }}
+                        style={{ backgroundImage: "url('https://images.unsplash.com/photo-1534353436294-0dbd4bdac845?q=80&w=800&auto=format&fit=crop')" }}
                       >
                         <div className="absolute inset-0 bg-black/50"></div>
                         <span className="absolute top-[28%] left-[40%] text-[10px] text-white font-semibold drop-shadow-md">Chelmsford</span>
@@ -329,7 +331,7 @@ const Home: React.FC = () => {
                         <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-2">Live Fleet: Essex</h3>
                         <div
                           className="relative h-32 rounded-lg overflow-hidden bg-cover bg-center"
-                          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1569327212182-a37d05372763?q=80&w=800&auto=format&fit=crop')" }}
+                          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1534353436294-0dbd4bdac845?q=80&w=800&auto=format&fit=crop')" }}
                         >
                           <div className="absolute inset-0 bg-black/50"></div>
                           <span className="absolute top-[28%] left-[40%] text-xs text-white font-semibold drop-shadow-md">Chelmsford</span>
@@ -444,12 +446,12 @@ const Home: React.FC = () => {
                     className={`p-4 rounded-lg text-left transition-all duration-300 w-48 lg:w-full flex-shrink-0 ${
                       activeFeature === index
                         ? 'bg-gradient-to-r from-amber-500 to-orange-600 text-white shadow-lg'
-                        : 'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-gray-900 dark:text-gray-100'
+                        : 'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700'
                     }`}
                   >
                     <div className="flex items-center">
                       <feature.icon className={`w-6 h-6 mr-3 flex-shrink-0 ${activeFeature === index ? 'text-white' : 'text-amber-600 dark:text-amber-400'}`} />
-                      <span className="font-semibold">{feature.title}</span>
+                      <span className={`font-semibold ${activeFeature === index ? 'text-white' : 'text-gray-900 dark:text-gray-100'}`}>{feature.title}</span>
                     </div>
                   </button>
                 ))}
