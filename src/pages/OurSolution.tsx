@@ -180,7 +180,7 @@ const OurSolution: React.FC = () => {
                     <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">{feature.title}</h3>
                     <p className="text-gray-600 dark:text-gray-300 text-sm">{feature.description}</p>
                   </div>
-                  <div className="h-48 flex items-center justify-center">
+                  <div className="h-40 sm:h-48 flex items-center justify-center">
                     {feature.visual}
                   </div>
                 </div>

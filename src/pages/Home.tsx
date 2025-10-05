@@ -223,7 +223,7 @@ const Home: React.FC = () => {
         <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 pt-24 pb-12">
           {/* Top Content */}
           <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent mb-6 leading-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent mb-6 leading-tight">
               The All-in-One Solution for Modern Logistics.
             </h1>
             <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8">
@@ -292,7 +292,7 @@ const Home: React.FC = () => {
             </div>
 
             {/* Desktop View */}
-            <div className="hidden md:block relative h-[400px]">
+            <div className="hidden md:block relative md:h-[400px]">
               <div className="relative flex flex-row items-center justify-between h-full">
                 <div className="flex flex-col justify-between h-full py-2">
                   {features.map((feature) => (
@@ -426,8 +426,8 @@ const Home: React.FC = () => {
               Discover the core benefits that make HOSS the preferred platform for modern logistics companies.
             </p>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-12">
-            <div className="lg:col-span-1">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12">
+            <div className="lg:col-span-2">
               <div className="flex flex-row lg:flex-col overflow-x-auto lg:overflow-x-visible -mx-4 px-4 lg:mx-0 lg:px-0 pb-4 lg:pb-0 space-x-2 lg:space-x-0 lg:space-y-2">
                 {interactiveFeatures.map((feature, index) => (
                   <button
