@@ -1,11 +1,10 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+import { SmtpClient } from "https://deno.land/x/smtp@v0.7.0/mod.ts";
 
 // Whitelist of allowed origins (no trailing slashes)
 const allowedOrigins = [
   'http://localhost:3000',
   'https://hoss1.vercel.app',
-  // You can also add your Vercel preview deployment URL pattern here if needed
-  // For example: Deno.env.get("VERCEL_PREVIEW_URL")
 ];
 
 // Helper to generate the correct CORS headers for a given request
@@ -24,6 +23,14 @@ function getCorsHeaders(requestOrigin: string | null) {
   return headers;
 }
 
+// Helper to create structured JSON responses
+function jsonResponse(status: number, body: object, corsHeaders: HeadersInit) {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { ...corsHeaders, "Content-Type": "application/json" },
+  });
+}
+
 serve(async (req: Request) => {
   const requestOrigin = req.headers.get("Origin");
   const corsHeaders = getCorsHeaders(requestOrigin);
@@ -35,36 +42,51 @@ serve(async (req: Request) => {
 
   // 2. Block requests from non-allowed origins
   if (!corsHeaders["Access-Control-Allow-Origin"]) {
-    return new Response(JSON.stringify({ error: "Forbidden: Origin not allowed" }), {
-      status: 403,
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
+    return jsonResponse(403, { error: "Forbidden: Origin not allowed" }, corsHeaders);
   }
 
-  // 3. Handle POST requests
-  if (req.method === "POST") {
-    // This is a dummy handler as requested.
-    // You can add your email sending logic here.
-    try {
-      // Optional: You can still parse the body if needed for your real logic
-      // const body = await req.json();
-      // console.log("Received body:", body);
+  // 3. Ensure the method is POST
+  if (req.method !== "POST") {
+    return jsonResponse(405, { error: "Method Not Allowed" }, corsHeaders);
+  }
 
-      return new Response(JSON.stringify({ success: true }), {
-        status: 200,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
-    } catch (error) {
-      return new Response(JSON.stringify({ error: "Internal Server Error" }), {
-        status: 500,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
+  try {
+    // 4. Parse request body and validate required fields
+    const { name, email, message } = await req.json();
+    if (!name || !email || !message) {
+      return jsonResponse(400, { error: "Missing required fields: name, email, message" }, corsHeaders);
     }
-  }
 
-  // 4. Handle all other methods
-  return new Response(JSON.stringify({ error: "Method Not Allowed" }), {
-    status: 405,
-    headers: { ...corsHeaders, "Content-Type": "application/json" },
-  });
+    // 5. Check for required environment variables (set as Supabase secrets)
+    const smtpPassword = Deno.env.get("EMAIL_PASSWORD"); // Using the name you specified
+    if (!smtpPassword) {
+        console.error("Missing EMAIL_PASSWORD secret in Supabase function settings.");
+        throw new Error("Server configuration error.");
+    }
+
+    // 6. Configure and send the email
+    const client = new SmtpClient();
+    await client.connectTLS({
+      hostname: "mail.thehoss.co.uk",
+      port: 465,
+      username: "noreply@thehoss.co.uk",
+      password: smtpPassword,
+    });
+
+    await client.send({
+      from: `"HOSS Contact" <noreply@thehoss.co.uk>`,
+      to: "info@thehoss.co.uk",
+      subject: `New contact form from ${name}`,
+      content: `From: ${name} <${email}>\n\n${message}`,
+    });
+
+    await client.close();
+
+    // 7. Return success response
+    return jsonResponse(200, { success: true }, corsHeaders);
+
+  } catch (error) {
+    console.error("Error sending email:", error);
+    return jsonResponse(500, { success: false, error: "Failed to send email" }, corsHeaders);
+  }
 });
