@@ -1,5 +1,4 @@
-// NOTE: This is a Deno function. Dependencies are imported via URL, so 'npm install' is not needed.
-// Before deploying, ensure secrets are set in your Supabase project dashboard.
+// This is a Deno function. Before deploying, ensure secrets are set in your Supabase project.
 // Deploy command: supabase functions deploy send-email --no-verify-jwt
 
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
@@ -64,7 +63,7 @@ serve(async (req: Request) => {
     if (!smtpHost || !smtpPort || !smtpUser || !smtpPassword) {
       const configError = new Error("Server configuration error: Missing one or more required SMTP secrets (SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASSWORD)");
       console.error(configError);
-      return jsonResponse(500, { success: false, error: configError.message, stack: configError.stack }, corsHeaders);
+      return jsonResponse(500, { success: false, error: configError.message }, corsHeaders);
     }
 
     // 5. Parse request body and validate required fields
@@ -73,37 +72,31 @@ serve(async (req: Request) => {
       return jsonResponse(400, { error: "Missing required fields: name, email, message" }, corsHeaders);
     }
 
-    // 6. Configure and send the email
+    // 6. Configure and send the email using Deno's SmtpClient
     const client = new SmtpClient();
     
-    try {
-      await client.connectTLS({
-        hostname: smtpHost,
-        port: parseInt(smtpPort),
-        username: smtpUser,
-        password: smtpPassword,
-      });
+    await client.connectTLS({
+      hostname: smtpHost,
+      port: parseInt(smtpPort),
+      username: smtpUser,
+      password: smtpPassword,
+    });
 
-      await client.send({
-        from: `"HOSS Contact" <${smtpUser}>`,
-        to: "info@thehoss.co.uk",
-        subject: `New contact form from ${name}`,
-        content: `From: ${name} <${email}>\n\n${message}`,
-      });
+    await client.send({
+      from: `"HOSS Contact" <${smtpUser}>`,
+      to: "info@thehoss.co.uk",
+      subject: `New contact form from ${name}`,
+      content: `From: ${name} <${email}>\n\n${message}`,
+    });
 
-      await client.close();
-    } catch (emailError) {
-      // Catch errors specifically from the email sending process
-      console.error("SMTP Error:", emailError);
-      throw emailError; // Re-throw to be caught by the outer catch block
-    }
+    await client.close();
 
     // 7. Return success response
     return jsonResponse(200, { success: true }, corsHeaders);
 
-  } catch (error) {
-    // This outer catch handles any error, including the re-thrown emailError
-    console.error("Full error in send-email function:", error);
-    return jsonResponse(500, { success: false, error: error.message, stack: error.stack }, corsHeaders);
+  } catch (err) {
+    // Catch any error, log it, and return a structured error response
+    console.error(err);
+    return jsonResponse(500, { success: false, error: err.message }, corsHeaders);
   }
 });
