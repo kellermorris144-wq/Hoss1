@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { Calendar, CheckCircle, Clock, Users, MapPin } from 'lucide-react';
-import { FunctionsHttpError } from '@supabase/supabase-js';
 import Card from '../components/Card';
 import Button from '../components/Button';
 import Modal from '../components/Modal';
-import { supabase } from '../integrations/supabase/client';
 
 interface FormData {
   firstName: string;
@@ -66,52 +64,46 @@ const Demo: React.FC = () => {
 
     setIsSubmitting(true);
     
-    const { error } = await supabase.functions.invoke('send-email', {
-      body: { formType: 'demo', ...formData },
-    });
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ formType: 'demo', ...formData }),
+      });
 
-    if (error) {
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'An unexpected error occurred.');
+      }
+
+      setIsSubmitting(false);
+      setShowSuccessModal(true);
+      
+      // Reset form
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        company: '',
+        industry: '',
+        fleetSize: '',
+        currentSolution: '',
+        challenges: '',
+        preferredDate: '',
+        preferredTime: '',
+        location: '',
+        message: '',
+      });
+
+    } catch (error) {
       console.error('Error sending demo request:', error);
       setIsSubmitting(false);
-      
-      let userMessage = 'An unexpected error occurred. Please try again later.';
-
-      if (error instanceof FunctionsHttpError) {
-        // Server returned a non-2xx status code (e.g., 400, 500)
-        try {
-          const errorJson = await error.context.json();
-          userMessage = errorJson.message || 'There was a problem with the server response.';
-        } catch {
-          userMessage = 'Could not understand the server\'s response.';
-        }
-      } else if (error.name === 'FunctionsFetchError') {
-        // Network error or CORS issue
-        userMessage = 'Could not connect to the server. This is often due to a network issue or a CORS configuration problem. Please check your internet connection and ensure the ALLOWED_ORIGIN secret is correctly set in your Supabase project.';
-      }
-      
-      alert(`Failed to schedule demo:\n\n${userMessage}`);
-      return;
+      const errorMessage = error instanceof Error ? error.message : 'Please try again later.';
+      alert(`Failed to schedule demo:\n\n${errorMessage}`);
     }
-    
-    setIsSubmitting(false);
-    setShowSuccessModal(true);
-    
-    // Reset form
-    setFormData({
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '',
-      company: '',
-      industry: '',
-      fleetSize: '',
-      currentSolution: '',
-      challenges: '',
-      preferredDate: '',
-      preferredTime: '',
-      location: '',
-      message: '',
-    });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
