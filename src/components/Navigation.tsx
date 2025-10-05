@@ -9,6 +9,7 @@ const Navigation: React.FC = () => {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const loginRef = useRef<HTMLDivElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
 
   const navLinks = [
     { to: '/', label: 'Home' },
@@ -25,6 +26,12 @@ const Navigation: React.FC = () => {
       if (loginRef.current && !loginRef.current.contains(event.target as Node)) {
         setIsLoginOpen(false);
       }
+      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target as Node)) {
+        // A bit of a hack to not close the menu when the toggle button is clicked
+        if (!(event.target as HTMLElement).closest('.mobile-menu-button')) {
+          setIsMobileMenuOpen(false);
+        }
+      }
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
@@ -39,6 +46,10 @@ const Navigation: React.FC = () => {
     } else {
       document.body.style.overflow = 'unset';
     }
+    // Cleanup function
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
   }, [isMobileMenuOpen]);
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
@@ -114,7 +125,7 @@ const Navigation: React.FC = () => {
             </button>
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800"
+              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 mobile-menu-button"
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? <X className="w-6 h-6 text-gray-700 dark:text-gray-300" /> : <Menu className="w-6 h-6 text-gray-700 dark:text-gray-300" />}
@@ -123,54 +134,53 @@ const Navigation: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Dropdown */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-16 left-0 right-0 h-[calc(100vh-4rem)] bg-white dark:bg-gray-900 animate-fade-in p-4">
-          <div className="flex flex-col h-full">
-            <div className="space-y-2">
-              {navLinks.map(({ to, label }) => (
-                <NavLink
-                  key={to}
-                  to={to}
-                  onClick={closeMobileMenu}
-                  className={({ isActive }) =>
-                    `block px-4 py-3 rounded-lg text-base font-medium transition-all duration-200 ${
-                      isActive
-                        ? 'bg-amber-600 text-white'
-                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
-                    }`
-                  }
-                >
-                  {label}
-                </NavLink>
-              ))}
-            </div>
-            <div className="mt-auto border-t border-gray-200 dark:border-gray-800 pt-4">
-              <h3 className="font-bold text-lg text-gray-900 dark:text-gray-100 mb-4">Client Portal Login</h3>
-              <form className="space-y-4">
-                {/* Login Form Fields */}
+        <div ref={mobileMenuRef} className="md:hidden absolute top-16 left-0 right-0 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 shadow-lg animate-slide-down">
+          <div className="px-2 pt-2 pb-3 space-y-1">
+            {navLinks.map(({ to, label }) => (
+              <NavLink
+                key={to}
+                to={to}
+                onClick={closeMobileMenu}
+                className={({ isActive }) =>
+                  `block px-3 py-2 rounded-md text-base font-medium ${
+                    isActive
+                      ? 'bg-amber-600 text-white'
+                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                  }`
+                }
+              >
+                {label}
+              </NavLink>
+            ))}
+          </div>
+          <div className="pt-4 pb-4 border-t border-gray-200 dark:border-gray-800">
+            <div className="px-4">
+              <h3 className="font-bold text-base text-gray-900 dark:text-gray-100 mb-4">Client Portal Login</h3>
+              <form className="space-y-3">
                 <div>
                   <label className="sr-only">Username</label>
                   <div className="relative">
                     <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                    <input type="text" className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg dark:bg-gray-800" placeholder="Username" />
+                    <input type="text" className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg dark:bg-gray-800 text-sm" placeholder="Username" />
                   </div>
                 </div>
                 <div>
                   <label className="sr-only">Password</label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                    <input type="password" className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg dark:bg-gray-800" placeholder="Password" />
+                    <input type="password" className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg dark:bg-gray-800 text-sm" placeholder="Password" />
                   </div>
                 </div>
                 <div>
                   <label className="sr-only">Organisation ID</label>
                   <div className="relative">
                     <Building className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                    <input type="text" className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg dark:bg-gray-800" placeholder="Organisation ID" />
+                    <input type="text" className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg dark:bg-gray-800 text-sm" placeholder="Organisation ID" />
                   </div>
                 </div>
-                <Button type="submit" className="w-full">Sign In</Button>
+                <Button type="submit" className="w-full" size="md">Sign In</Button>
               </form>
             </div>
           </div>
