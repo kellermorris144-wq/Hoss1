@@ -1,19 +1,31 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts"
 import { SmtpClient } from "https://deno.land/x/smtp@v0.7.0/mod.ts"
 
-// This is set in your Supabase project's Edge Function secrets
-const ALLOWED_ORIGIN = Deno.env.get("ALLOWED_ORIGIN") ?? "";
+// Define allowed origins. The production one comes from secrets, dev is hardcoded.
+const allowedOrigins = [
+  'http://localhost:3000', // For local development
+  Deno.env.get("ALLOWED_ORIGIN") ?? '' // For production (e.g., 'https://hoss1.vercel.app')
+].filter(Boolean); // Filter out empty string if secret is not set
 
-// Centralized CORS headers for all responses
-const corsHeaders = {
-  "Access-Control-Allow-Origin": ALLOWED_ORIGIN,
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
-  "Access-Control-Allow-Headers": "content-type, authorization, apikey, x-client-info, accept",
-  "Access-Control-Max-Age": "86400", // Cache preflight response for 24 hours
-};
+// Helper to generate CORS headers dynamically based on request origin
+function getCorsHeaders(requestOrigin: string | null) {
+  const headers = {
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Access-Control-Allow-Headers": "content-type, authorization, apikey, x-client-info, accept",
+    "Access-Control-Max-Age": "86400",
+    "Access-Control-Allow-Origin": "" // Default to not allowed
+  };
 
-// Helper to create structured JSON responses with CORS headers
-function jsonResponse(status: number, body: unknown) {
+  // If the request origin is in our whitelist, reflect it in the response
+  if (requestOrigin && allowedOrigins.includes(requestOrigin)) {
+    headers["Access-Control-Allow-Origin"] = requestOrigin;
+  }
+  
+  return headers;
+}
+
+// Helper to create structured JSON responses with correct CORS headers
+function jsonResponse(status: number, body: unknown, corsHeaders: HeadersInit) {
   return new Response(JSON.stringify(body), {
     status,
     headers: {
@@ -24,18 +36,26 @@ function jsonResponse(status: number, body: unknown) {
 }
 
 serve(async (req: Request) => {
+  const requestOrigin = req.headers.get("Origin");
+  const corsHeaders = getCorsHeaders(requestOrigin);
+
   // 1. Handle CORS preflight request immediately
   if (req.method === "OPTIONS") {
     return new Response(null, { status: 204, headers: corsHeaders });
   }
 
+  // If the origin is not in our whitelist, block the request.
+  if (!corsHeaders["Access-Control-Allow-Origin"]) {
+      return jsonResponse(403, { status: "error", message: "Forbidden: Origin not allowed" }, corsHeaders);
+  }
+
   // 2. Validate request method and content type
   if (req.method !== "POST") {
-    return jsonResponse(405, { status: "error", message: "Method Not Allowed" });
+    return jsonResponse(405, { status: "error", message: "Method Not Allowed" }, corsHeaders);
   }
   const contentType = req.headers.get("content-type") || "";
   if (!contentType.includes("application/json")) {
-    return jsonResponse(415, { status: "error", message: "Unsupported Media Type: Must be application/json" });
+    return jsonResponse(415, { status: "error", message: "Unsupported Media Type: Must be application/json" }, corsHeaders);
   }
 
   try {
@@ -43,6 +63,7 @@ serve(async (req: Request) => {
     const requiredSecrets = ["SMTP_HOST", "SMTP_PORT", "SMTP_USER", "SMTP_PASSWORD"];
     for (const secret of requiredSecrets) {
       if (!Deno.env.get(secret)) {
+        console.error(`Server configuration error: Missing required secret '${secret}'`);
         throw new Error(`Server configuration error: Missing required secret '${secret}'`);
       }
     }
@@ -50,7 +71,7 @@ serve(async (req: Request) => {
     // 4. Parse and validate the request body
     const body = await req.json().catch(() => null);
     if (!body) {
-      return jsonResponse(400, { status: "error", message: "Invalid JSON body" });
+      return jsonResponse(400, { status: "error", message: "Invalid JSON body" }, corsHeaders);
     }
     const { formType, ...formData } = body;
 
@@ -61,7 +82,7 @@ serve(async (req: Request) => {
       const required = ['firstName', 'lastName', 'email', 'phone', 'company', 'industry', 'fleetSize'];
       for (const field of required) {
         if (!formData[field]) {
-          return jsonResponse(400, { status: "error", message: `Missing required field for demo form: ${field}` });
+          return jsonResponse(400, { status: "error", message: `Missing required field for demo form: ${field}` }, corsHeaders);
         }
       }
       subject = 'New Demo Request from HOSS Website';
@@ -79,7 +100,7 @@ serve(async (req: Request) => {
       const required = ['name', 'email', 'subject', 'message'];
        for (const field of required) {
         if (!formData[field]) {
-          return jsonResponse(400, { status: "error", message: `Missing required field for contact form: ${field}` });
+          return jsonResponse(400, { status: "error", message: `Missing required field for contact form: ${field}` }, corsHeaders);
         }
       }
       subject = `New Contact Form Submission: ${formData.subject}`;
@@ -91,7 +112,7 @@ serve(async (req: Request) => {
              `Subject: ${formData.subject}\n\n` +
              `Message:\n${formData.message}`;
     } else {
-      return jsonResponse(400, { status: "error", message: `Invalid or missing formType specified.` });
+      return jsonResponse(400, { status: "error", message: `Invalid or missing formType specified.` }, corsHeaders);
     }
 
     // 5. Connect to SMTP and send email
@@ -111,10 +132,10 @@ serve(async (req: Request) => {
     });
     await client.close();
 
-    return jsonResponse(200, { status: "ok", message: "Email sent successfully" });
+    return jsonResponse(200, { status: "ok", message: "Email sent successfully" }, corsHeaders);
 
   } catch (error) {
     console.error("send-email function error:", error?.stack || error);
-    return jsonResponse(500, { status: "error", message: "Internal Server Error", details: error.message });
+    return jsonResponse(500, { status: "error", message: "Internal Server Error" }, corsHeaders);
   }
 })
