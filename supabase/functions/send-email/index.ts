@@ -13,7 +13,7 @@ serve(async (req) => {
   }
 
   try {
-    // Check for required secrets first
+    // 1. Check for required secrets first
     const requiredSecrets = ["SMTP_HOST", "SMTP_PORT", "SMTP_USER", "SMTP_PASSWORD"];
     for (const secret of requiredSecrets) {
       if (!Deno.env.get(secret)) {
@@ -21,16 +21,24 @@ serve(async (req) => {
       }
     }
 
+    // 2. Parse the request body
     const { formType, ...formData } = await req.json()
 
+    // 3. Attempt to connect to the SMTP server
     const client = new SmtpClient();
-    await client.connectTLS({
-      hostname: Deno.env.get("SMTP_HOST")!,
-      port: parseInt(Deno.env.get("SMTP_PORT")!),
-      username: Deno.env.get("SMTP_USER")!,
-      password: Deno.env.get("SMTP_PASSWORD")!,
-    });
+    try {
+      await client.connectTLS({
+        hostname: Deno.env.get("SMTP_HOST")!,
+        port: parseInt(Deno.env.get("SMTP_PORT")!),
+        username: Deno.env.get("SMTP_USER")!,
+        password: Deno.env.get("SMTP_PASSWORD")!,
+      });
+    } catch (connectionError) {
+      console.error("SMTP Connection Error:", connectionError);
+      throw new Error(`Failed to connect to SMTP server. Please verify your SMTP credentials and firewall settings. Original error: ${connectionError.message}`);
+    }
 
+    // 4. Prepare the email content
     let subject = '';
     let body = '';
 
@@ -59,12 +67,18 @@ serve(async (req) => {
       throw new Error('Invalid form type specified.');
     }
 
-    await client.send({
-      from: `HOSS Noreply <${Deno.env.get("SMTP_USER")!}>`,
-      to: "info@thehoss.co.uk",
-      subject,
-      content: body,
-    });
+    // 5. Attempt to send the email
+    try {
+      await client.send({
+        from: `HOSS Noreply <${Deno.env.get("SMTP_USER")!}>`,
+        to: "info@thehoss.co.uk",
+        subject,
+        content: body,
+      });
+    } catch (sendError) {
+      console.error("SMTP Send Error:", sendError);
+      throw new Error(`Failed to send email after connecting. The server rejected the message. Original error: ${sendError.message}`);
+    }
 
     await client.close();
 
