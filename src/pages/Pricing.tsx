@@ -1,38 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { CheckCircle, ArrowRight, Users, Briefcase, Truck, Building, PlusCircle, MinusCircle } from 'lucide-react';
+import React, { useState } from 'react';
+import { CheckCircle, ArrowRight, Building, PlusCircle, MinusCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 import Card from '../components/Card';
-import { useAnimatedCounter } from '../hooks/useAnimatedCounter';
+import PricingCalculator from '../components/PricingCalculator';
 
 const Pricing: React.FC = () => {
-  const [officeUsers, setOfficeUsers] = useState(1);
-  const [drivers, setDrivers] = useState(1);
-  const [customers, setCustomers] = useState(0);
-  const [totalCost, setTotalCost] = useState(0);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
-
-  const costs = {
-    office: 30,
-    driver: 10,
-    customer: 10,
-    base: 50,
-  };
-
-  // Calculate individual costs
-  const officeCost = officeUsers * costs.office;
-  const driverCost = drivers * costs.driver;
-  const customerCost = customers * costs.customer;
-
-  // Animate individual and total costs
-  const animatedOfficeCost = useAnimatedCounter(officeCost);
-  const animatedDriverCost = useAnimatedCounter(driverCost);
-  const animatedCustomerCost = useAnimatedCounter(customerCost);
-  const animatedTotalCost = useAnimatedCounter(totalCost);
-
-  useEffect(() => {
-    setTotalCost(officeCost + driverCost + customerCost + costs.base);
-  }, [officeCost, driverCost, customerCost, costs.base]);
 
   const includedFeatures = [
     'Live GPS Tracking & Mapping',
@@ -68,43 +42,6 @@ const Pricing: React.FC = () => {
     },
   ];
 
-  const Slider = ({ label, value, setValue, min = 0, max, icon: Icon }: { label: string, value: number, setValue: (v: number) => void, min?: number, max: number, icon: React.ElementType }) => {
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      let numValue = parseInt(e.target.value);
-      if (isNaN(numValue)) numValue = min;
-      if (numValue > max) numValue = max;
-      if (numValue < min) numValue = min;
-      setValue(numValue);
-    };
-
-    return (
-      <div className="space-y-3 group">
-        <div className="flex justify-between items-center">
-          <label className="font-medium text-gray-700 dark:text-gray-300 flex items-center">
-            <Icon className="w-5 h-5 mr-2 text-amber-600 dark:text-amber-400 group-hover:scale-110 transition-transform duration-200" />
-            {label}
-          </label>
-          <input
-            type="number"
-            value={value}
-            onChange={handleInputChange}
-            min={min}
-            max={max}
-            className="w-20 text-right bg-gray-100 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-lg px-2 py-1 font-bold text-lg text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-amber-500 focus:outline-none transition-colors"
-          />
-        </div>
-        <input
-          type="range"
-          min={min}
-          max={max}
-          value={value}
-          onChange={(e) => setValue(parseInt(e.target.value))}
-          className="w-full"
-        />
-      </div>
-    );
-  };
-
   return (
     <div className="pt-16">
       {/* Hero Section */}
@@ -124,56 +61,7 @@ const Pricing: React.FC = () => {
       {/* Calculator Section */}
       <section className="py-20 sm:py-24 bg-gray-50 dark:bg-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative">
-            <div className="absolute -inset-4 bg-gradient-to-r from-amber-500 to-orange-500 rounded-3xl blur-2xl opacity-20 animate-pulse-slow"></div>
-            <Card className="relative p-6 sm:p-8" gradient>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-                {/* Left Side: Sliders */}
-                <div className="flex flex-col justify-center">
-                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6">Estimate Your Monthly Cost</h2>
-                  <div className="space-y-8">
-                    <Slider label="Office Users" value={officeUsers} setValue={setOfficeUsers} min={1} max={50} icon={Briefcase} />
-                    <Slider label="Drivers" value={drivers} setValue={setDrivers} min={1} max={50} icon={Truck} />
-                    <Slider label="Customers" value={customers} setValue={setCustomers} min={0} max={100} icon={Users} />
-                  </div>
-                </div>
-
-                {/* Right Side: Cost Display */}
-                <div className="bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm p-6 rounded-2xl border border-gray-200 dark:border-gray-700 flex flex-col">
-                  <div className="flex-grow text-center flex flex-col justify-center">
-                    <p className="text-gray-500 dark:text-gray-400 text-lg mb-2">Your Estimated Monthly Total</p>
-                    <p className="text-6xl font-extrabold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent leading-none mb-6">
-                      £{animatedTotalCost.toFixed(2)}
-                    </p>
-                    
-                    <div className="space-y-3 text-sm text-left">
-                      <div className="flex justify-between items-center text-gray-600 dark:text-gray-300">
-                        <span>Base Fee</span>
-                        <span className="font-medium text-gray-800 dark:text-gray-200">£{costs.base.toFixed(2)}</span>
-                      </div>
-                      <div className="flex justify-between items-center text-gray-600 dark:text-gray-300">
-                        <span>Office Users ({officeUsers} x £{costs.office})</span>
-                        <span className="font-medium text-gray-800 dark:text-gray-200">£{animatedOfficeCost.toFixed(2)}</span>
-                      </div>
-                      <div className="flex justify-between items-center text-gray-600 dark:text-gray-300">
-                        <span>Drivers ({drivers} x £{costs.driver})</span>
-                        <span className="font-medium text-gray-800 dark:text-gray-200">£{animatedDriverCost.toFixed(2)}</span>
-                      </div>
-                      <div className="flex justify-between items-center text-gray-600 dark:text-gray-300">
-                        <span>Customers ({customers} x £{costs.customer})</span>
-                        <span className="font-medium text-gray-800 dark:text-gray-200">£{animatedCustomerCost.toFixed(2)}</span>
-                      </div>
-                    </div>
-                  </div>
-                  <Link to="/demo" className="block mt-8">
-                    <Button size="lg" className="w-full" icon={ArrowRight} iconPosition="right">
-                      Book a Demo
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-            </Card>
-          </div>
+          <PricingCalculator />
         </div>
       </section>
 
