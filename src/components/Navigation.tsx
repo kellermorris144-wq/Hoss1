@@ -52,10 +52,8 @@ const Navigation: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
-            <NavLink to="/" className="flex items-center space-x-2 group" onClick={closeMobileMenu}>
-              <span className="text-2xl font-bold bg-gradient-to-r from-amber-500 to-orange-600 bg-clip-text text-transparent">
-                HOSS
-              </span>
+            <NavLink to="/" className="flex items-center" onClick={closeMobileMenu}>
+              <img src="/logo.png" alt="HOSS Logo" className="h-8 w-auto" />
             </NavLink>
 
             {/* Desktop Navigation */}
