@@ -68,23 +68,17 @@ const Pricing: React.FC = () => {
   const Slider = ({ label, value, setValue, min = 0, max, icon: Icon }: { label: string, value: number, setValue: (v: number) => void, min?: number, max: number, icon: React.ElementType }) => {
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       let numValue = parseInt(e.target.value);
-      if (isNaN(numValue)) {
-        numValue = min;
-      }
-      if (numValue > max) {
-        numValue = max;
-      }
-      if (numValue < min) {
-        numValue = min;
-      }
+      if (isNaN(numValue)) numValue = min;
+      if (numValue > max) numValue = max;
+      if (numValue < min) numValue = min;
       setValue(numValue);
     };
 
     return (
-      <div className="relative p-4 bg-slate-50 dark:bg-slate-800/70 rounded-xl border border-slate-200 dark:border-slate-700 transition-all duration-300 hover:shadow-md hover:border-amber-400 dark:hover:border-amber-600">
-        <div className="flex justify-between items-center mb-4">
-          <label className="font-medium text-gray-700 dark:text-gray-300 flex items-center text-lg">
-            <Icon className="w-6 h-6 mr-3 text-amber-600 dark:text-amber-400" />
+      <div className="space-y-3 group">
+        <div className="flex justify-between items-center">
+          <label className="font-medium text-gray-700 dark:text-gray-300 flex items-center">
+            <Icon className="w-5 h-5 mr-2 text-amber-600 dark:text-amber-400 group-hover:scale-110 transition-transform duration-200" />
             {label}
           </label>
           <input
@@ -93,7 +87,7 @@ const Pricing: React.FC = () => {
             onChange={handleInputChange}
             min={min}
             max={max}
-            className="w-24 text-right bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg px-3 py-1.5 font-bold text-xl text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-amber-500 focus:outline-none transition-colors"
+            className="w-20 text-right bg-gray-100 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-lg px-2 py-1 font-bold text-lg text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-amber-500 focus:outline-none transition-colors"
           />
         </div>
         <input
@@ -104,6 +98,39 @@ const Pricing: React.FC = () => {
           onChange={(e) => setValue(parseInt(e.target.value))}
           className="w-full"
         />
+      </div>
+    );
+  };
+
+  const BarChart = () => {
+    const maxCost = costs.base + (50 * costs.office) + (50 * costs.driver) + (100 * costs.customer);
+    const costData = [
+      { label: 'Base Fee', value: costs.base, color: 'bg-slate-400' },
+      { label: 'Office Users', value: animatedOfficeCost, color: 'bg-amber-500' },
+      { label: 'Drivers', value: animatedDriverCost, color: 'bg-orange-500' },
+      { label: 'Customers', value: animatedCustomerCost, color: 'bg-red-500' },
+    ];
+
+    return (
+      <div className="bg-gray-100 dark:bg-gray-800/50 p-4 rounded-xl border border-gray-200 dark:border-gray-700">
+        <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-4 text-center">Cost Breakdown</h4>
+        <div className="flex items-end justify-center h-40 space-x-4">
+          {costData.map(item => (
+            <div key={item.label} className="flex-1 flex flex-col items-center group">
+              <div className="relative w-full h-full flex items-end justify-center">
+                <div
+                  className={`w-3/4 rounded-t-lg ${item.color} transition-all duration-500 ease-out hover:opacity-80`}
+                  style={{ height: `${(item.value / maxCost) * 150}%` }}
+                >
+                  <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-max px-2 py-1 bg-gray-900 text-white text-xs font-bold rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10">
+                    £{item.value.toFixed(2)}
+                  </div>
+                </div>
+              </div>
+              <span className="text-xs text-gray-500 dark:text-gray-400 mt-2 text-center">{item.label}</span>
+            </div>
+          ))}
+        </div>
       </div>
     );
   };
@@ -132,47 +159,26 @@ const Pricing: React.FC = () => {
               <div className="relative">
                 <div className="absolute -inset-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl blur-xl opacity-20 animate-pulse-slow"></div>
                 <Card className="relative p-6 sm:p-8 sticky top-24" gradient>
-                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8">Estimate Your Monthly Cost</h2>
+                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6">Estimate Your Monthly Cost</h2>
                   
-                  {/* Total Cost Display */}
-                  <div className="text-center mb-8">
-                      <p className="text-gray-500 dark:text-gray-400 text-lg mb-2">Your Estimated Monthly Total</p>
-                      <p className="text-6xl font-extrabold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent leading-none">
-                          £{animatedTotalCost.toFixed(2)}
-                      </p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-8">
+                    {/* Sliders */}
+                    <div className="space-y-6">
+                      <Slider label="Office Users" value={officeUsers} setValue={setOfficeUsers} min={1} max={50} icon={Briefcase} />
+                      <Slider label="Drivers" value={drivers} setValue={setDrivers} min={1} max={50} icon={Truck} />
+                      <Slider label="Customers" value={customers} setValue={setCustomers} min={0} max={100} icon={Users} />
+                    </div>
+                    {/* Total Cost Display */}
+                    <div className="text-center bg-gray-100 dark:bg-gray-800/50 p-6 rounded-2xl border border-gray-200 dark:border-gray-700">
+                        <p className="text-gray-500 dark:text-gray-400 text-lg mb-2">Monthly Total</p>
+                        <p className="text-5xl font-extrabold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent leading-none">
+                            £{animatedTotalCost.toFixed(2)}
+                        </p>
+                    </div>
                   </div>
 
-                  {/* Sliders */}
-                  <div className="space-y-8 mb-8">
-                    <Slider label="Office Users" value={officeUsers} setValue={setOfficeUsers} min={1} max={50} icon={Briefcase} />
-                    <Slider label="Drivers" value={drivers} setValue={setDrivers} min={1} max={50} icon={Truck} />
-                    <Slider label="Customers" value={customers} setValue={setCustomers} min={0} max={100} icon={Users} />
-                  </div>
-
-                  {/* Cost Breakdown */}
-                  <div className="bg-gray-100 dark:bg-gray-800/50 p-6 rounded-xl space-y-3 text-sm border border-gray-200 dark:border-gray-700">
-                    <div className="flex justify-between items-center text-gray-600 dark:text-gray-300 transition-colors">
-                      <span>Base Fee</span>
-                      <span className="font-medium text-gray-800 dark:text-gray-200">£{costs.base.toFixed(2)}</span>
-                    </div>
-                    <div className="flex justify-between items-center text-gray-600 dark:text-gray-300 transition-colors">
-                      <span>Office Users ({officeUsers} x £{costs.office})</span>
-                      <span className="font-medium text-gray-800 dark:text-gray-200">£{animatedOfficeCost.toFixed(2)}</span>
-                    </div>
-                    <div className="flex justify-between items-center text-gray-600 dark:text-gray-300 transition-colors">
-                      <span>Drivers ({drivers} x £{costs.driver})</span>
-                      <span className="font-medium text-gray-800 dark:text-gray-200">£{animatedDriverCost.toFixed(2)}</span>
-                    </div>
-                    <div className="flex justify-between items-center text-gray-600 dark:text-gray-300 transition-colors">
-                      <span>Customers ({customers} x £{costs.customer})</span>
-                      <span className="font-medium text-gray-800 dark:text-gray-200">£{animatedCustomerCost.toFixed(2)}</span>
-                    </div>
-                    <div className="border-t border-gray-300 dark:border-gray-700 my-3"></div>
-                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center text-xl font-bold text-gray-900 dark:text-gray-100">
-                      <span>Estimated Monthly Total</span>
-                      <span className="text-2xl sm:text-xl">£{animatedTotalCost.toFixed(2)}</span>
-                    </div>
-                  </div>
+                  {/* Cost Breakdown Chart */}
+                  <BarChart />
                   
                   <Link to="/demo" className="block mt-8">
                     <Button size="lg" className="w-full" icon={ArrowRight} iconPosition="right">
