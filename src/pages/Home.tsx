@@ -68,7 +68,7 @@ const MapVisual = () => (
   <div className="w-full h-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg p-4 flex items-center justify-center overflow-hidden">
     <div 
       className="w-full h-full rounded-lg relative bg-cover bg-center map-grid-overlay"
-      style={{ backgroundImage: "url('https://images.unsplash.com/photo-1534312527009-56c7016453e6?q=80&w=1974&auto=format&fit=crop')" }}
+      style={{ backgroundImage: "url('https://images.unsplash.com/photo-1612387692213-eda2b6a8425f?q=80&w=1974&auto=format&fit=crop')" }}
     >
       <div className="absolute inset-0 bg-black/20 dark:bg-black/50 rounded-lg"></div>
       <div className="relative w-full h-full">
@@ -276,7 +276,7 @@ const Home: React.FC = () => {
                       <h3 className="font-semibold text-slate-700 dark:text-slate-300 text-sm mb-2">Live Fleet: Essex</h3>
                       <div 
                         className="relative h-32 rounded-lg overflow-hidden bg-cover bg-center map-grid-overlay"
-                        style={{ backgroundImage: "url('https://images.unsplash.com/photo-1534312527009-56c7016453e6?q=80&w=1974&auto=format&fit=crop')" }}
+                        style={{ backgroundImage: "url('https://images.unsplash.com/photo-1612387692213-eda2b6a8425f?q=80&w=1974&auto=format&fit=crop')" }}
                       >
                         <div className="absolute inset-0 bg-black/20 dark:bg-black/50"></div>
                         <div className="relative w-full h-full">
@@ -333,7 +333,7 @@ const Home: React.FC = () => {
                         <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-2">Live Fleet: Essex</h3>
                         <div 
                           className="relative h-32 rounded-lg overflow-hidden bg-cover bg-center map-grid-overlay"
-                          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1534312527009-56c7016453e6?q=80&w=1974&auto=format&fit=crop')" }}
+                          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1612387692213-eda2b6a8425f?q=80&w=1974&auto=format&fit=crop')" }}
                         >
                           <div className="absolute inset-0 bg-black/20 dark:bg-black/50"></div>
                           <div className="relative w-full h-full">
