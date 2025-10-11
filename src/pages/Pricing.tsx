@@ -81,10 +81,10 @@ const Pricing: React.FC = () => {
     };
 
     return (
-      <div className="space-y-3 group">
-        <div className="flex justify-between items-center">
-          <label className="font-medium text-gray-700 dark:text-gray-300 flex items-center">
-            <Icon className="w-5 h-5 mr-2 text-amber-600 dark:text-amber-400 group-hover:scale-110 transition-transform duration-200" />
+      <div className="relative p-4 bg-slate-50 dark:bg-slate-800/70 rounded-xl border border-slate-200 dark:border-slate-700 transition-all duration-300 hover:shadow-md hover:border-amber-400 dark:hover:border-amber-600">
+        <div className="flex justify-between items-center mb-4">
+          <label className="font-medium text-gray-700 dark:text-gray-300 flex items-center text-lg">
+            <Icon className="w-6 h-6 mr-3 text-amber-600 dark:text-amber-400" />
             {label}
           </label>
           <input
@@ -93,7 +93,7 @@ const Pricing: React.FC = () => {
             onChange={handleInputChange}
             min={min}
             max={max}
-            className="w-20 text-right bg-gray-100 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-lg px-2 py-1 font-bold text-lg text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-amber-500 focus:outline-none transition-colors"
+            className="w-24 text-right bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg px-3 py-1.5 font-bold text-xl text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-amber-500 focus:outline-none transition-colors"
           />
         </div>
         <input
