@@ -42,6 +42,26 @@ const Pricing: React.FC = () => {
     },
   ];
 
+  const particles = Array.from({ length: 15 }).map((_, i) => {
+    const size = Math.random() * 10 + 5;
+    const duration = Math.random() * 5 + 8;
+    const delay = Math.random() * 7;
+    const left = Math.random() * 100;
+    const translateX = (Math.random() - 0.5) * 100;
+
+    return {
+      key: i,
+      style: {
+        width: `${size}px`,
+        height: `${size}px`,
+        left: `${left}%`,
+        animationDuration: `${duration}s`,
+        animationDelay: `${delay}s`,
+        '--translateX': `${translateX}px`,
+      } as React.CSSProperties,
+    };
+  });
+
   return (
     <div className="pt-16">
       {/* Hero Section */}
@@ -66,8 +86,13 @@ const Pricing: React.FC = () => {
       </section>
 
       {/* All-in-One Plan Section */}
-      <section className="py-20 sm:py-24 bg-gray-50 dark:bg-slate-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-20 sm:py-24 bg-gray-50 dark:bg-slate-800 overflow-hidden">
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          {particles.map(p => (
+            <div key={p.key} className="particle" style={p.style} />
+          ))}
+        </div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
               The All-in-One Plan
