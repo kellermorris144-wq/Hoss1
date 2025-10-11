@@ -122,23 +122,23 @@ const Pricing: React.FC = () => {
       </section>
 
       {/* Enterprise Note */}
-      <section className="bg-white dark:bg-gray-900 pb-20 sm:pb-24">
+      <section className="py-20 sm:py-24 bg-gray-50 dark:bg-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Card className="p-8 bg-gradient-to-r from-amber-500 to-orange-600 text-white shadow-2xl">
+          <Card className="p-8 border-2 border-amber-500/50 shadow-2xl">
             <div className="flex flex-col md:flex-row items-center text-center md:text-left gap-6">
               <div className="flex-shrink-0">
-                <Building className="w-12 h-12 md:w-16 md:h-16 text-amber-200" />
+                <Building className="w-12 h-12 md:w-16 md:h-16 text-amber-500" />
               </div>
               <div>
-                <h3 className="text-2xl font-bold mb-2">Need a solution for 50+ users?</h3>
-                <p className="text-amber-100">
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">Need a solution for 50+ users?</h3>
+                <p className="text-gray-600 dark:text-gray-300">
                   We offer negotiable pricing and dedicated enterprise support for larger teams. 
                   Contact our sales team to discuss a custom package tailored to your business.
                 </p>
               </div>
               <div className="flex-shrink-0 mt-4 md:mt-0">
                 <Link to="/contact">
-                  <Button size="lg" className="bg-white text-amber-700 hover:bg-slate-100 font-bold shadow-lg transform hover:scale-105">
+                  <Button size="lg" variant="primary">
                     Contact Sales
                   </Button>
                 </Link>
