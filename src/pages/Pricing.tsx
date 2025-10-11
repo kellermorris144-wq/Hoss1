@@ -25,10 +25,10 @@ const Pricing: React.FC = () => {
   const customerCost = customers * costs.customer;
 
   // Animate individual and total costs
-  const animatedOfficeCost = useAnimatedCounter(officeCost, 300);
-  const animatedDriverCost = useAnimatedCounter(driverCost, 300);
-  const animatedCustomerCost = useAnimatedCounter(customerCost, 300);
-  const animatedTotalCost = useAnimatedCounter(totalCost, 300);
+  const animatedOfficeCost = useAnimatedCounter(officeCost);
+  const animatedDriverCost = useAnimatedCounter(driverCost);
+  const animatedCustomerCost = useAnimatedCounter(customerCost);
+  const animatedTotalCost = useAnimatedCounter(totalCost);
 
   useEffect(() => {
     setTotalCost(officeCost + driverCost + customerCost + costs.base);
