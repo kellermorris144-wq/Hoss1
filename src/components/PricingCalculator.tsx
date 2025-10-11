@@ -25,56 +25,87 @@ const CalculatorSlider = ({ label, value, setValue, min, max }: { label: string,
 };
 
 const Visualizer = ({ office, drivers, customers }: { office: number, drivers: number, customers: number }) => {
-  const renderIcons = (count: number, Icon: React.ElementType, color: string) => {
-    const displayCount = Math.min(count, 25); 
-    return (
-      <div className="flex flex-wrap gap-2 mt-3">
-        {Array.from({ length: displayCount }).map((_, i) => (
-          <Icon 
-            key={i} 
-            className={`w-5 h-5 ${color} transition-all duration-300 animate-pop-in`} 
-            style={{ animationDelay: `${i * 20}ms` }} 
-          />
-        ))}
-      </div>
-    );
-  };
-
-  const Category = ({ count, label, Icon, color }: { count: number, label: string, Icon: React.ElementType, color: string }) => {
+  const Category = ({ count, label, Icon, color, description, feature }: { count: number, label: string, Icon: React.ElementType, color: string, description: string, feature?: string }) => {
     if (count === 0) return null;
     
     return (
-      <div className="bg-white dark:bg-slate-800/50 p-4 rounded-lg border border-slate-200 dark:border-slate-700/50 transition-opacity duration-300">
+      <div className="bg-white dark:bg-slate-800/50 p-4 rounded-lg border border-slate-200 dark:border-slate-700/50 transition-all duration-300 animate-pop-in">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${color.replace('text-', 'bg-')}/20`}>
-              <Icon className={`w-5 h-5 ${color}`} />
+            <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${color.replace('text-', 'bg-')}/20`}>
+              <Icon className={`w-6 h-6 ${color}`} />
             </div>
-            <h3 className="text-slate-800 dark:text-white font-semibold text-sm">{label}</h3>
+            <div>
+              <h3 className="text-slate-800 dark:text-white font-semibold">{label}</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400">{description}</p>
+            </div>
           </div>
-          <span className="font-mono text-lg text-slate-600 dark:text-slate-300">{count}</span>
+          <span className="font-mono text-2xl font-bold text-slate-700 dark:text-slate-300">{count}</span>
         </div>
-        {renderIcons(count, Icon, color)}
+        {feature && (
+          <div className="mt-3 pt-3 border-t border-slate-200 dark:border-slate-700/50">
+            <span className={`text-xs font-medium px-2 py-1 rounded-full ${color.replace('text-', 'bg-')}/20 ${color}`}>
+              {feature}
+            </span>
+          </div>
+        )}
       </div>
     );
   };
 
+  const totalUsers = office + drivers + customers;
+
   return (
     <div className="relative w-full h-full min-h-[300px] lg:min-h-0 bg-slate-50 dark:bg-slate-900 rounded-2xl p-6 flex flex-col overflow-hidden border border-slate-200 dark:border-slate-800">
+      <div className="mb-6">
+        <h3 className="text-lg font-bold text-slate-900 dark:text-white">Your HOSS Ecosystem</h3>
+        <p className="text-sm text-slate-500 dark:text-slate-400">A real-time view of your team structure.</p>
+      </div>
+      
       <div className="relative z-10 w-full flex-grow flex flex-col justify-center">
-        <div className="space-y-4">
-          <Category count={office} label="Office Users" Icon={Briefcase} color="text-amber-500" />
-          <Category count={drivers} label="Drivers" Icon={Truck} color="text-orange-500" />
-          <Category count={customers} label="Customers" Icon={Users} color="text-red-500" />
-        </div>
-        
-        {office === 0 && drivers === 0 && customers === 0 && (
-            <div className="text-center text-slate-500 my-auto">
-                <p className="text-lg">Your Fleet Visualizer</p>
-                <p className="text-sm">Adjust the sliders to see your team.</p>
-            </div>
+        {totalUsers > 0 ? (
+          <div className="space-y-4">
+            <Category 
+              count={office} 
+              label="Office Users" 
+              Icon={Briefcase} 
+              color="text-amber-500"
+              description="Manage operations & dispatch."
+              feature="Accesses Web Dashboard"
+            />
+            <Category 
+              count={drivers} 
+              label="Drivers" 
+              Icon={Truck} 
+              color="text-orange-500"
+              description="Execute jobs & capture PODs."
+              feature="Uses Mobile App"
+            />
+            <Category 
+              count={customers} 
+              label="Customers" 
+              Icon={Users} 
+              color="text-red-500"
+              description="Track shipments & view history."
+              feature="Accesses Customer Portal"
+            />
+          </div>
+        ) : (
+          <div className="text-center text-slate-500 my-auto">
+              <p className="text-lg">Your Fleet Visualizer</p>
+              <p className="text-sm">Adjust the sliders to see your team.</p>
+          </div>
         )}
       </div>
+
+      {totalUsers > 0 && (
+        <div className="mt-6 pt-6 border-t border-slate-200 dark:border-slate-700">
+          <div className="flex justify-between items-center">
+            <span className="font-semibold text-slate-700 dark:text-slate-300">Total Team Size</span>
+            <span className="font-mono text-2xl font-bold text-slate-900 dark:text-white">{totalUsers}</span>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
