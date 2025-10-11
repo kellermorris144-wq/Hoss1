@@ -1,13 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useTheme } from '../contexts/ThemeContext';
-import { Moon, Sun, User, Lock, Building, Menu, X } from 'lucide-react';
-import Button from './Button';
-import Modal from './Modal';
+import { Moon, Sun, Menu, X } from 'lucide-react';
 
 const Navigation: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
 
@@ -89,13 +86,14 @@ const Navigation: React.FC = () => {
                 {theme === 'light' ? <Moon className="w-5 h-5 text-gray-700" /> : <Sun className="w-5 h-5 text-gray-300" />}
               </button>
 
-              <Button
-                variant="outline"
-                size="md"
-                onClick={() => setIsLoginModalOpen(true)}
+              <a
+                href="https://portal.thehoss.co.uk"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 dark:focus:ring-offset-gray-900 border-2 border-gray-300 dark:border-gray-700 hover:border-amber-600 dark:hover:border-amber-500 text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 px-4 py-2 text-sm"
               >
                 Login
-              </Button>
+              </a>
             </div>
 
             {/* Mobile Header */}
@@ -108,13 +106,14 @@ const Navigation: React.FC = () => {
                 {theme === 'light' ? <Moon className="w-5 h-5 text-gray-700" /> : <Sun className="w-5 h-5 text-gray-300" />}
               </button>
               
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setIsLoginModalOpen(true)}
+              <a
+                href="https://portal.thehoss.co.uk"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 dark:focus:ring-offset-gray-900 border-2 border-gray-300 dark:border-gray-700 hover:border-amber-600 dark:hover:border-amber-500 text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 px-3 py-1.5 text-sm"
               >
                 Login
-              </Button>
+              </a>
 
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -151,37 +150,6 @@ const Navigation: React.FC = () => {
           </div>
         )}
       </nav>
-
-      <Modal
-        isOpen={isLoginModalOpen}
-        onClose={() => setIsLoginModalOpen(false)}
-        title="Client Portal Login"
-      >
-        <form className="space-y-4">
-          <div>
-            <label className="sr-only">Username</label>
-            <div className="relative">
-              <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-              <input type="text" className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg dark:bg-gray-800 text-sm dark:text-gray-100 dark:placeholder-gray-400" placeholder="Username" />
-            </div>
-          </div>
-          <div>
-            <label className="sr-only">Password</label>
-            <div className="relative">
-              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-              <input type="password" className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg dark:bg-gray-800 text-sm dark:text-gray-100 dark:placeholder-gray-400" placeholder="Password" />
-            </div>
-          </div>
-          <div>
-            <label className="sr-only">Organisation ID</label>
-            <div className="relative">
-              <Building className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-              <input type="text" className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg dark:bg-gray-800 text-sm dark:text-gray-100 dark:placeholder-gray-400" placeholder="Organisation ID" />
-            </div>
-          </div>
-          <Button type="submit" className="w-full" size="md">Sign In</Button>
-        </form>
-      </Modal>
     </>
   );
 };
