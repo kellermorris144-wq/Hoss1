@@ -66,30 +66,29 @@ const Pricing: React.FC = () => {
       </section>
 
       {/* All-in-One Plan Section */}
-      <section className="relative py-20 sm:py-24 bg-slate-900 overflow-hidden">
-        <div className="absolute inset-0 bg-grid-pattern opacity-5 dark:[&_path]:stroke-white/5"></div>
-        <div className="absolute inset-x-0 top-0 h-64 bg-gradient-to-b from-slate-900 to-transparent"></div>
-        <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-slate-900 to-transparent"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 sm:py-24 bg-gray-50 dark:bg-slate-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
               The All-in-One Plan
             </h2>
-            <p className="text-lg text-slate-400">
+            <p className="text-lg text-gray-600 dark:text-gray-300">
               Every HOSS subscription comes fully loaded with all the features you need to run and scale your business.
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {includedFeatures.map((feature, index) => (
               <div
                 key={feature}
-                className="relative group p-6 bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden animate-slide-in-bottom"
+                className="relative group p-6 bg-white/50 dark:bg-slate-900/50 backdrop-blur-lg border border-slate-200 dark:border-slate-700 rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 animate-slide-in-bottom"
                 style={{ animationDelay: `${index * 50}ms` }}
               >
-                <div className="absolute -top-1/2 -right-1/2 w-full h-full bg-gradient-radial from-amber-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-spin-slow"></div>
+                <div className="absolute -inset-px bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md"></div>
                 <div className="relative flex items-center">
-                  <CheckCircle className="w-6 h-6 text-green-400 mr-4 flex-shrink-0" />
-                  <span className="text-slate-300">{feature}</span>
+                  <div className="flex-shrink-0 w-10 h-10 bg-amber-100 dark:bg-amber-900/50 rounded-lg flex items-center justify-center mr-4 transition-all duration-300 group-hover:scale-110 group-hover:bg-amber-200 dark:group-hover:bg-amber-900">
+                    <CheckCircle className="w-6 h-6 text-amber-600 dark:text-amber-400" />
+                  </div>
+                  <span className="font-medium text-slate-700 dark:text-slate-300">{feature}</span>
                 </div>
               </div>
             ))}
