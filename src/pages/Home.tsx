@@ -68,7 +68,7 @@ const MapVisual = () => (
   <div className="w-full h-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg p-4 flex items-center justify-center overflow-hidden">
     <div 
       className="w-full h-full rounded-lg relative bg-cover bg-center"
-      style={{ backgroundImage: "url('https://images.unsplash.com/photo-1599511029751-813a5c837585?q=80&w=800&auto=format&fit=crop')" }}
+      style={{ backgroundImage: "url('https://images.unsplash.com/photo-1567653418876-5bb0e566e1c2?q=80&w=800&auto=format&fit=crop')" }}
     >
       <div className="absolute inset-0 bg-black/20 dark:bg-black/50 rounded-lg"></div>
       <div className="relative w-full h-full">
@@ -276,7 +276,7 @@ const Home: React.FC = () => {
                       <h3 className="font-semibold text-slate-700 dark:text-slate-300 text-sm mb-2">Live Fleet: Essex</h3>
                       <div 
                         className="relative h-32 rounded-lg overflow-hidden bg-cover bg-center map-grid-overlay"
-                        style={{ backgroundImage: "url('https://images.unsplash.com/photo-1599511029751-813a5c837585?q=80&w=800&auto=format&fit=crop')" }}
+                        style={{ backgroundImage: "url('https://images.unsplash.com/photo-1567653418876-5bb0e566e1c2?q=80&w=800&auto=format&fit=crop')" }}
                       >
                         <div className="absolute inset-0 bg-black/20 dark:bg-black/50"></div>
                         <div className="relative w-full h-full">
@@ -333,7 +333,7 @@ const Home: React.FC = () => {
                         <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-2">Live Fleet: Essex</h3>
                         <div 
                           className="relative h-32 rounded-lg overflow-hidden bg-cover bg-center map-grid-overlay"
-                          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1599511029751-813a5c837585?q=80&w=800&auto=format&fit=crop')" }}
+                          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1567653418876-5bb0e566e1c2?q=80&w=800&auto=format&fit=crop')" }}
                         >
                           <div className="absolute inset-0 bg-black/20 dark:bg-black/50"></div>
                           <div className="relative w-full h-full">
@@ -516,7 +516,7 @@ const Home: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {expertFeatures.map((feature) => (
               <div key={feature} className="relative group">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-500 to-orange-500 rounded-xl blur opacity-0 group-hover:opacity-60 transition duration-300"></div>
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-500 to-orange-500 rounded-xl blur opacity-0 group-hover:opacity-60 transition-300"></div>
                 <div className="relative bg-white/80 dark:bg-slate-800/80 backdrop-blur-lg border border-slate-200 dark:border-slate-700 rounded-xl p-6 h-full flex items-center">
                   <CheckSquare className="w-6 h-6 text-amber-600 mr-4 flex-shrink-0" />
                   <span className="font-medium text-gray-700 dark:text-gray-300">{feature}</span>

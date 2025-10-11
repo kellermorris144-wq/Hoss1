@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useTheme } from '../contexts/ThemeContext';
 import { Moon, Sun, Menu, X } from 'lucide-react';
+import hossLogo from '../assets/logo.png';
 
 const Navigation: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
@@ -53,7 +54,7 @@ const Navigation: React.FC = () => {
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <NavLink to="/" className="flex items-center" onClick={closeMobileMenu}>
-              <img src="/logo.png" alt="HOSS Logo" className="h-8 w-auto" />
+              <img src={hossLogo} alt="HOSS Logo" className="h-8 w-auto" />
             </NavLink>
 
             {/* Desktop Navigation */}
