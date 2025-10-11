@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Briefcase, Truck, Users, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Button from './Button';
+import Card from './Card';
 import { useAnimatedCounter } from '../hooks/useAnimatedCounter';
 
 const CalculatorSlider = ({ label, value, setValue, min, max }: { label: string, value: number, setValue: (v: number) => void, min: number, max: number }) => {
