@@ -19,15 +19,20 @@ const Pricing: React.FC = () => {
     base: 50,
   };
 
-  useEffect(() => {
-    const officeCost = officeUsers * costs.office;
-    const driverCost = drivers * costs.driver;
-    const customerCost = customers * costs.customer;
-    
-    setTotalCost(officeCost + driverCost + customerCost + costs.base);
-  }, [officeUsers, drivers, customers]);
+  // Calculate individual costs
+  const officeCost = officeUsers * costs.office;
+  const driverCost = drivers * costs.driver;
+  const customerCost = customers * costs.customer;
 
+  // Animate individual and total costs
+  const animatedOfficeCost = useAnimatedCounter(officeCost, 300);
+  const animatedDriverCost = useAnimatedCounter(driverCost, 300);
+  const animatedCustomerCost = useAnimatedCounter(customerCost, 300);
   const animatedTotalCost = useAnimatedCounter(totalCost, 300);
+
+  useEffect(() => {
+    setTotalCost(officeCost + driverCost + customerCost + costs.base);
+  }, [officeCost, driverCost, customerCost]);
 
   const includedFeatures = [
     'Live GPS Tracking & Mapping',
@@ -141,15 +146,15 @@ const Pricing: React.FC = () => {
                     </div>
                     <div className="flex justify-between items-center text-gray-600 dark:text-gray-300 transition-colors">
                       <span>Office Users ({officeUsers} x £{costs.office})</span>
-                      <span className="font-medium text-gray-800 dark:text-gray-200">£{(officeUsers * costs.office).toFixed(2)}</span>
+                      <span className="font-medium text-gray-800 dark:text-gray-200">£{animatedOfficeCost.toFixed(2)}</span>
                     </div>
                     <div className="flex justify-between items-center text-gray-600 dark:text-gray-300 transition-colors">
                       <span>Drivers ({drivers} x £{costs.driver})</span>
-                      <span className="font-medium text-gray-800 dark:text-gray-200">£{(drivers * costs.driver).toFixed(2)}</span>
+                      <span className="font-medium text-gray-800 dark:text-gray-200">£{animatedDriverCost.toFixed(2)}</span>
                     </div>
                     <div className="flex justify-between items-center text-gray-600 dark:text-gray-300 transition-colors">
                       <span>Customers ({customers} x £{costs.customer})</span>
-                      <span className="font-medium text-gray-800 dark:text-gray-200">£{(customers * costs.customer).toFixed(2)}</span>
+                      <span className="font-medium text-gray-800 dark:text-gray-200">£{animatedCustomerCost.toFixed(2)}</span>
                     </div>
                     <div className="border-t border-gray-300 dark:border-gray-700 my-3"></div>
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center text-xl font-bold text-gray-900 dark:text-gray-100">
