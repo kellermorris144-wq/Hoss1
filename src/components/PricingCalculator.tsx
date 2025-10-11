@@ -9,8 +9,8 @@ const CalculatorSlider = ({ label, value, setValue, min, max }: { label: string,
   return (
     <div className="space-y-3">
       <div className="flex justify-between items-center text-sm">
-        <label className="font-medium text-gray-300">{label}</label>
-        <span className="px-2 py-0.5 bg-slate-700 rounded font-mono text-white">{value}</span>
+        <label className="font-medium text-gray-700 dark:text-gray-300">{label}</label>
+        <span className="px-2 py-0.5 bg-slate-200 dark:bg-slate-700 rounded font-mono text-slate-800 dark:text-white">{value}</span>
       </div>
       <input
         type="range"
@@ -26,7 +26,6 @@ const CalculatorSlider = ({ label, value, setValue, min, max }: { label: string,
 
 const Visualizer = ({ office, drivers, customers }: { office: number, drivers: number, customers: number }) => {
   const renderIcons = (count: number, Icon: React.ElementType, color: string) => {
-    // Cap icons for performance and to prevent visual clutter
     const displayCount = Math.min(count, 25); 
     return (
       <div className="flex flex-wrap gap-2 mt-3">
@@ -45,15 +44,15 @@ const Visualizer = ({ office, drivers, customers }: { office: number, drivers: n
     if (count === 0) return null;
     
     return (
-      <div className="transition-opacity duration-300">
+      <div className="bg-white dark:bg-slate-800/50 p-4 rounded-lg border border-slate-200 dark:border-slate-700/50 transition-opacity duration-300">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${color.replace('text-', 'bg-')}/20`}>
               <Icon className={`w-5 h-5 ${color}`} />
             </div>
-            <h3 className="text-white font-semibold text-sm">{label}</h3>
+            <h3 className="text-slate-800 dark:text-white font-semibold text-sm">{label}</h3>
           </div>
-          <span className="font-mono text-lg text-slate-300">{count}</span>
+          <span className="font-mono text-lg text-slate-600 dark:text-slate-300">{count}</span>
         </div>
         {renderIcons(count, Icon, color)}
       </div>
@@ -61,13 +60,12 @@ const Visualizer = ({ office, drivers, customers }: { office: number, drivers: n
   };
 
   return (
-    <div className="relative w-full h-full min-h-[300px] lg:min-h-0 bg-slate-900 rounded-2xl p-6 flex flex-col overflow-hidden border border-slate-800">
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-900 to-slate-800 opacity-50"></div>
+    <div className="relative w-full h-full min-h-[300px] lg:min-h-0 bg-slate-50 dark:bg-slate-900 rounded-2xl p-6 flex flex-col overflow-hidden border border-slate-200 dark:border-slate-800">
       <div className="relative z-10 w-full flex-grow flex flex-col justify-center">
-        <div className="space-y-6">
-          <Category count={office} label="Office Users" Icon={Briefcase} color="text-amber-400" />
-          <Category count={drivers} label="Drivers" Icon={Truck} color="text-orange-400" />
-          <Category count={customers} label="Customers" Icon={Users} color="text-red-400" />
+        <div className="space-y-4">
+          <Category count={office} label="Office Users" Icon={Briefcase} color="text-amber-500" />
+          <Category count={drivers} label="Drivers" Icon={Truck} color="text-orange-500" />
+          <Category count={customers} label="Customers" Icon={Users} color="text-red-500" />
         </div>
         
         {office === 0 && drivers === 0 && customers === 0 && (
@@ -109,34 +107,34 @@ const PricingCalculator: React.FC = () => {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-      <Card className="p-6 sm:p-8 bg-slate-800/80 dark:bg-slate-900/80 backdrop-blur-md border-slate-700 text-white shadow-2xl shadow-slate-900/50">
+      <Card className="p-6 sm:p-8 bg-slate-50 dark:bg-slate-800/80 backdrop-blur-md border-slate-200 dark:border-slate-700 shadow-2xl shadow-slate-900/50">
         <div className="space-y-6">
           <CalculatorSlider label="Office Users" value={officeUsers} setValue={setOfficeUsers} min={1} max={50} />
           <CalculatorSlider label="Drivers" value={drivers} setValue={setDrivers} min={1} max={50} />
           <CalculatorSlider label="Customers" value={customers} setValue={setCustomers} min={0} max={100} />
         </div>
 
-        <div className="my-8 p-6 bg-slate-900/70 rounded-xl text-center">
-          <p className="text-slate-400 text-sm">Your Estimated Monthly Total</p>
-          <p className="text-5xl font-bold text-white tracking-tight">
+        <div className="my-8 p-6 bg-slate-100 dark:bg-slate-900/70 rounded-xl text-center">
+          <p className="text-slate-500 dark:text-slate-400 text-sm">Your Estimated Monthly Total</p>
+          <p className="text-5xl font-bold text-slate-900 dark:text-white tracking-tight">
             £{animatedTotalCost.toFixed(2)}
           </p>
         </div>
 
-        <div className="space-y-2 text-sm border-t border-slate-700 pt-6">
-          <div className="flex justify-between text-slate-300">
+        <div className="space-y-2 text-sm border-t border-slate-200 dark:border-slate-700 pt-6">
+          <div className="flex justify-between text-slate-600 dark:text-slate-300">
             <span>Base Fee</span>
             <span className="font-mono">£{costs.base.toFixed(2)}</span>
           </div>
-          <div className="flex justify-between text-slate-300">
+          <div className="flex justify-between text-slate-600 dark:text-slate-300">
             <span>Office Users ({officeUsers} x £{costs.office})</span>
             <span className="font-mono">£{animatedOfficeCost.toFixed(2)}</span>
           </div>
-          <div className="flex justify-between text-slate-300">
+          <div className="flex justify-between text-slate-600 dark:text-slate-300">
             <span>Drivers ({drivers} x £{costs.driver})</span>
             <span className="font-mono">£{animatedDriverCost.toFixed(2)}</span>
           </div>
-          <div className="flex justify-between text-slate-300">
+          <div className="flex justify-between text-slate-600 dark:text-slate-300">
             <span>Customers ({customers} x £{costs.customer})</span>
             <span className="font-mono">£{animatedCustomerCost.toFixed(2)}</span>
           </div>
