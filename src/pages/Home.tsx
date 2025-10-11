@@ -275,7 +275,7 @@ const Home: React.FC = () => {
                     <div className="p-3 bg-slate-100 dark:bg-slate-900/50 rounded-xl relative">
                       <h3 className="font-semibold text-slate-700 dark:text-slate-300 text-sm mb-2">Live Fleet: Essex</h3>
                       <div 
-                        className="relative h-32 rounded-lg overflow-hidden bg-cover bg-center"
+                        className="relative h-32 rounded-lg overflow-hidden bg-cover bg-center map-grid-overlay"
                         style={{ backgroundImage: "url('https://images.unsplash.com/photo-1599511029751-813a5c837585?q=80&w=800&auto=format&fit=crop')" }}
                       >
                         <div className="absolute inset-0 bg-black/20 dark:bg-black/50"></div>
@@ -332,7 +332,7 @@ const Home: React.FC = () => {
                       <div className="col-span-2 p-4 bg-slate-100 dark:bg-slate-900/50 rounded-xl relative">
                         <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-2">Live Fleet: Essex</h3>
                         <div 
-                          className="relative h-32 rounded-lg overflow-hidden bg-cover bg-center"
+                          className="relative h-32 rounded-lg overflow-hidden bg-cover bg-center map-grid-overlay"
                           style={{ backgroundImage: "url('https://images.unsplash.com/photo-1599511029751-813a5c837585?q=80&w=800&auto=format&fit=crop')" }}
                         >
                           <div className="absolute inset-0 bg-black/20 dark:bg-black/50"></div>

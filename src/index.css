@@ -420,6 +420,18 @@
     }
   }
 
+  .map-grid-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit; /* To match the parent's rounded corners */
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 1rem 1rem;
+    pointer-events: none;
+  }
+
   /* Custom Slider Styles */
   input[type=range] {
     -webkit-appearance: none;
