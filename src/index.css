@@ -105,98 +105,6 @@
     animation: morph 8s ease-in-out infinite;
   }
   
-  .animate-wave {
-    animation: wave 6s ease-in-out infinite;
-  }
-
-  .animate-shadow-pulse {
-    animation: shadow-pulse 5s infinite;
-  }
-
-  .animate-scale-in-stamp {
-    animation: scale-in-stamp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-  }
-
-  .animate-grow-bar {
-    transform-origin: bottom;
-    animation: grow-bar 0.8s ease-out forwards;
-  }
-
-  .animate-slide-in-right {
-    animation: slide-in-right 0.8s ease-out forwards;
-  }
-
-  .animate-slide-in-left {
-    animation: slide-in-left 0.8s ease-out forwards;
-  }
-
-  .animate-grow-bar-x {
-    transform-origin: left;
-    animation: grow-bar-x 1s ease-out forwards;
-  }
-
-  .animate-pop-in {
-    animation: pop-in 0.4s ease-out forwards;
-  }
-
-  .animate-float-gentle {
-    animation: float-gentle 7s ease-in-out infinite;
-  }
-
-  .animate-background-pan {
-    background-size: 200% 200%;
-    animation: background-pan 15s ease infinite;
-  }
-
-  .particle {
-    position: absolute;
-    bottom: -20px;
-    background: theme('colors.slate.300 / 0.5');
-    border-radius: 50%;
-    animation: bubble-up 10s infinite ease-in;
-    opacity: 0;
-  }
-  .dark .particle {
-    background: theme('colors.slate.600 / 0.6');
-  }
-
-  .animate-slide-in-bottom {
-    animation: slide-in-bottom 0.5s ease-out forwards;
-  }
-
-  .animate-background-shimmer {
-    position: relative;
-    overflow: hidden;
-  }
-  .animate-background-shimmer::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 200%;
-    height: 100%;
-    transform: skewX(-25deg);
-    background-image: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.15),
-      transparent
-    );
-    animation: shimmer 4s infinite linear;
-  }
-  .dark .animate-background-shimmer::after {
-    background-image: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.08),
-      transparent
-    );
-  }
-
-  .animate-slide-down {
-    animation: slide-down 0.3s ease-out forwards;
-  }
-  
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -283,10 +191,18 @@
     75% { transform: translateY(-15px) scaleY(1.05); }
   }
 
+  .animate-shadow-pulse {
+    animation: shadow-pulse 5s infinite;
+  }
+
   @keyframes shadow-pulse {
     50% {
       box-shadow: 0 0 0 10px rgba(245, 158, 11, 0), 0 0 0 0 rgba(245, 158, 11, 0.7);
     }
+  }
+
+  .animate-scale-in-stamp {
+    animation: scale-in-stamp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
   }
 
   @keyframes scale-in-stamp {
@@ -303,6 +219,11 @@
     }
   }
 
+  .animate-grow-bar {
+    transform-origin: bottom;
+    animation: grow-bar 0.8s ease-out forwards;
+  }
+
   @keyframes grow-bar {
     from {
       transform: scaleY(0);
@@ -310,6 +231,10 @@
     to {
       transform: scaleY(1);
     }
+  }
+
+  .animate-slide-in-right {
+    animation: slide-in-right 0.8s ease-out forwards;
   }
 
   @keyframes slide-in-right {
@@ -323,6 +248,10 @@
     }
   }
 
+  .animate-slide-in-left {
+    animation: slide-in-left 0.8s ease-out forwards;
+  }
+
   @keyframes slide-in-left {
     from {
       transform: translateX(20px) scaleX(-1);
@@ -334,6 +263,11 @@
     }
   }
 
+  .animate-grow-bar-x {
+    transform-origin: left;
+    animation: grow-bar-x 1s ease-out forwards;
+  }
+
   @keyframes grow-bar-x {
     from {
       transform: scaleX(0);
@@ -341,6 +275,10 @@
     to {
       transform: scaleX(1);
     }
+  }
+
+  .animate-pop-in {
+    animation: pop-in 0.4s ease-out forwards;
   }
 
   @keyframes pop-in {
@@ -358,6 +296,10 @@
     }
   }
 
+  .animate-float-gentle {
+    animation: float-gentle 7s ease-in-out infinite;
+  }
+
   @keyframes float-gentle {
     0%, 100% {
       transform: translateY(0) rotate(-1deg);
@@ -365,6 +307,11 @@
     50% {
       transform: translateY(-12px) rotate(1deg);
     }
+  }
+
+  .animate-background-pan {
+    background-size: 200% 200%;
+    animation: background-pan 15s ease infinite;
   }
 
   @keyframes background-pan {
@@ -377,6 +324,18 @@
     100% {
       background-position: 0% 50%;
     }
+  }
+
+  .particle {
+    position: absolute;
+    bottom: -20px;
+    background: theme('colors.slate.300 / 0.5');
+    border-radius: 50%;
+    animation: bubble-up 10s infinite ease-in;
+    opacity: 0;
+  }
+  .dark .particle {
+    background: theme('colors.slate.600 / 0.6');
   }
 
   @keyframes bubble-up {
@@ -393,6 +352,10 @@
     }
   }
 
+  .animate-slide-in-bottom {
+    animation: slide-in-bottom 0.5s ease-out forwards;
+  }
+
   @keyframes slide-in-bottom {
     from {
       opacity: 0;
@@ -404,6 +367,35 @@
     }
   }
 
+  .animate-background-shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  .animate-background-shimmer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    transform: skewX(-25deg);
+    background-image: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.15),
+      transparent
+    );
+    animation: shimmer 4s infinite linear;
+  }
+  .dark .animate-background-shimmer::after {
+    background-image: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.08),
+      transparent
+    );
+  }
+
   @keyframes shimmer {
     0% {
       left: -100%;
@@ -413,6 +405,10 @@
     }
   }
 
+  .animate-slide-down {
+    animation: slide-down 0.3s ease-out forwards;
+  }
+  
   @keyframes slide-down {
     from {
       opacity: 0;
@@ -431,6 +427,7 @@
     background: transparent;
     cursor: pointer;
     width: 100%;
+    user-select: none; /* Prevent text selection during drag */
   }
 
   input[type=range]:focus {
@@ -446,8 +443,10 @@
     -webkit-appearance: none;
     appearance: none;
     margin-top: -7px; /* (track-height - thumb-height) / 2 */
-    transition: none !important;
-    @apply w-6 h-6 bg-amber-500 rounded-full cursor-pointer shadow-md;
+    /* Explicitly disable all transitions */
+    transition-property: none !important;
+    transition-duration: 0s !important;
+    @apply w-6 h-6 bg-amber-500 rounded-full cursor-pointer; /* Removed shadow-md */
   }
 
   input[type=range]:focus::-webkit-slider-thumb {
@@ -460,8 +459,10 @@
   }
 
   input[type=range]::-moz-range-thumb {
-    transition: none !important;
-    @apply w-6 h-6 bg-amber-500 rounded-full cursor-pointer shadow-md border-0;
+    /* Explicitly disable all transitions */
+    transition-property: none !important;
+    transition-duration: 0s !important;
+    @apply w-6 h-6 bg-amber-500 rounded-full cursor-pointer border-0; /* Removed shadow-md */
   }
 
   input[type=range]:focus::-moz-range-thumb {
