@@ -32,7 +32,7 @@ const Pricing: React.FC = () => {
 
   useEffect(() => {
     setTotalCost(officeCost + driverCost + customerCost + costs.base);
-  }, [officeCost, driverCost, customerCost]);
+  }, [officeCost, driverCost, customerCost, costs.base]);
 
   const includedFeatures = [
     'Live GPS Tracking & Mapping',
@@ -81,10 +81,10 @@ const Pricing: React.FC = () => {
     };
 
     return (
-      <div className="space-y-3">
+      <div className="space-y-3 group">
         <div className="flex justify-between items-center">
           <label className="font-medium text-gray-700 dark:text-gray-300 flex items-center">
-            <Icon className="w-5 h-5 mr-2 text-amber-600 dark:text-amber-400" />
+            <Icon className="w-5 h-5 mr-2 text-amber-600 dark:text-amber-400 group-hover:scale-110 transition-transform duration-200" />
             {label}
           </label>
           <input
@@ -133,12 +133,23 @@ const Pricing: React.FC = () => {
                 <div className="absolute -inset-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl blur-xl opacity-20 animate-pulse-slow"></div>
                 <Card className="relative p-6 sm:p-8 sticky top-24" gradient>
                   <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8">Estimate Your Monthly Cost</h2>
+                  
+                  {/* Total Cost Display */}
+                  <div className="text-center mb-8">
+                      <p className="text-gray-500 dark:text-gray-400 text-lg mb-2">Your Estimated Monthly Total</p>
+                      <p className="text-6xl font-extrabold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent leading-none">
+                          £{animatedTotalCost.toFixed(2)}
+                      </p>
+                  </div>
+
+                  {/* Sliders */}
                   <div className="space-y-8 mb-8">
                     <Slider label="Office Users" value={officeUsers} setValue={setOfficeUsers} min={1} max={50} icon={Briefcase} />
                     <Slider label="Drivers" value={drivers} setValue={setDrivers} min={1} max={50} icon={Truck} />
                     <Slider label="Customers" value={customers} setValue={setCustomers} min={0} max={100} icon={Users} />
                   </div>
 
+                  {/* Cost Breakdown */}
                   <div className="bg-gray-100 dark:bg-gray-800/50 p-6 rounded-xl space-y-3 text-sm border border-gray-200 dark:border-gray-700">
                     <div className="flex justify-between items-center text-gray-600 dark:text-gray-300 transition-colors">
                       <span>Base Fee</span>
