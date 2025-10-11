@@ -55,8 +55,8 @@ function App() {
                 <div className="text-center sm:text-left">
                   <h4 className="font-medium mb-3">Contact</h4>
                   <ul className="space-y-2 text-sm text-gray-400">
-                    <li>+44 20 1234 5678</li>
-                    <li>hello@hoss.co.uk</li>
+                    <li>020 3151 2025</li>
+                    <li>info@thehoss.co.uk</li>
                     <li>London, UK</li>
                   </ul>
                 </div>

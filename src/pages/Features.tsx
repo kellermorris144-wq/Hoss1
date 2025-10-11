@@ -33,13 +33,13 @@ const AnimatedMap = () => {
           {/* Location Pins / "Cities" */}
           <g className="opacity-70">
             <circle cx="50" cy="200" r="4" fill="currentColor" className="text-slate-400" />
-            <text x="45" y="220" className="text-[10px] font-sans font-semibold fill-current text-slate-500 dark:text-slate-400" textAnchor="middle">London</text>
+            <text x="45" y="220" className="text-[10px] font-sans font-semibold fill-current text-slate-500 dark:text-slate-400" textAnchor="middle">Bristol</text>
             <circle cx="450" cy="200" r="4" fill="currentColor" className="text-slate-400" />
-            <text x="450" y="220" className="text-[10px] font-sans font-semibold fill-current text-slate-500 dark:text-slate-400" textAnchor="middle">Dover</text>
+            <text x="450" y="220" className="text-[10px] font-sans font-semibold fill-current text-slate-500 dark:text-slate-400" textAnchor="middle">London</text>
             <circle cx="80" cy="70" r="4" fill="currentColor" className="text-slate-400" />
             <text x="80" y="60" className="text-[10px] font-sans font-semibold fill-current text-slate-500 dark:text-slate-400" textAnchor="middle">Manchester</text>
             <circle cx="480" cy="70" r="4" fill="currentColor" className="text-slate-400" />
-            <text x="480" y="60" className="text-[10px] font-sans font-semibold fill-current text-slate-500 dark:text-slate-400" textAnchor="middle">Glasgow</text>
+            <text x="480" y="60" className="text-[10px] font-sans font-semibold fill-current text-slate-500 dark:text-slate-400" textAnchor="middle">Doncaster</text>
             <foreignObject x="240" y="115" width="24" height="24">
               <MapPin className="w-6 h-6 text-red-500 animate-pulse" />
             </foreignObject>
@@ -212,12 +212,12 @@ const highlightedFeatures = [
   },
   {
     icon: BarChart3,
-    title: 'Advanced Analytics & BI',
-    description: 'Make data-driven decisions with powerful insights. HOSS provides built-in reporting and statistics for a clear overview of your activity, from fleet performance to profitability per job. For deeper analysis, connect directly to your favorite Business Intelligence tools and unlock the full potential of your operational data.',
+    title: 'Driver & Fleet Analytics',
+    description: 'Make data-driven decisions with powerful insights. HOSS allows employers to view driver stats and analytics of their daily, weekly & monthly revenue, mileage, fuel efficiency and more.',
     visual: () => (
       <div className="relative w-full h-full p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700 group">
         <div className="w-full h-full bg-white dark:bg-slate-800 rounded-lg p-4 shadow-inner flex flex-col space-y-4">
-          <h3 className="font-bold text-slate-800 dark:text-slate-200">Performance Dashboard</h3>
+          <h3 className="font-bold text-slate-800 dark:text-slate-200">Driver Performance</h3>
           <div className="flex-grow flex items-end justify-between space-x-2 px-2">
             <div className="w-1/4 h-[40%] bg-amber-400 rounded-t-md transition-all duration-300 group-hover:bg-amber-500 animate-grow-bar" style={{ animationDelay: '0.1s' }}></div>
             <div className="w-1/4 h-[60%] bg-amber-400 rounded-t-md transition-all duration-300 group-hover:bg-amber-500 animate-grow-bar" style={{ animationDelay: '0.2s' }}></div>
@@ -226,12 +226,12 @@ const highlightedFeatures = [
           </div>
           <div className="grid grid-cols-2 gap-2 text-center">
             <div className="p-2 bg-slate-100 dark:bg-slate-900/50 rounded-md">
-              <p className="text-xs text-slate-500 dark:text-slate-400">On-Time Rate</p>
-              <p className="font-bold text-lg text-green-500">98.7%</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Avg. Fuel Efficiency</p>
+              <p className="font-bold text-lg text-green-500">8.2 MPG</p>
             </div>
             <div className="p-2 bg-slate-100 dark:bg-slate-900/50 rounded-md">
-              <p className="text-xs text-slate-500 dark:text-slate-400">Fleet Utilization</p>
-              <p className="font-bold text-lg text-amber-500">82%</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Monthly Revenue</p>
+              <p className="font-bold text-lg text-amber-500">£8,120</p>
             </div>
           </div>
         </div>
@@ -269,8 +269,8 @@ const otherFeatures = [
   },
   {
     icon: Smartphone,
-    title: 'CX Mobile App',
-    description: 'Empower drivers and customers with a native mobile app for job management, photo capture, and digital signatures.',
+    title: 'Mobile App',
+    description: 'Enables drivers to use our easy to use mobile app for job updates, photo capture, and digital signatures and more!',
   },
 ];
 
@@ -286,28 +286,6 @@ const Features: React.FC = () => {
           <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             HOSS is more than just software; it's a complete solution designed to streamline every aspect of your logistics operations, from first mile to final invoice.
           </p>
-        </div>
-      </section>
-
-      {/* Highlighted Features */}
-      <section className="py-20 sm:py-24 bg-white dark:bg-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-16 sm:space-y-20">
-            {highlightedFeatures.map((feature, index) => (
-              <div key={feature.title} className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
-                <div className={`lg:order-${index % 2 === 1 ? '2' : '1'}`}>
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-amber-100 to-orange-100 dark:from-amber-900/50 dark:to-orange-900/50 rounded-xl mb-4">
-                    <feature.icon className="w-7 h-7 text-amber-600 dark:text-amber-400" />
-                  </div>
-                  <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">{feature.title}</h2>
-                  <p className="text-gray-600 dark:text-gray-300 text-lg">{feature.description}</p>
-                </div>
-                <div className={`lg:order-${index % 2 === 1 ? '1' : '2'} h-64 sm:h-80`}>
-                  <feature.visual />
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -336,6 +314,28 @@ const Features: React.FC = () => {
                   <p className="text-gray-600 dark:text-gray-300 text-sm">
                     {feature.description}
                   </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Highlighted Features */}
+      <section className="py-20 sm:py-24 bg-white dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="space-y-16 sm:space-y-20">
+            {highlightedFeatures.map((feature, index) => (
+              <div key={feature.title} className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
+                <div className={`lg:order-${index % 2 === 1 ? '2' : '1'}`}>
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-amber-100 to-orange-100 dark:from-amber-900/50 dark:to-orange-900/50 rounded-xl mb-4">
+                    <feature.icon className="w-7 h-7 text-amber-600 dark:text-amber-400" />
+                  </div>
+                  <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">{feature.title}</h2>
+                  <p className="text-gray-600 dark:text-gray-300 text-lg">{feature.description}</p>
+                </div>
+                <div className={`lg:order-${index % 2 === 1 ? '1' : '2'} h-64 sm:h-80`}>
+                  <feature.visual />
                 </div>
               </div>
             ))}

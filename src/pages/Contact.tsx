@@ -76,43 +76,22 @@ const Contact: React.FC = () => {
     {
       icon: Phone,
       title: 'Phone',
-      details: ['+44 20 1234 5678', '+44 800 HOSS (4677)'],
+      details: ['020 3151 2025'],
     },
     {
       icon: Mail,
       title: 'Email',
-      details: ['hello@hoss.co.uk', 'support@hoss.co.uk'],
+      details: ['info@thehoss.co.uk'],
     },
     {
       icon: MapPin,
       title: 'Address',
-      details: ['HOSS Headquarters', '123 Logistics Way', 'London, UK SW1A 1AA'],
+      details: ['HOSS Headquarters', '71-75 Shelton Street', 'Covent Garden, London, WC2H 9JQ'],
     },
     {
       icon: Clock,
       title: 'Business Hours',
-      details: ['Mon-Fri: 8:00 AM - 6:00 PM', 'Sat: 9:00 AM - 2:00 PM', 'Sun: Emergency only'],
-    },
-  ];
-
-  const officeLocations = [
-    {
-      city: 'London',
-      address: '123 Logistics Way, London SW1A 1AA',
-      phone: '+44 20 1234 5678',
-      type: 'Headquarters',
-    },
-    {
-      city: 'Manchester',
-      address: '456 Northern Plaza, Manchester M1 2AB',
-      phone: '+44 161 123 4567',
-      type: 'Regional Office',
-    },
-    {
-      city: 'Birmingham',
-      address: '789 Midlands Centre, Birmingham B1 3CD',
-      phone: '+44 121 234 5678',
-      type: 'Regional Office',
+      details: ['Available 24 hours daily!'],
     },
   ];
 
@@ -282,55 +261,7 @@ const Contact: React.FC = () => {
                   </Card>
                 ))}
               </div>
-
-              <Card className="p-8 bg-gradient-to-br from-amber-500 to-orange-600 text-white">
-                <h3 className="text-xl font-bold mb-4">24/7 Emergency Support</h3>
-                <p className="text-amber-100 mb-4">
-                  Need urgent assistance? Our emergency support team is available 
-                  around the clock for critical issues.
-                </p>
-                <div className="flex items-center text-amber-100">
-                  <Phone className="w-5 h-5 mr-2" />
-                  <span className="font-semibold">+44 800 EMERGENCY</span>
-                </div>
-              </Card>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Office Locations */}
-      <section className="py-24 bg-gray-50 dark:bg-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-              Our Locations
-            </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300">
-              Visit us at one of our offices across the UK
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {officeLocations.map((location) => (
-              <Card key={location.city} hover className="p-6 text-center">
-                <div className="w-12 h-12 bg-gradient-to-br from-amber-500 to-orange-600 rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <MapPin className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
-                  {location.city}
-                </h3>
-                <div className="text-xs text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/50 px-2 py-1 rounded mb-3">
-                  {location.type}
-                </div>
-                <p className="text-gray-600 dark:text-gray-300 text-sm mb-2">
-                  {location.address}
-                </p>
-                <p className="text-gray-500 dark:text-gray-400 text-sm">
-                  {location.phone}
-                </p>
-              </Card>
-            ))}
           </div>
         </div>
       </section>

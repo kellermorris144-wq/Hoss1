@@ -27,7 +27,7 @@ const Pricing: React.FC = () => {
     setTotalCost(officeCost + driverCost + customerCost + costs.base);
   }, [officeUsers, drivers, customers]);
 
-  const animatedTotalCost = useAnimatedCounter(totalCost, 500);
+  const animatedTotalCost = useAnimatedCounter(totalCost, 300);
 
   const includedFeatures = [
     'Live GPS Tracking & Mapping',
@@ -36,9 +36,8 @@ const Pricing: React.FC = () => {
     'Digital POD & Document Capture',
     'Vehicle Maintenance Alerts',
     'Accounting Software Integrations',
-    'Mobile App for Drivers & Customers',
+    'Mobile App for Drivers',
     'Advanced Analytics & Reporting',
-    'Unlimited Admin Users',
     '24/7 Priority Support',
   ];
 
@@ -49,7 +48,7 @@ const Pricing: React.FC = () => {
     },
     {
       question: 'How are "Drivers" and "Customers" defined for billing?',
-      answer: 'A "Driver" is any active driver profile in the system that can be assigned to jobs. A "Customer" is a client profile that has access to a portal to track their shipments or manage bookings. You can have unlimited inactive profiles.'
+      answer: 'A "Driver" is any active driver profile in the system that can be assigned to jobs. A "Customer" is a client profile that has access to a portal to track their shipments or manage bookings.'
     },
     {
       question: 'Is the pricing really all-inclusive?',

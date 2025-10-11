@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
-import { Truck, MapPin, FileText, CreditCard, BarChart3, CheckCircle, ArrowRight, AlertTriangle, Warehouse, CheckSquare, User, Users, Building, LayoutDashboard, ArrowRightLeft } from 'lucide-react';
+import { Truck, MapPin, FileText, CreditCard, BarChart3, CheckCircle, ArrowRight, AlertTriangle, Warehouse, CheckSquare, User, Users, Building, LayoutDashboard, ArrowRightLeft, Smartphone } from 'lucide-react';
 
 const features = [
   { name: 'Live ETA Tracking', icon: MapPin },
@@ -36,16 +36,14 @@ const trucks = [
 ];
 
 const expertFeatures = [
-  'Automated Quoting',
   'Multi Pickup/Delivery Bookings',
-  'Automated Invoicing',
+  'Easy to Use',
+  'Quick Invoicing',
   'Works from any Device',
-  'Accounting and Bank Integration',
-  'Customer Management (CRM System)',
+  'Customer Management',
   'Live Tracking',
   'Automated Intelligent Address Lookup',
-  'Servicing, MOT, Insurance Monitoring',
-  'Signature/Document/Photo/POD Capture',
+  'Servicing & MOT Monitoring',
 ];
 
 const whoWeHelp = [
@@ -195,27 +193,27 @@ const Home: React.FC = () => {
 
   const interactiveFeatures = [
     {
-      icon: MapPin,
-      title: 'Find Profitable Loads',
-      description: 'Stop searching, start hauling. HOSS gives you exclusive access to thousands of daily loads from a network of vetted shippers. Our smart matching system filters opportunities by your route, vehicle type, and availability, while Price-Per-Mile insights ensure you\'re always maximizing your earnings.',
+      icon: Smartphone,
+      title: 'Stop chasing drivers',
+      description: "Stop spending numerous hours per day chasing drivers for eta's to jobs, in & out times of deliveries & POD's! Our mobile app for drivers is extremely easy to use and is simple as pressing one button which instantly updates the job for office to see!",
       visual: <MapVisual />,
     },
     {
-      icon: ArrowRightLeft,
-      title: 'Slash Empty Mileage',
-      description: 'Turn deadhead runs into revenue. HOSS\'s intelligent backload finder automatically identifies profitable return loads along your route. Drastically reduce fuel waste, increase your vehicle utilisation, and boost your bottom line with every trip.',
+      icon: Users,
+      title: 'Customer Access',
+      description: "If you have customers which you do work for often then you can give them access which will allow them to see all jobs allocated to them to avoid the need for constant back and forth emails, they can view the job and see all needed details including POD's, ETA's, Times of arrivals & departures.",
       visual: <BackloadVisual />,
     },
     {
       icon: LayoutDashboard,
-      title: 'Unify Your Fleet Management',
-      description: 'Ditch the spreadsheets and chaotic group chats. Manage your entire fleet from a single, intuitive dashboard. HOSS provides live GPS tracking, automated dispatching, instant driver communication, and real-time performance analytics to keep your operations running smoothly and efficiently.',
+      title: 'Unify Fleet Management',
+      description: "Manage daily checks for drivers & even set reminders for vehicle MOT's or regular inspections.",
       visual: <FleetVisual />,
     },
     {
       icon: CreditCard,
-      title: 'Get Paid in Days, Not Weeks',
-      description: 'Accelerate your cash flow with automated invoicing and integrated payments. HOSS generates and sends professional invoices the moment a job is complete. Track payment statuses in real-time and offer clients secure, convenient payment options to eliminate delays and chasing payments.',
+      title: 'Easy Invoicing',
+      description: 'With the simple click of a button you can generate an invoice with all the customers details and details of the job including POD images!',
       visual: <PaymentsVisual />,
     },
   ];
@@ -232,7 +230,7 @@ const Home: React.FC = () => {
               The All-in-One Solution for Modern Logistics.
             </h1>
             <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8">
-              HOSS integrates everything from live tracking and quoting to invoicing and analytics into a single, powerful platform. Stop juggling software and start streamlining your operations.
+              HOSS integrates everything from organising the workflow of job progression to straight forward invoicing and much more between.
             </p>
             <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
               <Link to="/demo">
@@ -499,10 +497,10 @@ const Home: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-16 lg:mb-20">
             <div>
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6 leading-tight">
-                The logistics platform built by <span className="text-amber-600 dark:text-amber-500">logistics experts</span>, for logistics professionals.
+                The haulage platform built by <span className="text-amber-600 dark:text-amber-500">haulage experts</span>, for haulage professionals.
               </h2>
               <p className="text-lg text-gray-600 dark:text-gray-300">
-                HOSS is engineered by professionals who live and breathe logistics. With decades of industry experience, our team knows what it takes to run a thriving logistics company, and we've built HOSS to help you run yours.
+                HOSS is engineered by professionals who live and breathe haulage. With decades of industry experience, our team knows what it takes to run a thriving haulage company, and we've built HOSS to help you run yours.
               </p>
             </div>
             <div className="flex justify-center items-center">
@@ -516,7 +514,7 @@ const Home: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {expertFeatures.slice(0, 9).map((feature) => (
+            {expertFeatures.map((feature) => (
               <div key={feature} className="relative group">
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-500 to-orange-500 rounded-xl blur opacity-0 group-hover:opacity-60 transition duration-300"></div>
                 <div className="relative bg-white/80 dark:bg-slate-800/80 backdrop-blur-lg border border-slate-200 dark:border-slate-700 rounded-xl p-6 h-full flex items-center">
