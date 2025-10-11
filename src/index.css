@@ -446,9 +446,7 @@
     -webkit-appearance: none;
     appearance: none;
     margin-top: -7px; /* (track-height - thumb-height) / 2 */
-    @apply w-6 h-6 bg-amber-500 rounded-full cursor-pointer transition-all duration-200 ease-in-out shadow-md;
-    @apply hover:scale-110 hover:shadow-lg;
-    @apply active:scale-125 active:shadow-xl;
+    @apply w-6 h-6 bg-amber-500 rounded-full cursor-pointer shadow-md;
   }
 
   input[type=range]:focus::-webkit-slider-thumb {
@@ -461,9 +459,7 @@
   }
 
   input[type=range]::-moz-range-thumb {
-    @apply w-6 h-6 bg-amber-500 rounded-full cursor-pointer transition-all duration-200 ease-in-out shadow-md border-0;
-    @apply hover:scale-110 hover:shadow-lg;
-    @apply active:scale-125 active:shadow-xl;
+    @apply w-6 h-6 bg-amber-500 rounded-full cursor-pointer shadow-md border-0;
   }
 
   input[type=range]:focus::-moz-range-thumb {
