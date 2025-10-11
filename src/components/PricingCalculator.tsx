@@ -26,40 +26,54 @@ const CalculatorSlider = ({ label, value, setValue, min, max }: { label: string,
 
 const Visualizer = ({ office, drivers, customers }: { office: number, drivers: number, customers: number }) => {
   const renderIcons = (count: number, Icon: React.ElementType, color: string) => {
-    const displayCount = Math.min(count, 30); // Cap icons for performance
-    return Array.from({ length: displayCount }).map((_, i) => (
-      <Icon key={i} className={`w-5 h-5 ${color} transition-all duration-300 animate-pop-in`} style={{ animationDelay: `${i * 15}ms` }} />
-    ));
+    // Cap icons for performance and to prevent visual clutter
+    const displayCount = Math.min(count, 25); 
+    return (
+      <div className="flex flex-wrap gap-2 mt-3">
+        {Array.from({ length: displayCount }).map((_, i) => (
+          <Icon 
+            key={i} 
+            className={`w-5 h-5 ${color} transition-all duration-300 animate-pop-in`} 
+            style={{ animationDelay: `${i * 20}ms` }} 
+          />
+        ))}
+      </div>
+    );
+  };
+
+  const Category = ({ count, label, Icon, color }: { count: number, label: string, Icon: React.ElementType, color: string }) => {
+    if (count === 0) return null;
+    
+    return (
+      <div className="transition-opacity duration-300">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${color.replace('text-', 'bg-')}/20`}>
+              <Icon className={`w-5 h-5 ${color}`} />
+            </div>
+            <h3 className="text-white font-semibold text-sm">{label}</h3>
+          </div>
+          <span className="font-mono text-lg text-slate-300">{count}</span>
+        </div>
+        {renderIcons(count, Icon, color)}
+      </div>
+    );
   };
 
   return (
-    <div className="relative w-full h-full min-h-[300px] lg:min-h-0 bg-slate-900 rounded-2xl p-6 flex flex-col justify-center overflow-hidden border border-slate-800">
-      <div className="absolute inset-0 bg-grid-pattern opacity-20"></div>
-      <div className="absolute top-0 left-0 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl animate-pulse-slow"></div>
-      <div className="absolute bottom-0 right-0 w-48 h-48 bg-orange-500/10 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '2s' }}></div>
-      
-      <div className="relative z-10 w-full space-y-4">
-        {office > 0 && (
-          <div>
-            <h3 className="text-white font-semibold mb-2 text-sm">Office Users</h3>
-            <div className="flex flex-wrap gap-2">{renderIcons(office, Briefcase, 'text-amber-400')}</div>
-          </div>
-        )}
-        {drivers > 0 && (
-          <div>
-            <h3 className="text-white font-semibold mb-2 text-sm">Drivers</h3>
-            <div className="flex flex-wrap gap-2">{renderIcons(drivers, Truck, 'text-orange-400')}</div>
-          </div>
-        )}
-        {customers > 0 && (
-          <div>
-            <h3 className="text-white font-semibold mb-2 text-sm">Customers</h3>
-            <div className="flex flex-wrap gap-2">{renderIcons(customers, Users, 'text-red-400')}</div>
-          </div>
-        )}
+    <div className="relative w-full h-full min-h-[300px] lg:min-h-0 bg-slate-900 rounded-2xl p-6 flex flex-col overflow-hidden border border-slate-800">
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-900 to-slate-800 opacity-50"></div>
+      <div className="relative z-10 w-full flex-grow flex flex-col justify-center">
+        <div className="space-y-6">
+          <Category count={office} label="Office Users" Icon={Briefcase} color="text-amber-400" />
+          <Category count={drivers} label="Drivers" Icon={Truck} color="text-orange-400" />
+          <Category count={customers} label="Customers" Icon={Users} color="text-red-400" />
+        </div>
+        
         {office === 0 && drivers === 0 && customers === 0 && (
-            <div className="text-center text-slate-500">
-                <p>Your fleet will appear here</p>
+            <div className="text-center text-slate-500 my-auto">
+                <p className="text-lg">Your Fleet Visualizer</p>
+                <p className="text-sm">Adjust the sliders to see your team.</p>
             </div>
         )}
       </div>
