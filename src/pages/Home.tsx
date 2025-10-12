@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
-import { Truck, MapPin, FileText, CreditCard, BarChart3, CheckCircle, ArrowRight, AlertTriangle, Warehouse, CheckSquare, User, Users, Building, LayoutDashboard, Smartphone, Clock, Wrench, Wind, Wallet, ThumbsUp } from 'lucide-react';
+import { Truck, MapPin, FileText, CreditCard, BarChart3, CheckCircle, ArrowRight, AlertTriangle, Warehouse, CheckSquare, User, Users, Building, LayoutDashboard, Smartphone, Clock, Wrench, FileClock, Wallet, ThumbsUp } from 'lucide-react';
 import { useAnimatedCounter } from '../hooks/useAnimatedCounter';
 
 const features = [
@@ -198,6 +198,7 @@ const alerts = [
     message: 'Major Delay on M25',
     location: 'Junction 28, Brentwood',
     details: 'Est. 45 min delay',
+    subDetails: 'Driver: Mike P. (HOSS-11)',
   },
   {
     id: 2,
@@ -208,16 +209,18 @@ const alerts = [
     message: 'HOSS-07 Service Due',
     location: 'Next 50 miles',
     details: 'Reg: AB12 CDE',
+    subDetails: 'Action: Oil Change',
   },
   {
     id: 3,
-    type: 'weather',
-    icon: Wind,
-    color: 'text-cyan-500',
-    bgColor: 'bg-cyan-500/10',
-    message: 'High Wind Warning',
-    location: 'Dartford Crossing',
-    details: 'Gusts up to 60 mph',
+    type: 'pod',
+    icon: FileClock,
+    color: 'text-orange-500',
+    bgColor: 'bg-orange-500/10',
+    message: 'POD Overdue',
+    location: 'Job #J-5821',
+    details: 'Client: Global Logistics',
+    subDetails: '2 hours past delivery',
   },
 ];
 
@@ -246,9 +249,14 @@ const UrgentAlerts = () => {
           </div>
           <div className="relative w-full overflow-hidden">
             <div key={currentAlert.id} className="animate-slide-in-bottom">
-              <p className={`font-bold text-sm ${currentAlert.color}`}>{currentAlert.message}</p>
+              <p className={`font-bold text-sm ${currentAlert.color}`}>
+                <span className="bg-gradient-to-r from-current to-slate-500 dark:to-slate-300 bg-clip-text text-transparent animate-background-shimmer">
+                  {currentAlert.message}
+                </span>
+              </p>
               <p className="text-xs text-slate-600 dark:text-slate-400">{currentAlert.location}</p>
               <p className="text-xs font-semibold text-slate-700 dark:text-slate-300 mt-1">{currentAlert.details}</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{currentAlert.subDetails}</p>
             </div>
           </div>
         </div>
