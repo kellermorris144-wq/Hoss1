@@ -224,7 +224,7 @@ const UrgentAlerts = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentAlertIndex(prevIndex => (prevIndex + 1) % alerts.length);
-    }, 5000); // Change alert every 5 seconds
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 
@@ -232,19 +232,19 @@ const UrgentAlerts = () => {
 
   return (
     <div className="h-full flex flex-col">
-      <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-4">Urgent Alerts</h3>
-      <div className={`relative flex-grow p-4 rounded-lg overflow-hidden ${currentAlert.bgColor}`}>
+      <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-2 text-base">Urgent Alerts</h3>
+      <div className={`relative flex-grow p-3 rounded-lg overflow-hidden ${currentAlert.bgColor}`}>
         <div className="flex items-start">
-          <div className="relative w-10 h-10 flex-shrink-0 mr-4">
+          <div className="relative w-8 h-8 flex-shrink-0 mr-3">
             <div className={`absolute inset-0 rounded-full opacity-50 animate-ping ${currentAlert.bgColor.replace('bg-', 'bg-opacity-50 ')}`}></div>
-            <div className={`relative w-10 h-10 rounded-full flex items-center justify-center ${currentAlert.bgColor}`}>
-              <currentAlert.icon className={`w-5 h-5 ${currentAlert.color}`} />
+            <div className={`relative w-8 h-8 rounded-full flex items-center justify-center ${currentAlert.bgColor}`}>
+              <currentAlert.icon className={`w-4 h-4 ${currentAlert.color}`} />
             </div>
           </div>
           <div className="relative w-full overflow-hidden">
             <div key={currentAlert.id} className="animate-slide-in-bottom">
-              <p className={`font-bold ${currentAlert.color}`}>{currentAlert.message}</p>
-              <p className="text-sm text-slate-500 dark:text-slate-400">{currentAlert.location}</p>
+              <p className={`font-bold text-sm ${currentAlert.color}`}>{currentAlert.message}</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400">{currentAlert.location}</p>
             </div>
           </div>
         </div>
@@ -260,25 +260,25 @@ const LiveStats = () => {
 
   return (
     <div className="h-full flex flex-col">
-      <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-4">Live Stats</h3>
-      <div className="space-y-4 flex-grow flex flex-col justify-around">
+      <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-2 text-base">Live Stats</h3>
+      <div className="space-y-3 flex-grow flex flex-col justify-around">
         <div>
-          <p className="text-sm text-slate-500 dark:text-slate-400">Revenue Today</p>
-          <p className="text-3xl font-bold text-slate-800 dark:text-slate-200">
+          <p className="text-xs text-slate-500 dark:text-slate-400">Revenue Today</p>
+          <p className="text-2xl font-bold text-slate-800 dark:text-slate-200">
             £{revenue.toLocaleString('en-GB', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
           </p>
         </div>
         <div>
-          <p className="text-sm text-slate-500 dark:text-slate-400">Jobs Completed</p>
-          <p className="text-3xl font-bold text-slate-800 dark:text-slate-200">{jobs.toFixed(0)}</p>
+          <p className="text-xs text-slate-500 dark:text-slate-400">Jobs Completed</p>
+          <p className="text-2xl font-bold text-slate-800 dark:text-slate-200">{jobs.toFixed(0)}</p>
         </div>
         <div>
-          <p className="text-sm text-slate-500 dark:text-slate-400">On-Time Rate</p>
+          <p className="text-xs text-slate-500 dark:text-slate-400">On-Time Rate</p>
           <div className="flex items-center gap-2 mt-1">
-            <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2 overflow-hidden">
-              <div className="bg-green-500 h-2 rounded-full transition-all duration-500" style={{ width: `${onTimeRate}%` }}></div>
+            <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1.5 overflow-hidden">
+              <div className="bg-green-500 h-1.5 rounded-full transition-all duration-500" style={{ width: `${onTimeRate}%` }}></div>
             </div>
-            <span className="font-bold text-green-500 text-lg">{onTimeRate.toFixed(1)}%</span>
+            <span className="font-bold text-green-500 text-base">{onTimeRate.toFixed(1)}%</span>
           </div>
         </div>
       </div>
@@ -288,11 +288,11 @@ const LiveStats = () => {
 
 const DashboardSidebar = () => {
   return (
-    <div className="col-span-3 lg:col-span-1 grid grid-rows-2 gap-4">
-      <div className="row-span-1 p-4 bg-slate-100 dark:bg-slate-900/50 rounded-xl">
+    <div className="col-span-5 lg:col-span-2 grid grid-rows-2 gap-4">
+      <div className="row-span-1 p-3 bg-slate-100 dark:bg-slate-900/50 rounded-xl">
         <LiveStats />
       </div>
-      <div className="row-span-1 p-4 bg-slate-100 dark:bg-slate-900/50 rounded-xl">
+      <div className="row-span-1 p-3 bg-slate-100 dark:bg-slate-900/50 rounded-xl">
         <UrgentAlerts />
       </div>
     </div>
@@ -430,69 +430,71 @@ const Home: React.FC = () => {
                   </div>
                 </div>
                 <div className="w-full md:w-auto max-w-lg">
-                  <div className="bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl shadow-2xl p-6 w-full backdrop-blur-sm animate-shadow-pulse">
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="font-bold text-lg text-slate-800 dark:text-slate-200">Operations Dashboard</span>
+                  <div className="bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl shadow-2xl p-4 w-full backdrop-blur-sm animate-shadow-pulse">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="font-bold text-base text-slate-800 dark:text-slate-200">Operations Dashboard</span>
                       <div className="flex items-center space-x-1.5">
                         <div className="w-3 h-3 bg-red-400 rounded-full"></div>
                         <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
                         <div className="w-3 h-3 bg-green-400 rounded-full"></div>
                       </div>
                     </div>
-                    <div className="grid grid-cols-3 gap-4">
-                      <div className="col-span-3 lg:col-span-2 p-4 bg-slate-100 dark:bg-slate-900/50 rounded-xl relative">
-                        <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-2">Live Fleet: Essex</h3>
-                        <div 
-                          className="relative h-48 rounded-lg overflow-hidden bg-cover bg-center map-grid-overlay"
-                          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1612387692213-eda2b6a8425f?q=80&w=1974&auto=format&fit=crop')" }}
-                        >
-                          <div className="absolute inset-0 bg-black/20 dark:bg-black/50"></div>
-                          <div className="relative w-full h-full">
-                            <span className="absolute top-[40%] left-[48%] text-xs text-white font-bold bg-black/60 px-1.5 py-0.5 rounded -translate-x-1/2">Chelmsford</span>
-                            <span className="absolute top-[70%] left-[65%] text-xs text-white font-bold bg-black/60 px-1.5 py-0.5 rounded -translate-x-1/2">Southend</span>
-                            <span className="absolute top-[50%] left-[20%] text-xs text-white font-bold bg-black/60 px-1.5 py-0.5 rounded -translate-x-1/2">Harlow</span>
-                            {trucks.map(truck => (
-                              <div key={truck.id} className="absolute group" style={truck.position}>
-                                <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-max px-2 py-1 bg-slate-900 text-white text-xs font-bold rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10">
-                                  <p>{truck.driver}</p>
-                                  <p className="text-slate-400 font-medium">{truck.id}</p>
+                    <div className="grid grid-cols-5 gap-4">
+                      <div className="col-span-5 lg:col-span-3 flex flex-col gap-4">
+                        <div className="p-3 bg-slate-100 dark:bg-slate-900/50 rounded-xl relative">
+                          <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-2 text-sm">Live Fleet: Essex</h3>
+                          <div 
+                            className="relative h-32 rounded-lg overflow-hidden bg-cover bg-center map-grid-overlay"
+                            style={{ backgroundImage: "url('https://images.unsplash.com/photo-1612387692213-eda2b6a8425f?q=80&w=1974&auto=format&fit=crop')" }}
+                          >
+                            <div className="absolute inset-0 bg-black/20 dark:bg-black/50"></div>
+                            <div className="relative w-full h-full">
+                              <span className="absolute top-[40%] left-[48%] text-[10px] text-white font-bold bg-black/60 px-1.5 py-0.5 rounded -translate-x-1/2">Chelmsford</span>
+                              <span className="absolute top-[70%] left-[65%] text-[10px] text-white font-bold bg-black/60 px-1.5 py-0.5 rounded -translate-x-1/2">Southend</span>
+                              <span className="absolute top-[50%] left-[20%] text-[10px] text-white font-bold bg-black/60 px-1.5 py-0.5 rounded -translate-x-1/2">Harlow</span>
+                              {trucks.map(truck => (
+                                <div key={truck.id} className="absolute group" style={truck.position}>
+                                  <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-max px-2 py-1 bg-slate-900 text-white text-xs font-bold rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10">
+                                    <p>{truck.driver}</p>
+                                    <p className="text-slate-400 font-medium">{truck.id}</p>
+                                  </div>
+                                  <div className="relative w-3 h-3">
+                                    <div className={`absolute inset-0 ${truck.pingColor} rounded-full animate-ping`}></div>
+                                    <div className={`relative block w-3 h-3 ${truck.color} rounded-full border-2 border-white`}></div>
+                                  </div>
                                 </div>
-                                <div className="relative w-3 h-3">
-                                  <div className={`absolute inset-0 ${truck.pingColor} rounded-full animate-ping`}></div>
-                                  <div className={`relative block w-3 h-3 ${truck.color} rounded-full border-2 border-white`}></div>
-                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                        <div className="p-3 bg-slate-100 dark:bg-slate-900/50 rounded-xl">
+                          <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-2 text-sm">Active Jobs</h3>
+                          <div className="space-y-1">
+                            <div className="flex justify-between items-center text-xs p-1.5 rounded-md transition-colors hover:bg-slate-200 dark:hover:bg-slate-800/50">
+                              <div className="flex items-center">
+                                <Truck className="w-3 h-3 mr-2 text-amber-500" />
+                                <span className="font-medium text-slate-700 dark:text-slate-300">Chelmsford &rarr; Colchester</span>
                               </div>
-                            ))}
+                              <span className="flex items-center text-green-600 dark:text-green-400 font-semibold"><CheckCircle className="w-3 h-3 mr-1" /> On Time</span>
+                            </div>
+                            <div className="flex justify-between items-center text-xs p-1.5 rounded-md transition-colors hover:bg-slate-200 dark:hover:bg-slate-800/50">
+                              <div className="flex items-center">
+                                <Truck className="w-3 h-3 mr-2 text-amber-500" />
+                                <span className="font-medium text-slate-700 dark:text-slate-300">Southend &rarr; London</span>
+                              </div>
+                              <span className="flex items-center text-yellow-600 dark:text-yellow-400 font-semibold"><Clock className="w-3 h-3 mr-1 animate-spin" style={{ animationDuration: '2s' }} /> In Transit</span>
+                            </div>
+                            <div className="flex justify-between items-center text-xs p-1.5 rounded-md transition-colors hover:bg-slate-200 dark:hover:bg-slate-800/50">
+                              <div className="flex items-center">
+                                <Truck className="w-3 h-3 mr-2 text-amber-500" />
+                                <span className="font-medium text-slate-700 dark:text-slate-300">Harwich &rarr; Tilbury</span>
+                              </div>
+                              <span className="flex items-center text-red-600 dark:text-red-400 font-semibold"><AlertTriangle className="w-3 h-3 mr-1" /> At Risk</span>
+                            </div>
                           </div>
                         </div>
                       </div>
                       <DashboardSidebar />
-                      <div className="col-span-3 p-4 bg-slate-100 dark:bg-slate-900/50 rounded-xl">
-                        <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-3">Active Jobs</h3>
-                        <div className="space-y-2">
-                          <div className="flex justify-between items-center text-sm p-2 rounded-md transition-colors hover:bg-slate-200 dark:hover:bg-slate-800/50 animate-fade-in" style={{ animationDelay: '100ms' }}>
-                            <div className="flex items-center">
-                              <Truck className="w-4 h-4 mr-3 text-amber-500" />
-                              <span className="font-medium text-slate-700 dark:text-slate-300">Chelmsford &rarr; Colchester</span>
-                            </div>
-                            <span className="flex items-center text-green-600 dark:text-green-400 font-semibold"><CheckCircle className="w-4 h-4 mr-1.5" /> On Time</span>
-                          </div>
-                          <div className="flex justify-between items-center text-sm p-2 rounded-md transition-colors hover:bg-slate-200 dark:hover:bg-slate-800/50 animate-fade-in" style={{ animationDelay: '200ms' }}>
-                            <div className="flex items-center">
-                              <Truck className="w-4 h-4 mr-3 text-amber-500" />
-                              <span className="font-medium text-slate-700 dark:text-slate-300">Southend &rarr; London</span>
-                            </div>
-                            <span className="flex items-center text-yellow-600 dark:text-yellow-400 font-semibold"><Clock className="w-4 h-4 mr-1.5 animate-spin" style={{ animationDuration: '2s' }} /> In Transit</span>
-                          </div>
-                          <div className="flex justify-between items-center text-sm p-2 rounded-md transition-colors hover:bg-slate-200 dark:hover:bg-slate-800/50 animate-fade-in" style={{ animationDelay: '300ms' }}>
-                            <div className="flex items-center">
-                              <Truck className="w-4 h-4 mr-3 text-amber-500" />
-                              <span className="font-medium text-slate-700 dark:text-slate-300">Harwich &rarr; Tilbury</span>
-                            </div>
-                            <span className="flex items-center text-red-600 dark:text-red-400 font-semibold"><AlertTriangle className="w-4 h-4 mr-1.5" /> At Risk</span>
-                          </div>
-                        </div>
-                      </div>
                     </div>
                   </div>
                 </div>
