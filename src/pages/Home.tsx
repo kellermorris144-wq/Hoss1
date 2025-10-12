@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
-import { Truck, MapPin, FileText, CreditCard, BarChart3, CheckCircle, ArrowRight, AlertTriangle, Warehouse, CheckSquare, User, Users, Building, LayoutDashboard, CloudRain, ClipboardCheck, Smartphone } from 'lucide-react';
+import { Truck, MapPin, FileText, CreditCard, BarChart3, CheckCircle, ArrowRight, AlertTriangle, Warehouse, CheckSquare, User, Users, Building, LayoutDashboard, ArrowRightLeft, Smartphone } from 'lucide-react';
 
 const features = [
   { name: 'Live ETA Tracking', icon: MapPin },
@@ -188,66 +188,8 @@ const PaymentsVisual = () => {
   );
 };
 
-const AnimatedCounter = ({ value, precision = 0 }: { value: number, precision?: number }) => {
-  const [displayValue, setDisplayValue] = useState(0);
-
-  useEffect(() => {
-    let start = displayValue;
-    const end = value;
-    if (start === end) return;
-
-    const duration = 1000;
-    const range = end - start;
-    let startTime: number | null = null;
-
-    const step = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      const progress = Math.min((timestamp - startTime) / duration, 1);
-      const current = start + range * progress;
-      setDisplayValue(current);
-      if (progress < 1) {
-        requestAnimationFrame(step);
-      }
-    };
-
-    requestAnimationFrame(step);
-  }, [value]);
-
-  return <span>{displayValue.toFixed(precision)}</span>;
-};
-
-const allAlerts = [
-  { type: 'traffic', icon: AlertTriangle, color: 'red', text: 'Traffic Delay: M25 Junction 1A' },
-  { type: 'maintenance', icon: Warehouse, color: 'yellow', text: 'Maintenance Due: HOSS-07' },
-  { type: 'weather', icon: CloudRain, color: 'blue', text: 'High Wind Warning: A1(M)' },
-  { type: 'load', icon: ClipboardCheck, color: 'green', text: 'New Priority Load Available' },
-  { type: 'traffic', icon: AlertTriangle, color: 'red', text: 'Accident Reported: M6 near Birmingham' },
-  { type: 'maintenance', icon: Warehouse, color: 'yellow', text: 'Inspection Required: HOSS-04' },
-];
-
-const alertStyles = {
-  red: { bg: 'bg-red-100/50 dark:bg-red-900/30', icon: 'text-red-500', text: 'text-red-700 dark:text-red-300' },
-  yellow: { bg: 'bg-yellow-100/50 dark:bg-yellow-900/30', icon: 'text-yellow-500', text: 'text-yellow-700 dark:text-yellow-300' },
-  blue: { bg: 'bg-blue-100/50 dark:bg-blue-900/30', icon: 'text-blue-500', text: 'text-blue-700 dark:text-blue-300' },
-  green: { bg: 'bg-green-100/50 dark:bg-green-900/30', icon: 'text-green-500', text: 'text-green-700 dark:text-green-300' },
-};
-
 const Home: React.FC = () => {
   const [activeFeature, setActiveFeature] = useState(0);
-  const [currentAlerts, setCurrentAlerts] = useState([allAlerts[0], allAlerts[1]]);
-  const [isFading, setIsFading] = useState(false);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIsFading(true);
-      setTimeout(() => {
-        const shuffled = [...allAlerts].sort(() => 0.5 - Math.random());
-        setCurrentAlerts([shuffled[0], shuffled[1]]);
-        setIsFading(false);
-      }, 300);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, []);
 
   const interactiveFeatures = [
     {
@@ -358,11 +300,11 @@ const Home: React.FC = () => {
             </div>
 
             {/* Desktop View */}
-            <div className="hidden md:block relative md:h-[550px]">
-              <div className="relative flex flex-row items-center justify-center h-full gap-x-32">
-                <div className="flex flex-col space-y-12">
+            <div className="hidden md:block relative md:h-[400px]">
+              <div className="relative flex flex-row items-center justify-between h-full">
+                <div className="flex flex-col justify-between h-full py-2">
                   {features.map((feature) => (
-                    <div key={feature.name} className="flex items-center space-x-4 group w-64">
+                    <div key={feature.name} className="flex items-center space-x-4 group">
                       <div className="flex items-center justify-center w-12 h-12 bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl shadow-sm transition-all duration-300 group-hover:scale-110 group-hover:shadow-amber-500/30 group-hover:border-amber-400 dark:group-hover:border-amber-600">
                         <feature.icon className="w-6 h-6 text-slate-500 dark:text-slate-400 transition-colors group-hover:text-amber-500" />
                       </div>
@@ -370,65 +312,82 @@ const Home: React.FC = () => {
                     </div>
                   ))}
                 </div>
-                
-                <div className="w-full md:w-auto max-w-2xl">
-                  <div className="bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-2xl p-6 w-full backdrop-blur-md animate-background-shimmer">
-                    <div className="flex items-center justify-between mb-6 animate-fade-in">
-                      <h2 className="font-bold text-xl text-slate-800 dark:text-slate-200">Live Operations Dashboard</h2>
-                      <div className="flex items-center space-x-2">
-                        <span className="text-xs font-semibold text-green-500">LIVE</span>
-                        <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse"></div>
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                  <div className="absolute inset-0 bg-amber-500/20 rounded-full blur-2xl animate-pulse-slow"></div>
+                  <div className="relative w-28 h-28 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full flex items-center justify-center shadow-lg">
+                    <Truck className="w-12 h-12 text-amber-600 dark:text-amber-500" />
+                  </div>
+                </div>
+                <div className="w-full md:w-auto max-w-lg">
+                  <div className="bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl shadow-2xl p-6 w-full backdrop-blur-sm animate-shadow-pulse">
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="font-bold text-lg text-slate-800 dark:text-slate-200">Operations Dashboard</span>
+                      <div className="flex items-center space-x-1.5">
+                        <div className="w-3 h-3 bg-red-400 rounded-full"></div>
+                        <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                        <div className="w-3 h-3 bg-green-400 rounded-full"></div>
                       </div>
                     </div>
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                      <div className="lg:col-span-2 space-y-6">
-                        <div className="p-4 bg-slate-100 dark:bg-slate-900/50 rounded-xl relative animate-fade-in" style={{ animationDelay: '100ms' }}>
-                          <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-2">Live Fleet: Essex</h3>
-                          <div className="relative h-48 rounded-lg overflow-hidden bg-cover bg-center map-grid-overlay" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1612387692213-eda2b6a8425f?q=80&w=1974&auto=format&fit=crop')" }}>
-                            <div className="absolute inset-0 bg-black/20 dark:bg-black/50"></div>
-                            <div className="relative w-full h-full">
-                              {trucks.map(truck => (
-                                <div key={truck.id} className="absolute group" style={truck.position}>
-                                  <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-max px-2 py-1 bg-slate-900 text-white text-xs font-bold rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10">
-                                    <p>{truck.driver}</p><p className="text-slate-400 font-medium">{truck.id}</p>
-                                  </div>
-                                  <div className="relative w-3 h-3"><div className={`absolute inset-0 ${truck.pingColor} rounded-full animate-ping`}></div><div className={`relative block w-3 h-3 ${truck.color} rounded-full border-2 border-white`}></div></div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="col-span-2 p-4 bg-slate-100 dark:bg-slate-900/50 rounded-xl relative">
+                        <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-2">Live Fleet: Essex</h3>
+                        <div 
+                          className="relative h-32 rounded-lg overflow-hidden bg-cover bg-center map-grid-overlay"
+                          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1612387692213-eda2b6a8425f?q=80&w=1974&auto=format&fit=crop')" }}
+                        >
+                          <div className="absolute inset-0 bg-black/20 dark:bg-black/50"></div>
+                          <div className="relative w-full h-full">
+                            <span className="absolute top-[40%] left-[48%] text-xs text-white font-bold bg-black/60 px-1.5 py-0.5 rounded -translate-x-1/2">Chelmsford</span>
+                            <span className="absolute top-[70%] left-[65%] text-xs text-white font-bold bg-black/60 px-1.5 py-0.5 rounded -translate-x-1/2">Southend</span>
+                            <span className="absolute top-[50%] left-[20%] text-xs text-white font-bold bg-black/60 px-1.5 py-0.5 rounded -translate-x-1/2">Harlow</span>
+                            {trucks.map(truck => (
+                              <div key={truck.id} className="absolute group" style={truck.position}>
+                                <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-max px-2 py-1 bg-slate-900 text-white text-xs font-bold rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10">
+                                  <p>{truck.driver}</p>
+                                  <p className="text-slate-400 font-medium">{truck.id}</p>
                                 </div>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                        <div className="p-4 bg-slate-100 dark:bg-slate-900/50 rounded-xl animate-fade-in" style={{ animationDelay: '200ms' }}>
-                          <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-3">Urgent Alerts</h3>
-                          <div className={`space-y-2 transition-opacity duration-300 ${isFading ? 'opacity-0' : 'opacity-100'}`}>
-                            {currentAlerts.map((alert, index) => {
-                              const styles = alertStyles[alert.color as keyof typeof alertStyles];
-                              return (
-                                <div key={index} className={`flex items-center text-sm p-2 rounded-md ${styles.bg}`}>
-                                  <alert.icon className={`w-4 h-4 mr-2 flex-shrink-0 ${styles.icon}`} />
-                                  <span className={styles.text}>{alert.text}</span>
+                                <div className="relative w-3 h-3">
+                                  <div className={`absolute inset-0 ${truck.pingColor} rounded-full animate-ping`}></div>
+                                  <div className={`relative block w-3 h-3 ${truck.color} rounded-full border-2 border-white`}></div>
                                 </div>
-                              );
-                            })}
+                              </div>
+                            ))}
                           </div>
                         </div>
                       </div>
-                      <div className="lg:col-span-1 space-y-6">
-                        <div className="p-4 bg-slate-100 dark:bg-slate-900/50 rounded-xl animate-fade-in" style={{ animationDelay: '300ms' }}>
-                          <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-4">Today's Snapshot</h3>
-                          <div className="grid grid-cols-2 gap-4 text-center">
-                            <div><p className="text-2xl font-bold text-green-500"><AnimatedCounter value={98.7} precision={1} />%</p><p className="text-xs text-slate-500 dark:text-slate-400">On-Time Rate</p></div>
-                            <div><p className="text-2xl font-bold text-amber-500"><AnimatedCounter value={82} />%</p><p className="text-xs text-slate-500 dark:text-slate-400">Utilization</p></div>
-                            <div><p className="text-2xl font-bold text-slate-800 dark:text-slate-200">£<AnimatedCounter value={4750} /></p><p className="text-xs text-slate-500 dark:text-slate-400">Revenue Today</p></div>
-                            <div><p className="text-2xl font-bold text-slate-800 dark:text-slate-200"><AnimatedCounter value={12} />/<span className="text-base">15</span></p><p className="text-xs text-slate-500 dark:text-slate-400">Active Drivers</p></div>
+                      <div className="col-span-1 p-4 bg-slate-100 dark:bg-slate-900/50 rounded-xl">
+                        <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-4">Key Metrics</h3>
+                        <div className="space-y-4">
+                          <div>
+                            <div className="flex items-center text-sm text-slate-500 dark:text-slate-400">
+                              <div className="w-2 h-2 rounded-full bg-green-400 mr-2 shadow-[0_0_6px_1px] shadow-green-400"></div>
+                              On-Time Rate
+                            </div>
+                            <p className="text-3xl font-bold text-slate-800 dark:text-slate-200">98.7%</p>
+                          </div>
+                          <div>
+                            <div className="flex items-center text-sm text-slate-500 dark:text-slate-400">
+                              <div className="w-2 h-2 rounded-full bg-amber-400 mr-2 shadow-[0_0_6px_1px] shadow-amber-400"></div>
+                              Fleet Utilization
+                            </div>
+                            <p className="text-3xl font-bold text-slate-800 dark:text-slate-200">82%</p>
                           </div>
                         </div>
-                        <div className="p-4 bg-slate-100 dark:bg-slate-900/50 rounded-xl animate-fade-in" style={{ animationDelay: '400ms' }}>
-                          <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-3">Active Jobs</h3>
-                          <div className="space-y-3 max-h-48 overflow-y-auto pr-2">
-                            <div className="text-sm"><div className="flex justify-between items-center mb-1"><span className="font-medium text-slate-700 dark:text-slate-300">CHL &rarr; CLC</span><span className="text-green-500 font-semibold">On Time</span></div><div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1.5"><div className="bg-green-500 h-1.5 rounded-full w-[75%] animate-grow-bar-x"></div></div></div>
-                            <div className="text-sm"><div className="flex justify-between items-center mb-1"><span className="font-medium text-slate-700 dark:text-slate-300">STH &rarr; LDN</span><span className="text-yellow-500 font-semibold">In Transit</span></div><div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1.5"><div className="bg-yellow-500 h-1.5 rounded-full w-[40%] animate-grow-bar-x" style={{animationDelay: '100ms'}}></div></div></div>
-                            <div className="text-sm"><div className="flex justify-between items-center mb-1"><span className="font-medium text-slate-700 dark:text-slate-300">HRW &rarr; TIL</span><span className="text-red-500 font-semibold">At Risk</span></div><div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1.5"><div className="bg-red-500 h-1.5 rounded-full w-[90%] animate-grow-bar-x" style={{animationDelay: '200ms'}}></div></div></div>
+                      </div>
+                      <div className="col-span-1 p-4 bg-slate-100 dark:bg-slate-900/50 rounded-xl">
+                        <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-4">Active Jobs</h3>
+                        <div className="space-y-3">
+                          <div className="flex justify-between items-center text-sm p-2 rounded-md transition-colors hover:bg-slate-200 dark:hover:bg-slate-800/50">
+                            <span className="font-medium text-slate-700 dark:text-slate-300">Chelmsford &rarr; Colchester</span>
+                            <span className="flex items-center text-green-600 dark:text-green-400"><CheckCircle className="w-4 h-4 mr-1" /> On Time</span>
+                          </div>
+                          <div className="flex justify-between items-center text-sm p-2 rounded-md transition-colors hover:bg-slate-200 dark:hover:bg-slate-800/50">
+                            <span className="font-medium text-slate-700 dark:text-slate-300">Southend &rarr; London</span>
+                            <span className="flex items-center text-yellow-600 dark:text-yellow-400"><Truck className="w-4 h-4 mr-1" /> In Transit</span>
+                          </div>
+                          <div className="flex justify-between items-center text-sm p-2 rounded-md transition-colors hover:bg-slate-200 dark:hover:bg-slate-800/50">
+                            <span className="font-medium text-slate-700 dark:text-slate-300">Harwich &rarr; Tilbury</span>
+                            <span className="flex items-center text-red-600 dark:text-red-400"><AlertTriangle className="w-4 h-4 mr-1" /> At Risk</span>
                           </div>
                         </div>
                       </div>
@@ -436,41 +395,35 @@ const Home: React.FC = () => {
                   </div>
                 </div>
               </div>
-              <svg className="absolute top-0 left-0 w-full h-full z-[-1]" preserveAspectRatio="none" viewBox="0 0 1280 550">
+              <svg className="absolute top-0 left-0 w-full h-full z-[-1]" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1280 400">
                 <defs>
                   <linearGradient id="line-grad" x1="0%" y1="0%" x2="100%" y2="0%">
                     <stop offset="0%" stopColor="rgba(245, 158, 11, 0.5)" />
-                    <stop offset="100%" stopColor="rgba(245, 158, 11, 0.2)" />
+                    <stop offset="100%" stopColor="rgba(245, 158, 11, 0.1)" />
                   </linearGradient>
                   <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                    <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
                     <feMerge>
                       <feMergeNode in="coloredBlur"/>
                       <feMergeNode in="SourceGraphic"/>
                     </feMerge>
                   </filter>
                 </defs>
-                <g filter="url(#glow)" fill="#f59e0b">
-                  {/* Paths */}
-                  <path d="M 270 131 C 350 131, 350 275, 430 275" stroke="url(#line-grad)" strokeWidth="1.5" fill="none" />
-                  <path d="M 270 227 C 350 227, 350 275, 430 275" stroke="url(#line-grad)" strokeWidth="1.5" fill="none" />
-                  <path d="M 270 323 C 350 323, 350 275, 430 275" stroke="url(#line-grad)" strokeWidth="1.5" fill="none" />
-                  <path d="M 270 419 C 350 419, 350 275, 430 275" stroke="url(#line-grad)" strokeWidth="1.5" fill="none" />
-
-                  {/* Dots on lines */}
-                  <circle cx="310" cy="131" r="3" />
-                  <circle cx="365" cy="190" r="3" />
-                  <circle cx="310" cy="227" r="3" />
-                  <circle cx="360" cy="255" r="3" />
-                  <circle cx="310" cy="323" r="3" />
-                  <circle cx="360" cy="295" r="3" />
-                  <circle cx="310" cy="419" r="3" />
-                  <circle cx="365" cy="360" r="3" />
-
-                  {/* Convergence Point Cluster */}
-                  <circle cx="430" cy="275" r="4" />
-                  <circle cx="438" cy="270" r="3" />
-                  <circle cx="438" cy="280" r="3" />
+                <g filter="url(#glow)">
+                  <path d="M 280 50 C 420 50, 450 200, 580 200" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
+                  <path d="M 280 125 C 420 125, 450 200, 580 200" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
+                  <path d="M 280 275 C 420 275, 450 200, 580 200" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
+                  <path d="M 280 350 C 420 350, 450 200, 580 200" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
+                  <path d="M 700 200 H 850" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
+                  <path d="M 850 190 H 700" stroke="rgba(34, 197, 94, 0.6)" strokeWidth="1.5" fill="none" />
+                  <path d="M 850 210 H 700" stroke="rgba(34, 197, 94, 0.6)" strokeWidth="1.5" fill="none" />
+                  <circle cx="0" cy="0" r="5" fill="#f59e0b"><animateMotion dur="8s" repeatCount="indefinite" path="M 280 50 C 420 50, 450 200, 580 200" /></circle>
+                  <circle cx="0" cy="0" r="5" fill="#f59e0b"><animateMotion dur="7s" repeatCount="indefinite" path="M 280 125 C 420 125, 450 200, 580 200" /></circle>
+                  <circle cx="0" cy="0" r="5" fill="#f59e0b"><animateMotion dur="6s" repeatCount="indefinite" path="M 280 275 C 420 275, 450 200, 580 200" /></circle>
+                  <circle cx="0" cy="0" r="5" fill="#f59e0b"><animateMotion dur="9s" repeatCount="indefinite" path="M 280 350 C 420 350, 450 200, 580 200" /></circle>
+                  <circle cx="0" cy="0" r="5" fill="#f59e0b"><animateMotion dur="5s" repeatCount="indefinite" path="M 700 200 H 850" /></circle>
+                  <circle cx="0" cy="0" r="4" fill="#22c55e"><animateMotion dur="4s" repeatCount="indefinite" path="M 850 190 H 700" /></circle>
+                  <circle cx="0" cy="0" r="4" fill="#22c55e"><animateMotion dur="4s" begin="0.5s" repeatCount="indefinite" path="M 850 210 H 700" /></circle>
                 </g>
               </svg>
             </div>

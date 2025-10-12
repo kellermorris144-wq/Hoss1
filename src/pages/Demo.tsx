@@ -10,6 +10,7 @@ interface FormData {
   email: string;
   phone: string;
   company: string;
+  industry: string;
   fleetSize: string;
   currentSolution: string;
   challenges: string;
@@ -26,6 +27,7 @@ const Demo: React.FC = () => {
     email: '',
     phone: '',
     company: '',
+    industry: '',
     fleetSize: '',
     currentSolution: '',
     challenges: '',
@@ -48,6 +50,7 @@ const Demo: React.FC = () => {
     else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Email is invalid';
     if (!formData.phone.trim()) newErrors.phone = 'Phone number is required';
     if (!formData.company.trim()) newErrors.company = 'Company name is required';
+    if (!formData.industry) newErrors.industry = 'Industry is required';
     if (!formData.fleetSize) newErrors.fleetSize = 'Fleet size is required';
 
     setErrors(newErrors);
@@ -85,6 +88,7 @@ const Demo: React.FC = () => {
         email: '',
         phone: '',
         company: '',
+        industry: '',
         fleetSize: '',
         currentSolution: '',
         challenges: '',
@@ -272,27 +276,53 @@ const Demo: React.FC = () => {
                     )}
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Fleet Size *
-                  </label>
-                  <select
-                    name="fleetSize"
-                    value={formData.fleetSize}
-                    onChange={handleChange}
-                    className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 ${
-                      errors.fleetSize ? 'border-red-500' : 'border-gray-300 dark:border-gray-700'
-                    }`}
-                  >
-                    <option value="">Select Fleet Size</option>
-                    <option value="1-5">1-5 vehicles</option>
-                    <option value="6-20">6-20 vehicles</option>
-                    <option value="21-50">21-50 vehicles</option>
-                    <option value="50+">50+ vehicles</option>
-                  </select>
-                  {errors.fleetSize && (
-                    <p className="mt-1 text-sm text-red-600">{errors.fleetSize}</p>
-                  )}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      Industry *
+                    </label>
+                    <select
+                      name="industry"
+                      value={formData.industry}
+                      onChange={handleChange}
+                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 ${
+                        errors.industry ? 'border-red-500' : 'border-gray-300 dark:border-gray-700'
+                      }`}
+                    >
+                      <option value="">Select Industry</option>
+                      <option value="logistics">Logistics & Transportation</option>
+                      <option value="manufacturing">Manufacturing</option>
+                      <option value="retail">Retail & E-commerce</option>
+                      <option value="construction">Construction</option>
+                      <option value="agriculture">Agriculture</option>
+                      <option value="other">Other</option>
+                    </select>
+                    {errors.industry && (
+                      <p className="mt-1 text-sm text-red-600">{errors.industry}</p>
+                    )}
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      Fleet Size *
+                    </label>
+                    <select
+                      name="fleetSize"
+                      value={formData.fleetSize}
+                      onChange={handleChange}
+                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 ${
+                        errors.fleetSize ? 'border-red-500' : 'border-gray-300 dark:border-gray-700'
+                      }`}
+                    >
+                      <option value="">Select Fleet Size</option>
+                      <option value="1-5">1-5 vehicles</option>
+                      <option value="6-20">6-20 vehicles</option>
+                      <option value="21-50">21-50 vehicles</option>
+                      <option value="50+">50+ vehicles</option>
+                    </select>
+                    {errors.fleetSize && (
+                      <p className="mt-1 text-sm text-red-600">{errors.fleetSize}</p>
+                    )}
+                  </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
