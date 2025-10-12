@@ -1,10 +1,9 @@
 import React from 'react';
-import hossLogo from '../assets/hoss-logo.png';
 
 const Logo: React.FC<{ className?: string }> = ({ className = 'h-8 w-auto' }) => {
   return (
     <img
-      src={hossLogo}
+      src="/logo.png"
       alt="HOSS Logo"
       className={className}
     />
