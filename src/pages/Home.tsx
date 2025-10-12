@@ -197,6 +197,7 @@ const alerts = [
     bgColor: 'bg-red-500/10',
     message: 'Major Delay on M25',
     location: 'Junction 28, Brentwood',
+    details: 'Est. 45 min delay',
   },
   {
     id: 2,
@@ -206,6 +207,7 @@ const alerts = [
     bgColor: 'bg-blue-500/10',
     message: 'HOSS-07 Service Due',
     location: 'Next 50 miles',
+    details: 'Reg: AB12 CDE',
   },
   {
     id: 3,
@@ -215,6 +217,7 @@ const alerts = [
     bgColor: 'bg-cyan-500/10',
     message: 'High Wind Warning',
     location: 'Dartford Crossing',
+    details: 'Gusts up to 60 mph',
   },
 ];
 
@@ -236,7 +239,7 @@ const UrgentAlerts = () => {
       <div className={`relative flex-grow p-3 rounded-lg overflow-hidden ${currentAlert.bgColor}`}>
         <div className="flex items-start">
           <div className="relative w-8 h-8 flex-shrink-0 mr-3">
-            <div className={`absolute inset-0 rounded-full opacity-50 animate-ping ${currentAlert.bgColor.replace('bg-', 'bg-opacity-50 ')}`}></div>
+            <div className={`absolute inset-0 rounded-full opacity-50 animate-ping ${currentAlert.bgColor.replace('bg-', 'bg-opacity-50 ')}`} style={{ animationDelay: '1s' }}></div>
             <div className={`relative w-8 h-8 rounded-full flex items-center justify-center ${currentAlert.bgColor}`}>
               <currentAlert.icon className={`w-4 h-4 ${currentAlert.color}`} />
             </div>
@@ -244,7 +247,8 @@ const UrgentAlerts = () => {
           <div className="relative w-full overflow-hidden">
             <div key={currentAlert.id} className="animate-slide-in-bottom">
               <p className={`font-bold text-sm ${currentAlert.color}`}>{currentAlert.message}</p>
-              <p className="text-xs text-slate-500 dark:text-slate-400">{currentAlert.location}</p>
+              <p className="text-xs text-slate-600 dark:text-slate-400">{currentAlert.location}</p>
+              <p className="text-xs font-semibold text-slate-700 dark:text-slate-300 mt-1">{currentAlert.details}</p>
             </div>
           </div>
         </div>
@@ -257,28 +261,29 @@ const LiveStats = () => {
   const revenue = useAnimatedCounter(12450);
   const jobs = useAnimatedCounter(42);
   const onTimeRate = useAnimatedCounter(98.7);
+  const activeTrucks = useAnimatedCounter(18);
 
   return (
     <div className="h-full flex flex-col">
       <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-2 text-base">Live Stats</h3>
       <div className="space-y-3 flex-grow flex flex-col justify-around">
-        <div>
-          <p className="text-xs text-slate-500 dark:text-slate-400">Revenue Today</p>
-          <p className="text-2xl font-bold text-slate-800 dark:text-slate-200">
+        <div className="flex justify-between items-baseline">
+          <p className="text-xs text-slate-500 dark:text-slate-400">Revenue</p>
+          <p className="text-xl font-bold text-slate-800 dark:text-slate-200">
             £{revenue.toLocaleString('en-GB', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
           </p>
         </div>
-        <div>
-          <p className="text-xs text-slate-500 dark:text-slate-400">Jobs Completed</p>
-          <p className="text-2xl font-bold text-slate-800 dark:text-slate-200">{jobs.toFixed(0)}</p>
+        <div className="flex justify-between items-baseline">
+          <p className="text-xs text-slate-500 dark:text-slate-400">Active Trucks</p>
+          <p className="text-xl font-bold text-slate-800 dark:text-slate-200">{activeTrucks.toFixed(0)} / 25</p>
         </div>
         <div>
-          <p className="text-xs text-slate-500 dark:text-slate-400">On-Time Rate</p>
-          <div className="flex items-center gap-2 mt-1">
+          <p className="text-xs text-slate-500 dark:text-slate-400 mb-1">On-Time Rate</p>
+          <div className="flex items-center gap-2">
             <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1.5 overflow-hidden">
               <div className="bg-green-500 h-1.5 rounded-full transition-all duration-500" style={{ width: `${onTimeRate}%` }}></div>
             </div>
-            <span className="font-bold text-green-500 text-base">{onTimeRate.toFixed(1)}%</span>
+            <span className="font-bold text-green-500 text-sm">{onTimeRate.toFixed(1)}%</span>
           </div>
         </div>
       </div>
