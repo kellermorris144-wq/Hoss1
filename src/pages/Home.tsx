@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
-import { Truck, MapPin, FileText, CreditCard, BarChart3, CheckCircle, ArrowRight, AlertTriangle, Warehouse, CheckSquare, User, Users, Building, LayoutDashboard, Smartphone, Clock, Wrench, Star } from 'lucide-react';
+import { Truck, MapPin, FileText, CreditCard, BarChart3, CheckCircle, ArrowRight, AlertTriangle, Warehouse, CheckSquare, User, Users, Building, LayoutDashboard, Smartphone, Clock, Wrench, Star, ArrowUp } from 'lucide-react';
 import { useAnimatedCounter } from '../hooks/useAnimatedCounter';
 
 const features = [
@@ -68,7 +68,7 @@ const MapVisual = () => (
   <div className="w-full h-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg p-4 flex items-center justify-center overflow-hidden">
     <div 
       className="w-full h-full rounded-lg relative bg-cover bg-center map-grid-overlay"
-      style={{ backgroundImage: "url('https://images.unsplash.com/photo-1612387692213-eda2b6a8425f?q=80&w=1974&auto=format&fit=crop')" }}
+      style={{ backgroundImage: "url('https://images.unsplash.com/photo-1612387692213-eda2b6a8425f?q=80&w=1974&auto-format&fit=crop')" }}
     >
       <div className="absolute inset-0 bg-black/20 dark:bg-black/50 rounded-lg"></div>
       <div className="relative w-full h-full">
@@ -195,7 +195,7 @@ const alerts = [
     icon: AlertTriangle,
     color: 'text-red-500',
     bgColor: 'bg-red-500/10',
-    message: 'Major Delay on M25',
+    message: 'M25 Delay (+25 min)',
     location: 'Junction 28, Brentwood',
   },
   {
@@ -204,7 +204,7 @@ const alerts = [
     icon: Wrench,
     color: 'text-blue-500',
     bgColor: 'bg-blue-500/10',
-    message: 'HOSS-07 Service Due',
+    message: 'HOSS-07 (LK18 ABC) Service Due',
     location: 'Next 50 miles',
   },
   {
@@ -213,7 +213,7 @@ const alerts = [
     icon: Star,
     color: 'text-amber-500',
     bgColor: 'bg-amber-500/10',
-    message: 'New Priority Job',
+    message: 'New Priority Job (AMZ LCY2)',
     location: 'London Gateway Port',
   },
 ];
@@ -233,7 +233,7 @@ const UrgentAlerts = () => {
   return (
     <div className="h-full flex flex-col">
       <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-2 text-base">Urgent Alerts</h3>
-      <div className={`relative flex-grow p-3 rounded-lg overflow-hidden ${currentAlert.bgColor}`}>
+      <div className={`relative flex-grow p-3 rounded-lg overflow-hidden ${currentAlert.bgColor} animate-background-shimmer`}>
         <div className="flex items-start">
           <div className="relative w-8 h-8 flex-shrink-0 mr-3">
             <div className={`absolute inset-0 rounded-full opacity-50 animate-ping ${currentAlert.bgColor.replace('bg-', 'bg-opacity-50 ')}`}></div>
@@ -264,13 +264,21 @@ const LiveStats = () => {
       <div className="space-y-3 flex-grow flex flex-col justify-around">
         <div>
           <p className="text-xs text-slate-500 dark:text-slate-400">Revenue Today</p>
-          <p className="text-2xl font-bold text-slate-800 dark:text-slate-200">
-            £{revenue.toLocaleString('en-GB', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
-          </p>
+          <div className="flex items-baseline">
+            <p className="text-2xl font-bold text-slate-800 dark:text-slate-200">
+              £{revenue.toLocaleString('en-GB', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+            </p>
+            <span className="flex items-center text-xs font-bold text-green-500 ml-2">
+              <ArrowUp className="w-3 h-3" /> 5.2%
+            </span>
+          </div>
         </div>
         <div>
           <p className="text-xs text-slate-500 dark:text-slate-400">Jobs Completed</p>
-          <p className="text-2xl font-bold text-slate-800 dark:text-slate-200">{jobs.toFixed(0)}</p>
+          <div className="flex items-baseline">
+            <p className="text-2xl font-bold text-slate-800 dark:text-slate-200">{jobs.toFixed(0)}</p>
+            <span className="text-xs font-bold text-green-500 ml-2">+3 today</span>
+          </div>
         </div>
         <div>
           <p className="text-xs text-slate-500 dark:text-slate-400">On-Time Rate</p>
@@ -430,7 +438,7 @@ const Home: React.FC = () => {
                   </div>
                 </div>
                 <div className="w-full md:w-auto max-w-lg">
-                  <div className="bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl shadow-2xl p-4 w-full backdrop-blur-sm animate-shadow-pulse">
+                  <div className="bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl shadow-2xl p-4 w-full backdrop-blur-sm animate-shadow-pulse bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800/60 dark:to-slate-900/60 animate-background-pan">
                     <div className="flex items-center justify-between mb-3">
                       <span className="font-bold text-base text-slate-800 dark:text-slate-200">Operations Dashboard</span>
                       <div className="flex items-center space-x-1.5">
