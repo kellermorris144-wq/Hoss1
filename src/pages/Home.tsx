@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
-import { Truck, MapPin, FileText, CreditCard, BarChart3, CheckCircle, ArrowRight, AlertTriangle, Warehouse, CheckSquare, User, Users, Building, LayoutDashboard, ArrowRightLeft, Smartphone, DollarSign, ClipboardCheck } from 'lucide-react';
+import { Truck, MapPin, FileText, CreditCard, BarChart3, CheckCircle, ArrowRight, AlertTriangle, Warehouse, CheckSquare, User, Users, Building, LayoutDashboard, CloudRain, ClipboardCheck, Smartphone } from 'lucide-react';
 
 const features = [
   { name: 'Live ETA Tracking', icon: MapPin },
@@ -216,8 +216,38 @@ const AnimatedCounter = ({ value, precision = 0 }: { value: number, precision?: 
   return <span>{displayValue.toFixed(precision)}</span>;
 };
 
+const allAlerts = [
+  { type: 'traffic', icon: AlertTriangle, color: 'red', text: 'Traffic Delay: M25 Junction 1A' },
+  { type: 'maintenance', icon: Warehouse, color: 'yellow', text: 'Maintenance Due: HOSS-07' },
+  { type: 'weather', icon: CloudRain, color: 'blue', text: 'High Wind Warning: A1(M)' },
+  { type: 'load', icon: ClipboardCheck, color: 'green', text: 'New Priority Load Available' },
+  { type: 'traffic', icon: AlertTriangle, color: 'red', text: 'Accident Reported: M6 near Birmingham' },
+  { type: 'maintenance', icon: Warehouse, color: 'yellow', text: 'Inspection Required: HOSS-04' },
+];
+
+const alertStyles = {
+  red: { bg: 'bg-red-100/50 dark:bg-red-900/30', icon: 'text-red-500', text: 'text-red-700 dark:text-red-300' },
+  yellow: { bg: 'bg-yellow-100/50 dark:bg-yellow-900/30', icon: 'text-yellow-500', text: 'text-yellow-700 dark:text-yellow-300' },
+  blue: { bg: 'bg-blue-100/50 dark:bg-blue-900/30', icon: 'text-blue-500', text: 'text-blue-700 dark:text-blue-300' },
+  green: { bg: 'bg-green-100/50 dark:bg-green-900/30', icon: 'text-green-500', text: 'text-green-700 dark:text-green-300' },
+};
+
 const Home: React.FC = () => {
   const [activeFeature, setActiveFeature] = useState(0);
+  const [currentAlerts, setCurrentAlerts] = useState([allAlerts[0], allAlerts[1]]);
+  const [isFading, setIsFading] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsFading(true);
+      setTimeout(() => {
+        const shuffled = [...allAlerts].sort(() => 0.5 - Math.random());
+        setCurrentAlerts([shuffled[0], shuffled[1]]);
+        setIsFading(false);
+      }, 300);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
 
   const interactiveFeatures = [
     {
@@ -370,9 +400,16 @@ const Home: React.FC = () => {
                         </div>
                         <div className="p-4 bg-slate-100 dark:bg-slate-900/50 rounded-xl animate-fade-in" style={{ animationDelay: '200ms' }}>
                           <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-3">Urgent Alerts</h3>
-                          <div className="space-y-2">
-                            <div className="flex items-center text-sm p-2 rounded-md bg-red-100/50 dark:bg-red-900/30"><AlertTriangle className="w-4 h-4 text-red-500 mr-2 flex-shrink-0" /><span className="text-red-700 dark:text-red-300">Traffic Delay: M25 Junction 1A</span></div>
-                            <div className="flex items-center text-sm p-2 rounded-md bg-yellow-100/50 dark:bg-yellow-900/30"><Warehouse className="w-4 h-4 text-yellow-500 mr-2 flex-shrink-0" /><span className="text-yellow-700 dark:text-yellow-300">Maintenance Due: HOSS-07</span></div>
+                          <div className={`space-y-2 transition-opacity duration-300 ${isFading ? 'opacity-0' : 'opacity-100'}`}>
+                            {currentAlerts.map((alert, index) => {
+                              const styles = alertStyles[alert.color as keyof typeof alertStyles];
+                              return (
+                                <div key={index} className={`flex items-center text-sm p-2 rounded-md ${styles.bg}`}>
+                                  <alert.icon className={`w-4 h-4 mr-2 flex-shrink-0 ${styles.icon}`} />
+                                  <span className={styles.text}>{alert.text}</span>
+                                </div>
+                              );
+                            })}
                           </div>
                         </div>
                       </div>
@@ -403,25 +440,37 @@ const Home: React.FC = () => {
                 <defs>
                   <linearGradient id="line-grad" x1="0%" y1="0%" x2="100%" y2="0%">
                     <stop offset="0%" stopColor="rgba(245, 158, 11, 0.5)" />
-                    <stop offset="100%" stopColor="rgba(245, 158, 11, 0.1)" />
+                    <stop offset="100%" stopColor="rgba(245, 158, 11, 0.2)" />
                   </linearGradient>
                   <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                    <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
                     <feMerge>
                       <feMergeNode in="coloredBlur"/>
                       <feMergeNode in="SourceGraphic"/>
                     </feMerge>
                   </filter>
                 </defs>
-                <g filter="url(#glow)">
-                  <path d="M 300 131 C 350 131, 400 275, 430 275" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
-                  <path d="M 300 227 C 350 227, 400 275, 430 275" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
-                  <path d="M 300 323 C 350 323, 400 275, 430 275" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
-                  <path d="M 300 419 C 350 419, 400 275, 430 275" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
-                  <circle cx="0" cy="0" r="5" fill="#f59e0b"><animateMotion dur="8s" repeatCount="indefinite" path="M 300 131 C 350 131, 400 275, 430 275" /></circle>
-                  <circle cx="0" cy="0" r="5" fill="#f59e0b"><animateMotion dur="7s" repeatCount="indefinite" path="M 300 227 C 350 227, 400 275, 430 275" /></circle>
-                  <circle cx="0" cy="0" r="5" fill="#f59e0b"><animateMotion dur="6s" repeatCount="indefinite" path="M 300 323 C 350 323, 400 275, 430 275" /></circle>
-                  <circle cx="0" cy="0" r="5" fill="#f59e0b"><animateMotion dur="9s" repeatCount="indefinite" path="M 300 419 C 350 419, 400 275, 430 275" /></circle>
+                <g filter="url(#glow)" fill="#f59e0b">
+                  {/* Paths */}
+                  <path d="M 300 131 C 380 131, 380 275, 460 275" stroke="url(#line-grad)" strokeWidth="1.5" fill="none" />
+                  <path d="M 300 227 C 380 227, 380 275, 460 275" stroke="url(#line-grad)" strokeWidth="1.5" fill="none" />
+                  <path d="M 300 323 C 380 323, 380 275, 460 275" stroke="url(#line-grad)" strokeWidth="1.5" fill="none" />
+                  <path d="M 300 419 C 380 419, 380 275, 460 275" stroke="url(#line-grad)" strokeWidth="1.5" fill="none" />
+
+                  {/* Dots on lines */}
+                  <circle cx="340" cy="131" r="3" />
+                  <circle cx="395" cy="190" r="3" />
+                  <circle cx="340" cy="227" r="3" />
+                  <circle cx="390" cy="255" r="3" />
+                  <circle cx="340" cy="323" r="3" />
+                  <circle cx="390" cy="295" r="3" />
+                  <circle cx="340" cy="419" r="3" />
+                  <circle cx="395" cy="360" r="3" />
+
+                  {/* Convergence Point Cluster */}
+                  <circle cx="460" cy="275" r="4" />
+                  <circle cx="468" cy="270" r="3" />
+                  <circle cx="468" cy="280" r="3" />
                 </g>
               </svg>
             </div>
