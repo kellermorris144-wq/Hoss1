@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
-import { Truck, MapPin, FileText, CreditCard, BarChart3, CheckCircle, ArrowRight, AlertTriangle, Warehouse, CheckSquare, User, Users, Building, LayoutDashboard, ArrowRightLeft, Smartphone } from 'lucide-react';
+import { Truck, MapPin, FileText, CreditCard, BarChart3, CheckCircle, ArrowRight, AlertTriangle, Warehouse, CheckSquare, User, Users, Building, LayoutDashboard, Smartphone, Clock } from 'lucide-react';
+import { useAnimatedCounter } from '../hooks/useAnimatedCounter';
 
 const features = [
   { name: 'Live ETA Tracking', icon: MapPin },
@@ -10,7 +11,6 @@ const features = [
   { name: 'Analytics & Reporting', icon: BarChart3 },
 ];
 
-// Updated truck positions to align with the new Essex map
 const trucks = [
   {
     id: 'HOSS-04',
@@ -188,6 +188,39 @@ const PaymentsVisual = () => {
   );
 };
 
+const LiveStats = () => {
+  const revenue = useAnimatedCounter(12450);
+  const jobs = useAnimatedCounter(42);
+  const onTimeRate = useAnimatedCounter(98.7);
+
+  return (
+    <div className="h-full flex flex-col">
+      <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-4">Live Stats</h3>
+      <div className="space-y-4 flex-grow flex flex-col justify-around">
+        <div>
+          <p className="text-sm text-slate-500 dark:text-slate-400">Revenue Today</p>
+          <p className="text-3xl font-bold text-slate-800 dark:text-slate-200">
+            £{revenue.toLocaleString('en-GB', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+          </p>
+        </div>
+        <div>
+          <p className="text-sm text-slate-500 dark:text-slate-400">Jobs Completed</p>
+          <p className="text-3xl font-bold text-slate-800 dark:text-slate-200">{jobs.toFixed(0)}</p>
+        </div>
+        <div>
+          <p className="text-sm text-slate-500 dark:text-slate-400">On-Time Rate</p>
+          <div className="flex items-center gap-2 mt-1">
+            <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2 overflow-hidden">
+              <div className="bg-green-500 h-2 rounded-full transition-all duration-500" style={{ width: `${onTimeRate}%` }}></div>
+            </div>
+            <span className="font-bold text-green-500 text-lg">{onTimeRate.toFixed(1)}%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Home: React.FC = () => {
   const [activeFeature, setActiveFeature] = useState(0);
 
@@ -328,11 +361,11 @@ const Home: React.FC = () => {
                         <div className="w-3 h-3 bg-green-400 rounded-full"></div>
                       </div>
                     </div>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="col-span-2 p-4 bg-slate-100 dark:bg-slate-900/50 rounded-xl relative">
+                    <div className="grid grid-cols-3 gap-4">
+                      <div className="col-span-3 lg:col-span-2 p-4 bg-slate-100 dark:bg-slate-900/50 rounded-xl relative">
                         <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-2">Live Fleet: Essex</h3>
                         <div 
-                          className="relative h-32 rounded-lg overflow-hidden bg-cover bg-center map-grid-overlay"
+                          className="relative h-48 rounded-lg overflow-hidden bg-cover bg-center map-grid-overlay"
                           style={{ backgroundImage: "url('https://images.unsplash.com/photo-1612387692213-eda2b6a8425f?q=80&w=1974&auto=format&fit=crop')" }}
                         >
                           <div className="absolute inset-0 bg-black/20 dark:bg-black/50"></div>
@@ -355,39 +388,32 @@ const Home: React.FC = () => {
                           </div>
                         </div>
                       </div>
-                      <div className="col-span-1 p-4 bg-slate-100 dark:bg-slate-900/50 rounded-xl">
-                        <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-4">Key Metrics</h3>
-                        <div className="space-y-4">
-                          <div>
-                            <div className="flex items-center text-sm text-slate-500 dark:text-slate-400">
-                              <div className="w-2 h-2 rounded-full bg-green-400 mr-2 shadow-[0_0_6px_1px] shadow-green-400"></div>
-                              On-Time Rate
-                            </div>
-                            <p className="text-3xl font-bold text-slate-800 dark:text-slate-200">98.7%</p>
-                          </div>
-                          <div>
-                            <div className="flex items-center text-sm text-slate-500 dark:text-slate-400">
-                              <div className="w-2 h-2 rounded-full bg-amber-400 mr-2 shadow-[0_0_6px_1px] shadow-amber-400"></div>
-                              Fleet Utilization
-                            </div>
-                            <p className="text-3xl font-bold text-slate-800 dark:text-slate-200">82%</p>
-                          </div>
-                        </div>
+                      <div className="col-span-3 lg:col-span-1 p-4 bg-slate-100 dark:bg-slate-900/50 rounded-xl">
+                        <LiveStats />
                       </div>
-                      <div className="col-span-1 p-4 bg-slate-100 dark:bg-slate-900/50 rounded-xl">
-                        <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-4">Active Jobs</h3>
-                        <div className="space-y-3">
-                          <div className="flex justify-between items-center text-sm p-2 rounded-md transition-colors hover:bg-slate-200 dark:hover:bg-slate-800/50">
-                            <span className="font-medium text-slate-700 dark:text-slate-300">Chelmsford &rarr; Colchester</span>
-                            <span className="flex items-center text-green-600 dark:text-green-400"><CheckCircle className="w-4 h-4 mr-1" /> On Time</span>
+                      <div className="col-span-3 p-4 bg-slate-100 dark:bg-slate-900/50 rounded-xl">
+                        <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-3">Active Jobs</h3>
+                        <div className="space-y-2">
+                          <div className="flex justify-between items-center text-sm p-2 rounded-md transition-colors hover:bg-slate-200 dark:hover:bg-slate-800/50 animate-fade-in" style={{ animationDelay: '100ms' }}>
+                            <div className="flex items-center">
+                              <Truck className="w-4 h-4 mr-3 text-amber-500" />
+                              <span className="font-medium text-slate-700 dark:text-slate-300">Chelmsford &rarr; Colchester</span>
+                            </div>
+                            <span className="flex items-center text-green-600 dark:text-green-400 font-semibold"><CheckCircle className="w-4 h-4 mr-1.5" /> On Time</span>
                           </div>
-                          <div className="flex justify-between items-center text-sm p-2 rounded-md transition-colors hover:bg-slate-200 dark:hover:bg-slate-800/50">
-                            <span className="font-medium text-slate-700 dark:text-slate-300">Southend &rarr; London</span>
-                            <span className="flex items-center text-yellow-600 dark:text-yellow-400"><Truck className="w-4 h-4 mr-1" /> In Transit</span>
+                          <div className="flex justify-between items-center text-sm p-2 rounded-md transition-colors hover:bg-slate-200 dark:hover:bg-slate-800/50 animate-fade-in" style={{ animationDelay: '200ms' }}>
+                            <div className="flex items-center">
+                              <Truck className="w-4 h-4 mr-3 text-amber-500" />
+                              <span className="font-medium text-slate-700 dark:text-slate-300">Southend &rarr; London</span>
+                            </div>
+                            <span className="flex items-center text-yellow-600 dark:text-yellow-400 font-semibold"><Clock className="w-4 h-4 mr-1.5 animate-spin" style={{ animationDuration: '2s' }} /> In Transit</span>
                           </div>
-                          <div className="flex justify-between items-center text-sm p-2 rounded-md transition-colors hover:bg-slate-200 dark:hover:bg-slate-800/50">
-                            <span className="font-medium text-slate-700 dark:text-slate-300">Harwich &rarr; Tilbury</span>
-                            <span className="flex items-center text-red-600 dark:text-red-400"><AlertTriangle className="w-4 h-4 mr-1" /> At Risk</span>
+                          <div className="flex justify-between items-center text-sm p-2 rounded-md transition-colors hover:bg-slate-200 dark:hover:bg-slate-800/50 animate-fade-in" style={{ animationDelay: '300ms' }}>
+                            <div className="flex items-center">
+                              <Truck className="w-4 h-4 mr-3 text-amber-500" />
+                              <span className="font-medium text-slate-700 dark:text-slate-300">Harwich &rarr; Tilbury</span>
+                            </div>
+                            <span className="flex items-center text-red-600 dark:text-red-400 font-semibold"><AlertTriangle className="w-4 h-4 mr-1.5" /> At Risk</span>
                           </div>
                         </div>
                       </div>
