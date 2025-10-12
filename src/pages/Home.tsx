@@ -226,7 +226,7 @@ const Home: React.FC = () => {
         <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 pt-24 pb-12">
           {/* Top Content */}
           <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent mb-6 leading-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent mb-6 leading-snug">
               The All-in-One Solution for Modern Logistics.
             </h1>
             <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8">
@@ -496,7 +496,7 @@ const Home: React.FC = () => {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-16 lg:mb-20">
             <div>
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6 leading-tight">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6 leading-snug">
                 The haulage platform built by <span className="text-amber-600 dark:text-amber-500">haulage experts</span>, for haulage professionals.
               </h2>
               <p className="text-lg text-gray-600 dark:text-gray-300">
