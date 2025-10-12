@@ -1,4 +1,4 @@
-import React, from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 import { Truck, MapPin, FileText, CreditCard, BarChart3, CheckCircle, ArrowRight, AlertTriangle, Warehouse, CheckSquare, User, Users, Building, LayoutDashboard, ArrowRightLeft, Smartphone, DollarSign, ClipboardCheck } from 'lucide-react';
