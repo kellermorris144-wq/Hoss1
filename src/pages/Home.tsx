@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
-import { Truck, MapPin, FileText, CreditCard, BarChart3, CheckCircle, ArrowRight, AlertTriangle, Warehouse, CheckSquare, User, Users, Building, LayoutDashboard, ArrowRightLeft, Smartphone } from 'lucide-react';
+import { Truck, MapPin, FileText, CreditCard, BarChart3, CheckCircle, ArrowRight, AlertTriangle, Warehouse, CheckSquare, User, Users, Building, LayoutDashboard, ArrowRightLeft, Smartphone, DollarSign, ClipboardCheck } from 'lucide-react';
 
 const features = [
   { name: 'Live ETA Tracking', icon: MapPin },
@@ -328,8 +328,8 @@ const Home: React.FC = () => {
                         <div className="w-3 h-3 bg-green-400 rounded-full"></div>
                       </div>
                     </div>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="col-span-2 p-4 bg-slate-100 dark:bg-slate-900/50 rounded-xl relative">
+                    <div className="grid grid-cols-1 gap-4">
+                      <div className="col-span-1 p-4 bg-slate-100 dark:bg-slate-900/50 rounded-xl relative">
                         <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-2">Live Fleet: Essex</h3>
                         <div 
                           className="relative h-32 rounded-lg overflow-hidden bg-cover bg-center map-grid-overlay"
@@ -356,38 +356,27 @@ const Home: React.FC = () => {
                         </div>
                       </div>
                       <div className="col-span-1 p-4 bg-slate-100 dark:bg-slate-900/50 rounded-xl">
-                        <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-4">Key Metrics</h3>
-                        <div className="space-y-4">
-                          <div>
-                            <div className="flex items-center text-sm text-slate-500 dark:text-slate-400">
-                              <div className="w-2 h-2 rounded-full bg-green-400 mr-2 shadow-[0_0_6px_1px] shadow-green-400"></div>
-                              On-Time Rate
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div className="md:col-span-2">
+                            <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-2 flex items-center">
+                              <DollarSign className="w-4 h-4 mr-2 text-green-500" />
+                              Daily Revenue
+                            </h3>
+                            <p className="text-2xl font-bold text-slate-800 dark:text-slate-200">£4,820</p>
+                            <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1.5 mt-1">
+                              <div className="bg-green-500 h-1.5 rounded-full" style={{ width: '75%' }}></div>
                             </div>
-                            <p className="text-3xl font-bold text-slate-800 dark:text-slate-200">98.7%</p>
+                            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">75% of £6,500 goal</p>
                           </div>
-                          <div>
-                            <div className="flex items-center text-sm text-slate-500 dark:text-slate-400">
-                              <div className="w-2 h-2 rounded-full bg-amber-400 mr-2 shadow-[0_0_6px_1px] shadow-amber-400"></div>
-                              Fleet Utilization
+                          <div className="md:col-span-2">
+                            <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-2 flex items-center">
+                              <ClipboardCheck className="w-4 h-4 mr-2 text-blue-500" />
+                              Jobs Completed
+                            </h3>
+                            <p className="text-2xl font-bold text-slate-800 dark:text-slate-200">14 / 21</p>
+                            <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1.5 mt-1">
+                              <div className="bg-blue-500 h-1.5 rounded-full" style={{ width: '66%' }}></div>
                             </div>
-                            <p className="text-3xl font-bold text-slate-800 dark:text-slate-200">82%</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-span-1 p-4 bg-slate-100 dark:bg-slate-900/50 rounded-xl">
-                        <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-4">Active Jobs</h3>
-                        <div className="space-y-3">
-                          <div className="flex justify-between items-center text-sm p-2 rounded-md transition-colors hover:bg-slate-200 dark:hover:bg-slate-800/50">
-                            <span className="font-medium text-slate-700 dark:text-slate-300">Chelmsford &rarr; Colchester</span>
-                            <span className="flex items-center text-green-600 dark:text-green-400"><CheckCircle className="w-4 h-4 mr-1" /> On Time</span>
-                          </div>
-                          <div className="flex justify-between items-center text-sm p-2 rounded-md transition-colors hover:bg-slate-200 dark:hover:bg-slate-800/50">
-                            <span className="font-medium text-slate-700 dark:text-slate-300">Southend &rarr; London</span>
-                            <span className="flex items-center text-yellow-600 dark:text-yellow-400"><Truck className="w-4 h-4 mr-1" /> In Transit</span>
-                          </div>
-                          <div className="flex justify-between items-center text-sm p-2 rounded-md transition-colors hover:bg-slate-200 dark:hover:bg-slate-800/50">
-                            <span className="font-medium text-slate-700 dark:text-slate-300">Harwich &rarr; Tilbury</span>
-                            <span className="flex items-center text-red-600 dark:text-red-400"><AlertTriangle className="w-4 h-4 mr-1" /> At Risk</span>
                           </div>
                         </div>
                       </div>
