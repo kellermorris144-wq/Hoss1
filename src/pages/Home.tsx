@@ -328,11 +328,11 @@ const Home: React.FC = () => {
             </div>
 
             {/* Desktop View */}
-            <div className="hidden md:block relative md:h-[450px]">
-              <div className="relative flex flex-row items-center justify-between h-full">
-                <div className="flex flex-col justify-between h-full py-2">
+            <div className="hidden md:block relative md:h-[550px]">
+              <div className="relative flex flex-row items-center justify-center h-full gap-x-32">
+                <div className="flex flex-col space-y-12">
                   {features.map((feature) => (
-                    <div key={feature.name} className="flex items-center space-x-4 group">
+                    <div key={feature.name} className="flex items-center space-x-4 group w-64">
                       <div className="flex items-center justify-center w-12 h-12 bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl shadow-sm transition-all duration-300 group-hover:scale-110 group-hover:shadow-amber-500/30 group-hover:border-amber-400 dark:group-hover:border-amber-600">
                         <feature.icon className="w-6 h-6 text-slate-500 dark:text-slate-400 transition-colors group-hover:text-amber-500" />
                       </div>
@@ -340,12 +340,7 @@ const Home: React.FC = () => {
                     </div>
                   ))}
                 </div>
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-                  <div className="absolute inset-0 bg-amber-500/20 rounded-full blur-2xl animate-pulse-slow"></div>
-                  <div className="relative w-28 h-28 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full flex items-center justify-center shadow-lg">
-                    <Truck className="w-12 h-12 text-amber-600 dark:text-amber-500" />
-                  </div>
-                </div>
+                
                 <div className="w-full md:w-auto max-w-2xl">
                   <div className="bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-2xl p-6 w-full backdrop-blur-md animate-background-shimmer">
                     <div className="flex items-center justify-between mb-6 animate-fade-in">
@@ -404,7 +399,7 @@ const Home: React.FC = () => {
                   </div>
                 </div>
               </div>
-              <svg className="absolute top-0 left-0 w-full h-full z-[-1]" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1280 400">
+              <svg className="absolute top-0 left-0 w-full h-full z-[-1]" preserveAspectRatio="none" viewBox="0 0 1280 550">
                 <defs>
                   <linearGradient id="line-grad" x1="0%" y1="0%" x2="100%" y2="0%">
                     <stop offset="0%" stopColor="rgba(245, 158, 11, 0.5)" />
@@ -419,20 +414,14 @@ const Home: React.FC = () => {
                   </filter>
                 </defs>
                 <g filter="url(#glow)">
-                  <path d="M 280 50 C 420 50, 450 200, 580 200" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
-                  <path d="M 280 125 C 420 125, 450 200, 580 200" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
-                  <path d="M 280 275 C 420 275, 450 200, 580 200" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
-                  <path d="M 280 350 C 420 350, 450 200, 580 200" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
-                  <path d="M 700 200 H 850" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
-                  <path d="M 850 190 H 700" stroke="rgba(34, 197, 94, 0.6)" strokeWidth="1.5" fill="none" />
-                  <path d="M 850 210 H 700" stroke="rgba(34, 197, 94, 0.6)" strokeWidth="1.5" fill="none" />
-                  <circle cx="0" cy="0" r="5" fill="#f59e0b"><animateMotion dur="8s" repeatCount="indefinite" path="M 280 50 C 420 50, 450 200, 580 200" /></circle>
-                  <circle cx="0" cy="0" r="5" fill="#f59e0b"><animateMotion dur="7s" repeatCount="indefinite" path="M 280 125 C 420 125, 450 200, 580 200" /></circle>
-                  <circle cx="0" cy="0" r="5" fill="#f59e0b"><animateMotion dur="6s" repeatCount="indefinite" path="M 280 275 C 420 275, 450 200, 580 200" /></circle>
-                  <circle cx="0" cy="0" r="5" fill="#f59e0b"><animateMotion dur="9s" repeatCount="indefinite" path="M 280 350 C 420 350, 450 200, 580 200" /></circle>
-                  <circle cx="0" cy="0" r="5" fill="#f59e0b"><animateMotion dur="5s" repeatCount="indefinite" path="M 700 200 H 850" /></circle>
-                  <circle cx="0" cy="0" r="4" fill="#22c55e"><animateMotion dur="4s" repeatCount="indefinite" path="M 850 190 H 700" /></circle>
-                  <circle cx="0" cy="0" r="4" fill="#22c55e"><animateMotion dur="4s" begin="0.5s" repeatCount="indefinite" path="M 850 210 H 700" /></circle>
+                  <path d="M 300 131 C 350 131, 400 275, 430 275" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
+                  <path d="M 300 227 C 350 227, 400 275, 430 275" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
+                  <path d="M 300 323 C 350 323, 400 275, 430 275" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
+                  <path d="M 300 419 C 350 419, 400 275, 430 275" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
+                  <circle cx="0" cy="0" r="5" fill="#f59e0b"><animateMotion dur="8s" repeatCount="indefinite" path="M 300 131 C 350 131, 400 275, 430 275" /></circle>
+                  <circle cx="0" cy="0" r="5" fill="#f59e0b"><animateMotion dur="7s" repeatCount="indefinite" path="M 300 227 C 350 227, 400 275, 430 275" /></circle>
+                  <circle cx="0" cy="0" r="5" fill="#f59e0b"><animateMotion dur="6s" repeatCount="indefinite" path="M 300 323 C 350 323, 400 275, 430 275" /></circle>
+                  <circle cx="0" cy="0" r="5" fill="#f59e0b"><animateMotion dur="9s" repeatCount="indefinite" path="M 300 419 C 350 419, 400 275, 430 275" /></circle>
                 </g>
               </svg>
             </div>
