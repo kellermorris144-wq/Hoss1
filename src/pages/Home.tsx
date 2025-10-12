@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
-import { Truck, MapPin, FileText, CreditCard, BarChart3, CheckCircle, ArrowRight, AlertTriangle, Warehouse, CheckSquare, User, Users, Building, LayoutDashboard, Smartphone, Clock, Wrench, Wind } from 'lucide-react';
+import { Truck, MapPin, FileText, CreditCard, BarChart3, CheckCircle, ArrowRight, AlertTriangle, Warehouse, CheckSquare, User, Users, Building, LayoutDashboard, Smartphone, Clock, Wrench, Star } from 'lucide-react';
 import { useAnimatedCounter } from '../hooks/useAnimatedCounter';
 
 const features = [
@@ -209,12 +209,12 @@ const alerts = [
   },
   {
     id: 3,
-    type: 'weather',
-    icon: Wind,
-    color: 'text-cyan-500',
-    bgColor: 'bg-cyan-500/10',
-    message: 'High Wind Warning',
-    location: 'Dartford Crossing',
+    type: 'job',
+    icon: Star,
+    color: 'text-amber-500',
+    bgColor: 'bg-amber-500/10',
+    message: 'New Priority Job',
+    location: 'London Gateway Port',
   },
 ];
 
@@ -453,7 +453,7 @@ const Home: React.FC = () => {
                               <span className="absolute top-[70%] left-[65%] text-[10px] text-white font-bold bg-black/60 px-1.5 py-0.5 rounded -translate-x-1/2">Southend</span>
                               <span className="absolute top-[50%] left-[20%] text-[10px] text-white font-bold bg-black/60 px-1.5 py-0.5 rounded -translate-x-1/2">Harlow</span>
                               {trucks.map(truck => (
-                                <div key={truck.id} className="absolute group" style={truck.position}>
+                                <div key={truck.id} className="absolute group animate-float-gentle" style={truck.position}>
                                   <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-max px-2 py-1 bg-slate-900 text-white text-xs font-bold rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10">
                                     <p>{truck.driver}</p>
                                     <p className="text-slate-400 font-medium">{truck.id}</p>
@@ -467,7 +467,7 @@ const Home: React.FC = () => {
                             </div>
                           </div>
                         </div>
-                        <div className="p-3 bg-slate-100 dark:bg-slate-900/50 rounded-xl">
+                        <div className="p-3 bg-slate-100 dark:bg-slate-900/50 rounded-xl animate-background-shimmer">
                           <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-2 text-sm">Active Jobs</h3>
                           <div className="space-y-1">
                             <div className="flex justify-between items-center text-xs p-1.5 rounded-md transition-colors hover:bg-slate-200 dark:hover:bg-slate-800/50">
