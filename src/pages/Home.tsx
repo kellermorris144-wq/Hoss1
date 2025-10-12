@@ -452,25 +452,25 @@ const Home: React.FC = () => {
                 </defs>
                 <g filter="url(#glow)" fill="#f59e0b">
                   {/* Paths */}
-                  <path d="M 300 131 C 380 131, 380 275, 460 275" stroke="url(#line-grad)" strokeWidth="1.5" fill="none" />
-                  <path d="M 300 227 C 380 227, 380 275, 460 275" stroke="url(#line-grad)" strokeWidth="1.5" fill="none" />
-                  <path d="M 300 323 C 380 323, 380 275, 460 275" stroke="url(#line-grad)" strokeWidth="1.5" fill="none" />
-                  <path d="M 300 419 C 380 419, 380 275, 460 275" stroke="url(#line-grad)" strokeWidth="1.5" fill="none" />
+                  <path d="M 270 131 C 350 131, 350 275, 430 275" stroke="url(#line-grad)" strokeWidth="1.5" fill="none" />
+                  <path d="M 270 227 C 350 227, 350 275, 430 275" stroke="url(#line-grad)" strokeWidth="1.5" fill="none" />
+                  <path d="M 270 323 C 350 323, 350 275, 430 275" stroke="url(#line-grad)" strokeWidth="1.5" fill="none" />
+                  <path d="M 270 419 C 350 419, 350 275, 430 275" stroke="url(#line-grad)" strokeWidth="1.5" fill="none" />
 
                   {/* Dots on lines */}
-                  <circle cx="340" cy="131" r="3" />
-                  <circle cx="395" cy="190" r="3" />
-                  <circle cx="340" cy="227" r="3" />
-                  <circle cx="390" cy="255" r="3" />
-                  <circle cx="340" cy="323" r="3" />
-                  <circle cx="390" cy="295" r="3" />
-                  <circle cx="340" cy="419" r="3" />
-                  <circle cx="395" cy="360" r="3" />
+                  <circle cx="310" cy="131" r="3" />
+                  <circle cx="365" cy="190" r="3" />
+                  <circle cx="310" cy="227" r="3" />
+                  <circle cx="360" cy="255" r="3" />
+                  <circle cx="310" cy="323" r="3" />
+                  <circle cx="360" cy="295" r="3" />
+                  <circle cx="310" cy="419" r="3" />
+                  <circle cx="365" cy="360" r="3" />
 
                   {/* Convergence Point Cluster */}
-                  <circle cx="460" cy="275" r="4" />
-                  <circle cx="468" cy="270" r="3" />
-                  <circle cx="468" cy="280" r="3" />
+                  <circle cx="430" cy="275" r="4" />
+                  <circle cx="438" cy="270" r="3" />
+                  <circle cx="438" cy="280" r="3" />
                 </g>
               </svg>
             </div>
