@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
-import { Truck, MapPin, FileText, CreditCard, BarChart3, CheckCircle, ArrowRight, AlertTriangle, Warehouse, CheckSquare, User, Users, Building, LayoutDashboard, Smartphone, Clock } from 'lucide-react';
+import { Truck, MapPin, FileText, CreditCard, BarChart3, CheckCircle, ArrowRight, AlertTriangle, Warehouse, CheckSquare, User, Users, Building, LayoutDashboard, Smartphone, Clock, Wrench, Wind } from 'lucide-react';
 import { useAnimatedCounter } from '../hooks/useAnimatedCounter';
 
 const features = [
@@ -188,6 +188,71 @@ const PaymentsVisual = () => {
   );
 };
 
+const alerts = [
+  {
+    id: 1,
+    type: 'traffic',
+    icon: AlertTriangle,
+    color: 'text-red-500',
+    bgColor: 'bg-red-500/10',
+    message: 'Major Delay on M25',
+    location: 'Junction 28, Brentwood',
+  },
+  {
+    id: 2,
+    type: 'maintenance',
+    icon: Wrench,
+    color: 'text-blue-500',
+    bgColor: 'bg-blue-500/10',
+    message: 'HOSS-07 Service Due',
+    location: 'Next 50 miles',
+  },
+  {
+    id: 3,
+    type: 'weather',
+    icon: Wind,
+    color: 'text-cyan-500',
+    bgColor: 'bg-cyan-500/10',
+    message: 'High Wind Warning',
+    location: 'Dartford Crossing',
+  },
+];
+
+const UrgentAlerts = () => {
+  const [currentAlertIndex, setCurrentAlertIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentAlertIndex(prevIndex => (prevIndex + 1) % alerts.length);
+    }, 5000); // Change alert every 5 seconds
+    return () => clearInterval(interval);
+  }, []);
+
+  const currentAlert = alerts[currentAlertIndex];
+
+  return (
+    <div className="h-full flex flex-col">
+      <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-4">Urgent Alerts</h3>
+      <div className={`relative flex-grow p-4 rounded-lg overflow-hidden ${currentAlert.bgColor}`}>
+        <div className="flex items-start">
+          <div className="relative w-10 h-10 flex-shrink-0 mr-4">
+            <div className={`absolute inset-0 rounded-full opacity-50 animate-ping ${currentAlert.bgColor.replace('bg-', 'bg-opacity-50 ')}`}></div>
+            <div className={`relative w-10 h-10 rounded-full flex items-center justify-center ${currentAlert.bgColor}`}>
+              <currentAlert.icon className={`w-5 h-5 ${currentAlert.color}`} />
+            </div>
+          </div>
+          <div className="relative w-full overflow-hidden">
+            <div key={currentAlert.id} className="animate-slide-in-bottom">
+              <p className={`font-bold ${currentAlert.color}`}>{currentAlert.message}</p>
+              <p className="text-sm text-slate-500 dark:text-slate-400">{currentAlert.location}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const LiveStats = () => {
   const revenue = useAnimatedCounter(12450);
   const jobs = useAnimatedCounter(42);
@@ -216,6 +281,19 @@ const LiveStats = () => {
             <span className="font-bold text-green-500 text-lg">{onTimeRate.toFixed(1)}%</span>
           </div>
         </div>
+      </div>
+    </div>
+  );
+};
+
+const DashboardSidebar = () => {
+  return (
+    <div className="col-span-3 lg:col-span-1 grid grid-rows-2 gap-4">
+      <div className="row-span-1 p-4 bg-slate-100 dark:bg-slate-900/50 rounded-xl">
+        <LiveStats />
+      </div>
+      <div className="row-span-1 p-4 bg-slate-100 dark:bg-slate-900/50 rounded-xl">
+        <UrgentAlerts />
       </div>
     </div>
   );
@@ -388,9 +466,7 @@ const Home: React.FC = () => {
                           </div>
                         </div>
                       </div>
-                      <div className="col-span-3 lg:col-span-1 p-4 bg-slate-100 dark:bg-slate-900/50 rounded-xl">
-                        <LiveStats />
-                      </div>
+                      <DashboardSidebar />
                       <div className="col-span-3 p-4 bg-slate-100 dark:bg-slate-900/50 rounded-xl">
                         <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-3">Active Jobs</h3>
                         <div className="space-y-2">
