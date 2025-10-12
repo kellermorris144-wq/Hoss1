@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
-import { Truck, MapPin, FileText, CreditCard, BarChart3, CheckCircle, ArrowRight, AlertTriangle, Warehouse, CheckSquare, User, Users, Building, LayoutDashboard, Smartphone, Clock, Wrench, Wind } from 'lucide-react';
+import { Truck, MapPin, FileText, CreditCard, BarChart3, CheckCircle, ArrowRight, AlertTriangle, Warehouse, CheckSquare, User, Users, Building, LayoutDashboard, Smartphone, Clock, Wrench, Wind, Wallet, ThumbsUp } from 'lucide-react';
 import { useAnimatedCounter } from '../hooks/useAnimatedCounter';
 
 const features = [
@@ -259,33 +259,32 @@ const UrgentAlerts = () => {
 
 const LiveStats = () => {
   const revenue = useAnimatedCounter(12450);
-  const jobs = useAnimatedCounter(42);
-  const onTimeRate = useAnimatedCounter(98.7);
   const activeTrucks = useAnimatedCounter(18);
+  const idleTrucks = useAnimatedCounter(3);
+  const onTimeRate = useAnimatedCounter(98.7);
+
+  const stats = [
+    { icon: Wallet, value: `£${revenue.toLocaleString('en-GB', { maximumFractionDigits: 0 })}`, label: 'Revenue' },
+    { icon: Truck, value: `${activeTrucks.toFixed(0)} / 25`, label: 'Active Trucks' },
+    { icon: Clock, value: `${idleTrucks.toFixed(0)}`, label: 'Idle Trucks' },
+    { icon: ThumbsUp, value: `${onTimeRate.toFixed(1)}%`, label: 'On-Time Rate' },
+  ];
 
   return (
     <div className="h-full flex flex-col">
       <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-2 text-base">Live Stats</h3>
       <div className="space-y-3 flex-grow flex flex-col justify-around">
-        <div className="flex justify-between items-baseline">
-          <p className="text-xs text-slate-500 dark:text-slate-400">Revenue</p>
-          <p className="text-xl font-bold text-slate-800 dark:text-slate-200">
-            £{revenue.toLocaleString('en-GB', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
-          </p>
-        </div>
-        <div className="flex justify-between items-baseline">
-          <p className="text-xs text-slate-500 dark:text-slate-400">Active Trucks</p>
-          <p className="text-xl font-bold text-slate-800 dark:text-slate-200">{activeTrucks.toFixed(0)} / 25</p>
-        </div>
-        <div>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mb-1">On-Time Rate</p>
-          <div className="flex items-center gap-2">
-            <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1.5 overflow-hidden">
-              <div className="bg-green-500 h-1.5 rounded-full transition-all duration-500" style={{ width: `${onTimeRate}%` }}></div>
+        {stats.map((stat, index) => (
+          <div key={index} className="flex items-center">
+            <div className="w-8 h-8 flex-shrink-0 mr-3 rounded-lg bg-slate-200 dark:bg-slate-800 flex items-center justify-center">
+              <stat.icon className="w-4 h-4 text-amber-600 dark:text-amber-500" />
             </div>
-            <span className="font-bold text-green-500 text-sm">{onTimeRate.toFixed(1)}%</span>
+            <div>
+              <p className="text-sm font-bold text-slate-800 dark:text-slate-200">{stat.value}</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400">{stat.label}</p>
+            </div>
           </div>
-        </div>
+        ))}
       </div>
     </div>
   );
@@ -474,27 +473,24 @@ const Home: React.FC = () => {
                         </div>
                         <div className="p-3 bg-slate-100 dark:bg-slate-900/50 rounded-xl">
                           <h3 className="font-semibold text-slate-700 dark:text-slate-300 mb-2 text-sm">Active Jobs</h3>
-                          <div className="space-y-1">
-                            <div className="flex justify-between items-center text-xs p-1.5 rounded-md transition-colors hover:bg-slate-200 dark:hover:bg-slate-800/50">
-                              <div className="flex items-center">
-                                <Truck className="w-3 h-3 mr-2 text-amber-500" />
+                          <div className="space-y-2">
+                            <div>
+                              <div className="flex justify-between items-center text-xs mb-1">
                                 <span className="font-medium text-slate-700 dark:text-slate-300">Chelmsford &rarr; Colchester</span>
+                                <span className="font-semibold text-green-500">75%</span>
                               </div>
-                              <span className="flex items-center text-green-600 dark:text-green-400 font-semibold"><CheckCircle className="w-3 h-3 mr-1" /> On Time</span>
+                              <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1 overflow-hidden">
+                                <div className="bg-green-500 h-1 rounded-full animate-grow-bar-x" style={{ width: '75%', animationDelay: '200ms' }}></div>
+                              </div>
                             </div>
-                            <div className="flex justify-between items-center text-xs p-1.5 rounded-md transition-colors hover:bg-slate-200 dark:hover:bg-slate-800/50">
-                              <div className="flex items-center">
-                                <Truck className="w-3 h-3 mr-2 text-amber-500" />
+                            <div>
+                              <div className="flex justify-between items-center text-xs mb-1">
                                 <span className="font-medium text-slate-700 dark:text-slate-300">Southend &rarr; London</span>
+                                <span className="font-semibold text-yellow-500">40%</span>
                               </div>
-                              <span className="flex items-center text-yellow-600 dark:text-yellow-400 font-semibold"><Clock className="w-3 h-3 mr-1 animate-spin" style={{ animationDuration: '2s' }} /> In Transit</span>
-                            </div>
-                            <div className="flex justify-between items-center text-xs p-1.5 rounded-md transition-colors hover:bg-slate-200 dark:hover:bg-slate-800/50">
-                              <div className="flex items-center">
-                                <Truck className="w-3 h-3 mr-2 text-amber-500" />
-                                <span className="font-medium text-slate-700 dark:text-slate-300">Harwich &rarr; Tilbury</span>
+                              <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1 overflow-hidden">
+                                <div className="bg-yellow-500 h-1 rounded-full animate-grow-bar-x" style={{ width: '40%', animationDelay: '300ms' }}></div>
                               </div>
-                              <span className="flex items-center text-red-600 dark:text-red-400 font-semibold"><AlertTriangle className="w-3 h-3 mr-1" /> At Risk</span>
                             </div>
                           </div>
                         </div>
@@ -519,20 +515,14 @@ const Home: React.FC = () => {
                   </filter>
                 </defs>
                 <g filter="url(#glow)">
-                  <path d="M 280 50 C 420 50, 450 200, 580 200" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
-                  <path d="M 280 125 C 420 125, 450 200, 580 200" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
-                  <path d="M 280 275 C 420 275, 450 200, 580 200" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
-                  <path d="M 280 350 C 420 350, 450 200, 580 200" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
-                  <path d="M 700 200 H 850" stroke="url(#line-grad)" strokeWidth="2" fill="none" />
-                  <path d="M 850 190 H 700" stroke="rgba(34, 197, 94, 0.6)" strokeWidth="1.5" fill="none" />
-                  <path d="M 850 210 H 700" stroke="rgba(34, 197, 94, 0.6)" strokeWidth="1.5" fill="none" />
+                  <path d="M 280 50 C 420 50, 450 200, 580 200" stroke="url(#line-grad)" strokeWidth="2" fill="none" className="animate-pulse-slow" />
+                  <path d="M 280 125 C 420 125, 450 200, 580 200" stroke="url(#line-grad)" strokeWidth="2" fill="none" className="animate-pulse-slow" style={{ animationDelay: '0.5s' }} />
+                  <path d="M 280 275 C 420 275, 450 200, 580 200" stroke="url(#line-grad)" strokeWidth="2" fill="none" className="animate-pulse-slow" style={{ animationDelay: '1s' }} />
+                  <path d="M 280 350 C 420 350, 450 200, 580 200" stroke="url(#line-grad)" strokeWidth="2" fill="none" className="animate-pulse-slow" style={{ animationDelay: '1.5s' }} />
                   <circle cx="0" cy="0" r="5" fill="#f59e0b"><animateMotion dur="8s" repeatCount="indefinite" path="M 280 50 C 420 50, 450 200, 580 200" /></circle>
                   <circle cx="0" cy="0" r="5" fill="#f59e0b"><animateMotion dur="7s" repeatCount="indefinite" path="M 280 125 C 420 125, 450 200, 580 200" /></circle>
                   <circle cx="0" cy="0" r="5" fill="#f59e0b"><animateMotion dur="6s" repeatCount="indefinite" path="M 280 275 C 420 275, 450 200, 580 200" /></circle>
                   <circle cx="0" cy="0" r="5" fill="#f59e0b"><animateMotion dur="9s" repeatCount="indefinite" path="M 280 350 C 420 350, 450 200, 580 200" /></circle>
-                  <circle cx="0" cy="0" r="5" fill="#f59e0b"><animateMotion dur="5s" repeatCount="indefinite" path="M 700 200 H 850" /></circle>
-                  <circle cx="0" cy="0" r="4" fill="#22c55e"><animateMotion dur="4s" repeatCount="indefinite" path="M 850 190 H 700" /></circle>
-                  <circle cx="0" cy="0" r="4" fill="#22c55e"><animateMotion dur="4s" begin="0.5s" repeatCount="indefinite" path="M 850 210 H 700" /></circle>
                 </g>
               </svg>
             </div>
